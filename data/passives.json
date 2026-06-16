@@ -1,0 +1,3212 @@
+[
+  {
+    "PassiveKey": "Plain",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Simple",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Incompetent",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Booby Trap",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Serenity",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Quick Shiv",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Counter",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fluffy",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Strong",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Slimy Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Thorn Skin",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Magic Gift",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Medicare",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Matter Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Apyrous",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Resilient",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Thick Skin",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hot Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Liquid Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Cold Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Electric Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Rock Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Soil Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Air Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wisp Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shade Body",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "White Piece",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Black Piece",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Endure",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Indecisive",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Battle Stance",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Beast Rider",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bravery",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Evil",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Violence",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Arts Of Disguise",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Clear Sight",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Battle Expert",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Card Body",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mine Trap",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Heavy Armor",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Magic Shield",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Narrow Minded",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Faith",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Metal Body",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Light Helmet",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dark Armor",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Iron Healer",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Agile",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wound Carer",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Outlaw",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Elemental Gift",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Great Wisdom",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Summoner",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Strong Qi",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fire Blessing",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Water Blessing",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Thunder Blessing",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Earth Blessing",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wind Blessing",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Light Blessing",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dark Blessing",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gunblin Spirit",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Lava Twin",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dual Wield",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Detection Skills",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Forest Spirit",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Determined",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Royal Guard",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Blade Master",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Lightning Breakthrough",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Galactic Reputation",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Battle Maniac",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Pure Faith",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Foresight",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ninpo Taijutsu",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Yokai",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Explosion Expert",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Great Summoner",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mythical Warrior",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Phantom Power",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Paragon Killer",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Monster Buster",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dragon Mount",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Million Beast Style",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Murder Expert",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Soul Guard",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Oblivious Power",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Aura Master",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sword & Magic",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Boxing Stance",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Star Followers",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Runes Protector",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Herb Expert",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Battojustsu",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Leadership",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hell Triplet",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Undead",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Strength Master",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Agility Master",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Intelligence Master",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Health Master",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Fire",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Water",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Ice",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Thunder",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Earth",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Wind",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Light",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Dark",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Life",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Golem's Heart",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Elemental Knowledge",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Elemental Blessing",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Kingdom Secret Weapon",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sea Captain",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sky Ranger",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ground Snatcher",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Champion's Pride",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Resident Of Hell",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wicked Lady",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dragon Bond",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dragon Blood",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dragon Scale",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gorgon Snakes",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fusion Beast",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Impenetrable Stone Skin",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Snow Sculpture",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Frozen Maiden",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Noble Race",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shield of Light",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Black Claymore",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Last Hope",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Last Episode",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Last Surprise",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "AI System",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Kind Healer",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Orc Leader",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gold Bell",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shadow",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bad Boy",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Life Taker",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Force",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fire Dancer",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Death Glener",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wildlife Friend",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Markmanship",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hawkeyes",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Notorious Mob",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sinister Madness",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Medical Expert",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sagittarius",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sky Blessing",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Venom Queen",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mechanic Adept",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eternal Flame",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "God's Messenger",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Automaton Tech",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Revolution Mission",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Blood Thirster",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Majestic Guardian",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Sea Serpent",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Primal Chaos",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Dragon God",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sleipnir Mount",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eruption Heart",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Champion Stance",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Terminator",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Outcast Ruler",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Goblin Lord",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Brutal Power",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Galactic Warrior",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The King Of Orcs",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ansellus The Great",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Slime Wizard",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Great Artist",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Queen's Blessing",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Blood Moon Beast",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "High Elves King",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Forbidden Magic",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Supreme Samurai",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Fairy King",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mythical Tree",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dracomecha",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mega Titan",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ocean Princess",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "10 Knights",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Lord Of Knights",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Archangel",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mega Fusion Tech",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "For A Better Future",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Versatile",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "God Of Death",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Aura",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Great Aura",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Evolution Revolt",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Will To Live",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Early Burst",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Protection",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tough",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Resistance",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Superfluous",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Round Up",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Regen",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Half Life",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Last Instinct",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Inevitable Curse",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Great Iron Healer",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Xmas Blessing",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sleigh Rider",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Clockwork Body",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Well Prepared",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fortify",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Invincible",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "One Above All",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "GM",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Superhuman",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Peace Maker",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Apex Predator",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Power Ranger",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Operator",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Embodiment",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Megazord",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mother Mainframe",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Unknown Agent",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Symbiote",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Almighty",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "All Rounded",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bless Of Gold",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bless Of Crystal",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Breakfast Nightmare",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Smooth Tentacles",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Proud Bird",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sins Collector",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Seven Deadly Sins",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Super Fats",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Covetousness Spirit",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Unstoppable Rage",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mad Jealousy",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Absolute Defiance",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shapless Body",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Indolence Soul",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Void Creatures",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Anonymous Mask",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tragedy Inciter",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Good For Nothing",
+    "Skill Rank": "Low",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Cheat Like",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Information Manipulator",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "NoMoney4Me",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Alluring Body",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Lone Knight",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Vermillion Wrath",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Phlogiston Core",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eternal Engine",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Web Master",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Endless Creativity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Drakeblood Addiction",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Painting Gift",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Jobmania Bot",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Slime Royalty",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Time Lord",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Deranged Zealot",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Masterful Seduction",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Infamous Physician",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Total Concentration: Constant",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Powerslave",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Unquestionable Justice",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Immortal Curse",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "White Wolf",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Skeletal Protector",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Everybody Eyes Close",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Perseverance",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Adamant Will",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Poison Resist",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mechanical Arm",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Blessing Of All Mother",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mitsurugi Shin Ryu",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Iron Will",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Steeled Strength",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Princess Charm",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Puppet Technique",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Emperor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tai Chi Qigong",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mimic",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Indestructible Body",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Monkey King",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "72 Morphings",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sea Drake King Armor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eye Of Heaven",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Nine Turns Divine Skill",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Phantom Blade",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Soul Blade Blessing",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Machi No Dorufin",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Schrodinger's Melody",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dark Retaliation",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Severely Scarred Skin",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Empyrean Messenger",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Celestial Blessing",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Magical Murdering Weapon",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Caerbannog Dweller",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Darksteel Armor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mushroom Boss",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Titan's Bloodline",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sage Who Pacifies Heaven",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Raksha Soul",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gambling Addiction",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Flawless Cheater",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "God's Favorite",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mega Debt Collector",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Father Shark",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spooky Soul",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gentleman's Way",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Adorable Witch",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Irregular In Mahou High",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Meow Meow Mahou",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Immortal Vessel",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Stein's Masterpiece",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Cambion",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Voodoo Doll",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Beserker Armor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sacred Tree Eater",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gluttonous",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Perfect Designer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Guardian of Athena",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fire Sign Zodiac",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Earth Sign Zodiac",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Air Sign Zodiac",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Water Sign Zodiac",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Travelling Merchant",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Elegant Beast",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Memes Collector",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mischief Punisher",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Midnight Santa",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Betrayer Of Stars",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Longevity Monk",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dharma Body",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Tower Of Babel",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Age Reminder",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The 12 Sheng Xiao",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tiger Year",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Soul Regulator",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Radiation Mutation",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Of Vengeance",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Knight of Catarina",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "En Garde",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Duelist's Dance",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Challenger",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Cursed Nerf Sword",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hui Men Buster",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Kobold Emperor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Saboteur Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hades Engine",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hypnos Hack",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Lonely Warrior's Determination",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Water God Style: Flow",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eldritch Lullaby",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Core",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Weird Surgeon",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Satan In A Smock",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "10000 Hour Rule",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Engineering Degree",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Oil & Gas Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ships Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Electro Mechanical Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Construction Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Aerospace Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Nuclear Power Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Servant Of Chaos",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Thunder Sign Zodiac",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Odin Will Provide",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sailboat Rider",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shark Rider",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Strange Depths",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mako Might",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bioshock",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "God Of Mischief",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "God Of Discord",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Prodigious Strength",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Goblin's Nightmare",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Not Tested",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Still Not Tested",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spirit Body",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Chimbus The Awesome",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Harbinger Of Misfortune",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Harbinger Of Death",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Firearms Expert",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Death God Physiology",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Chainsaw Devil Contract",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Who You Gonna Call",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spiritual Awareness",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Smartest Man in the Universe",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Blaze God Blessing",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Frost God Blessing",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Lightning God Blessing",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Terra God Blessing",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gale God Blessing",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Lord Of Light & Dark",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fallen Angel",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Let Me Solo Her",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Trinity Slimes",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "RGB Ladies",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Second Year Syndrome (Thunder)",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Duelist's Strength",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Throne Of Judgement",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Blood Faith",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Messenger Of Love",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Baptist",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "King In Disguise",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dual Personality Bear Calm",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dual Personality Bear Rage",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Warmhearted Snow Sage",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Coldhearted Elf Hunter",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Rudolf Reindeer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Steamborg Prototype Armor",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Steamborg Prototype Sniper",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Axe Sensei",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Drilling Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Silver Paladin",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mystic Force",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Rabbit Year",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Cosmic Creature",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Time Entity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Perverted Person",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Chosen Magica Girl",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dragon Lover Shaggette",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Kobold Pride",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Crystals Hydra",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Infamouse Tchen & Karg",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Scarlet Terror",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mother Of Dragons",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Stand Manifestation",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Telekinesis Professor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Giant Plant",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Elemental Maid Assassin",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Prosthetic Mod",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Inflammation Knife Technique",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Move Like Thunder",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Boss Villain",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Plasma Power Suit",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Breath Of Spring",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Child Of Little Faith",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Easter Saboter",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fertility Goddess",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Lady of the Equinox",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Guilty Gear Fireseal",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wielder Of Thunderseal",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Herald of Destruction",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "UQ Holder",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Until The End Of Time",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Babel's Incarnation",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Genesis 11 1 9",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ancient Golem Tech",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Arcane Stone Armor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bad Omen",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hexed Necromancy",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Oblivious Instinct",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Immortal Legacy",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fallen Servant of Nature",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Aura Of Rot",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Marshal Canopy",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Thunder Lord",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Oni Clan Leader",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Parasitic Shadow Entity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Summer Lover",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sunfire",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Solar Sustenance",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Summers Embrace",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Kaguras Gift",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Patience",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Genius",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Musical Talent",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Absolute Pitch",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Revengeful Ghost",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Perpetual Spite",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sharp",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Trickster Veil",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Aria Of Perseverance",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Master of Platyjitsu",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mammal of Action",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Cute Cat Pyjamas",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fluffy Pilow 28",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Doggo Family",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Simp Slayer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wench Slayer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Nightmare Affinity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sacred Haunting",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ghostly Harmonies",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eternal Obsession",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sticky Body",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Perfect Tempo",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Z Fighter",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Frosty Hide",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Instinctual Fury",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Four Sylphs",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Winter Affinity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Glacial Aura",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Toy Battalion",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sweet Grounding",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Boy Sage Great King",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Devil Boy",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dragon Year",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Twin Beacons",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bio Energy Harvest",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Subatomic Manipulation",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eccentric Elegance",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Convincing Actress",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Egg Expert",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Silent Hopper",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Pollen Vigor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Limitless Six Eyes",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Craftsmans Insight",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Battle Forgemaster",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Arcane Forgemaster",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Regal Forgemaster",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sevenfold Discord",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Vestiges Of Vice",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Chromatic Arts",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Beach Sentinel",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sandcastle Engineer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "String Human",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Summer Affinity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hero Of Exploration",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bottomless Backpack",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "I Am Very Important",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Echoes Of the End",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Marine Corps Martial Arts Program",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Prankster",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Aztec Priest",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Aztec Warrior",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Nagual Warrior",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Nagual Beast Mode",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Evil Burning Head",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hair Snatcher",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Swamp Monster",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Blood Terror",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tupi Supreme Deity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Extroverted Oni",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hothead's Determination",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Introverted Oni",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Deceptive Appearance",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Magma Caller",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tideweaver",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Land Carver",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tempest Knight",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Legendary Shield Wielder",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Annihilation Protocol",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eternal Sludge",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Carrier Of Decay",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Entertainer",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Emperors Court Mage",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Big M",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Perfect Cube Of Flesh",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Autumn Affinity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Candle Of Prophecy",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Gourmet Chef",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Emergency Food",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Infinity Candy Magic",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Corrupted Radiance Elf",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Super Alloy Z",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Carnival Carnage",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Harmony Of Hope",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Scaled Boogeyman",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eater Of Unruly Souls",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Snake Year",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Lunar Warmth",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Guiding Lantern",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Power Armored Soldier",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Veteran Psionic Warrior",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Arthropod Mutation",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Four Fisted Brute",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mindbending Specialist",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Withering Skeletons",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Bunny Girl Sisters",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Katana Maiden",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Dagger Mistress",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spring Affinity",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "White Fangs Legacy",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Attack Titan",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Achievement Hunter",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Miracle Survivor",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spring Scramble Contestant",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Identity Thief",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ooze Of Filth",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Super Goo Body",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Purest Bug",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Cursed Parasite",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shaded Barkskin",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Record Keeper",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Galactic Arsenal",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Spacejunk Scavenger",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Terrifying Vocabulary",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Arcane Instability",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Fourth Wall Mastery",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Eye Of The Solarian",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Photovoltaic Pulse",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shark Aura",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Perfect Beach Body",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wave Resonance",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Tengen Toppa",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sacrificial Directive",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Overbearing Oni",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Mad Enlightenment",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Mire Hag",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Wielder Of The Magic Pipe",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Urban Phantom",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Queen Of The Night",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ideologic Patrol",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Supreme Sorcerer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Keeper Of The Eye",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Backward Mistress",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Legacy Of The Magus",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Sacred Sarcophagus",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hardened Heart",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "A Quiet Welcome",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hero Of Ishval",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Team Player",
+    "Skill Rank": "Medium",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Natural Athlete",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Double Three Peat",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Akron Hammer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Master Tinkerer",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Let It Go",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Old-Man Winter",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Warden Of The Herd",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Last Stag",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Horse Year",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Ox Year",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "One Handed Grace",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Badminton Rock Star",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "The Crownless King",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Evergreen Tree",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Captain Long",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Queen Of Underworld",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Veil of Withered Spring",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Gate Of Inferno",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Steady Path",
+    "Skill Rank": "High",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Preta Path",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Clutch Legend",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Shadow Die Twice",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Return By Death",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Hollow Heart",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Master Of The Stolen Gate",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  },
+  {
+    "PassiveKey": "Void Positioning",
+    "Skill Rank": "Master",
+    "Skill Description": ""
+  }
+]
