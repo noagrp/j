@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jobmania Wiki</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <nav>
+            <img src="https://raw.githubusercontent.com/noagrp/jobmania/main/jobmania_official_icon.png" width="80">
+            <select id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="English">English</option>
+                <option value="Chinese">中文 (简体)</option>
+                <option value="Japanese">日本語</option>
+            </select>
+            <div class="menu-item" onclick="loadView('Home')">Home</div>
+            <div class="menu-item" onclick="loadView('Monsters')">Monsters</div>
+            <div class="menu-item" onclick="loadView('Jobs')">Jobs</div>
+            <div class="menu-item" onclick="loadView('Abilities')">Abilities</div>
+            <div class="menu-item" onclick="loadView('Passives')">Passives</div>
+        </nav>
+        <main id="content"><h1>Loading Wiki Data...</h1></main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

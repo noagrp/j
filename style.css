@@ -1,0 +1,9 @@
+body { margin: 0; font-family: sans-serif; background: #121212; color: #eee; 
+       cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat976.cur'), auto; }
+#app { display: flex; min-height: 100vh; }
+nav { width: 250px; background: #181818; padding: 20px; border-right: 2px solid #333; }
+main { flex: 1; padding: 40px; }
+.menu-item { color: #aaa; cursor: pointer; padding: 10px; border-bottom: 1px solid #222; }
+.menu-item:hover { color: #ff4500; }
+.card { background: #202020; padding: 15px; margin: 10px 0; border-radius: 5px; }
+.link { color: #4da6ff; cursor: pointer; text-decoration: underline; }
