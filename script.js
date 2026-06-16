@@ -52,12 +52,28 @@ function loadView(view) {
                style="width:100%; max-width:500px; padding:10px; margin:10px 0; border-radius:8px; background:#222; color:white; border:1px solid #444;">
     `;
 
-    if (view === 'Home') {
-        main.innerHTML += `<div class="home-card">... (your home content) ...</div>`;
-        attachSearch();
-        return;
-    }
-
+if (view === 'Home') {
+    main.innerHTML = `
+        <h1>🔥 Jobmania - Eternal Dungeon</h1>
+        <div class="home-card">
+            <h2>About this game</h2>
+            <p><strong>Pick a Hero and a job then embark on an eternal journey of dungeon descending.</strong></p>
+            <p>Acquire random abilities and jobs through the journey and build your own unique play style. How far can you go?</p>
+            
+            <h3>FEATURES</h3>
+            <ul>
+                <li>Rogue lite, procedural enemies and events generation.</li>
+                <li>Dungeon crawler, descend into the dungeon as much as you can.</li>
+                <li>Strategic deck building...</li>
+                <!-- ... keep all your features ... -->
+            </ul>
+            
+            <p><strong>Join our Discord:</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p>
+        </div>
+    `;
+    return;
+}
+    
     const cat = view.toLowerCase();
     const items = db[cat] || [];
     if (items.length === 0) return;
