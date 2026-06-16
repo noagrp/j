@@ -4,37 +4,54 @@ const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'
 const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 
 async function init() {
-    for (const f of files) {
-        const res = await fetch(`data/${f}.json`);
-        db[f] = await res.json();
-        // Fetch localisation automatically
-        const loc = await fetch(`data/${f}_localisation.json`);
-        db[f + '_localisation'] = await loc.json();
-    }
-    loadView('Home');
-}
+    const main = document.getElementById('content');
+    // Using the absolute RAW GitHub URL for your files
+    const baseUrl = 'https://raw.githubusercontent.com/noagrp/j/main/data/';
 
-function getTranslation(category, key) {
-    const loc = db[category + '_localisation'];
-    const entry = loc?.find(i => Object.values(i)[0] === key);
-    return entry ? (entry[currentLang] || entry['English'] || key) : key;
+    try {
+        for (const f of files) {
+            // Fetch main data
+            const res = await fetch(baseUrl + f + '.json');
+            if (!res.ok) throw new Error(`Failed to load ${f}.json`);
+            db[f] = await res.json();
+            
+            // Fetch localization
+            const loc = await fetch(baseUrl + f + '_localisation.json');
+            if (loc.ok) db[f + '_localisation'] = await loc.json();
+        }
+        loadView('Home');
+    } catch (err) {
+        console.error("Initialization Error:", err);
+        main.innerHTML = `<h1>Error Loading Data</h1><p>${err.message}</p>`;
+    }
 }
 
 function loadView(view) {
     window.lastView = view;
     const main = document.getElementById('content');
-    main.innerHTML = `<h1>${view}</h1>`;
-    if (view === 'Home') main.innerHTML += "Welcome to Jobmania!";
-    else if (db[view.toLowerCase()]) {
+    if (view === 'Home') {
+        main.innerHTML = `<h1>Welcome to Jobmania Wiki</h1>`;
+    } else if (db[view.toLowerCase()]) {
+        main.innerHTML = `<h1>${view}</h1>`;
         db[view.toLowerCase()].forEach(item => {
             let html = `<div class="card">`;
             for (let [k, v] of Object.entries(item)) {
-                if (LinkRegistry[k]) html += `<strong>${k}:</strong> <span class="link" onclick="showPopup('${LinkRegistry[k]}','${v}')">${getTranslation(LinkRegistry[k], v)}</span><br>`;
-                else html += `<strong>${k}:</strong> ${v}<br>`;
+                if (LinkRegistry[k]) {
+                    html += `<strong>${k}:</strong> <span class="link" onclick="showPopup('${LinkRegistry[k]}','${v}')">${getTranslation(LinkRegistry[k], v)}</span><br>`;
+                } else {
+                    html += `<strong>${k}:</strong> ${v}<br>`;
+                }
             }
             main.innerHTML += html + `</div>`;
         });
     }
+}
+
+function getTranslation(category, key) {
+    const loc = db[category + '_localisation'];
+    if (!loc) return key;
+    const entry = loc.find(i => Object.values(i)[0] === key);
+    return entry ? (entry[currentLang] || entry['English'] || key) : key;
 }
 
 function showPopup(cat, key) {
@@ -46,4 +63,5 @@ function showPopup(cat, key) {
 }
 
 function changeLanguage(lang) { currentLang = lang; loadView(window.lastView); }
+
 init();
