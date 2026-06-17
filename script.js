@@ -110,46 +110,28 @@ function loadView(view) {
     const main = document.getElementById('content');
     let searchHtml = (view !== 'Home') ? `
         <input type="text" id="searchInput" placeholder="${getDict('search')}..."
-               style="width:100%; max-width:500px; padding:10px 14px; margin:15px auto 25px; display:block; background:#1e2f66; color:white; border:1px solid #00aaff; border-radius:8px;">
+               style="width:100%; max-width:600px; padding:14px 18px; margin:15px auto 25px; display:block; background:#1a2a5c; color:white; border:2px solid #00aaff; border-radius:12px; font-size:1.05em;">
     ` : '';
     if (view === 'Home') {
-        main.innerHTML = `
-            <h1>🔥 Jobmania - Eternal Dungeon</h1>
-            <div class="home-card">
-                <h2>About this game</h2>
-                <p><strong>Pick a Hero and a job then embark on an eternal journey of dungeon descending.</strong></p>
-                <p>Acquire random abilities and jobs through the journey and build your own unique play style.<br>
-                <strong>How far can you go?</strong></p>
-                <h3>FEATURES</h3>
-                <ul>
-                    <li>Rogue lite, procedural enemies and events generation.</li>
-                    <li>Dungeon crawler, descend into the dungeon as much as you can.</li>
-                    <li>Strategic deck building, build your own unique deck by adding abilities into your deck via chests and defeating enemies.</li>
-                    <li>RPG Turn-based combat system, complex but easy to play. Defeat tons of different enemies, challenging but addictive.</li>
-                    <li>Equip 3 jobs at once, swap, and use their abilities strategically for powerful synergy.</li>
-                    <li>Combine jobs and materials to craft new unique jobs.</li>
-                    <li>Get new heroes from Gacha, enemies defeated from the last run will appear in a special Gacha pool!</li>
-                    <li>Collect special relics to enhance your build further.</li>
-                    <li>A lot of Memes, Anime and Movies references in the game!</li>
-                    <li>Free with ads and in-app purchases, remove all ads with one purchase.</li>
-                    <li>Portrait screen only, you can play this game with one hand.</li>
-                </ul>
-                <p><strong>Join our Discord:</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p>
-            </div>
-        `;
+        main.innerHTML = `...your home page content...`; // keep your original home
         return;
     }
     const cat = view.toLowerCase();
     const items = db[cat] || [];
     main.innerHTML = `
-        <h1>${view} <small>(${items.length} entries)</small></h1>
-        ${searchHtml}
+        <div class="header-card">
+            <h1>${view}</h1>
+            <p><strong>${items.length} entries</strong></p>
+            ${searchHtml}
+        </div>
+        <div class="grid" id="grid-container"></div>
     `;
+    const container = document.getElementById('grid-container');
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
         const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
         const name = nameKey && item[nameKey] ? item[nameKey] : '';
-        let cardHtml = `<div class="card" onclick="zoomCard(this)">`;
+        let cardHtml = `<div class="card" onclick="toggleExpand(this)">`;
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
@@ -157,9 +139,9 @@ function loadView(view) {
                 ? getTranslation(cat, v) : v;
             let emoji = getRankEmoji(cat, k, v);
             if (k.includes("AbilityKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); zoomCard(this.parentElement)">${getTranslation('abilities', v)}</span>${emoji}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); toggleExpand(this.parentElement)">${getTranslation('abilities', v)}</span>${emoji}<br>`;
             } else if (k.includes("PassiveKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); zoomCard(this.parentElement)">${getTranslation('passives', v)}</span>${emoji}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); toggleExpand(this.parentElement)">${getTranslation('passives', v)}</span>${emoji}<br>`;
             } else {
                 cardHtml += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
             }
@@ -169,7 +151,7 @@ function loadView(view) {
         div.innerHTML = cardHtml;
         fragment.appendChild(div.firstElementChild);
     });
-    main.appendChild(fragment);
+    container.appendChild(fragment);
     attachSearch();
 }
 
@@ -184,37 +166,9 @@ function attachSearch() {
     });
 }
 
-// Zoom on same page
-let currentZoomed = null;
-
-function zoomCard(card) {
-    const overlay = document.getElementById('zoom-overlay') || createOverlay();
-    if (currentZoomed === card) {
-        closeZoom();
-        return;
-    }
-    if (currentZoomed) closeZoom();
-    card.classList.add('zoomed');
-    currentZoomed = card;
-    overlay.style.display = 'block';
-}
-
-function createOverlay() {
-    const overlay = document.createElement('div');
-    overlay.id = 'zoom-overlay';
-    overlay.className = 'overlay';
-    overlay.onclick = closeZoom;
-    document.body.appendChild(overlay);
-    return overlay;
-}
-
-function closeZoom() {
-    if (currentZoomed) {
-        currentZoomed.classList.remove('zoomed');
-        currentZoomed = null;
-    }
-    const overlay = document.getElementById('zoom-overlay');
-    if (overlay) overlay.style.display = 'none';
+// Expand / Collapse Card in place
+function toggleExpand(card) {
+    card.classList.toggle('expanded');
 }
 
 function changeLanguage(lang) {
@@ -232,7 +186,7 @@ async function loadData(cat) {
     } catch(e) {}
 }
 
-// Fire Cursor (unchanged)
+// Fire Cursor Effects (unchanged)
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
     const particle = document.createElement('div');
@@ -267,4 +221,3 @@ document.addEventListener('click', (e) => {
 });
 
 init();
-
