@@ -30,17 +30,31 @@ function getTranslation(category, key) {
 // Find who uses this ability/passive
 function findUsers(key, type) {
     const users = [];
-    const cat = type === 'abilities' ? 'jobs' : 'monsters'; // mainly jobs for now
-    const data = db[cat] || [];
-    data.forEach(item => {
-        for (let [k, v] of Object.entries(item)) {
-            if (k.includes(type === 'abilities' ? 'AbilityKey' : 'PassiveKey') && v === key) {
-                const nameKey = cat === 'jobs' ? 'JobKey' : 'MonsterKey';
-                users.push(item[nameKey] || item[key]);
+    const isAbility = type === 'abilities';
+    
+    // Search in JOBS
+    if (db.jobs) {
+        db.jobs.forEach(item => {
+            for (let [k, v] of Object.entries(item)) {
+                if (k.includes(isAbility ? "AbilityKey" : "PassiveKey") && v === key) {
+                    if (item.JobKey) users.push({ name: item.JobKey, category: 'jobs' });
+                }
             }
-        }
-    });
-    return [...new Set(users)]; // unique
+        });
+    }
+
+    // Search in MONSTERS
+    if (db.monsters) {
+        db.monsters.forEach(item => {
+            for (let [k, v] of Object.entries(item)) {
+                if (k.includes(isAbility ? "AbilityKey" : "PassiveKey") && v === key) {
+                    if (item.MonsterKey) users.push({ name: item.MonsterKey, category: 'monsters' });
+                }
+            }
+        });
+    }
+
+    return users;
 }
 
 function loadView(view) {
@@ -115,13 +129,12 @@ function attachSearch() {
 }
 
 async function showPopup(cat, key) {
-    await loadData(cat); // ensure loaded
+    await loadData(cat);
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
 
     const trans = getTranslation(cat, key);
-    const usersJobs = findUsers(key, cat);
-    const usersMonsters = cat === 'abilities' ? findUsers(key, 'abilities') : []; // extend later
+    const users = findUsers(key, cat);
 
     let html = `
         <h2>${trans}</h2>
@@ -129,31 +142,37 @@ async function showPopup(cat, key) {
         <div class="card">
     `;
 
+    // Main data
     for (let [k, v] of Object.entries(data)) {
-        if (!v) continue;
+        if (!v || v === "") continue;
         let displayKey = k.replace(/\s*\*\d+/, '');
         if (k.includes("Key")) displayKey = k.replace("Key", "");
-        
         html += `<strong>${displayKey}:</strong> ${v}<br>`;
     }
 
-    // Backlinks
-    if (usersJobs.length > 0) {
-        html += `<br><strong>Used by Jobs:</strong><br>`;
-        usersJobs.forEach(job => html += `<span class="link" onclick="showPopup('jobs','${job}')">${getTranslation('jobs', job)}</span><br>`);
+    html += `<hr style="border-color:#444; margin:25px 0 15px;">`;
+
+    // Backlinks - Properly separated
+    const jobUsers = users.filter(u => u.category === 'jobs');
+    const monsterUsers = users.filter(u => u.category === 'monsters');
+
+    if (jobUsers.length > 0) {
+        html += `<strong style="color:#ffd700;">Used by Jobs (${jobUsers.length}):</strong><br><br>`;
+        jobUsers.forEach(u => {
+            html += `• <span class="link" onclick="showPopup('jobs','${u.name}')">${getTranslation('jobs', u.name)}</span><br>`;
+        });
+        html += `<br>`;
     }
-    if (usersMonsters.length > 0) {
-        html += `<br><strong>Used by Monsters:</strong><br>`;
-        usersMonsters.forEach(m => html += `<span class="link" onclick="showPopup('monsters','${m}')">${getTranslation('monsters', m)}</span><br>`);
+
+    if (monsterUsers.length > 0) {
+        html += `<strong style="color:#00ffcc;">Used by Monsters (${monsterUsers.length}):</strong><br><br>`;
+        monsterUsers.forEach(u => {
+            html += `• <span class="link" onclick="showPopup('monsters','${u.name}')">${getTranslation('monsters', u.name)}</span><br>`;
+        });
     }
 
     html += `</div>`;
     document.getElementById('content').innerHTML = html;
-}
-
-function changeLanguage(lang) {
-    currentLang = lang;
-    if (window.lastView) loadView(window.lastView);
 }
 
 // Load single category on demand
