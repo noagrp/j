@@ -2,52 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobmania Wiki</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
-<nav>
-    <!-- Hamburger Button -->
-    <div class="hamburger" onclick="toggleMenu()">
-        ☰
-    </div>
+        <nav id="main-nav">
+            <!-- Hamburger -->
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
 
-    <!-- Logo -->
-    <img src="https://raw.githubusercontent.com/noagrp/j/refs/heads/main/jobmania_official_icon.png" 
-         alt="Jobmania Logo" class="nav-logo">
+            <!-- Logo -->
+            <img src="https://raw.githubusercontent.com/noagrp/j/refs/heads/main/jobmania_official_icon.png" 
+                 alt="Jobmania Logo" class="nav-logo">
 
-    <!-- Language Selector -->
-    <select id="langSelect" onchange="changeLanguage(this.value)">
-        <option value="English">🇬🇧 English</option>
-        <option value="Chinese">🇨🇳 中文 (简体)</option>
-        <option value="Chinese (Traditional)">🇹🇼 中文 (繁體)</option>
-        <option value="Japanese">🇯🇵 日本語</option>
-    </select>
+            <!-- Language -->
+            <select id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="English">🇬🇧 English</option>
+                <option value="Chinese">🇨🇳 中文 (简体)</option>
+                <option value="Chinese (Traditional)">🇹🇼 中文 (繁體)</option>
+                <option value="Japanese">🇯🇵 日本語</option>
+            </select>
 
-    <!-- Game Info -->
-    <div class="game-info">
-        <strong>Jobmania - Eternal Dungeon</strong><br>
-        AUBJECTIVE TECHNOLOGY LTD.<br>
-        Contains ads • In-app purchases
-    </div>
+            <!-- Game Info -->
+            <div class="game-info">
+                <strong>Jobmania - Eternal Dungeon</strong><br>
+                AUBJECTIVE TECHNOLOGY LTD.<br>
+                Contains ads • In-app purchases
+            </div>
 
-    <hr>
+            <hr>
 
-    <!-- Main Navigation -->
-    <div class="menu-item" onclick="loadView('Home')">🏠 Home</div>
-    <div class="menu-item" onclick="loadView('Monsters')">👹 Characters</div>
-    <div class="menu-item" onclick="loadView('Jobs')">⚔️ Jobs</div>
-    <div class="menu-item" onclick="loadView('Abilities')">✨ Abilities</div>
-    <div class="menu-item" onclick="loadView('Passives')">🛡️ Passives</div>
+            <!-- Menu -->
+            <div class="menu-item" onclick="loadView('Home')">🏠 Home</div>
+            <div class="menu-item" onclick="loadView('Monsters')">👹 Characters</div>
+            <div class="menu-item" onclick="loadView('Jobs')">⚔️ Jobs</div>
+            <div class="menu-item" onclick="loadView('Abilities')">✨ Abilities</div>
+            <div class="menu-item" onclick="loadView('Passives')">🛡️ Passives</div>
 
-    <hr>
+            <hr>
 
-    <a href="https://play.google.com/store/apps/details?id=com.aubjective.jobmania&hl=en" 
-       target="_blank" class="menu-link">▶️ Google Play</a>
-    <a href="https://discord.gg/6U5FNFVrwb" 
-       target="_blank" class="menu-link">💬 Join Discord</a>
-</nav>
+            <a href="https://play.google.com/store/apps/details?id=com.aubjective.jobmania&hl=en" target="_blank" class="menu-link">▶️ Google Play</a>
+            <a href="https://discord.gg/6U5FNFVrwb" target="_blank" class="menu-link">💬 Join Discord</a>
+        </nav>
 
         <main id="content">
             <h1>Loading Wiki Data...</h1>
