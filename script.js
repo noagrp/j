@@ -1,9 +1,8 @@
 const db = {};
 let currentLang = 'English';
-let dictionary = [];   // Universal Dictionary
+let dictionary = [];
 
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
-const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 
 // Dictionary Helper
 function getDict(key) {
@@ -74,7 +73,6 @@ async function init() {
             if (loc.ok) db[f + '_localisation'] = await loc.json();
         }
 
-        // Load Dictionary
         const dictRes = await fetch('data/dictionary.json');
         if (dictRes.ok) dictionary = await dictRes.json();
 
@@ -152,17 +150,17 @@ function loadView(view) {
     items.forEach(item => {
         const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
         const name = nameKey && item[nameKey] ? item[nameKey] : '';
-        let cardHtml = `<div class="card" onclick="showPopup('${cat}','${name}')" style="cursor:pointer;">`;
+        let cardHtml = `<div class="card" onclick="loadDetail('${cat}','${name}')">`;
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
-            let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives'))
+            let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
                 ? getTranslation(cat, v) : v;
             let emoji = getRankEmoji(cat, k, v);
             if (k.includes("AbilityKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span>${emoji}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); loadDetail('abilities','${v}')">${getTranslation('abilities', v)}</span>${emoji}<br>`;
             } else if (k.includes("PassiveKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('passives','${v}')">${getTranslation('passives', v)}</span>${emoji}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); loadDetail('passives','${v}')">${getTranslation('passives', v)}</span>${emoji}<br>`;
             } else {
                 cardHtml += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
             }
@@ -187,43 +185,51 @@ function attachSearch() {
     });
 }
 
-async function showPopup(cat, key) {
+// ==================== FULL PAGE DETAIL ====================
+async function loadDetail(cat, key) {
     await loadData(cat);
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
+
     const trans = getTranslation(cat, key);
     const users = findUsers(key, cat);
+
     let html = `
-        <h2>${trans}</h2>
-        <button onclick="loadView(window.lastView)" class="back-btn">← Back</button>
-        <div class="card">
+        <button onclick="loadView(window.lastView)" class="back-btn">← Back to ${getDict(cat)}</button>
+        <div class="detail-page">
+            <div class="detail-header">
+                <h2>${trans}</h2>
+            </div>
     `;
+
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
-        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives'))
+        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
             ? getTranslation(cat, v) : v;
         let emoji = getRankEmoji(cat, k, v);
         if (k.includes("AbilityKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('abilities','${v}')">${displayValue}</span>${emoji}<br>`;
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('abilities','${v}')">${displayValue}</span>${emoji}<br>`;
         } else if (k.includes("PassiveKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('passives','${v}')">${displayValue}</span>${emoji}<br>`;
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('passives','${v}')">${displayValue}</span>${emoji}<br>`;
         } else {
             html += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
         }
     }
-    html += `<hr style="border-color:#444; margin:25px 0;">`;
+
+    html += `<hr style="border-color:#444; margin:30px 0;">`;
     const jobUsers = users.filter(u => db.jobs && db.jobs.some(j => j.JobKey === u));
     const monsterUsers = users.filter(u => db.monsters && db.monsters.some(m => m.MonsterKey === u));
+
     if (jobUsers.length > 0) {
         html += `<strong style="color:#ffd700;">${getDict('Used by Jobs')} (${jobUsers.length}):</strong><br><br>`;
-        jobUsers.forEach(job => html += `• <span class="link" onclick="showPopup('jobs','${job}')">${getTranslation('jobs', job)}</span><br>`);
-        html += `<br>`;
+        jobUsers.forEach(job => html += `• <span class="link" onclick="loadDetail('jobs','${job}')">${getTranslation('jobs', job)}</span><br>`);
     }
     if (monsterUsers.length > 0) {
         html += `<strong style="color:#00ffcc;">${getDict('Used by Monsters')} (${monsterUsers.length}):</strong><br><br>`;
-        monsterUsers.forEach(monster => html += `• <span class="link" onclick="showPopup('monsters','${monster}')">${getTranslation('monsters', monster)}</span><br>`);
+        monsterUsers.forEach(monster => html += `• <span class="link" onclick="loadDetail('monsters','${monster}')">${getTranslation('monsters', monster)}</span><br>`);
     }
+
     html += `</div>`;
     document.getElementById('content').innerHTML = html;
 }
