@@ -153,7 +153,6 @@ function loadView(view) {
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
         const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
-        const name = nameKey && item[nameKey] ? item[nameKey] : '';
         let cardHtml = `<div class="card" onclick="toggleExpand(this)">`;
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
@@ -189,19 +188,16 @@ function attachSearch() {
     });
 }
 
-// Expand card in place
 function toggleExpand(card) {
     card.classList.toggle('expanded');
 }
 
-// Open detail for passive / ability
 async function loadDetail(cat, key) {
     await loadData(cat);
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
     const trans = getTranslation(cat, key);
-    const users = findUsers(key, cat);
-
+    
     let html = `
         <div class="card expanded" style="max-width:800px; margin:20px auto; padding:30px;">
             <button onclick="this.parentElement.remove()" class="back-btn" style="margin-bottom:20px;">← Close Detail</button>
@@ -240,6 +236,13 @@ function toggleMenu() {
     const nav = document.querySelector('nav');
     nav.classList.toggle('open');
 }
+
+// Ensure Menu Closes on Selection (Mobile)
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('menu-item') && window.innerWidth <= 768) {
+        document.querySelector('nav').classList.remove('open');
+    }
+});
 
 // Fire Cursor Effects
 function createFireParticle(x, y) {
