@@ -3,6 +3,44 @@ let currentLang = 'English';
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 
+// Rank Emoji - Follow your exact ranking
+function getRankEmoji(cat, key, value) {
+    if (!value) return "";
+    const val = String(value).toLowerCase().trim();
+
+    if (cat === 'jobs' && key === "Rarity") {
+        if (val === "1") return " 🟢";
+        if (val === "2") return " 🔵";
+        if (val === "3") return " 🟣";
+        if (val === "4") return " 🔴";
+        if (val === "5") return " 🟡";
+    }
+
+    if (cat === 'monsters' && key === "Difficulty") {
+        if (val.includes("beginner")) return " 🟢";
+        if (val.includes("easy")) return " 🔵";
+        if (val.includes("medium")) return " 🟣";
+        if (val.includes("hard")) return " 🔴";
+        if (val.includes("boss")) return " 🟡";
+    }
+
+    if (cat === 'abilities' && key === "Ability Tier") {
+        if (val === "low") return " 🟢";
+        if (val === "medium") return " 🔵";
+        if (val === "high") return " 🔴";
+        if (val === "master") return " 🟡";
+        if (val === "curse") return " ⚪";
+    }
+
+    if (cat === 'passives' && key === "Skill Rank") {
+        if (val === "low") return " 🟢";
+        if (val === "medium") return " 🔵";
+        if (val === "high") return " 🔴";
+        if (val === "master") return " 🟡";
+    }
+    return "";
+}
+
 // Clean display names
 function getDisplayKey(cat, originalKey, index = 0) {
     if (!originalKey) return '';
@@ -110,12 +148,13 @@ function loadView(view) {
             let displayKey = getDisplayKey(cat, k);
             let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
                 ? getTranslation(cat, v) : v;
+            let emoji = getRankEmoji(cat, k, v);
             if (k.includes("AbilityKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span><br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span>${emoji}<br>`;
             } else if (k.includes("PassiveKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('passives','${v}')">${getTranslation('passives', v)}</span><br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('passives','${v}')">${getTranslation('passives', v)}</span>${emoji}<br>`;
             } else {
-                cardHtml += `<strong>${displayKey}:</strong> ${displayValue}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
             }
         }
         cardHtml += `</div>`;
@@ -154,20 +193,15 @@ async function showPopup(cat, key) {
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
-        
-        // STRONG TRANSLATION - Always translate name values first
-        let displayValue = v;
-        if (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) {
-            displayValue = getTranslation(cat, v);
-        }
-
-        // Clickable links with translated text
+        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
+            ? getTranslation(cat, v) : v;
+        let emoji = getRankEmoji(cat, k, v);
         if (k.includes("AbilityKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('abilities','${v}')">${displayValue}</span><br>`;
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('abilities','${v}')">${displayValue}</span>${emoji}<br>`;
         } else if (k.includes("PassiveKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('passives','${v}')">${displayValue}</span><br>`;
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('passives','${v}')">${displayValue}</span>${emoji}<br>`;
         } else {
-            html += `<strong>${displayKey}:</strong> ${displayValue}<br>`;
+            html += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
         }
     }
     html += `<hr style="border-color:#444; margin:25px 0;">`;
