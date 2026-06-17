@@ -50,7 +50,7 @@ function loadView(view) {
     window.lastView = view;
     const main = document.getElementById('content');
 
-    // Search bar always visible
+    // Search bar
     let html = `
         <h1>${view}</h1>
         <input type="text" id="searchInput" placeholder="Search..." 
@@ -58,32 +58,45 @@ function loadView(view) {
     `;
 
     if (view === 'Home') {
-        html += `
-            <div class="home-card">
-                <h2>About this game</h2>
-                <p><strong>Pick a Hero and a job then embark on an eternal journey of dungeon descending.</strong></p>
-                <p>Acquire random abilities and jobs through the journey and build your own unique play style.<br>
-                <strong>How far can you go?</strong></p>
-
-                <h3>FEATURES</h3>
-                <ul>
-                    <li>Rogue lite, procedural enemies and events generation.</li>
-                    <li>Dungeon crawler, descend into the dungeon as much as you can.</li>
-                    <li>Strategic deck building...</li>
-                    <li>RPG Turn-based combat system...</li>
-                    <li>Equip 3 jobs at once...</li>
-                    <li>Combine jobs and materials...</li>
-                    <li>Get new heroes from Gacha...</li>
-                    <li>Collect special relics...</li>
-                    <li>A lot of Memes, Anime and Movies references...</li>
-                </ul>
-                <p><strong>Join our Discord:</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p>
-            </div>
-        `;
+        html += `<div class="home-card">... your home content ...</div>`;
         main.innerHTML = html;
         attachSearch();
         return;
     }
+
+    const cat = view.toLowerCase();
+    const items = db[cat] || [];
+    main.innerHTML = html + `<h1>${view} <small>(${items.length} entries)</small></h1>`;
+
+    const fragment = document.createDocumentFragment();
+    items.forEach(item => {
+        const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : 'AbilityKey';
+        const name = item[nameKey] || 'Unknown';
+
+        let cardHtml = `<div class="card" onclick="showPopup('${cat}','${name}')" style="cursor:pointer;">`;
+        for (let [k, v] of Object.entries(item)) {
+            if (!v) continue;
+            let displayKey = k.replace(/\s*\*\d+/, '');
+            if (k.includes("Key")) displayKey = displayKey.replace("Key", "");
+
+            if (k.includes("AbilityKey") && v) {
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span><br>`;
+            } else if (k.includes("PassiveKey") && v) {
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('passives','${v}')">${getTranslation('passives', v)}</span><br>`;
+            } else {
+                cardHtml += `<strong>${displayKey}:</strong> ${v}<br>`;
+            }
+        }
+        cardHtml += `</div>`;
+
+        const div = document.createElement('div');
+        div.innerHTML = cardHtml;
+        fragment.appendChild(div.firstElementChild);
+    });
+
+    main.appendChild(fragment);
+    attachSearch();
+}
 
     const cat = view.toLowerCase();
     const items = db[cat] || [];
