@@ -3,6 +3,38 @@ let currentLang = 'English';
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 
+// Clean display names - removes "Key" but keeps *5, *3 etc.
+function getDisplayKey(cat, originalKey) {
+    if (!originalKey) return '';
+
+    let key = originalKey.trim();
+
+    // Special handling for Jobs
+    if (cat === 'jobs') {
+        if (originalKey === "AbilityKey") {
+            return "Switch Skill";
+        } else if (originalKey.includes("AbilityKey")) {
+            // Keep the *5, *3 etc.
+            return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
+        }
+    }
+
+    // Special handling for Monsters
+    if (cat === 'monsters') {
+        if (originalKey.includes("PassiveKey")) return "Passive";
+        if (originalKey.includes("AbilityKey")) return "Ability";
+    }
+
+    // General cleaning - remove "Key" and "Key_2", "Key_3" etc.
+    key = key.replace(/Key(_\d+)?$/, '').trim();
+
+    // Capitalize first letter
+    if (key) {
+        key = key.charAt(0).toUpperCase() + key.slice(1);
+    }
+    return key;
+}
+
 async function init() {
     const main = document.getElementById('content');
     main.innerHTML = `<h1>🔥 Jobmania Wiki</h1><p>🔄 Loading data...</p>`;
@@ -32,7 +64,6 @@ function findUsers(key, type) {
     const users = [];
     const isAbility = type === 'abilities';
     const cat = isAbility ? 'jobs' : 'monsters';
-
     if (db[cat]) {
         db[cat].forEach(item => {
             for (let [k, v] of Object.entries(item)) {
@@ -51,7 +82,7 @@ function loadView(view) {
     const main = document.getElementById('content');
 
     let searchHtml = (view !== 'Home') ? `
-        <input type="text" id="searchInput" placeholder="Search..." 
+        <input type="text" id="searchInput" placeholder="Search..."
                style="width:100%; max-width:500px; padding:10px 14px; margin:15px auto 25px; display:block; background:#1e2f66; color:white; border:1px solid #00aaff; border-radius:8px;">
     ` : '';
 
@@ -63,7 +94,6 @@ function loadView(view) {
                 <p><strong>Pick a Hero and a job then embark on an eternal journey of dungeon descending.</strong></p>
                 <p>Acquire random abilities and jobs through the journey and build your own unique play style.<br>
                 <strong>How far can you go?</strong></p>
-
                 <h3>FEATURES</h3>
                 <ul>
                     <li>Rogue lite, procedural enemies and events generation.</li>
@@ -86,14 +116,12 @@ function loadView(view) {
 
     const cat = view.toLowerCase();
     const items = db[cat] || [];
-
     main.innerHTML = `
         <h1>${view} <small>(${items.length} entries)</small></h1>
         ${searchHtml}
     `;
 
     const fragment = document.createDocumentFragment();
-
     items.forEach(item => {
         const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
         const name = nameKey && item[nameKey] ? item[nameKey] : '';
@@ -103,18 +131,7 @@ function loadView(view) {
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
 
-            let displayKey = k.replace(/\s*\*\d+/, '');
-
-            if (cat === 'jobs') {
-                if (k === "AbilityKey") {
-                    displayKey = "Switch Skill";
-                } else if (k.includes("AbilityKey")) {
-                    displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
-                }
-            }
-            if (cat === 'monsters' && k.includes("_2")) {
-                displayKey = k.replace("_2", "");
-            }
+            let displayKey = getDisplayKey(cat, k);
 
             if (k.includes("AbilityKey") && v) {
                 cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span><br>`;
@@ -163,15 +180,7 @@ async function showPopup(cat, key) {
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
 
-        let displayKey = k.replace(/\s*\*\d+/, '');
-
-        if (cat === 'jobs') {
-            if (k === "AbilityKey") displayKey = "Switch Skill";
-            else if (k.includes("AbilityKey")) displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
-        }
-        if (cat === 'monsters' && k.includes("_2")) {
-            displayKey = k.replace("_2", "");
-        }
+        let displayKey = getDisplayKey(cat, k);
 
         html += `<strong>${displayKey}:</strong> ${v}<br>`;
     }
@@ -211,7 +220,7 @@ async function loadData(cat) {
     } catch(e) {}
 }
 
-// ====================== FIRE CURSOR EFFECTS ======================
+// Fire Cursor Effects (kept intact)
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
     const particle = document.createElement('div');
@@ -222,14 +231,12 @@ function createFireParticle(x, y) {
     trail.appendChild(particle);
     setTimeout(() => particle.remove(), 1000);
 }
-
 function createTrailContainer() {
     const container = document.createElement('div');
     container.id = 'fire-trail';
     document.body.appendChild(container);
     return container;
 }
-
 function createFireBurst(x, y) {
     const burst = document.createElement('div');
     burst.className = 'fire-burst';
@@ -238,15 +245,9 @@ function createFireBurst(x, y) {
     document.body.appendChild(burst);
     setTimeout(() => burst.remove(), 600);
 }
-
-// Mouse trail
 document.addEventListener('mousemove', (e) => {
-    if (Math.random() > 0.35) {
-        createFireParticle(e.clientX, e.clientY);
-    }
+    if (Math.random() > 0.35) createFireParticle(e.clientX, e.clientY);
 });
-
-// Click burst
 document.addEventListener('click', (e) => {
     createFireBurst(e.clientX, e.clientY);
     setTimeout(() => createFireBurst(e.clientX + 12, e.clientY + 8), 60);
