@@ -1,7 +1,7 @@
 :root {
     --primary: #ff4500;
     --accent: #00ccff;
-    --bg: #0f1b4d;           /* Nice deep blue */
+    --bg: #0f1b4d; /* Nice deep blue */
     --nav: #1a2a66;
     --card: #16214d;
     --text: #f0f4ff;
@@ -16,8 +16,54 @@ body {
     background: var(--bg);
     color: var(--text);
     cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat976.cur'), crosshair;
+    overflow-x: hidden;
 }
 
+/* ====================== FIRE CURSOR EFFECTS ====================== */
+#fire-trail {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.fire-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff8800;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #ffcc00, 0 0 20px #ff5500;
+    animation: fireTrail 0.8s forwards;
+    opacity: 0;
+}
+
+@keyframes fireTrail {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(0.2); opacity: 0; }
+}
+
+.fire-burst {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ffff00, #ff5500, transparent);
+    border-radius: 50%;
+    animation: fireBurstAnim 0.6s forwards;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes fireBurstAnim {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
+
+/* Rest of your original styles (unchanged) */
 #app { display: flex; min-height: 100vh; }
 
 nav {
