@@ -218,6 +218,12 @@ async function loadData(cat) {
     } catch(e) {}
 }
 
+// Hamburger Menu Toggle
+function toggleMenu() {
+    const nav = document.querySelector('nav');
+    nav.classList.toggle('open');
+}
+
 // Fire Cursor Effects
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
