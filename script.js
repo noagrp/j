@@ -155,7 +155,7 @@ async function showPopup(cat, key) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
         
-        // CENTRALIZED TRANSLATION - Always translate name values first
+        // STRONG TRANSLATION - Always translate name values first
         let displayValue = v;
         if (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) {
             displayValue = getTranslation(cat, v);
