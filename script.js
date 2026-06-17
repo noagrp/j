@@ -4,7 +4,7 @@ let dictionary = [];
 
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 
-// Dictionary
+// Dictionary Helper
 function getDict(key) {
     const entry = dictionary.find(i => i.DictionaryKey === key);
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
@@ -194,13 +194,13 @@ function toggleExpand(card) {
     card.classList.toggle('expanded');
 }
 
-// Simple detail for ability/passive when clicked from expanded card
+// Open detail for passive / ability
 async function loadDetail(cat, key) {
     await loadData(cat);
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
     const trans = getTranslation(cat, key);
-    alert(`${trans}\n\n(Detail view coming soon - currently showing name only)`);
+    alert(`Opened ${cat}: ${trans}\n\n(Full detail view will be improved later)`);
 }
 
 function changeLanguage(lang) {
