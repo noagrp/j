@@ -106,7 +106,7 @@ function loadView(view) {
 
             let displayKey = k.replace(/\s*\*\d+/, '');
 
-            // Special labels
+            // Refined Labels
             if (cat === 'jobs') {
                 if (k === "AbilityKey") {
                     displayKey = "Switch Skill";
