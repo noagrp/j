@@ -1,10 +1,11 @@
 :root {
     --primary: #ff4500;
-    --accent: #4da6ff;
-    --bg: #0a0a0a;
-    --nav: #111111;
-    --card: #1a1a1a;
-    --text: #eeeeee;
+    --accent: #00ccff;
+    --bg: #0f1b4d;           /* Nice deep blue */
+    --nav: #1a2a66;
+    --card: #16214d;
+    --text: #f0f4ff;
+    --label: #a0d8ff;
 }
 
 * { box-sizing: border-box; }
@@ -20,10 +21,10 @@ body {
 #app { display: flex; min-height: 100vh; }
 
 nav {
-    width: 260px;
+    width: 270px;
     background: var(--nav);
-    padding: 20px;
-    border-right: 1px solid #222;
+    padding: 24px 16px;
+    border-right: 3px solid var(--accent);
     position: sticky;
     top: 0;
     height: 100vh;
@@ -32,178 +33,139 @@ nav {
 
 nav img {
     display: block;
-    margin: 0 auto 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(255, 69, 0, 0.3);
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #00ccff;
 }
 
 #langSelect {
     width: 100%;
-    padding: 10px;
-    background: #222;
+    padding: 12px;
+    background: #13214d;
     color: white;
-    border: 1px solid #444;
-    border-radius: 8px;
+    border: 2px solid #00ccff;
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
 .menu-item {
-    color: #aaa;
+    color: #b0d0ff;
     cursor: pointer;
-    padding: 14px 16px;
-    margin: 4px 0;
-    border-radius: 8px;
-    transition: all 0.2s;
+    padding: 14px 18px;
+    margin: 6px 0;
+    border-radius: 10px;
+    transition: all 0.3s;
 }
 
 .menu-item:hover {
-    background: rgba(255, 69, 0, 0.15);
-    color: var(--primary);
+    background: rgba(0, 204, 255, 0.2);
+    color: white;
     transform: translateX(8px);
 }
 
-/* Search in sidebar */
-#sidebarSearch {
-    width: 100%;
-    padding: 10px;
-    background: #222;
-    color: white;
-    border: 1px solid #444;
-    border-radius: 8px;
-    margin: 15px 0;
-}
-
+/* Main Area */
 main {
     flex: 1;
-    padding: 30px;
+    padding: 30px 40px;
     overflow-y: auto;
 }
 
 h1 {
     text-align: center;
-    color: var(--primary);
-    margin: 10px 0 30px;
-    font-size: 2.4rem;
-    text-shadow: 0 2px 10px rgba(255,69,0,0.3);
+    color: #ffd700;
+    margin: 10px 0 35px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 15px #00ccff;
 }
 
-/* Full width cards */
-.card {
-    background: linear-gradient(135deg, #3a1a66, #2a0f55);
-    padding: 24px;
+/* Cards - Clean & Colorful */
+.card, .home-card {
+    background: var(--card);
+    padding: 26px;
     margin: 20px 0;
     border-radius: 16px;
-    border: 3px solid #ff00cc;
-    box-shadow: 0 8px 25px rgba(255, 0, 204, 0.3);
+    border: 2px solid #334477;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     transition: all 0.4s ease;
     position: relative;
-    overflow: hidden;
-    min-height: 220px; /* Better space usage */
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.03);
-    border-color: #00ffcc;
-    box-shadow: 0 15px 40px rgba(0, 255, 204, 0.5);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgba(0, 204, 255, 0.35);
+    transform: translateY(-6px);
 }
 
-/* Icon placeholder (ready for future images) */
-.card::before {
-    content: attr(data-icon);
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 52px;
-    opacity: 0.15;
-    transition: all 0.3s;
-}
-
-.card:hover::before {
-    opacity: 0.4;
-    transform: scale(1.2);
-}
-
-/* Card content improvements */
-.card strong {
-    color: #ffd700;
-    font-size: 1.1em;
-}
-
-.card .link {
-    color: #00ffff;
-    font-weight: bold;
-    text-shadow: 0 0 6px #00ffff;
-}
-
-.card .link:hover {
-    color: #ffff00;
-}
-
-/* Make stats look like a nice grid */
-.card br {
-    display: none;
-}
-
+/* Nice left-aligned labels */
 .card strong {
     display: inline-block;
-    width: 48%;
-    margin-bottom: 8px;
+    width: 160px;
+    color: var(--label);
+    font-weight: 600;
+    vertical-align: top;
 }
 
-/* Home Card - Extra Fun */
+/* Neon hover border effect */
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.card:hover::after {
+    opacity: 1;
+    border-image: linear-gradient(45deg, #00ccff, #ff00cc) 1;
+}
+
+/* Links */
+.link {
+    color: #00ffdd;
+    font-weight: 500;
+}
+
+.link:hover {
+    color: #ffff00;
+    text-decoration: underline;
+}
+
+/* Home Card */
 .home-card {
-    background: linear-gradient(135deg, #4a1f80, #2a0f55);
-    padding: 35px;
-    border: 4px solid #ffd700;
-    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.6);
     max-width: 1100px;
     margin: 0 auto 40px;
+    background: linear-gradient(135deg, #1e2f66, #16214d);
+    border: 3px solid #ffd700;
 }
 
-.link {
-    color: var(--accent);
-    cursor: pointer;
-}
-
-.link:hover { color: #7ed6ff; text-decoration: underline; }
-
-/* Home card - full width */
-.home-card {
-    max-width: 1000px;
-    margin: 0 auto 30px;
-}
-
-/* Search in main for other pages */
+/* Search */
 #searchInput {
     width: 100%;
     max-width: 600px;
-    padding: 12px;
-    margin: 0 auto 25px;
+    margin: 0 auto 30px;
     display: block;
-    background: #222;
+    padding: 14px 18px;
+    background: #1a2a5c;
     color: white;
-    border: 1px solid #444;
-    border-radius: 8px;
+    border: 2px solid #00aaff;
+    border-radius: 12px;
+    font-size: 1.05em;
 }
 
-/* Back button */
 .back-btn {
-    padding: 8px 18px;
-    background: #222;
-    color: var(--primary);
-    border: none;
-    border-radius: 6px;
+    padding: 10px 22px;
+    background: #1e2f66;
+    color: #00ccff;
+    border: 2px solid #00ccff;
+    border-radius: 50px;
     cursor: pointer;
-    font-size: 1em;
-    margin: 10px 0 20px;
+    font-weight: bold;
 }
 
 .back-btn:hover {
-    background: var(--primary);
-    color: white;
-}
-
-#content {
-    max-width: 1200px;
-    margin: 0 auto;
+    background: #00ccff;
+    color: #000;
 }
