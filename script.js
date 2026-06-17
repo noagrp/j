@@ -3,30 +3,20 @@ let currentLang = 'English';
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 
-// Clean display names - removes "Key" but keeps *5, *3 etc.
+// Clean display names
 function getDisplayKey(cat, originalKey, index = 0) {
     if (!originalKey) return '';
     let key = originalKey.trim();
     if (cat === 'jobs') {
-        if (originalKey === "AbilityKey") {
-            return "Switch Skill";
-        } else if (originalKey.includes("AbilityKey")) {
-            return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
-        }
+        if (originalKey === "AbilityKey") return "Switch Skill";
+        else if (originalKey.includes("AbilityKey")) return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
     }
-    // For monsters with multiple passives/abilities
     if (cat === 'monsters') {
-        if (originalKey.includes("PassiveKey")) {
-            return index === 0 ? "Passive" : `Passive ${index + 1}`;
-        }
-        if (originalKey.includes("AbilityKey")) {
-            return index === 0 ? "Ability" : `Ability ${index + 1}`;
-        }
+        if (originalKey.includes("PassiveKey")) return index === 0 ? "Passive" : `Passive ${index + 1}`;
+        if (originalKey.includes("AbilityKey")) return index === 0 ? "Ability" : `Ability ${index + 1}`;
     }
     key = key.replace(/Key(_\d+)?$/, '').trim();
-    if (key) {
-        key = key.charAt(0).toUpperCase() + key.slice(1);
-    }
+    if (key) key = key.charAt(0).toUpperCase() + key.slice(1);
     return key;
 }
 
@@ -118,10 +108,8 @@ function loadView(view) {
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
-            let displayValue = v;
-            if ((k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives'))) {
-                displayValue = getTranslation(cat, v);
-            }
+            let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
+                ? getTranslation(cat, v) : v;
             if (k.includes("AbilityKey") && v) {
                 cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span><br>`;
             } else if (k.includes("PassiveKey") && v) {
@@ -167,12 +155,13 @@ async function showPopup(cat, key) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
         
-        // FIXED: Always translate the value for name fields
-        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
-            ? getTranslation(cat, v) 
-            : v;
+        // CENTRALIZED TRANSLATION FIX
+        let displayValue = v;
+        if (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) {
+            displayValue = getTranslation(cat, v);
+        }
 
-        // Make Passives and Abilities clickable
+        // Clickable links with translated text
         if (k.includes("AbilityKey") && v) {
             html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('abilities','${v}')">${displayValue}</span><br>`;
         } else if (k.includes("PassiveKey") && v) {
@@ -212,7 +201,7 @@ async function loadData(cat) {
     } catch(e) {}
 }
 
-// ====================== FIRE CURSOR EFFECTS ======================
+// Fire Cursor Effects
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
     const particle = document.createElement('div');
