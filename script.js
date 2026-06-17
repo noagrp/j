@@ -3,11 +3,10 @@ let currentLang = 'English';
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 
-// Rank Emoji - Follow your exact ranking
+// Rank Emoji
 function getRankEmoji(cat, key, value) {
     if (!value) return "";
     const val = String(value).toLowerCase().trim();
-
     if (cat === 'jobs' && key === "Rarity") {
         if (val === "1") return " 🟢";
         if (val === "2") return " 🔵";
@@ -15,7 +14,6 @@ function getRankEmoji(cat, key, value) {
         if (val === "4") return " 🔴";
         if (val === "5") return " 🟡";
     }
-
     if (cat === 'monsters' && key === "Difficulty") {
         if (val.includes("beginner")) return " 🟢";
         if (val.includes("easy")) return " 🔵";
@@ -23,7 +21,6 @@ function getRankEmoji(cat, key, value) {
         if (val.includes("hard")) return " 🔴";
         if (val.includes("boss")) return " 🟡";
     }
-
     if (cat === 'abilities' && key === "Ability Tier") {
         if (val === "low") return " 🟢";
         if (val === "medium") return " 🔵";
@@ -31,7 +28,6 @@ function getRankEmoji(cat, key, value) {
         if (val === "master") return " 🟡";
         if (val === "curse") return " ⚪";
     }
-
     if (cat === 'passives' && key === "Skill Rank") {
         if (val === "low") return " 🟢";
         if (val === "medium") return " 🔵";
@@ -41,7 +37,7 @@ function getRankEmoji(cat, key, value) {
     return "";
 }
 
-// Clean display names
+// Clean display names - Monster changed to Character
 function getDisplayKey(cat, originalKey, index = 0) {
     if (!originalKey) return '';
     let key = originalKey.trim();
@@ -52,6 +48,7 @@ function getDisplayKey(cat, originalKey, index = 0) {
     if (cat === 'monsters') {
         if (originalKey.includes("PassiveKey")) return index === 0 ? "Passive" : `Passive ${index + 1}`;
         if (originalKey.includes("AbilityKey")) return index === 0 ? "Ability" : `Ability ${index + 1}`;
+        if (originalKey === "MonsterKey") return "Character";
     }
     key = key.replace(/Key(_\d+)?$/, '').trim();
     if (key) key = key.charAt(0).toUpperCase() + key.slice(1);
