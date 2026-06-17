@@ -50,7 +50,6 @@ function loadView(view) {
     window.lastView = view;
     const main = document.getElementById('content');
 
-    // Search bar only on list pages
     let searchHtml = (view !== 'Home') ? `
         <input type="text" id="searchInput" placeholder="Search..." 
                style="width:100%; max-width:500px; padding:10px 14px; margin:15px auto 25px; display:block; background:#1e2f66; color:white; border:1px solid #00aaff; border-radius:8px;">
@@ -106,7 +105,6 @@ function loadView(view) {
 
             let displayKey = k.replace(/\s*\*\d+/, '');
 
-            // Refined Labels
             if (cat === 'jobs') {
                 if (k === "AbilityKey") {
                     displayKey = "Switch Skill";
@@ -212,5 +210,47 @@ async function loadData(cat) {
         if (loc.ok) db[cat + '_localisation'] = await loc.json();
     } catch(e) {}
 }
+
+// ====================== FIRE CURSOR EFFECTS ======================
+function createFireParticle(x, y) {
+    const trail = document.getElementById('fire-trail') || createTrailContainer();
+    const particle = document.createElement('div');
+    particle.className = 'fire-particle';
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    particle.style.background = `hsl(${Math.random()*30 + 15}, 100%, 60%)`;
+    trail.appendChild(particle);
+    setTimeout(() => particle.remove(), 1000);
+}
+
+function createTrailContainer() {
+    const container = document.createElement('div');
+    container.id = 'fire-trail';
+    document.body.appendChild(container);
+    return container;
+}
+
+function createFireBurst(x, y) {
+    const burst = document.createElement('div');
+    burst.className = 'fire-burst';
+    burst.style.left = `${x}px`;
+    burst.style.top = `${y}px`;
+    document.body.appendChild(burst);
+    setTimeout(() => burst.remove(), 600);
+}
+
+// Mouse trail
+document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.35) {
+        createFireParticle(e.clientX, e.clientY);
+    }
+});
+
+// Click burst
+document.addEventListener('click', (e) => {
+    createFireBurst(e.clientX, e.clientY);
+    setTimeout(() => createFireBurst(e.clientX + 12, e.clientY + 8), 60);
+    setTimeout(() => createFireBurst(e.clientX - 10, e.clientY - 10), 120);
+});
 
 init();
