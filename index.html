@@ -7,19 +7,24 @@
 </head>
 <body>
     <div id="app">
-        <nav>
-            <img src="https://raw.githubusercontent.com/noagrp/jobmania/main/jobmania_official_icon.png" width="80">
-            <select id="langSelect" onchange="changeLanguage(this.value)">
-                <option value="English">English</option>
-                <option value="Chinese">中文 (简体)</option>
-                <option value="Japanese">日本語</option>
-            </select>
-            <div class="menu-item" onclick="loadView('Home')">Home</div>
-            <div class="menu-item" onclick="loadView('Monsters')">Monsters</div>
-            <div class="menu-item" onclick="loadView('Jobs')">Jobs</div>
-            <div class="menu-item" onclick="loadView('Abilities')">Abilities</div>
-            <div class="menu-item" onclick="loadView('Passives')">Passives</div>
-        </nav>
+<nav>
+    <!-- New items at the top -->
+    <img src="logo.png" alt="Jobmania Logo"> 
+    <div class="menu-item"><strong>Jobmania - Eternal Dungeon</strong></div>
+    <div class="menu-item">AUBJECTIVE TECHNOLOGY LTD.</div>
+    <div class="menu-item">Contains ads • In-app purchases</div>
+    <div class="menu-item" onclick="window.open('https://play.google.com/store/apps/details?id=your.game.id','_blank')">▶️ Google Play</div>
+    <div class="menu-item" onclick="window.open('https://discord.gg/6U5FNFVrwb','_blank')">💬 Discord</div>
+
+    <hr style="margin:20px 0; border-color:#334477;">
+
+    <!-- Main menu below -->
+    <div class="menu-item" onclick="loadView('Home')">🏠 Home</div>
+    <div class="menu-item" onclick="loadView('Monsters')">👹 Characters</div>
+    <div class="menu-item" onclick="loadView('Jobs')">⚔️ Jobs</div>
+    <div class="menu-item" onclick="loadView('Abilities')">✨ Abilities</div>
+    <div class="menu-item" onclick="loadView('Passives')">🛡️ Passives</div>
+</nav>
         <main id="content"><h1>Loading Wiki Data...</h1></main>
     </div>
     <script src="script.js"></script>
