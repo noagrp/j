@@ -6,9 +6,7 @@ const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 // Clean display names - removes "Key" but keeps *5, *3 etc.
 function getDisplayKey(cat, originalKey, index = 0) {
     if (!originalKey) return '';
-
     let key = originalKey.trim();
-
     if (cat === 'jobs') {
         if (originalKey === "AbilityKey") {
             return "Switch Skill";
@@ -16,7 +14,6 @@ function getDisplayKey(cat, originalKey, index = 0) {
             return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
         }
     }
-
     // For monsters with multiple passives/abilities
     if (cat === 'monsters') {
         if (originalKey.includes("PassiveKey")) {
@@ -26,7 +23,6 @@ function getDisplayKey(cat, originalKey, index = 0) {
             return index === 0 ? "Ability" : `Ability ${index + 1}`;
         }
     }
-
     key = key.replace(/Key(_\d+)?$/, '').trim();
     if (key) {
         key = key.charAt(0).toUpperCase() + key.slice(1);
@@ -37,12 +33,10 @@ function getDisplayKey(cat, originalKey, index = 0) {
 async function init() {
     const main = document.getElementById('content');
     main.innerHTML = `<h1>🔥 Jobmania Wiki</h1><p>🔄 Loading data...</p>`;
-
     try {
         for (const f of files) {
             const res = await fetch(`data/${f}.json`);
             if (res.ok) db[f] = await res.json();
-
             const loc = await fetch(`data/${f}_localisation.json`);
             if (loc.ok) db[f + '_localisation'] = await loc.json();
         }
@@ -79,12 +73,10 @@ function findUsers(key, type) {
 function loadView(view) {
     window.lastView = view;
     const main = document.getElementById('content');
-
     let searchHtml = (view !== 'Home') ? `
         <input type="text" id="searchInput" placeholder="Search..."
                style="width:100%; max-width:500px; padding:10px 14px; margin:15px auto 25px; display:block; background:#1e2f66; color:white; border:1px solid #00aaff; border-radius:8px;">
     ` : '';
-
     if (view === 'Home') {
         main.innerHTML = `
             <h1>🔥 Jobmania - Eternal Dungeon</h1>
@@ -112,32 +104,24 @@ function loadView(view) {
         `;
         return;
     }
-
     const cat = view.toLowerCase();
     const items = db[cat] || [];
     main.innerHTML = `
         <h1>${view} <small>(${items.length} entries)</small></h1>
         ${searchHtml}
     `;
-
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
         const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
         const name = nameKey && item[nameKey] ? item[nameKey] : '';
-
         let cardHtml = `<div class="card" onclick="showPopup('${cat}','${name}')" style="cursor:pointer;">`;
-
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
-
             let displayKey = getDisplayKey(cat, k);
             let displayValue = v;
-
-            // Use translation for name fields
             if ((k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives'))) {
                 displayValue = getTranslation(cat, v);
             }
-
             if (k.includes("AbilityKey") && v) {
                 cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span><br>`;
             } else if (k.includes("PassiveKey") && v) {
@@ -147,12 +131,10 @@ function loadView(view) {
             }
         }
         cardHtml += `</div>`;
-
         const div = document.createElement('div');
         div.innerHTML = cardHtml;
         fragment.appendChild(div.firstElementChild);
     });
-
     main.appendChild(fragment);
     attachSearch();
 }
@@ -172,60 +154,44 @@ async function showPopup(cat, key) {
     await loadData(cat);
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
-
     const trans = getTranslation(cat, key);
     const users = findUsers(key, cat);
-
     let html = `
         <h2>${trans}</h2>
         <button onclick="loadView(window.lastView)" class="back-btn">← Back</button>
         <div class="card">
     `;
-
     let passiveCount = 0;
     let abilityCount = 0;
-
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
-
         let displayKey = getDisplayKey(cat, k);
-
         let displayValue = v;
         if (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) {
             displayValue = getTranslation(cat, v);
         }
 
-        // Handle multiple passives/abilities with numbered labels
-        if (cat === 'monsters') {
-            if (k.includes("PassiveKey")) {
-                displayKey = passiveCount === 0 ? "Passive" : `Passive ${passiveCount + 1}`;
-                passiveCount++;
-            }
-            if (k.includes("AbilityKey")) {
-                displayKey = abilityCount === 0 ? "Ability" : `Ability ${abilityCount + 1}`;
-                abilityCount++;
-            }
+        // Make Passives and Abilities clickable in detail view
+        if (k.includes("AbilityKey") && v) {
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('abilities','${v}')">${displayValue}</span><br>`;
+        } else if (k.includes("PassiveKey") && v) {
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('passives','${v}')">${displayValue}</span><br>`;
+        } else {
+            html += `<strong>${displayKey}:</strong> ${displayValue}<br>`;
         }
-
-        html += `<strong>${displayKey}:</strong> ${displayValue}<br>`;
     }
-
     html += `<hr style="border-color:#444; margin:25px 0;">`;
-
     const jobUsers = users.filter(u => db.jobs && db.jobs.some(j => j.JobKey === u));
     const monsterUsers = users.filter(u => db.monsters && db.monsters.some(m => m.MonsterKey === u));
-
     if (jobUsers.length > 0) {
         html += `<strong style="color:#ffd700;">Used by Jobs (${jobUsers.length}):</strong><br><br>`;
         jobUsers.forEach(job => html += `• <span class="link" onclick="showPopup('jobs','${job}')">${getTranslation('jobs', job)}</span><br>`);
         html += `<br>`;
     }
-
     if (monsterUsers.length > 0) {
         html += `<strong style="color:#00ffcc;">Used by Monsters (${monsterUsers.length}):</strong><br><br>`;
         monsterUsers.forEach(monster => html += `• <span class="link" onclick="showPopup('monsters','${monster}')">${getTranslation('monsters', monster)}</span><br>`);
     }
-
     html += `</div>`;
     document.getElementById('content').innerHTML = html;
 }
