@@ -1,7 +1,7 @@
 :root {
     --primary: #ff4500;
     --accent: #00ccff;
-    --bg: #0f1b4d; /* Nice deep blue */
+    --bg: #0f1b4d;
     --nav: #1a2a66;
     --card: #16214d;
     --text: #f0f4ff;
@@ -29,7 +29,6 @@ body {
     top: 0;
     left: 0;
 }
-
 .fire-particle {
     position: absolute;
     width: 8px;
@@ -40,12 +39,10 @@ body {
     animation: fireTrail 0.8s forwards;
     opacity: 0;
 }
-
 @keyframes fireTrail {
     0% { transform: scale(1); opacity: 0.9; }
     100% { transform: scale(0.2); opacity: 0; }
 }
-
 .fire-burst {
     position: fixed;
     pointer-events: none;
@@ -57,13 +54,12 @@ body {
     animation: fireBurstAnim 0.6s forwards;
     transform: translate(-50%, -50%);
 }
-
 @keyframes fireBurstAnim {
     0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
     100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
 }
 
-/* Rest of your original styles (unchanged) */
+/* ====================== NAV ====================== */
 #app { display: flex; min-height: 100vh; }
 
 nav {
@@ -77,28 +73,39 @@ nav {
     overflow-y: auto;
 }
 
-nav img {
+/* Logo */
+nav img, .nav-logo {
     display: block;
-    margin: 0 auto 24px;
+    margin: 0 auto 20px;
     border-radius: 50%;
     box-shadow: 0 0 20px #00ccff;
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
 }
 
-#langSelect {
-    width: 100%;
-    padding: 12px;
-    background: #13214d;
-    color: white;
-    border: 2px solid #00ccff;
-    border-radius: 10px;
-    margin-bottom: 20px;
+/* Game Info Section (non-clickable) */
+.game-info {
+    text-align: center;
+    color: #b0d0ff;
+    font-size: 0.93em;
+    line-height: 1.5;
+    margin: 15px 0 25px;
+    padding: 0 8px;
 }
 
+.game-info strong {
+    color: #ffd700;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Menu Items */
 .menu-item {
     color: #b0d0ff;
     cursor: pointer;
-    padding: 14px 18px;
-    margin: 6px 0;
+    padding: 13px 18px;
+    margin: 5px 0;
     border-radius: 10px;
     transition: all 0.3s;
 }
@@ -107,6 +114,29 @@ nav img {
     background: rgba(0, 204, 255, 0.2);
     color: white;
     transform: translateX(8px);
+}
+
+/* External Links (Google Play & Discord) */
+.menu-link {
+    display: block;
+    color: #b0d0ff;
+    padding: 13px 18px;
+    margin: 5px 0;
+    border-radius: 10px;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.menu-link:hover {
+    background: rgba(0, 204, 255, 0.25);
+    color: #00ffdd;
+    transform: translateX(8px);
+}
+
+/* Separators */
+nav hr {
+    margin: 20px 12px;
+    border-color: #334477;
 }
 
 /* Main Area */
@@ -124,7 +154,7 @@ h1 {
     text-shadow: 0 0 15px #00ccff;
 }
 
-/* Cards - Clean & Colorful */
+/* Cards */
 .card, .home-card {
     background: var(--card);
     padding: 26px;
@@ -142,7 +172,6 @@ h1 {
     transform: translateY(-6px);
 }
 
-/* Nice left-aligned labels */
 .card strong {
     display: inline-block;
     width: 160px;
@@ -151,7 +180,6 @@ h1 {
     vertical-align: top;
 }
 
-/* Neon hover border effect */
 .card::after {
     content: '';
     position: absolute;
@@ -162,7 +190,6 @@ h1 {
     opacity: 0;
     transition: all 0.4s;
 }
-
 .card:hover::after {
     opacity: 1;
     border-image: linear-gradient(45deg, #00ccff, #ff00cc) 1;
@@ -173,7 +200,6 @@ h1 {
     color: #00ffdd;
     font-weight: 500;
 }
-
 .link:hover {
     color: #ffff00;
     text-decoration: underline;
@@ -210,7 +236,6 @@ h1 {
     cursor: pointer;
     font-weight: bold;
 }
-
 .back-btn:hover {
     background: #00ccff;
     color: #000;
