@@ -166,12 +166,11 @@ async function showPopup(cat, key) {
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
-        let displayValue = v;
-
-        // FIXED: Always translate name values
-        if (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) {
-            displayValue = getTranslation(cat, v);
-        }
+        
+        // FIXED: Always translate the value for name fields
+        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
+            ? getTranslation(cat, v) 
+            : v;
 
         // Make Passives and Abilities clickable
         if (k.includes("AbilityKey") && v) {
