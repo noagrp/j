@@ -4,31 +4,30 @@ const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'
 const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
 
 // Clean display names - removes "Key" but keeps *5, *3 etc.
-function getDisplayKey(cat, originalKey) {
+function getDisplayKey(cat, originalKey, index = 0) {
     if (!originalKey) return '';
 
     let key = originalKey.trim();
 
-    // Special handling for Jobs
     if (cat === 'jobs') {
         if (originalKey === "AbilityKey") {
             return "Switch Skill";
         } else if (originalKey.includes("AbilityKey")) {
-            // Keep the *5, *3 etc.
             return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
         }
     }
 
-    // Special handling for Monsters
+    // For monsters with multiple passives/abilities
     if (cat === 'monsters') {
-        if (originalKey.includes("PassiveKey")) return "Passive";
-        if (originalKey.includes("AbilityKey")) return "Ability";
+        if (originalKey.includes("PassiveKey")) {
+            return index === 0 ? "Passive" : `Passive ${index + 1}`;
+        }
+        if (originalKey.includes("AbilityKey")) {
+            return index === 0 ? "Ability" : `Ability ${index + 1}`;
+        }
     }
 
-    // General cleaning - remove "Key" and "Key_2", "Key_3" etc.
     key = key.replace(/Key(_\d+)?$/, '').trim();
-
-    // Capitalize first letter
     if (key) {
         key = key.charAt(0).toUpperCase() + key.slice(1);
     }
@@ -132,13 +131,19 @@ function loadView(view) {
             if (!v || v === "") continue;
 
             let displayKey = getDisplayKey(cat, k);
+            let displayValue = v;
+
+            // Use translation for name fields
+            if ((k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives'))) {
+                displayValue = getTranslation(cat, v);
+            }
 
             if (k.includes("AbilityKey") && v) {
                 cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span><br>`;
             } else if (k.includes("PassiveKey") && v) {
                 cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('passives','${v}')">${getTranslation('passives', v)}</span><br>`;
             } else {
-                cardHtml += `<strong>${displayKey}:</strong> ${v}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> ${displayValue}<br>`;
             }
         }
         cardHtml += `</div>`;
@@ -177,12 +182,32 @@ async function showPopup(cat, key) {
         <div class="card">
     `;
 
+    let passiveCount = 0;
+    let abilityCount = 0;
+
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
 
         let displayKey = getDisplayKey(cat, k);
 
-        html += `<strong>${displayKey}:</strong> ${v}<br>`;
+        let displayValue = v;
+        if (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) {
+            displayValue = getTranslation(cat, v);
+        }
+
+        // Handle multiple passives/abilities with numbered labels
+        if (cat === 'monsters') {
+            if (k.includes("PassiveKey")) {
+                displayKey = passiveCount === 0 ? "Passive" : `Passive ${passiveCount + 1}`;
+                passiveCount++;
+            }
+            if (k.includes("AbilityKey")) {
+                displayKey = abilityCount === 0 ? "Ability" : `Ability ${abilityCount + 1}`;
+                abilityCount++;
+            }
+        }
+
+        html += `<strong>${displayKey}:</strong> ${displayValue}<br>`;
     }
 
     html += `<hr style="border-color:#444; margin:25px 0;">`;
@@ -220,7 +245,7 @@ async function loadData(cat) {
     } catch(e) {}
 }
 
-// Fire Cursor Effects (kept intact)
+// ====================== FIRE CURSOR EFFECTS ======================
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
     const particle = document.createElement('div');
