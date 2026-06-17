@@ -1,8 +1,15 @@
 const db = {};
 let currentLang = 'English';
-let dictionary = [];   // ← Dictionary added
+let dictionary = [];   // Universal Dictionary
 
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
+const LinkRegistry = { "AbilityKey": "abilities", "PassiveKey": "passives" };
+
+// Dictionary Helper
+function getDict(key) {
+    const entry = dictionary.find(i => i.DictionaryKey === key);
+    return entry ? (entry[currentLang] || entry['English'] || key) : key;
+}
 
 // Rank Emoji
 function getRankEmoji(cat, key, value) {
@@ -36,12 +43,6 @@ function getRankEmoji(cat, key, value) {
         if (val === "master") return " 🟡";
     }
     return "";
-}
-
-// Dictionary Helper
-function getDict(key) {
-    const entry = dictionary.find(i => i.DictionaryKey === key);
-    return entry ? (entry[currentLang] || entry['English'] || key) : key;
 }
 
 // Clean display names
@@ -147,7 +148,6 @@ function loadView(view) {
         <h1>${view} <small>(${items.length} entries)</small></h1>
         ${searchHtml}
     `;
-    // ... (rest of loadView remains the same)
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
         const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
@@ -156,7 +156,7 @@ function loadView(view) {
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
-            let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
+            let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives'))
                 ? getTranslation(cat, v) : v;
             let emoji = getRankEmoji(cat, k, v);
             if (k.includes("AbilityKey") && v) {
@@ -201,7 +201,7 @@ async function showPopup(cat, key) {
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
-        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
+        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives'))
             ? getTranslation(cat, v) : v;
         let emoji = getRankEmoji(cat, k, v);
         if (k.includes("AbilityKey") && v) {
@@ -243,11 +243,38 @@ async function loadData(cat) {
     } catch(e) {}
 }
 
-// Fire Cursor Effects (unchanged)
-function createFireParticle(x, y) { /* ... */ }
-function createTrailContainer() { /* ... */ }
-function createFireBurst(x, y) { /* ... */ }
-document.addEventListener('mousemove', (e) => { /* ... */ });
-document.addEventListener('click', (e) => { /* ... */ });
+// Fire Cursor Effects
+function createFireParticle(x, y) {
+    const trail = document.getElementById('fire-trail') || createTrailContainer();
+    const particle = document.createElement('div');
+    particle.className = 'fire-particle';
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    particle.style.background = `hsl(${Math.random()*30 + 15}, 100%, 60%)`;
+    trail.appendChild(particle);
+    setTimeout(() => particle.remove(), 1000);
+}
+function createTrailContainer() {
+    const container = document.createElement('div');
+    container.id = 'fire-trail';
+    document.body.appendChild(container);
+    return container;
+}
+function createFireBurst(x, y) {
+    const burst = document.createElement('div');
+    burst.className = 'fire-burst';
+    burst.style.left = `${x}px`;
+    burst.style.top = `${y}px`;
+    document.body.appendChild(burst);
+    setTimeout(() => burst.remove(), 600);
+}
+document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.35) createFireParticle(e.clientX, e.clientY);
+});
+document.addEventListener('click', (e) => {
+    createFireBurst(e.clientX, e.clientY);
+    setTimeout(() => createFireBurst(e.clientX + 12, e.clientY + 8), 60);
+    setTimeout(() => createFireBurst(e.clientX - 10, e.clientY - 10), 120);
+});
 
 init();
