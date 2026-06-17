@@ -50,6 +50,15 @@ function loadView(view) {
     window.lastView = view;
     const main = document.getElementById('content');
 
+    // Search bar (only on list pages, not Home)
+    let searchHtml = '';
+    if (view !== 'Home') {
+        searchHtml = `
+            <input type="text" id="searchInput" placeholder="Search..." 
+                   style="width:100%; max-width:500px; padding:10px 14px; margin:15px auto 25px; display:block; background:#1e2f66; color:white; border:1px solid #00aaff; border-radius:8px;">
+        `;
+    }
+
     if (view === 'Home') {
         main.innerHTML = `
             <h1>🔥 Jobmania - Eternal Dungeon</h1>
@@ -64,13 +73,13 @@ function loadView(view) {
                     <li>Rogue lite, procedural enemies and events generation.</li>
                     <li>Dungeon crawler, descend into the dungeon as much as you can.</li>
                     <li>Strategic deck building, build your own unique deck by adding abilities into your deck via chests and defeating enemies.</li>
-                    <li>RPG Turn-based combat system, complex but easy to play.</li>
+                    <li>RPG Turn-based combat system, complex but easy to play. Defeat tons of different enemies, challenging but addictive.</li>
                     <li>Equip 3 jobs at once, swap, and use their abilities strategically for powerful synergy.</li>
                     <li>Combine jobs and materials to craft new unique jobs.</li>
                     <li>Get new heroes from Gacha, enemies defeated from the last run will appear in a special Gacha pool!</li>
                     <li>Collect special relics to enhance your build further.</li>
                     <li>A lot of Memes, Anime and Movies references in the game!</li>
-                    <li>Free with ads and in-app purchases.</li>
+                    <li>Free with ads and in-app purchases, remove all ads with one purchase.</li>
                     <li>Portrait screen only, you can play this game with one hand.</li>
                 </ul>
 
@@ -79,6 +88,62 @@ function loadView(view) {
         `;
         return;
     }
+
+    // Other pages (Monsters, Jobs, Abilities, etc.)
+    const cat = view.toLowerCase();
+    const items = db[cat] || [];
+    
+    main.innerHTML = `
+        <h1>${view} <small>(${items.length} entries)</small></h1>
+        ${searchHtml}
+    `;
+
+    const fragment = document.createDocumentFragment();
+    
+    items.forEach(item => {
+        const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
+        const name = nameKey && item[nameKey] ? item[nameKey] : '';
+
+        let cardHtml = `<div class="card" onclick="showPopup('${cat}','${name}')" style="cursor:pointer;">`;
+
+        for (let [k, v] of Object.entries(item)) {
+            if (!v || v === "") continue;
+
+            let displayKey = k.replace(/\s*\*\d+/, '');   // Remove *5, *3 etc.
+
+            // Special display for Jobs
+            if (cat === 'jobs' && k.includes("AbilityKey")) {
+                displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
+            }
+
+            // Special display for Monsters (clean Passive_2, Ability_2)
+            if (cat === 'monsters') {
+                if (k.includes("_2")) {
+                    displayKey = k.replace("_2", "");
+                }
+            }
+
+            if (k.includes("AbilityKey") && v) {
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('abilities','${v}')">${getTranslation('abilities', v)}</span><br>`;
+            } 
+            else if (k.includes("PassiveKey") && v) {
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); showPopup('passives','${v}')">${getTranslation('passives', v)}</span><br>`;
+            } 
+            else {
+                cardHtml += `<strong>${displayKey}:</strong> ${v}<br>`;
+            }
+        }
+
+        cardHtml += `</div>`;
+
+        const div = document.createElement('div');
+        div.innerHTML = cardHtml;
+        fragment.appendChild(div.firstElementChild);
+    });
+
+    main.appendChild(fragment);
+    attachSearch();
+}
 
     // Other pages - Minimalist search bar
     let html = `
@@ -146,14 +211,29 @@ async function showPopup(cat, key) {
         <div class="card">
     `;
 
+    // Main data with clean labels
     for (let [k, v] of Object.entries(data)) {
-        if (!v) continue;
-        let displayKey = k.replace(/\s*\*\d+/, '');
-        if (k.includes("Key")) displayKey = displayKey.replace("Key", "");
+        if (!v || v === "") continue;
+
+        let displayKey = k.replace(/\s*\*\d+/, '');   // Remove *5, *3 etc.
+
+        // Clean display for Monsters
+        if (cat === 'monsters') {
+            if (k.includes("_2")) {
+                displayKey = k.replace("_2", "");
+            }
+        }
+
+        // Clean display for Jobs
+        if (cat === 'jobs' && k.includes("AbilityKey")) {
+            displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
+        }
+
         html += `<strong>${displayKey}:</strong> ${v}<br>`;
     }
 
-    html += `<hr style="border-color:#444; margin:25px 0;">`;
+    // Backlinks section
+    html += `<hr style="border-color:#444; margin:25px 0 15px;">`;
 
     const jobUsers = users.filter(u => db.jobs && db.jobs.some(j => j.JobKey === u));
     const monsterUsers = users.filter(u => db.monsters && db.monsters.some(m => m.MonsterKey === u));
