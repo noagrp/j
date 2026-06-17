@@ -69,13 +69,15 @@ function loadView(view) {
                 <ul>
                     <li>Rogue lite, procedural enemies and events generation.</li>
                     <li>Dungeon crawler, descend into the dungeon as much as you can.</li>
-                    <li>Strategic deck building...</li>
-                    <li>RPG Turn-based combat system...</li>
-                    <li>Equip 3 jobs at once...</li>
-                    <li>Combine jobs and materials...</li>
-                    <li>Get new heroes from Gacha...</li>
-                    <li>Collect special relics...</li>
-                    <li>A lot of Memes, Anime and Movies references...</li>
+                    <li>Strategic deck building, build your own unique deck by adding abilities into your deck via chests and defeating enemies.</li>
+                    <li>RPG Turn-based combat system, complex but easy to play. Defeat tons of different enemies, challenging but addictive.</li>
+                    <li>Equip 3 jobs at once, swap, and use their abilities strategically for powerful synergy.</li>
+                    <li>Combine jobs and materials to craft new unique jobs.</li>
+                    <li>Get new heroes from Gacha, enemies defeated from the last run will appear in a special Gacha pool!</li>
+                    <li>Collect special relics to enhance your build further.</li>
+                    <li>A lot of Memes, Anime and Movies references in the game!</li>
+                    <li>Free with ads and in-app purchases, remove all ads with one purchase.</li>
+                    <li>Portrait screen only, you can play this game with one hand.</li>
                 </ul>
                 <p><strong>Join our Discord:</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p>
             </div>
@@ -104,8 +106,13 @@ function loadView(view) {
 
             let displayKey = k.replace(/\s*\*\d+/, '');
 
-            if (cat === 'jobs' && k.includes("AbilityKey")) {
-                displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
+            // Special labels
+            if (cat === 'jobs') {
+                if (k === "AbilityKey") {
+                    displayKey = "Switch Skill";
+                } else if (k.includes("AbilityKey")) {
+                    displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
+                }
             }
             if (cat === 'monsters' && k.includes("_2")) {
                 displayKey = k.replace("_2", "");
@@ -157,10 +164,16 @@ async function showPopup(cat, key) {
 
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
+
         let displayKey = k.replace(/\s*\*\d+/, '');
 
-        if (cat === 'monsters' && k.includes("_2")) displayKey = k.replace("_2", "");
-        if (cat === 'jobs' && k.includes("AbilityKey")) displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
+        if (cat === 'jobs') {
+            if (k === "AbilityKey") displayKey = "Switch Skill";
+            else if (k.includes("AbilityKey")) displayKey = "Deck Ability " + k.replace("AbilityKey", "").trim();
+        }
+        if (cat === 'monsters' && k.includes("_2")) {
+            displayKey = k.replace("_2", "");
+        }
 
         html += `<strong>${displayKey}:</strong> ${v}<br>`;
     }
