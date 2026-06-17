@@ -155,13 +155,13 @@ async function showPopup(cat, key) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
         
-        // Always translate name values (Passives, Abilities, etc.)
+        // CENTRALIZED TRANSLATION - Always translate name values first
         let displayValue = v;
         if (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) {
             displayValue = getTranslation(cat, v);
         }
 
-        // Clickable with translated text
+        // Clickable links with translated text
         if (k.includes("AbilityKey") && v) {
             html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('abilities','${v}')">${displayValue}</span><br>`;
         } else if (k.includes("PassiveKey") && v) {
