@@ -200,7 +200,24 @@ async function loadDetail(cat, key) {
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
     const trans = getTranslation(cat, key);
-    alert(`Opened ${cat}: ${trans}\n\n(Full detail view will be improved later)`);
+    const users = findUsers(key, cat);
+
+    let html = `
+        <div class="card expanded" style="max-width:800px; margin:20px auto; padding:30px;">
+            <button onclick="this.parentElement.remove()" class="back-btn" style="margin-bottom:20px;">← Close Detail</button>
+            <h2>${trans}</h2>
+    `;
+
+    for (let [k, v] of Object.entries(data)) {
+        if (!v || v === "") continue;
+        let displayKey = getDisplayKey(cat, k);
+        let displayValue = (k.includes("Key")) ? getTranslation(cat, v) : v;
+        let emoji = getRankEmoji(cat, k, v);
+        html += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
+    }
+
+    html += `</div>`;
+    document.getElementById('grid-container').insertAdjacentHTML('afterbegin', html);
 }
 
 function changeLanguage(lang) {
