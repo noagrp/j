@@ -4,7 +4,7 @@ let dictionary = [];
 
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 
-// Dictionary Helper
+// Dictionary
 function getDict(key) {
     const entry = dictionary.find(i => i.DictionaryKey === key);
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
@@ -44,7 +44,6 @@ function getRankEmoji(cat, key, value) {
     return "";
 }
 
-// Clean display names
 function getDisplayKey(cat, originalKey, index = 0) {
     if (!originalKey) return '';
     let key = originalKey.trim();
@@ -150,7 +149,7 @@ function loadView(view) {
     items.forEach(item => {
         const nameKey = cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : null;
         const name = nameKey && item[nameKey] ? item[nameKey] : '';
-        let cardHtml = `<div class="card" onclick="loadDetail('${cat}','${name}')">`;
+        let cardHtml = `<div class="card" onclick="zoomCard(this)">`;
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
@@ -158,9 +157,9 @@ function loadView(view) {
                 ? getTranslation(cat, v) : v;
             let emoji = getRankEmoji(cat, k, v);
             if (k.includes("AbilityKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); loadDetail('abilities','${v}')">${getTranslation('abilities', v)}</span>${emoji}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); zoomCard(this.parentElement)">${getTranslation('abilities', v)}</span>${emoji}<br>`;
             } else if (k.includes("PassiveKey") && v) {
-                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); loadDetail('passives','${v}')">${getTranslation('passives', v)}</span>${emoji}<br>`;
+                cardHtml += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopImmediatePropagation(); zoomCard(this.parentElement)">${getTranslation('passives', v)}</span>${emoji}<br>`;
             } else {
                 cardHtml += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
             }
@@ -185,53 +184,37 @@ function attachSearch() {
     });
 }
 
-// ==================== FULL PAGE DETAIL ====================
-async function loadDetail(cat, key) {
-    await loadData(cat);
-    const data = db[cat]?.find(i => Object.values(i)[0] === key);
-    if (!data) return;
+// Zoom on same page
+let currentZoomed = null;
 
-    const trans = getTranslation(cat, key);
-    const users = findUsers(key, cat);
-
-    let html = `
-        <button onclick="loadView(window.lastView)" class="back-btn">← Back to ${getDict(cat)}</button>
-        <div class="detail-page">
-            <div class="detail-header">
-                <h2>${trans}</h2>
-            </div>
-    `;
-
-    for (let [k, v] of Object.entries(data)) {
-        if (!v || v === "") continue;
-        let displayKey = getDisplayKey(cat, k);
-        let displayValue = (k.includes("Key") && (cat === 'monsters' || cat === 'jobs' || cat === 'abilities' || cat === 'passives')) 
-            ? getTranslation(cat, v) : v;
-        let emoji = getRankEmoji(cat, k, v);
-        if (k.includes("AbilityKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('abilities','${v}')">${displayValue}</span>${emoji}<br>`;
-        } else if (k.includes("PassiveKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('passives','${v}')">${displayValue}</span>${emoji}<br>`;
-        } else {
-            html += `<strong>${displayKey}:</strong> ${displayValue}${emoji}<br>`;
-        }
+function zoomCard(card) {
+    const overlay = document.getElementById('zoom-overlay') || createOverlay();
+    if (currentZoomed === card) {
+        closeZoom();
+        return;
     }
+    if (currentZoomed) closeZoom();
+    card.classList.add('zoomed');
+    currentZoomed = card;
+    overlay.style.display = 'block';
+}
 
-    html += `<hr style="border-color:#444; margin:30px 0;">`;
-    const jobUsers = users.filter(u => db.jobs && db.jobs.some(j => j.JobKey === u));
-    const monsterUsers = users.filter(u => db.monsters && db.monsters.some(m => m.MonsterKey === u));
+function createOverlay() {
+    const overlay = document.createElement('div');
+    overlay.id = 'zoom-overlay';
+    overlay.className = 'overlay';
+    overlay.onclick = closeZoom;
+    document.body.appendChild(overlay);
+    return overlay;
+}
 
-    if (jobUsers.length > 0) {
-        html += `<strong style="color:#ffd700;">${getDict('Used by Jobs')} (${jobUsers.length}):</strong><br><br>`;
-        jobUsers.forEach(job => html += `• <span class="link" onclick="loadDetail('jobs','${job}')">${getTranslation('jobs', job)}</span><br>`);
+function closeZoom() {
+    if (currentZoomed) {
+        currentZoomed.classList.remove('zoomed');
+        currentZoomed = null;
     }
-    if (monsterUsers.length > 0) {
-        html += `<strong style="color:#00ffcc;">${getDict('Used by Monsters')} (${monsterUsers.length}):</strong><br><br>`;
-        monsterUsers.forEach(monster => html += `• <span class="link" onclick="loadDetail('monsters','${monster}')">${getTranslation('monsters', monster)}</span><br>`);
-    }
-
-    html += `</div>`;
-    document.getElementById('content').innerHTML = html;
+    const overlay = document.getElementById('zoom-overlay');
+    if (overlay) overlay.style.display = 'none';
 }
 
 function changeLanguage(lang) {
@@ -249,7 +232,7 @@ async function loadData(cat) {
     } catch(e) {}
 }
 
-// Fire Cursor Effects
+// Fire Cursor (unchanged)
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
     const particle = document.createElement('div');
