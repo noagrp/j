@@ -16,7 +16,6 @@ body {
     background: var(--bg);
     color: var(--text);
     cursor: url('https://cur.cursors-4u.net/nature/nat-10/nat976.cur'), crosshair;
-    overflow-x: hidden;
 }
 
 /* Fire Cursor */
@@ -35,16 +34,25 @@ nav { width: 270px; background: var(--nav); padding: 24px 16px; border-right: 3p
 .menu-item, .menu-link { color: #b0d0ff; cursor: pointer; padding: 13px 18px; margin: 5px 0; border-radius: 10px; transition: all 0.3s; text-decoration: none; display: block; }
 .menu-item:hover, .menu-link:hover { background: rgba(0, 204, 255, 0.25); color: white; transform: translateX(8px); }
 
-/* LIST GRID */
-main {
-    flex: 1;
-    padding: 30px 40px;
+/* LIST LAYOUT */
+main { flex: 1; padding: 30px 40px; }
+.header-card {
+    background: var(--card);
+    padding: 25px;
+    border-radius: 16px;
+    border: 2px solid #334477;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Grid */
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     gap: 25px;
 }
 
-/* Card with Running Neon */
+/* Card */
 .card {
     background: var(--card);
     padding: 26px;
@@ -56,7 +64,7 @@ main {
     position: relative;
     overflow: hidden;
 }
-.card:hover { transform: translateY(-8px); }
+.card:hover { transform: translateY(-6px); }
 .card::before {
     content: '';
     position: absolute;
@@ -67,44 +75,29 @@ main {
     background-size: 200% 100%;
     animation: neonRun 4s linear infinite;
     z-index: -1;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 @keyframes neonRun { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-/* Zoomed Card */
-.card.zoomed {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(4.2) !important;
-    z-index: 10000;
-    max-width: 420px;
-    width: 100% !important;
-    box-shadow: 0 0 80px rgba(0, 204, 255, 0.9) !important;
+/* Expanded Card */
+.card.expanded {
+    grid-column: 1 / -1;
+    padding: 35px;
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 204, 255, 0.4);
 }
 
-/* Overlay */
-.overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.88);
-    z-index: 9999;
-    display: none;
-}
-
-/* Labels - Fixed Width for Alignment */
+/* Fixed Labels */
 .card strong {
     display: inline-block;
-    width: 170px;
+    width: 175px;
     color: var(--label);
     font-weight: 600;
     vertical-align: top;
 }
 
+h1 { text-align: center; color: #ffd700; margin: 10px 0 35px; font-size: 2.5rem; text-shadow: 0 0 15px #00ccff; }
 .link { color: #00ffdd; font-weight: 500; }
 .link:hover { color: #ffff00; text-decoration: underline; }
-
-h1 { text-align: center; color: #ffd700; margin: 10px 0 35px; font-size: 2.5rem; text-shadow: 0 0 15px #00ccff; }
 .home-card { max-width: 1100px; margin: 0 auto 40px; background: linear-gradient(135deg, #1e2f66, #16214d); border: 3px solid #ffd700; padding: 30px; }
-#searchInput { width: 100%; max-width: 600px; margin: 0 auto 30px; display: block; padding: 14px 18px; background: #1a2a5c; color: white; border: 2px solid #00aaff; border-radius: 12px; font-size: 1.05em; }
+#searchInput { width: 100%; max-width: 600px; margin: 15px auto 25px; display: block; padding: 14px 18px; background: #1a2a5c; color: white; border: 2px solid #00aaff; border-radius: 12px; font-size: 1.05em; }
