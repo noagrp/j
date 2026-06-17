@@ -8,22 +8,36 @@
 <body>
     <div id="app">
 <nav>
-    <!-- New items at the top -->
-    <img src="logo.png" alt="Jobmania Logo"> 
-    <div class="menu-item"><strong>Jobmania - Eternal Dungeon</strong></div>
-    <div class="menu-item">AUBJECTIVE TECHNOLOGY LTD.</div>
-    <div class="menu-item">Contains ads • In-app purchases</div>
-    <div class="menu-item" onclick="window.open('https://play.google.com/store/apps/details?id=your.game.id','_blank')">▶️ Google Play</div>
-    <div class="menu-item" onclick="window.open('https://discord.gg/6U5FNFVrwb','_blank')">💬 Discord</div>
+    <!-- Logo -->
+    <img src="logo.png" alt="Jobmania Logo" class="nav-logo">
 
-    <hr style="margin:20px 0; border-color:#334477;">
+    <!-- Game Info (Non-clickable text) -->
+    <div class="game-info">
+        <strong>Jobmania - Eternal Dungeon</strong><br>
+        AUBJECTIVE TECHNOLOGY LTD.<br>
+        Contains ads • In-app purchases
+    </div>
 
-    <!-- Main menu below -->
+    <hr>
+
+    <!-- Links -->
     <div class="menu-item" onclick="loadView('Home')">🏠 Home</div>
     <div class="menu-item" onclick="loadView('Monsters')">👹 Characters</div>
     <div class="menu-item" onclick="loadView('Jobs')">⚔️ Jobs</div>
     <div class="menu-item" onclick="loadView('Abilities')">✨ Abilities</div>
     <div class="menu-item" onclick="loadView('Passives')">🛡️ Passives</div>
+
+    <hr>
+
+    <!-- Store & Community Buttons -->
+    <a href="https://play.google.com/store/apps/details?id=com.aubjective.jobmania&hl=en" 
+       target="_blank" class="menu-link">
+        ▶️ Google Play
+    </a>
+    <a href="https://discord.gg/6U5FNFVrwb" 
+       target="_blank" class="menu-link">
+        💬 Join Discord
+    </a>
 </nav>
         <main id="content"><h1>Loading Wiki Data...</h1></main>
     </div>
