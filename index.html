@@ -8,14 +8,13 @@
 </head>
 <body>
     <div id="app">
-        <nav>
+        <nav id="main-nav">
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
             <img src="https://raw.githubusercontent.com/noagrp/j/refs/heads/main/jobmania_official_icon.png" alt="Jobmania Logo" class="nav-logo">
 
-            <select id="langSelect" onchange="switchLanguage(this.value)">
-                <option value="index.html">🇬🇧 English</option>
+            <select id="langSelect" onchange="window.location.href=this.value">
+                <option value="index.html" selected>🇬🇧 English</option>
                 <option value="chinese.html">🇨🇳 中文 (简体)</option>
-                <option value="chinese-traditional.html">🇹🇼 中文 (繁體)</option>
-                <option value="japanese.html">🇯🇵 日本語</option>
             </select>
 
             <div class="game-info">
@@ -23,22 +22,16 @@
                 AUBJECTIVE TECHNOLOGY LTD.<br>
                 Contains ads • In-app purchases
             </div>
-
             <hr>
-
             <div class="menu-item" onclick="loadView('Home')">🏠 Home</div>
             <div class="menu-item" onclick="loadView('Monsters')">👹 Characters</div>
             <div class="menu-item" onclick="loadView('Jobs')">⚔️ Jobs</div>
             <div class="menu-item" onclick="loadView('Abilities')">✨ Abilities</div>
             <div class="menu-item" onclick="loadView('Passives')">🛡️ Passives</div>
-            <div class="menu-item" onclick="loadView('Relics')">🔮 Relics</div>
-
             <hr>
-
             <a href="https://play.google.com/store/apps/details?id=com.aubjective.jobmania&hl=en" target="_blank" class="menu-link">▶️ Google Play</a>
             <a href="https://discord.gg/6U5FNFVrwb" target="_blank" class="menu-link">💬 Join Discord</a>
         </nav>
-
         <main id="content">
             <h1>Loading Wiki Data...</h1>
         </main>
