@@ -142,24 +142,23 @@ function attachSearch() {
 
 // Full Page Detail on Click
 async function loadDetail(cat, key) {
-    // 1. Find the item
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
 
-    // 2. Build the Full Page view
+    // Build the Full Page view
     let html = `
         <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
         <div class="card" style="max-width:900px; margin:20px auto;">
             <h2>${key}</h2>
     `;
 
-    // 3. Render item details (and make them clickable links)
+    // 1. Render item details
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
         let emoji = getRankEmoji(cat, k, v);
         
-        // Interlinking: If field is an Ability or Passive, make it a link
+        // Link to Ability/Passive page
         if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
             html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
         } else {
@@ -167,35 +166,36 @@ async function loadDetail(cat, key) {
         }
     }
 
-    // 4. BACKLINKER: Scan Monsters and Jobs for this item
-    const backlinkers = [];
-    
-    // Check Monsters
-    if (db.monsters) {
-        db.monsters.forEach(m => {
-            if (Object.values(m).includes(key)) backlinkers.push({ cat: 'monsters', name: m.MonsterKey });
-        });
-    }
-    // Check Jobs
-    if (db.jobs) {
-        db.jobs.forEach(j => {
-            if (Object.values(j).includes(key)) backlinkers.push({ cat: 'jobs', name: j.JobKey });
-        });
-    }
+    // 2. BACKLINKING: The "Used By" Directory
+    // We scan Monsters and Jobs to see if they contain this key
+    const usedBy = [];
 
-    // 5. Render Backlinks
-    if (backlinkers.length > 0) {
+    ['monsters', 'jobs'].forEach(sourceCat => {
+        if (db[sourceCat]) {
+            db[sourceCat].forEach(item => {
+                // Check if any field in the Character/Job matches our Passive/Ability key
+                if (Object.values(item).includes(key)) {
+                    usedBy.push({ cat: sourceCat, name: Object.values(item)[0] });
+                }
+            });
+        }
+    });
+
+    // 3. Render the Directory
+    if (usedBy.length > 0) {
         html += `<hr><h3>Used By:</h3>`;
-        backlinkers.forEach(b => {
-            html += `<span class="link" onclick="loadDetail('${b.cat}','${b.name}')">👤 ${b.name} (${b.cat})</span><br>`;
+        usedBy.forEach(u => {
+            html += `
+                <div class="link" onclick="loadDetail('${u.cat}','${u.name}')" style="margin-bottom: 5px;">
+                    ${u.cat === 'monsters' ? '👹' : '⚔️'} ${u.name}
+                </div>`;
         });
     }
 
     html += `</div>`;
     document.getElementById('content').innerHTML = html;
-    window.scrollTo(0, 0); // Scroll to top for better UX
+    window.scrollTo(0, 0);
 }
-
 function toggleMenu() { 
     document.querySelector('nav').classList.toggle('open'); 
 }
