@@ -146,9 +146,9 @@ function loadView(view) {
             cardHtml += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
         }
 
-        // Added Sprite Display for Monsters
+        // Sprite Display (Bottom Aligned)
         if (cat === 'monsters') {
-            cardHtml += `<div style="text-align:center; margin-top:10px;">
+            cardHtml += `<div style="text-align:center; margin-top:auto; padding-top:15px;">
                 <img src="charactersprite/${itemKey}.png" alt="${itemKey}" style="max-width:80px; height:auto;">
             </div>`;
         }
@@ -181,7 +181,8 @@ async function loadDetail(cat, key) {
 
     let html = `
         <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
-        <div class="card" style="max-width:900px; margin:20px auto;">
+        <div class="card" style="max-width:900px; margin:20px auto; position:relative;">
+            ${(cat === 'monsters') ? `<img src="charactersprite/${key}.png" style="position:absolute; top:15px; right:15px; max-width:100px; height:auto;">` : ''}
             <h2>${title}</h2>
     `;
 
