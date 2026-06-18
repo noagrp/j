@@ -1,7 +1,7 @@
 const db = {};
 let currentLang = 'English';
 let dictionary = [];
-let relicLocal = [];
+let relicLocal = []; // Added for relic localization
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 
 function getDict(key) {
@@ -9,6 +9,7 @@ function getDict(key) {
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
 }
 
+// Added to fetch localized names for Relics
 function getRelicName(key) {
     const entry = relicLocal.find(i => i.RelicKey === key);
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
@@ -23,16 +24,31 @@ function getRankEmoji(cat, key, value) {
     if (!value) return "";
     const val = String(value).toLowerCase().trim();
     if (cat === 'jobs' && key === "Rarity") {
-        if (val === "1") return " 🟢"; if (val === "2") return " 🔵"; if (val === "3") return " 🟣"; if (val === "4") return " 🔴"; if (val === "5") return " 🟡";
+        if (val === "1") return " 🟢";
+        if (val === "2") return " 🔵";
+        if (val === "3") return " 🟣";
+        if (val === "4") return " 🔴";
+        if (val === "5") return " 🟡";
     }
     if (cat === 'monsters' && key === "Difficulty") {
-        if (val.includes("beginner")) return " 🟢"; if (val.includes("easy")) return " 🔵"; if (val.includes("medium")) return " 🟣"; if (val.includes("hard")) return " 🔴"; if (val.includes("boss")) return " 🟡";
+        if (val.includes("beginner")) return " 🟢";
+        if (val.includes("easy")) return " 🔵";
+        if (val.includes("medium")) return " 🟣";
+        if (val.includes("hard")) return " 🔴";
+        if (val.includes("boss")) return " 🟡";
     }
     if (cat === 'abilities' && key === "Ability Tier") {
-        if (val === "low") return " 🟢"; if (val === "medium") return " 🔵"; if (val === "high") return " 🔴"; if (val === "master") return " 🟡"; if (val === "curse") return " ⚪";
+        if (val === "low") return " 🟢";
+        if (val === "medium") return " 🔵";
+        if (val === "high") return " 🔴";
+        if (val === "master") return " 🟡";
+        if (val === "curse") return " ⚪";
     }
     if (cat === 'passives' && key === "Skill Rank") {
-        if (val === "low") return " 🟢"; if (val === "medium") return " 🔵"; if (val === "high") return " 🔴"; if (val === "master") return " 🟡";
+        if (val === "low") return " 🟢";
+        if (val === "medium") return " 🔵";
+        if (val === "high") return " 🔴";
+        if (val === "master") return " 🟡";
     }
     return "";
 }
@@ -64,8 +80,10 @@ async function init() {
         }
         const dictRes = await fetch('data/dictionary.json');
         if (dictRes.ok) dictionary = await dictRes.json();
+        // Load relic localization
         const relicRes = await fetch('data/relic_localisation.json');
         if (relicRes.ok) relicLocal = await relicRes.json();
+        
         loadView('Home');
     } catch (e) {
         console.error(e);
@@ -120,13 +138,12 @@ function loadView(view) {
     const container = document.getElementById('grid-container');
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
-        const itemKey = Object.values(item)[0];
-        const displayName = (cat === 'relic') ? getRelicName(itemKey) : itemKey;
-        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${itemKey}')">`;
-        cardHtml += `<strong>Name:</strong> ${displayName}<br>`;
+        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${Object.values(item)[0]}')">`;
         for (let [k, v] of Object.entries(item)) {
-            if (!v || v === "" || k === "RelicKey") continue;
-            cardHtml += `<strong>${getDisplayKey(cat, k)}:</strong> ${v}${getRankEmoji(cat, k, v)}<br>`;
+            if (!v || v === "") continue;
+            let displayKey = getDisplayKey(cat, k);
+            let emoji = getRankEmoji(cat, k, v);
+            cardHtml += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
         }
         cardHtml += `</div>`;
         const div = document.createElement('div');
@@ -151,6 +168,8 @@ function attachSearch() {
 async function loadDetail(cat, key) {
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
+    
+    // Check if it's a relic to get localized title
     const title = (cat === 'relic') ? getRelicName(key) : key;
 
     let html = `
@@ -160,14 +179,18 @@ async function loadDetail(cat, key) {
     `;
 
     for (let [k, v] of Object.entries(data)) {
-        if (!v || v === "" || (cat === 'relic' && k === "RelicKey")) continue;
+        if (!v || v === "") continue;
+        let displayKey = getDisplayKey(cat, k);
+        let emoji = getRankEmoji(cat, k, v);
+        
         if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
-            html += `<strong>${getDisplayKey(cat, k)}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span><br>`;
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
         } else {
-            html += `<strong>${getDisplayKey(cat, k)}:</strong> ${v}${getRankEmoji(cat, k, v)}<br>`;
+            html += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
         }
     }
 
+    // RELIC INDEPENDENCE: Only show backlinking for non-relic categories
     if (cat !== 'relic') {
         const usedBy = [];
         ['monsters', 'jobs'].forEach(sourceCat => {
@@ -180,10 +203,14 @@ async function loadDetail(cat, key) {
                 });
             }
         });
+
         if (usedBy.length > 0) {
             html += `<hr><h3>Used By:</h3>`;
             usedBy.forEach(u => {
-                html += `<div class="link" onclick="loadDetail('${u.cat}','${u.name}')" style="margin-bottom: 5px;">${u.cat === 'monsters' ? '👹' : '⚔️'} ${u.name}</div>`;
+                html += `
+                    <div class="link" onclick="loadDetail('${u.cat}','${u.name}')" style="margin-bottom: 5px;">
+                        ${u.cat === 'monsters' ? '👹' : '⚔️'} ${u.name}
+                    </div>`;
             });
         }
     }
@@ -201,6 +228,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// Cursor effects
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
     const particle = document.createElement('div');
