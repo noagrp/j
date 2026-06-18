@@ -142,27 +142,58 @@ function attachSearch() {
 
 // Full Page Detail on Click
 async function loadDetail(cat, key) {
+    // 1. Find the item
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
+
+    // 2. Build the Full Page view
     let html = `
         <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
         <div class="card" style="max-width:900px; margin:20px auto;">
             <h2>${key}</h2>
     `;
+
+    // 3. Render item details (and make them clickable links)
     for (let [k, v] of Object.entries(data)) {
         if (!v || v === "") continue;
         let displayKey = getDisplayKey(cat, k);
         let emoji = getRankEmoji(cat, k, v);
-        if (k.includes("AbilityKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('abilities','${v}')">${v}</span>${emoji}<br>`;
-        } else if (k.includes("PassiveKey") && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('passives','${v}')">${v}</span>${emoji}<br>`;
+        
+        // Interlinking: If field is an Ability or Passive, make it a link
+        if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
         } else {
             html += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
         }
     }
+
+    // 4. BACKLINKER: Scan Monsters and Jobs for this item
+    const backlinkers = [];
+    
+    // Check Monsters
+    if (db.monsters) {
+        db.monsters.forEach(m => {
+            if (Object.values(m).includes(key)) backlinkers.push({ cat: 'monsters', name: m.MonsterKey });
+        });
+    }
+    // Check Jobs
+    if (db.jobs) {
+        db.jobs.forEach(j => {
+            if (Object.values(j).includes(key)) backlinkers.push({ cat: 'jobs', name: j.JobKey });
+        });
+    }
+
+    // 5. Render Backlinks
+    if (backlinkers.length > 0) {
+        html += `<hr><h3>Used By:</h3>`;
+        backlinkers.forEach(b => {
+            html += `<span class="link" onclick="loadDetail('${b.cat}','${b.name}')">👤 ${b.name} (${b.cat})</span><br>`;
+        });
+    }
+
     html += `</div>`;
     document.getElementById('content').innerHTML = html;
+    window.scrollTo(0, 0); // Scroll to top for better UX
 }
 
 function toggleMenu() { 
