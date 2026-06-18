@@ -1,7 +1,7 @@
 const db = {};
 let currentLang = 'English';
 let dictionary = [];
-let relicLocal = []; // Added for relic localization
+let relicLocal = []; 
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 
 function getDict(key) {
@@ -9,7 +9,6 @@ function getDict(key) {
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
 }
 
-// Added to fetch localized names for Relics
 function getRelicName(key) {
     const entry = relicLocal.find(i => i.RelicKey === key);
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
@@ -80,7 +79,6 @@ async function init() {
         }
         const dictRes = await fetch('data/dictionary.json');
         if (dictRes.ok) dictionary = await dictRes.json();
-        // Load relic localization
         const relicRes = await fetch('data/relic_localisation.json');
         if (relicRes.ok) relicLocal = await relicRes.json();
         
@@ -138,13 +136,23 @@ function loadView(view) {
     const container = document.getElementById('grid-container');
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
-        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${Object.values(item)[0]}')">`;
+        const itemKey = Object.values(item)[0];
+        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${itemKey}')">`;
+        
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
             let emoji = getRankEmoji(cat, k, v);
             cardHtml += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
         }
+
+        // Added Sprite Display for Monsters
+        if (cat === 'monsters') {
+            cardHtml += `<div style="text-align:center; margin-top:10px;">
+                <img src="charactersprite/${itemKey}.png" alt="${itemKey}" style="max-width:80px; height:auto;">
+            </div>`;
+        }
+
         cardHtml += `</div>`;
         const div = document.createElement('div');
         div.innerHTML = cardHtml;
@@ -169,7 +177,6 @@ async function loadDetail(cat, key) {
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
     
-    // Check if it's a relic to get localized title
     const title = (cat === 'relic') ? getRelicName(key) : key;
 
     let html = `
@@ -190,7 +197,6 @@ async function loadDetail(cat, key) {
         }
     }
 
-    // RELIC INDEPENDENCE: Only show backlinking for non-relic categories
     if (cat !== 'relic') {
         const usedBy = [];
         ['monsters', 'jobs'].forEach(sourceCat => {
@@ -228,7 +234,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Cursor effects
 function createFireParticle(x, y) {
     const trail = document.getElementById('fire-trail') || createTrailContainer();
     const particle = document.createElement('div');
