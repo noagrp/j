@@ -77,10 +77,60 @@ async function showPopup(cat, key) {
             <div class="card">
     `;
     for (let [k, v] of Object.entries(data)) {
-        if (v) html += `<strong>${k.replace(/Key$/, '')}:</strong> ${v}<br>`;
+        if (!v || v === "") continue;
+        let displayKey = getDisplayKey(cat, k);
+        let emoji = getRankEmoji(cat, k, v);
+        if (k.includes("AbilityKey") && v) {
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('abilities','${v}')">${v}</span>${emoji}<br>`;
+        } else if (k.includes("PassiveKey") && v) {
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="showPopup('passives','${v}')">${v}</span>${emoji}<br>`;
+        } else {
+            html += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
+        }
     }
     html += `</div></div>`;
     document.getElementById('content').innerHTML = html;
+}
+
+function getDisplayKey(cat, originalKey) {
+    if (!originalKey) return '';
+    let key = originalKey.replace(/Key(_\d+)?$/, '').trim();
+    if (key) key = key.charAt(0).toUpperCase() + key.slice(1);
+    if (cat === 'monsters' && originalKey === "MonsterKey") return "Character";
+    return key;
+}
+
+function getRankEmoji(cat, key, value) {
+    if (!value) return "";
+    const val = String(value).toLowerCase().trim();
+    if (cat === 'jobs' && key === "Rarity") {
+        if (val === "1") return " 🟢";
+        if (val === "2") return " 🔵";
+        if (val === "3") return " 🟣";
+        if (val === "4") return " 🔴";
+        if (val === "5") return " 🟡";
+    }
+    if (cat === 'monsters' && key === "Difficulty") {
+        if (val.includes("beginner")) return " 🟢";
+        if (val.includes("easy")) return " 🔵";
+        if (val.includes("medium")) return " 🟣";
+        if (val.includes("hard")) return " 🔴";
+        if (val.includes("boss")) return " 🟡";
+    }
+    if (cat === 'abilities' && key === "Ability Tier") {
+        if (val === "low") return " 🟢";
+        if (val === "medium") return " 🔵";
+        if (val === "high") return " 🔴";
+        if (val === "master") return " 🟡";
+        if (val === "curse") return " ⚪";
+    }
+    if (cat === 'passives' && key === "Skill Rank") {
+        if (val === "low") return " 🟢";
+        if (val === "medium") return " 🔵";
+        if (val === "high") return " 🔴";
+        if (val === "master") return " 🟡";
+    }
+    return "";
 }
 
 function switchLanguage(page) {
