@@ -113,7 +113,7 @@ function loadView(view) {
     const container = document.getElementById('grid-container');
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
-        let cardHtml = `<div class="card" onclick="toggleExpand(this)">`;
+        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${item[cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : cat === 'relic' ? 'RelicKey' : ''] || ''}')">`;
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
@@ -140,8 +140,34 @@ function attachSearch() {
     });
 }
 
-function toggleExpand(card) { card.classList.toggle('expanded'); }
-function toggleMenu() { document.querySelector('nav').classList.toggle('open'); }
+// Full Page Detail on Click
+async function loadDetail(cat, key) {
+    const data = db[cat]?.find(i => Object.values(i)[0] === key);
+    if (!data) return;
+    let html = `
+        <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
+        <div class="card" style="max-width:900px; margin:20px auto;">
+            <h2>${key}</h2>
+    `;
+    for (let [k, v] of Object.entries(data)) {
+        if (!v || v === "") continue;
+        let displayKey = getDisplayKey(cat, k);
+        let emoji = getRankEmoji(cat, k, v);
+        if (k.includes("AbilityKey") && v) {
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('abilities','${v}')">${v}</span>${emoji}<br>`;
+        } else if (k.includes("PassiveKey") && v) {
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('passives','${v}')">${v}</span>${emoji}<br>`;
+        } else {
+            html += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
+        }
+    }
+    html += `</div>`;
+    document.getElementById('content').innerHTML = html;
+}
+
+function toggleMenu() { 
+    document.querySelector('nav').classList.toggle('open'); 
+}
 
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('menu-item') && window.innerWidth <= 768) {
