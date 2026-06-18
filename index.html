@@ -8,23 +8,16 @@
 </head>
 <body>
     <div id="app">
-        <nav id="main-nav">
-            <!-- Hamburger -->
-            <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <nav>
+            <img src="https://raw.githubusercontent.com/noagrp/j/refs/heads/main/jobmania_official_icon.png" alt="Jobmania Logo" class="nav-logo">
 
-            <!-- Logo -->
-            <img src="https://raw.githubusercontent.com/noagrp/j/refs/heads/main/jobmania_official_icon.png" 
-                 alt="Jobmania Logo" class="nav-logo">
-
-            <!-- Language -->
-            <select id="langSelect" onchange="changeLanguage(this.value)">
-                <option value="English">🇬🇧 English</option>
-                <option value="Chinese">🇨🇳 中文 (简体)</option>
-                <option value="Chinese (Traditional)">🇹🇼 中文 (繁體)</option>
-                <option value="Japanese">🇯🇵 日本語</option>
+            <select id="langSelect" onchange="switchLanguage(this.value)">
+                <option value="index.html">🇬🇧 English</option>
+                <option value="chinese.html">🇨🇳 中文 (简体)</option>
+                <option value="chinese-traditional.html">🇹🇼 中文 (繁體)</option>
+                <option value="japanese.html">🇯🇵 日本語</option>
             </select>
 
-            <!-- Game Info -->
             <div class="game-info">
                 <strong>Jobmania - Eternal Dungeon</strong><br>
                 AUBJECTIVE TECHNOLOGY LTD.<br>
@@ -33,12 +26,12 @@
 
             <hr>
 
-            <!-- Menu -->
             <div class="menu-item" onclick="loadView('Home')">🏠 Home</div>
             <div class="menu-item" onclick="loadView('Monsters')">👹 Characters</div>
             <div class="menu-item" onclick="loadView('Jobs')">⚔️ Jobs</div>
             <div class="menu-item" onclick="loadView('Abilities')">✨ Abilities</div>
             <div class="menu-item" onclick="loadView('Passives')">🛡️ Passives</div>
+            <div class="menu-item" onclick="loadView('Relics')">🔮 Relics</div>
 
             <hr>
 
