@@ -1,10 +1,16 @@
 const db = {};
 let currentLang = 'English';
 let dictionary = [];
+let relicLocal = [];
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
 
 function getDict(key) {
     const entry = dictionary.find(i => i.DictionaryKey === key);
+    return entry ? (entry[currentLang] || entry['English'] || key) : key;
+}
+
+function getRelicName(key) {
+    const entry = relicLocal.find(i => i.RelicKey === key);
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
 }
 
@@ -17,31 +23,16 @@ function getRankEmoji(cat, key, value) {
     if (!value) return "";
     const val = String(value).toLowerCase().trim();
     if (cat === 'jobs' && key === "Rarity") {
-        if (val === "1") return " 🟢";
-        if (val === "2") return " 🔵";
-        if (val === "3") return " 🟣";
-        if (val === "4") return " 🔴";
-        if (val === "5") return " 🟡";
+        if (val === "1") return " 🟢"; if (val === "2") return " 🔵"; if (val === "3") return " 🟣"; if (val === "4") return " 🔴"; if (val === "5") return " 🟡";
     }
     if (cat === 'monsters' && key === "Difficulty") {
-        if (val.includes("beginner")) return " 🟢";
-        if (val.includes("easy")) return " 🔵";
-        if (val.includes("medium")) return " 🟣";
-        if (val.includes("hard")) return " 🔴";
-        if (val.includes("boss")) return " 🟡";
+        if (val.includes("beginner")) return " 🟢"; if (val.includes("easy")) return " 🔵"; if (val.includes("medium")) return " 🟣"; if (val.includes("hard")) return " 🔴"; if (val.includes("boss")) return " 🟡";
     }
     if (cat === 'abilities' && key === "Ability Tier") {
-        if (val === "low") return " 🟢";
-        if (val === "medium") return " 🔵";
-        if (val === "high") return " 🔴";
-        if (val === "master") return " 🟡";
-        if (val === "curse") return " ⚪";
+        if (val === "low") return " 🟢"; if (val === "medium") return " 🔵"; if (val === "high") return " 🔴"; if (val === "master") return " 🟡"; if (val === "curse") return " ⚪";
     }
     if (cat === 'passives' && key === "Skill Rank") {
-        if (val === "low") return " 🟢";
-        if (val === "medium") return " 🔵";
-        if (val === "high") return " 🔴";
-        if (val === "master") return " 🟡";
+        if (val === "low") return " 🟢"; if (val === "medium") return " 🔵"; if (val === "high") return " 🔴"; if (val === "master") return " 🟡";
     }
     return "";
 }
@@ -71,6 +62,10 @@ async function init() {
             const res = await fetch(`data/${f}.json`);
             if (res.ok) db[f] = await res.json();
         }
+        const dictRes = await fetch('data/dictionary.json');
+        if (dictRes.ok) dictionary = await dictRes.json();
+        const relicRes = await fetch('data/relic_localisation.json');
+        if (relicRes.ok) relicLocal = await relicRes.json();
         loadView('Home');
     } catch (e) {
         console.error(e);
@@ -125,13 +120,13 @@ function loadView(view) {
     const container = document.getElementById('grid-container');
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
-        // Use Object.values(item)[0] as the primary key for the link
-        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${Object.values(item)[0]}')">`;
+        const itemKey = Object.values(item)[0];
+        const displayName = (cat === 'relic') ? getRelicName(itemKey) : itemKey;
+        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${itemKey}')">`;
+        cardHtml += `<strong>Name:</strong> ${displayName}<br>`;
         for (let [k, v] of Object.entries(item)) {
-            if (!v || v === "") continue;
-            let displayKey = getDisplayKey(cat, k);
-            let emoji = getRankEmoji(cat, k, v);
-            cardHtml += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
+            if (!v || v === "" || k === "RelicKey") continue;
+            cardHtml += `<strong>${getDisplayKey(cat, k)}:</strong> ${v}${getRankEmoji(cat, k, v)}<br>`;
         }
         cardHtml += `</div>`;
         const div = document.createElement('div');
@@ -153,54 +148,44 @@ function attachSearch() {
     });
 }
 
-// Full Page Detail on Click with Backlinking
 async function loadDetail(cat, key) {
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
+    const title = (cat === 'relic') ? getRelicName(key) : key;
 
     let html = `
         <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
         <div class="card" style="max-width:900px; margin:20px auto;">
-            <h2>${key}</h2>
+            <h2>${title}</h2>
     `;
 
-    // 1. Render item details
     for (let [k, v] of Object.entries(data)) {
-        if (!v || v === "") continue;
-        let displayKey = getDisplayKey(cat, k);
-        let emoji = getRankEmoji(cat, k, v);
-        
-        // Link ability/passive keys to their respective pages
+        if (!v || v === "" || (cat === 'relic' && k === "RelicKey")) continue;
         if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
+            html += `<strong>${getDisplayKey(cat, k)}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span><br>`;
         } else {
-            html += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
+            html += `<strong>${getDisplayKey(cat, k)}:</strong> ${v}${getRankEmoji(cat, k, v)}<br>`;
         }
     }
 
-    // 2. BACKLINKING: The "Used By" Directory
-    const usedBy = [];
-    ['monsters', 'jobs'].forEach(sourceCat => {
-        if (db[sourceCat]) {
-            db[sourceCat].forEach(item => {
-                const itemName = Object.values(item)[0];
-                // Only show if it's used by the monster/job AND it's not the page itself
-                if (Object.values(item).includes(key) && itemName !== key) {
-                    usedBy.push({ cat: sourceCat, name: itemName });
-                }
+    if (cat !== 'relic') {
+        const usedBy = [];
+        ['monsters', 'jobs'].forEach(sourceCat => {
+            if (db[sourceCat]) {
+                db[sourceCat].forEach(item => {
+                    const itemName = Object.values(item)[0];
+                    if (Object.values(item).includes(key) && itemName !== key) {
+                        usedBy.push({ cat: sourceCat, name: itemName });
+                    }
+                });
+            }
+        });
+        if (usedBy.length > 0) {
+            html += `<hr><h3>Used By:</h3>`;
+            usedBy.forEach(u => {
+                html += `<div class="link" onclick="loadDetail('${u.cat}','${u.name}')" style="margin-bottom: 5px;">${u.cat === 'monsters' ? '👹' : '⚔️'} ${u.name}</div>`;
             });
         }
-    });
-
-    // 3. Render the Directory
-    if (usedBy.length > 0) {
-        html += `<hr><h3>Used By:</h3>`;
-        usedBy.forEach(u => {
-            html += `
-                <div class="link" onclick="loadDetail('${u.cat}','${u.name}')" style="margin-bottom: 5px;">
-                    ${u.cat === 'monsters' ? '👹' : '⚔️'} ${u.name}
-                </div>`;
-        });
     }
 
     html += `</div>`;
