@@ -1,5 +1,17 @@
 const db = {};
+let currentLang = 'English';
+let dictionary = [];
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
+
+function getDict(key) {
+    const entry = dictionary.find(i => i.DictionaryKey === key);
+    return entry ? (entry[currentLang] || entry['English'] || key) : key;
+}
+
+function changeLanguage(lang) {
+    currentLang = lang;
+    loadView(window.lastView || 'Home');
+}
 
 function getRankEmoji(cat, key, value) {
     if (!value) return "";
@@ -113,7 +125,8 @@ function loadView(view) {
     const container = document.getElementById('grid-container');
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
-        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${item[cat === 'jobs' ? 'JobKey' : cat === 'monsters' ? 'MonsterKey' : cat === 'relic' ? 'RelicKey' : ''] || ''}')">`;
+        // Use Object.values(item)[0] as the primary key for the link
+        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${Object.values(item)[0]}')">`;
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
@@ -140,12 +153,11 @@ function attachSearch() {
     });
 }
 
-// Full Page Detail on Click
+// Full Page Detail on Click with Backlinking
 async function loadDetail(cat, key) {
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
 
-    // Build the Full Page view
     let html = `
         <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
         <div class="card" style="max-width:900px; margin:20px auto;">
@@ -158,24 +170,23 @@ async function loadDetail(cat, key) {
         let displayKey = getDisplayKey(cat, k);
         let emoji = getRankEmoji(cat, k, v);
         
-        // Link to Ability/Passive page
+        // Link ability/passive keys to their respective pages
         if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
+            html += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
         } else {
             html += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
         }
     }
 
     // 2. BACKLINKING: The "Used By" Directory
-    // We scan Monsters and Jobs to see if they contain this key
     const usedBy = [];
-
     ['monsters', 'jobs'].forEach(sourceCat => {
         if (db[sourceCat]) {
             db[sourceCat].forEach(item => {
-                // Check if any field in the Character/Job matches our Passive/Ability key
-                if (Object.values(item).includes(key)) {
-                    usedBy.push({ cat: sourceCat, name: Object.values(item)[0] });
+                const itemName = Object.values(item)[0];
+                // Only show if it's used by the monster/job AND it's not the page itself
+                if (Object.values(item).includes(key) && itemName !== key) {
+                    usedBy.push({ cat: sourceCat, name: itemName });
                 }
             });
         }
@@ -196,9 +207,8 @@ async function loadDetail(cat, key) {
     document.getElementById('content').innerHTML = html;
     window.scrollTo(0, 0);
 }
-function toggleMenu() { 
-    document.querySelector('nav').classList.toggle('open'); 
-}
+
+function toggleMenu() { document.querySelector('nav').classList.toggle('open'); }
 
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('menu-item') && window.innerWidth <= 768) {
