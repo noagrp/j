@@ -188,15 +188,15 @@ async function loadDetail(cat, key) {
     if (cat === 'monsters') {
         html += `
             <div class="card" style="text-align:center;">
-                <h2>Image Card</h2>
+                <h2></h2>
                 <img src="charactersprite/${key}.png" alt="${key}" style="max-width:120px; height:auto; margin-top:10px;">
             </div>
         `;
     }
 
     // 2. Expanded Page Split: Basic Card & Extra Card contents
-    let basicHtml = `<h2>Basic Card</h2><h3>${title}</h3>`;
-    let extraHtml = `<h2>Extra Card</h2>`;
+    let basicHtml = `<h2>Basic Info</h2><h3>${title}</h3>`;
+    let extraHtml = `<h2>More Info</h2>`;
     let hasExtra = false;
 
     let entryEntries = Object.entries(data);
