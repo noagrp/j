@@ -41,7 +41,7 @@ function getRankEmoji(cat, key, value) {
         if (val === "medium") return " ⭐⭐";
         if (val === "high") return " ⭐⭐⭐";
         if (val === "master") return " ⭐⭐⭐⭐";
-        if (val === "curse") return " ⚪";
+        if (val === "curse") return " ⭐";
     }
     if (cat === 'passives' && key === "Skill Rank") {
         if (val === "low") return " ⭐";
@@ -139,7 +139,6 @@ function loadView(view) {
         const itemKey = Object.values(item)[0];
         let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${itemKey}')">`;
         
-        // 1. Sprite Display at Top Center on list page cards
         if (cat === 'monsters') {
             cardHtml += `<div style="text-align:center; margin-bottom:15px;">
                 <img src="charactersprite/${itemKey}.png" alt="${itemKey}" style="max-width:80px; height:auto;">
@@ -150,7 +149,11 @@ function loadView(view) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
             let emoji = getRankEmoji(cat, k, v);
-            cardHtml += `<strong>${displayKey}:</strong> ${emoji}<br>`;
+            if (emoji) {
+                cardHtml += `<strong>${displayKey}:</strong>${emoji}<br>`;
+            } else {
+                cardHtml += `<strong>${displayKey}:</strong> ${v}<br>`;
+            }
         }
 
         cardHtml += `</div>`;
@@ -184,7 +187,6 @@ async function loadDetail(cat, key) {
         <div style="max-width:900px; margin:20px auto; display:flex; flex-direction:column; gap:20px;">
     `;
 
-    // 2. Expanded Page Split: Image Card
     if (cat === 'monsters') {
         html += `
             <div class="card" style="text-align:center;">
@@ -194,7 +196,6 @@ async function loadDetail(cat, key) {
         `;
     }
 
-    // 2. Expanded Page Split: Basic Card & Extra Card contents
     let basicHtml = `<h2>Basic Info</h2><h3>${title}</h3>`;
     let extraHtml = `<h2>More Info</h2>`;
     let hasExtra = false;
@@ -206,13 +207,14 @@ async function loadDetail(cat, key) {
         let emoji = getRankEmoji(cat, k, v);
         
         let line = "";
-        if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
-            line = `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
+        if (emoji) {
+            line = `<strong>${displayKey}:</strong>${emoji}<br>`;
+        } else if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
+            line = `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span><br>`;
         } else {
-            line = `<strong>${displayKey}:</strong> ${emoji}<br>`;
+            line = `<strong>${displayKey}:</strong> ${v}<br>`;
         }
 
-        // Put primary/first few items in Basic Card, rest or specific ones in Extra Card
         if (idx < 3) {
             basicHtml += line;
         } else {
