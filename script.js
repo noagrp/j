@@ -150,7 +150,7 @@ function loadView(view) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
             let emoji = getRankEmoji(cat, k, v);
-            cardHtml += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
+            cardHtml += `<strong>${displayKey}:</strong> ${emoji}<br>`;
         }
 
         cardHtml += `</div>`;
@@ -209,7 +209,7 @@ async function loadDetail(cat, key) {
         if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
             line = `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
         } else {
-            line = `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
+            line = `<strong>${displayKey}:</strong> ${emoji}<br>`;
         }
 
         // Put primary/first few items in Basic Card, rest or specific ones in Extra Card
