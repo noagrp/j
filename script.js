@@ -23,31 +23,31 @@ function getRankEmoji(cat, key, value) {
     if (!value) return "";
     const val = String(value).toLowerCase().trim();
     if (cat === 'jobs' && key === "Rarity") {
-        if (val === "1") return " 🟢";
-        if (val === "2") return " 🔵";
-        if (val === "3") return " 🟣";
-        if (val === "4") return " 🔴";
-        if (val === "5") return " 🟡";
+        if (val === "1") return " ⭐";
+        if (val === "2") return " ⭐⭐";
+        if (val === "3") return " ⭐⭐⭐";
+        if (val === "4") return " ⭐⭐⭐⭐";
+        if (val === "5") return " ⭐⭐⭐⭐⭐";
     }
     if (cat === 'monsters' && key === "Difficulty") {
-        if (val.includes("beginner")) return " 🟢";
-        if (val.includes("easy")) return " 🔵";
-        if (val.includes("medium")) return " 🟣";
-        if (val.includes("hard")) return " 🔴";
-        if (val.includes("boss")) return " 🟡";
+        if (val.includes("beginner")) return " ⭐";
+        if (val.includes("easy")) return " ⭐⭐";
+        if (val.includes("medium")) return " ⭐⭐⭐";
+        if (val.includes("hard")) return " ⭐⭐⭐⭐";
+        if (val.includes("boss")) return " ⭐⭐⭐⭐⭐";
     }
     if (cat === 'abilities' && key === "Ability Tier") {
-        if (val === "low") return " 🟢";
-        if (val === "medium") return " 🔵";
-        if (val === "high") return " 🔴";
-        if (val === "master") return " 🟡";
+        if (val === "low") return " ⭐";
+        if (val === "medium") return " ⭐⭐";
+        if (val === "high") return " ⭐⭐⭐";
+        if (val === "master") return " ⭐⭐⭐⭐";
         if (val === "curse") return " ⚪";
     }
     if (cat === 'passives' && key === "Skill Rank") {
-        if (val === "low") return " 🟢";
-        if (val === "medium") return " 🔵";
-        if (val === "high") return " 🔴";
-        if (val === "master") return " 🟡";
+        if (val === "low") return " ⭐";
+        if (val === "medium") return " ⭐⭐";
+        if (val === "high") return " ⭐⭐⭐";
+        if (val === "master") return " ⭐⭐⭐⭐";
     }
     return "";
 }
