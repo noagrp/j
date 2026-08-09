@@ -139,18 +139,18 @@ function loadView(view) {
         const itemKey = Object.values(item)[0];
         let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${itemKey}')">`;
         
+        // 1. Sprite Display at Top Center on list page cards
+        if (cat === 'monsters') {
+            cardHtml += `<div style="text-align:center; margin-bottom:15px;">
+                <img src="charactersprite/${itemKey}.png" alt="${itemKey}" style="max-width:80px; height:auto;">
+            </div>`;
+        }
+
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
             let displayKey = getDisplayKey(cat, k);
             let emoji = getRankEmoji(cat, k, v);
             cardHtml += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
-        }
-
-        // Sprite Display (Bottom Aligned)
-        if (cat === 'monsters') {
-            cardHtml += `<div style="text-align:center; margin-top:auto; padding-top:15px;">
-                <img src="charactersprite/${itemKey}.png" alt="${itemKey}" style="max-width:80px; height:auto;">
-            </div>`;
         }
 
         cardHtml += `</div>`;
@@ -181,21 +181,50 @@ async function loadDetail(cat, key) {
 
     let html = `
         <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
-        <div class="card" style="max-width:900px; margin:20px auto; position:relative;">
-            ${(cat === 'monsters') ? `<img src="charactersprite/${key}.png" style="position:absolute; top:15px; right:15px; max-width:100px; height:auto;">` : ''}
-            <h2>${title}</h2>
+        <div style="max-width:900px; margin:20px auto; display:flex; flex-direction:column; gap:20px;">
     `;
 
-    for (let [k, v] of Object.entries(data)) {
-        if (!v || v === "") continue;
+    // 2. Expanded Page Split: Image Card
+    if (cat === 'monsters') {
+        html += `
+            <div class="card" style="text-align:center;">
+                <h2>Image Card</h2>
+                <img src="charactersprite/${key}.png" alt="${key}" style="max-width:120px; height:auto; margin-top:10px;">
+            </div>
+        `;
+    }
+
+    // 2. Expanded Page Split: Basic Card & Extra Card contents
+    let basicHtml = `<h2>Basic Card</h2><h3>${title}</h3>`;
+    let extraHtml = `<h2>Extra Card</h2>`;
+    let hasExtra = false;
+
+    let entryEntries = Object.entries(data);
+    entryEntries.forEach(([k, v], idx) => {
+        if (!v || v === "") return;
         let displayKey = getDisplayKey(cat, k);
         let emoji = getRankEmoji(cat, k, v);
         
+        let line = "";
         if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
-            html += `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
+            line = `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span>${emoji}<br>`;
         } else {
-            html += `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
+            line = `<strong>${displayKey}:</strong> ${v}${emoji}<br>`;
         }
+
+        // Put primary/first few items in Basic Card, rest or specific ones in Extra Card
+        if (idx < 3) {
+            basicHtml += line;
+        } else {
+            extraHtml += line;
+            hasExtra = true;
+        }
+    });
+
+    html += `<div class="card">${basicHtml}</div>`;
+    
+    if (hasExtra) {
+        html += `<div class="card">${extraHtml}</div>`;
     }
 
     if (cat !== 'relic') {
@@ -212,13 +241,15 @@ async function loadDetail(cat, key) {
         });
 
         if (usedBy.length > 0) {
-            html += `<hr><h3>Used By:</h3>`;
+            let usedByHtml = `<div class="card"><h2>Used By</h2>`;
             usedBy.forEach(u => {
-                html += `
+                usedByHtml += `
                     <div class="link" onclick="loadDetail('${u.cat}','${u.name}')" style="margin-bottom: 5px;">
                         ${u.cat === 'monsters' ? '👹' : '⚔️'} ${u.name}
                     </div>`;
             });
+            usedByHtml += `</div>`;
+            html += usedByHtml;
         }
     }
 
