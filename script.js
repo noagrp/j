@@ -62,12 +62,12 @@ function getDisplayKey(cat, originalKey, index = 0) {
     if (cat === 'monsters') {
 if (originalKey.includes("PassiveKey")) {
             const match = originalKey.match(/\d+/);
-            const num = match ? parseInt(match[0]) + 1 : 1;
+            const num = match ? parseInt(match[0]) : 1;
             return `Passive${num}`;
         }
         if (originalKey.includes("AbilityKey")) {
             const match = originalKey.match(/\d+/);
-            const num = match ? parseInt(match[0]) + 1 : 1;
+            const num = match ? parseInt(match[0]) : 1;
             return `Ability${num}`;
         }
         if (originalKey === "MonsterKey") return "Character";
