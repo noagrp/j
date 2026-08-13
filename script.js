@@ -60,8 +60,16 @@ function getDisplayKey(cat, originalKey, index = 0) {
         else if (originalKey.includes("AbilityKey")) return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
     }
     if (cat === 'monsters') {
-        if (originalKey.includes("PassiveKey")) return index === 0 ? "Passive" : `Passive ${index + 1}`;
-        if (originalKey.includes("AbilityKey")) return index === 0 ? "Ability" : `Ability ${index + 1}`;
+if (originalKey.includes("PassiveKey")) {
+            const match = originalKey.match(/\d+/);
+            const num = match ? parseInt(match[0]) + 1 : 1;
+            return `Passive${num}`;
+        }
+        if (originalKey.includes("AbilityKey")) {
+            const match = originalKey.match(/\d+/);
+            const num = match ? parseInt(match[0]) + 1 : 1;
+            return `Ability${num}`;
+        }
         if (originalKey === "MonsterKey") return "Character";
     }
     key = key.replace(/Key(_\d+)?$/, '').trim();
