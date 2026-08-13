@@ -215,7 +215,7 @@ async function loadDetail(cat, key) {
             line = `<strong>${displayKey}:</strong> ${v}<br>`;
         }
 
-        if (idx < 5) {
+        if (idx < 6) {
             basicHtml += line;
         } else {
             extraHtml += line;
