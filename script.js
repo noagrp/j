@@ -268,7 +268,9 @@ async function loadDetail(cat, key) {
             line = `<strong>${displayKey}:</strong> ${v}<br>`;
         }
 
-        if (cat === 'monsters' ? idx < 3 : idx < 2) {
+        // Expanded threshold to 5 so HP, Str, Agi, Int, and Difficulty/Rarity stay together in Basic Info
+        const isBasicStat = ['difficulty', 'rarity', 'hp', 'str', 'agi', 'int'].some(stat => lowerK.includes(stat));
+        if (isBasicStat || idx < 5) {
             basicHtml += line;
         } else {
             extraHtml += line;
