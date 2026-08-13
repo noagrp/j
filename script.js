@@ -60,15 +60,9 @@ function getDisplayKey(cat, originalKey, index = 0) {
         else if (originalKey.includes("AbilityKey")) return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
     }
     if (cat === 'monsters') {
-        if (originalKey.toLowerCase().includes("passive")) return index === 0 ? "Passive 1" : `Passive ${index + 1}`;
-        if (originalKey.toLowerCase().includes("ability")) return index === 0 ? "Ability 1" : `Ability ${index + 1}`;
+        if (originalKey.includes("PassiveKey")) return index === 0 ? "Passive" : `Passive ${index + 1}`;
+        if (originalKey.includes("AbilityKey")) return index === 0 ? "Ability" : `Ability ${index + 1}`;
         if (originalKey === "MonsterKey") return "Character";
-    }
-    if (originalKey.toLowerCase() === 'ability' || originalKey.toLowerCase() === 'ability_2') {
-        return originalKey.toLowerCase() === 'ability' ? "Ability 1" : "Ability 2";
-    }
-    if (originalKey.toLowerCase() === 'passive' || originalKey.toLowerCase() === 'passive_2') {
-        return originalKey.toLowerCase() === 'passive' ? "Passive 1" : "Passive 2";
     }
     key = key.replace(/Key(_\d+)?$/, '').trim();
     if (key) key = key.charAt(0).toUpperCase() + key.slice(1);
@@ -193,84 +187,35 @@ async function loadDetail(cat, key) {
         <div style="max-width:900px; margin:20px auto; display:flex; flex-direction:column; gap:20px;">
     `;
 
-    let entries = Object.entries(data);
-    const primaryKeyName = entries[0][0];
-
     if (cat === 'monsters') {
         html += `
             <div class="card" style="text-align:center;">
                 <h2></h2>
                 <img src="charactersprite/${key}.png" alt="${key}" style="max-width:120px; height:auto; margin-top:10px;">
-                <div style="margin-top: 10px;"><strong>Character:</strong> ${key}</div>
-            </div>
-        `;
-    } else {
-        html += `
-            <div class="card">
-                <h2>Basic Info</h2>
-                <h3>${title}</h3>
-                <strong>ID:</strong> ${key}
             </div>
         `;
     }
 
-    entries = entries.filter(([k]) => k !== primaryKeyName);
-
-    if (cat === 'monsters' || cat === 'jobs' || cat === 'relic') {
-        const hpKey = cat === 'monsters' ? 'Lv100HP' : 'Lv10HP';
-        const strKey = cat === 'monsters' ? 'Lv100Str' : 'Lv10Str';
-        const agiKey = cat === 'monsters' ? 'Lv100Agi' : 'Lv10Agi';
-        const intKey = cat === 'monsters' ? 'Lv100Int' : 'Lv10Int';
-
-        const hpIdx = entries.findIndex(([k]) => k.toLowerCase() === hpKey.toLowerCase());
-        if (hpIdx !== -1) {
-            const statsToExtract = [strKey, agiKey, intKey].map(sKey => {
-                const idx = entries.findIndex(([k]) => k.toLowerCase() === sKey.toLowerCase());
-                if (idx !== -1) return entries.splice(idx, 1)[0];
-                return null;
-            }).filter(Boolean);
-
-            const currentHpIdx = entries.findIndex(([k]) => k.toLowerCase() === hpKey.toLowerCase());
-            if (currentHpIdx !== -1) {
-                entries.splice(currentHpIdx + 1, 0, ...statsToExtract);
-            }
-        }
-    }
-
-    let basicHtml = cat === 'monsters' ? `<h2>Basic Info</h2><h3>${title}</h3>` : '';
+    let basicHtml = `<h2>Basic Info</h2><h3>${title}</h3>`;
     let extraHtml = `<h2>More Info</h2>`;
     let hasExtra = false;
 
-    let abilityCounter = 0;
-    let passiveCounter = 0;
-
-    entries.forEach(([k, v], idx) => {
+    let entryEntries = Object.entries(data);
+    entryEntries.forEach(([k, v], idx) => {
         if (!v || v === "") return;
-        
         let displayKey = getDisplayKey(cat, k);
-        const lowerK = k.toLowerCase();
-        if (lowerK.includes('ability')) {
-            abilityCounter++;
-            displayKey = `Ability ${abilityCounter}`;
-        } else if (lowerK.includes('passive')) {
-            passiveCounter++;
-            displayKey = `Passive ${passiveCounter}`;
-        }
-
         let emoji = getRankEmoji(cat, k, v);
         
         let line = "";
         if (emoji) {
             line = `<strong>${displayKey}:</strong>${emoji}<br>`;
-        } else if ((k.includes("AbilityKey") || k.includes("PassiveKey") || lowerK.includes('ability') || lowerK.includes('passive')) && v) {
+        } else if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
             line = `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span><br>`;
         } else {
             line = `<strong>${displayKey}:</strong> ${v}<br>`;
         }
 
-        // Expanded threshold to 5 so HP, Str, Agi, Int, and Difficulty/Rarity stay together in Basic Info
-        const isBasicStat = ['difficulty', 'rarity', 'hp', 'str', 'agi', 'int'].some(stat => lowerK.includes(stat));
-        if (isBasicStat || idx < 5) {
+        if (idx < 5) {
             basicHtml += line;
         } else {
             extraHtml += line;
@@ -333,14 +278,12 @@ function createFireParticle(x, y) {
     trail.appendChild(particle);
     setTimeout(() => particle.remove(), 1000);
 }
-
 function createTrailContainer() {
     const container = document.createElement('div');
     container.id = 'fire-trail';
     document.body.appendChild(container);
     return container;
 }
-
 function createFireBurst(x, y) {
     const burst = document.createElement('div');
     burst.className = 'fire-burst';
@@ -349,11 +292,9 @@ function createFireBurst(x, y) {
     document.body.appendChild(burst);
     setTimeout(() => burst.remove(), 600);
 }
-
 document.addEventListener('mousemove', (e) => {
     if (Math.random() > 0.35) createFireParticle(e.clientX, e.clientY);
 });
-
 document.addEventListener('click', (e) => {
     createFireBurst(e.clientX, e.clientY);
     setTimeout(() => createFireBurst(e.clientX + 12, e.clientY + 8), 60);
