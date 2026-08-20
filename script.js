@@ -3,6 +3,8 @@ let currentLang = 'English';
 let dictionary = [];
 let relicLocal = []; 
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
+let detailHistory = [];
+let currentDetail = null;
 
 function getDict(key) {
     const entry = dictionary.find(i => i.DictionaryKey === key);
@@ -98,6 +100,8 @@ async function init() {
 }
 
 function loadView(view) {
+    detailHistory = [];
+    currentDetail = null;
     window.lastView = view;
     const main = document.getElementById('content');
     let searchHtml = (view !== 'Home') ? `
@@ -184,14 +188,19 @@ function attachSearch() {
     });
 }
 
-async function loadDetail(cat, key) {
+async function loadDetail(cat, key, fromHistory = false) {
     const data = db[cat]?.find(i => Object.values(i)[0] === key);
     if (!data) return;
+
+    if (!fromHistory && currentDetail) {
+        detailHistory.push(currentDetail);
+    }
+    currentDetail = { cat, key };
     
     const title = (cat === 'relic') ? getRelicName(key) : key;
 
     let html = `
-        <button onclick="loadView('${cat.charAt(0).toUpperCase() + cat.slice(1)}')" class="back-btn">← Back</button>
+        <button onclick="goBackToPreviousDetail()" class="back-btn">← Back</button>
         <div style="max-width:900px; margin:20px auto; display:flex; flex-direction:column; gap:20px;">
     `;
 
@@ -268,6 +277,19 @@ async function loadDetail(cat, key) {
     html += `</div>`;
     document.getElementById('content').innerHTML = html;
     window.scrollTo(0, 0);
+}
+
+function goBackToPreviousDetail() {
+    const previousDetail = detailHistory.pop();
+    if (previousDetail) {
+        loadDetail(previousDetail.cat, previousDetail.key, true);
+        return;
+    }
+
+    if (currentDetail) {
+        const categoryView = currentDetail.cat.charAt(0).toUpperCase() + currentDetail.cat.slice(1);
+        loadView(categoryView);
+    }
 }
 
 function toggleMenu() { document.querySelector('nav').classList.toggle('open'); }
