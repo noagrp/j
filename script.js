@@ -212,7 +212,7 @@ async function loadDetail(cat, key) {
 
     let entryEntries = Object.entries(data);
     entryEntries.forEach(([k, v], idx) => {
-        if (idx === 0 || !v || v === "") return;
+        if (!v || v === "") return;
         let displayKey = getDisplayKey(cat, k);
         let emoji = getRankEmoji(cat, k, v);
         
