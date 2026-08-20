@@ -195,22 +195,24 @@ async function loadDetail(cat, key) {
         <div style="max-width:900px; margin:20px auto; display:flex; flex-direction:column; gap:20px;">
     `;
 
-    if (cat === 'monsters') {
-        html += `
-            <div class="card" style="text-align:center;">
-                <h2></h2>
-                <img src="charactersprite/${key}.png" alt="${key}" style="max-width:120px; height:auto; margin-top:10px;">
-            </div>
-        `;
-    }
+    const detailMedia = (cat === 'monsters')
+        ? `<img src="charactersprite/${key}.png" alt="${title}" style="max-width:120px; height:auto;">`
+        : '';
 
-    let basicHtml = `<h2>Basic Info</h2><h3>${title}</h3>`;
+    html += `
+        <div class="card" style="text-align:center;">
+            ${detailMedia}
+            <h3 style="margin:${detailMedia ? '12px 0 0' : '0'};">${title}</h3>
+        </div>
+    `;
+
+    let basicHtml = `<h2>Basic Info</h2>`;
     let extraHtml = `<h2>More Info</h2>`;
     let hasExtra = false;
 
     let entryEntries = Object.entries(data);
     entryEntries.forEach(([k, v], idx) => {
-        if (!v || v === "") return;
+        if (idx === 0 || !v || v === "") return;
         let displayKey = getDisplayKey(cat, k);
         let emoji = getRankEmoji(cat, k, v);
         
