@@ -1,0 +1,110 @@
+name: Upgrade monster skill pools
+
+on:
+  push:
+    paths:
+      - '.github/workflows/upgrade-monsters.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Restructure monsters.json
+        run: |
+          python - <<'PY'
+          import json
+          from functools import lru_cache
+
+          def load(path):
+              with open(path, encoding='utf-8') as f:
+                  return json.load(f)
+
+          monsters = load('data/monsters.json')
+          abilities = load('data/abilities.json')
+          passives = load('data/passives.json')
+
+          ability_names = [str(next(iter(x.values()))) for x in abilities if x]
+          passive_names = [str(next(iter(x.values()))) for x in passives if x]
+
+          def splitter(names):
+              names = sorted((n for n in names if n), key=len, reverse=True)
+              def split(raw):
+                  if not raw:
+                      return []
+                  source = str(raw).replace('--', '-')
+                  @lru_cache(None)
+                  def walk(i):
+                      if i == len(source):
+                          return ()
+                      for name in names:
+                          if source[i:i+len(name)].lower() != name.lower():
+                              continue
+                          j = i + len(name)
+                          if j == len(source):
+                              return (name,)
+                          if source[j:j+1] == '-':
+                              tail = walk(j + 1)
+                              if tail is not None:
+                                  return (name,) + tail
+                      return None
+                  parsed = walk(0)
+                  return list(parsed) if parsed is not None else [p for p in source.split('-') if p]
+              return split
+
+          split_ability = splitter(ability_names)
+          split_passive = splitter(passive_names)
+          random_labels = ['100%', '99% to 50%', '49% to 30%', '29% to 1%']
+          threshold_labels = ['Enemy act first', 'Below 50%', 'Below 30%']
+
+          for m in monsters:
+              old_passives = m.pop('Passives', m.get('Random Passives', []))
+              if isinstance(old_passives, str):
+                  m['Random Passives'] = split_passive(old_passives)
+              else:
+                  m['Random Passives'] = old_passives
+
+              raw = m.get('Random Abilities', '')
+              if isinstance(raw, str):
+                  parts = raw.split('|')
+                  m['Random Abilities'] = {
+                      label: split_ability(parts[i] if i < len(parts) else '')
+                      for i, label in enumerate(random_labels)
+                  }
+
+              raw = m.get('Threshold Abilities', '')
+              if isinstance(raw, str):
+                  parts = raw.split('|')
+                  m['Threshold Abilities'] = {
+                      label: split_ability(parts[i] if i < len(parts) else '')
+                      for i, label in enumerate(threshold_labels)
+                  }
+
+              raw = m.get('Special Case Abilities', '')
+              if isinstance(raw, str):
+                  cases = []
+                  for entry in filter(None, raw.split('|')):
+                      condition, sep, skills = entry.partition(':')
+                      if not sep:
+                          skills, condition = condition, ''
+                      cases.append({'condition': condition.strip(), 'abilities': split_ability(skills)})
+                  m['Special Case Abilities'] = cases
+
+          with open('data/monsters.json', 'w', encoding='utf-8') as f:
+              json.dump(monsters, f, ensure_ascii=False, indent=2)
+              f.write('\n')
+          PY
+      - name: Commit upgraded JSON
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/monsters.json
+          git diff --cached --quiet && exit 0
+          git commit -m 'Restructure monster skill pools'
+          git push
