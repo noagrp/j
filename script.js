@@ -6,6 +6,13 @@ const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'
 let detailHistory = [];
 let currentDetail = null;
 
+const monsterStructuredFields = new Set([
+    'Random Passives',
+    'Random Abilities',
+    'Threshold Abilities',
+    'Special Case Abilities'
+]);
+
 function getDict(key) {
     const entry = dictionary.find(i => i.DictionaryKey === key);
     return entry ? (entry[currentLang] || entry['English'] || key) : key;
@@ -19,6 +26,79 @@ function getRelicName(key) {
 function changeLanguage(lang) {
     currentLang = lang;
     loadView(window.lastView || 'Home');
+}
+
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function detailLink(cat, name) {
+    if (!name) return '';
+    return `<span class="link" data-cat="${escapeHtml(cat)}" data-key="${escapeHtml(name)}"
+        onclick="event.stopPropagation(); loadDetail(this.dataset.cat, this.dataset.key)">${escapeHtml(name)}</span>`;
+}
+
+function hasStructuredValue(value) {
+    if (Array.isArray(value)) return value.length > 0;
+    if (value && typeof value === 'object') {
+        return Object.values(value).some(v => hasStructuredValue(v));
+    }
+    return value !== null && value !== undefined && value !== '';
+}
+
+function renderLinkedList(values, cat) {
+    if (!Array.isArray(values) || values.length === 0) return '';
+    return values.map(value => detailLink(cat, value)).join(' · ');
+}
+
+function renderTieredAbilities(value) {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return '';
+    return Object.entries(value)
+        .filter(([, abilities]) => Array.isArray(abilities) && abilities.length > 0)
+        .map(([label, abilities]) => `
+            <div style="margin:6px 0 10px 0;">
+                <strong>${escapeHtml(label)}:</strong><br>
+                ${renderLinkedList(abilities, 'abilities')}
+            </div>
+        `).join('');
+}
+
+function renderSpecialCaseAbilities(value) {
+    if (!Array.isArray(value) || value.length === 0) return '';
+    return value
+        .filter(item => item && Array.isArray(item.abilities) && item.abilities.length > 0)
+        .map(item => `
+            <div style="margin:6px 0 10px 0;">
+                ${item.condition ? `<strong>${escapeHtml(item.condition)}:</strong><br>` : ''}
+                ${renderLinkedList(item.abilities, 'abilities')}
+            </div>
+        `).join('');
+}
+
+function renderMonsterStructuredField(key, value) {
+    if (!hasStructuredValue(value)) return '';
+
+    if (key === 'Random Passives') {
+        const links = renderLinkedList(value, 'passives');
+        return links ? `<div style="margin:8px 0 14px 0;"><strong>Random Passives:</strong><br>${links}</div>` : '';
+    }
+
+    if (key === 'Random Abilities' || key === 'Threshold Abilities') {
+        const body = renderTieredAbilities(value);
+        return body ? `<div style="margin:8px 0 14px 0;"><strong>${escapeHtml(key)}:</strong>${body}</div>` : '';
+    }
+
+    if (key === 'Special Case Abilities') {
+        const body = renderSpecialCaseAbilities(value);
+        return body ? `<div style="margin:8px 0 14px 0;"><strong>Special Case Abilities:</strong>${body}</div>` : '';
+    }
+
+    return '';
 }
 
 function getRankEmoji(cat, key, value) {
@@ -62,7 +142,7 @@ function getDisplayKey(cat, originalKey, index = 0) {
         else if (originalKey.includes("AbilityKey")) return "Deck Ability " + originalKey.replace("AbilityKey", "").trim();
     }
     if (cat === 'monsters') {
-if (originalKey.includes("PassiveKey")) {
+        if (originalKey.includes("PassiveKey")) {
             const match = originalKey.match(/\d+/);
             const num = match ? parseInt(match[0]) : 1;
             return `Passive${num}`;
@@ -149,22 +229,23 @@ function loadView(view) {
     const fragment = document.createDocumentFragment();
     items.forEach(item => {
         const itemKey = Object.values(item)[0];
-        let cardHtml = `<div class="card" onclick="loadDetail('${cat}', '${itemKey}')">`;
+        let cardHtml = `<div class="card" data-key="${escapeHtml(itemKey)}" onclick="loadDetail('${cat}', this.dataset.key)">`;
         
         if (cat === 'monsters') {
             cardHtml += `<div style="text-align:center; margin-bottom:15px;">
-                <img src="charactersprite/${itemKey}.png" alt="${itemKey}" style="max-width:80px; height:auto;">
+                <img src="charactersprite/${encodeURIComponent(itemKey)}.png" alt="${escapeHtml(itemKey)}" style="max-width:80px; height:auto;">
             </div>`;
         }
 
         for (let [k, v] of Object.entries(item)) {
             if (!v || v === "") continue;
+            if (cat === 'monsters' && monsterStructuredFields.has(k)) continue;
             let displayKey = getDisplayKey(cat, k);
             let emoji = getRankEmoji(cat, k, v);
             if (emoji) {
-                cardHtml += `<strong>${displayKey}:</strong>${emoji}<br>`;
+                cardHtml += `<strong>${escapeHtml(displayKey)}:</strong>${emoji}<br>`;
             } else {
-                cardHtml += `<strong>${displayKey}:</strong> ${v}<br>`;
+                cardHtml += `<strong>${escapeHtml(displayKey)}:</strong> ${escapeHtml(v)}<br>`;
             }
         }
 
@@ -205,33 +286,40 @@ async function loadDetail(cat, key, fromHistory = false) {
     `;
 
     const detailMedia = (cat === 'monsters')
-        ? `<img src="charactersprite/${key}.png" alt="${title}" style="max-width:120px; height:auto;">`
+        ? `<img src="charactersprite/${encodeURIComponent(key)}.png" alt="${escapeHtml(title)}" style="max-width:120px; height:auto;">`
         : '';
 
     html += `
         <div class="card" style="text-align:center;">
             ${detailMedia}
-            <h3 style="margin:${detailMedia ? '12px 0 0' : '0'};">${title}</h3>
+            <h3 style="margin:${detailMedia ? '12px 0 0' : '0'};">${escapeHtml(title)}</h3>
         </div>
     `;
 
     let basicHtml = `<h2>Basic Info</h2>`;
     let extraHtml = `<h2>More Info</h2>`;
     let hasExtra = false;
+    let structuredHtml = '';
 
     let entryEntries = Object.entries(data);
     entryEntries.forEach(([k, v], idx) => {
+        if (cat === 'monsters' && monsterStructuredFields.has(k)) {
+            const block = renderMonsterStructuredField(k, v);
+            if (block) structuredHtml += block;
+            return;
+        }
+
         if (!v || v === "") return;
         let displayKey = getDisplayKey(cat, k);
         let emoji = getRankEmoji(cat, k, v);
         
         let line = "";
         if (emoji) {
-            line = `<strong>${displayKey}:</strong>${emoji}<br>`;
+            line = `<strong>${escapeHtml(displayKey)}:</strong>${emoji}<br>`;
         } else if ((k.includes("AbilityKey") || k.includes("PassiveKey")) && v) {
-            line = `<strong>${displayKey}:</strong> <span class="link" onclick="event.stopPropagation(); loadDetail('${k.includes('Ability') ? 'abilities' : 'passives'}','${v}')">${v}</span><br>`;
+            line = `<strong>${escapeHtml(displayKey)}:</strong> ${detailLink(k.includes('Ability') ? 'abilities' : 'passives', v)}<br>`;
         } else {
-            line = `<strong>${displayKey}:</strong> ${v}<br>`;
+            line = `<strong>${escapeHtml(displayKey)}:</strong> ${escapeHtml(v)}<br>`;
         }
 
         if (idx < 6) {
@@ -246,6 +334,10 @@ async function loadDetail(cat, key, fromHistory = false) {
     
     if (hasExtra) {
         html += `<div class="card">${extraHtml}</div>`;
+    }
+
+    if (cat === 'monsters' && structuredHtml) {
+        html += `<div class="card"><h2>Enemy Skill Pools</h2>${structuredHtml}</div>`;
     }
 
     if (cat !== 'relic') {
@@ -265,8 +357,9 @@ async function loadDetail(cat, key, fromHistory = false) {
             let usedByHtml = `<div class="card"><h2>Used By</h2>`;
             usedBy.forEach(u => {
                 usedByHtml += `
-                    <div class="link" onclick="loadDetail('${u.cat}','${u.name}')" style="margin-bottom: 5px;">
-                        ${u.cat === 'monsters' ? '👹' : '⚔️'} ${u.name}
+                    <div class="link" data-cat="${escapeHtml(u.cat)}" data-key="${escapeHtml(u.name)}"
+                         onclick="loadDetail(this.dataset.cat, this.dataset.key)" style="margin-bottom: 5px;">
+                        ${u.cat === 'monsters' ? '👹' : '⚔️'} ${escapeHtml(u.name)}
                     </div>`;
             });
             usedByHtml += `</div>`;
