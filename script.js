@@ -101,6 +101,86 @@ function renderMonsterStructuredField(key, value) {
     return '';
 }
 
+function splitKnownNames(raw, cat) {
+    if (!raw) return [];
+    const source = String(raw).replace(/--+/g, '-');
+    const keyField = cat === 'passives' ? 'PassiveKey' : 'AbilityKey';
+    const names = (db[cat] || [])
+        .map(item => item[keyField] || Object.values(item)[0])
+        .filter(Boolean)
+        .sort((a, b) => b.length - a.length);
+
+    const memo = new Map();
+    function parseAt(index) {
+        if (index === source.length) return [];
+        if (memo.has(index)) return memo.get(index);
+        for (const name of names) {
+            const slice = source.slice(index, index + name.length);
+            if (slice.toLowerCase() !== String(name).toLowerCase()) continue;
+            const next = index + name.length;
+            if (next === source.length) {
+                const result = [name];
+                memo.set(index, result);
+                return result;
+            }
+            if (source[next] === '-') {
+                const tail = parseAt(next + 1);
+                if (tail) {
+                    const result = [name, ...tail];
+                    memo.set(index, result);
+                    return result;
+                }
+            }
+        }
+        memo.set(index, null);
+        return null;
+    }
+
+    return parseAt(0) || source.split('-').filter(Boolean);
+}
+
+function normalizeMonsterSkillPools(monster) {
+    if ('Passives' in monster && !('Random Passives' in monster)) {
+        monster['Random Passives'] = splitKnownNames(monster.Passives, 'passives');
+        delete monster.Passives;
+    }
+
+    if (typeof monster['Random Abilities'] === 'string') {
+        const parts = monster['Random Abilities'].split('|');
+        const labels = ['100%', '99% to 50%', '49% to 30%', '29% to 1%'];
+        monster['Random Abilities'] = Object.fromEntries(
+            labels.map((label, index) => [label, splitKnownNames(parts[index] || '', 'abilities')])
+        );
+    }
+
+    if (typeof monster['Threshold Abilities'] === 'string') {
+        const parts = monster['Threshold Abilities'].split('|');
+        const labels = ['Enemy act first', 'Below 50%', 'Below 30%'];
+        monster['Threshold Abilities'] = Object.fromEntries(
+            labels.map((label, index) => [label, splitKnownNames(parts[index] || '', 'abilities')])
+        );
+    }
+
+    if (typeof monster['Special Case Abilities'] === 'string') {
+        monster['Special Case Abilities'] = monster['Special Case Abilities']
+            ? monster['Special Case Abilities'].split('|').filter(Boolean).map(entry => {
+                const separator = entry.indexOf(':');
+                const condition = separator >= 0 ? entry.slice(0, separator).trim() : '';
+                const skills = separator >= 0 ? entry.slice(separator + 1) : entry;
+                return { condition, abilities: splitKnownNames(skills, 'abilities') };
+            })
+            : [];
+    }
+
+    return monster;
+}
+
+function normalizeMonsterData() {
+    if (Array.isArray(db.monsters)) {
+        db.monsters = db.monsters.map(normalizeMonsterSkillPools);
+    }
+}
+
 function getRankEmoji(cat, key, value) {
     if (!value) return "";
     const val = String(value).toLowerCase().trim();
@@ -171,7 +251,8 @@ async function init() {
         if (dictRes.ok) dictionary = await dictRes.json();
         const relicRes = await fetch('data/relic_localisation.json');
         if (relicRes.ok) relicLocal = await relicRes.json();
-        
+
+        normalizeMonsterData();
         loadView('Home');
     } catch (e) {
         console.error(e);
