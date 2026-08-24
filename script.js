@@ -2,7 +2,7 @@ const db = {};
 let currentLang = 'English';
 let dictionary = [];
 let relicLocal = [];
-const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic'];
+const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic', 'jobcraft'];
 let detailHistory = [];
 let currentDetail = null;
 
@@ -36,6 +36,42 @@ function normalizeMaterialData() { if (Array.isArray(db.materials)) db.materials
 function renderMaterialCombineList(value) {
     if (!Array.isArray(value) || value.length === 0) return '';
     return value.map(item => `<div class="material-combine-row">${detailLink('jobs', item.Job)}<span class="material-combine-arrow">→</span>${detailLink('jobs', item.Result)}</div>`).join('');
+}
+
+function craftEntityLink(cat, name) {
+    if (!name) return '';
+    const exists = (db[cat] || []).some(item => Object.values(item)[0] === name);
+    return exists ? detailLink(cat, name) : `<span>${escapeHtml(name)}</span>`;
+}
+
+function findCraftingPath(jobKey, visited = new Set()) {
+    if (jobKey === 'Jobless') return [];
+    if (visited.has(jobKey)) return null;
+    const nextVisited = new Set(visited);
+    nextVisited.add(jobKey);
+    const incoming = (db.jobcraft || []).filter(recipe => recipe.ToJobKey === jobKey);
+    for (const recipe of incoming) {
+        const parentPath = findCraftingPath(recipe.FromJobKey, nextVisited);
+        if (parentPath !== null) return [...parentPath, recipe];
+    }
+    return null;
+}
+
+function renderCraftRecipe(recipe) {
+    return `<div class="craft-row">${craftEntityLink('jobs', recipe.FromJobKey)}<span class="craft-plus">+</span>${craftEntityLink('materials', recipe.MaterialKey)}<span class="craft-arrow">→</span>${craftEntityLink('jobs', recipe.ToJobKey)}</div>`;
+}
+
+function renderCraftingPath(jobKey) {
+    if (jobKey === 'Jobless') return '';
+    const path = findCraftingPath(jobKey);
+    if (!Array.isArray(path) || path.length === 0) return '';
+    return `<div class="craft-list">${path.map(renderCraftRecipe).join('')}</div>`;
+}
+
+function renderCraftsInto(jobKey) {
+    const recipes = (db.jobcraft || []).filter(recipe => recipe.FromJobKey === jobKey);
+    if (recipes.length === 0) return '';
+    return `<div class="craft-list">${recipes.map(renderCraftRecipe).join('')}</div>`;
 }
 
 function renderMonsterSkillPools(data) {
@@ -165,6 +201,12 @@ async function loadDetail(cat, key, fromHistory = false) {
         const usedBy = [];
         ['monsters', 'jobs'].forEach(sourceCat => { (db[sourceCat] || []).forEach(item => { const itemName = Object.values(item)[0]; if (Object.values(item).includes(key) && itemName !== key) usedBy.push({ cat: sourceCat, name: itemName }); }); });
         if (usedBy.length > 0) { html += `<div class="card detail-section"><h2>Used By</h2><div class="used-by-list">`; usedBy.forEach(u => { html += `<div class="used-by-item link" data-cat="${escapeHtml(u.cat)}" data-key="${escapeHtml(u.name)}" onclick="loadDetail(this.dataset.cat, this.dataset.key)">${u.cat === 'monsters' ? '👹' : '⚔️'} ${escapeHtml(u.name)}</div>`; }); html += `</div></div>`; }
+    }
+    if (cat === 'jobs') {
+        const craftingPath = renderCraftingPath(key);
+        if (craftingPath) html += `<div class="card detail-section"><h2>Crafting Path</h2>${craftingPath}</div>`;
+        const craftsInto = renderCraftsInto(key);
+        if (craftsInto) html += `<div class="card detail-section"><h2>Crafts Into</h2>${craftsInto}</div>`;
     }
     html += `</div>`; document.getElementById('content').innerHTML = html; window.scrollTo(0, 0);
 }
