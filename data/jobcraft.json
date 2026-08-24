@@ -1,0 +1,2202 @@
+[
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Sword",
+    "ToJobKey": "Warrior"
+  },
+  {
+    "FromJobKey": "Warrior",
+    "MaterialKey": "Shield",
+    "ToJobKey": "Knight"
+  },
+  {
+    "FromJobKey": "Knight",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Dark Knight"
+  },
+  {
+    "FromJobKey": "Dark Knight",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Grand Dark Knight"
+  },
+  {
+    "FromJobKey": "Grand Dark Knight",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Demon Knight"
+  },
+  {
+    "FromJobKey": "Dark Knight",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Abyss Knight"
+  },
+  {
+    "FromJobKey": "Abyss Knight",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Oblivion Knight"
+  },
+  {
+    "FromJobKey": "Abyss Knight",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Ghost Rider"
+  },
+  {
+    "FromJobKey": "Dark Knight",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Shadewood Knight"
+  },
+  {
+    "FromJobKey": "Shadewood Knight",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "Knight Of Ni"
+  },
+  {
+    "FromJobKey": "Knight",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Paladin"
+  },
+  {
+    "FromJobKey": "Paladin",
+    "MaterialKey": "Light Spirit",
+    "ToJobKey": "High Paladin"
+  },
+  {
+    "FromJobKey": "High Paladin",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Sacred Knight"
+  },
+  {
+    "FromJobKey": "High Paladin",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Frost Paladin"
+  },
+  {
+    "FromJobKey": "High Paladin",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Chromatic Knight"
+  },
+  {
+    "FromJobKey": "Paladin",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "Guardian"
+  },
+  {
+    "FromJobKey": "Guardian",
+    "MaterialKey": "Elemental Runestones",
+    "ToJobKey": "Elemental Guardian"
+  },
+  {
+    "FromJobKey": "Guardian",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Titan"
+  },
+  {
+    "FromJobKey": "Guardian",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "The Tower"
+  },
+  {
+    "FromJobKey": "Guardian",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Onion Knight"
+  },
+  {
+    "FromJobKey": "Guardian",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Coastal Lifeguard"
+  },
+  {
+    "FromJobKey": "Knight",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Dragon Knight"
+  },
+  {
+    "FromJobKey": "Dragon Knight",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Dragon Slayer"
+  },
+  {
+    "FromJobKey": "Dragon Knight",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Lazarus Blade"
+  },
+  {
+    "FromJobKey": "Warrior",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Samurai"
+  },
+  {
+    "FromJobKey": "Samurai",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Samurai Master"
+  },
+  {
+    "FromJobKey": "Samurai Master",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Shogun"
+  },
+  {
+    "FromJobKey": "Samurai Master",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Zantetsuken"
+  },
+  {
+    "FromJobKey": "Samurai Master",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Shinigami"
+  },
+  {
+    "FromJobKey": "Samurai Master",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Afro Samurai"
+  },
+  {
+    "FromJobKey": "Warrior",
+    "MaterialKey": "Spear",
+    "ToJobKey": "Lancer"
+  },
+  {
+    "FromJobKey": "Lancer",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Dragoon"
+  },
+  {
+    "FromJobKey": "Dragoon",
+    "MaterialKey": "Magic Ring",
+    "ToJobKey": "Arcane Lancer"
+  },
+  {
+    "FromJobKey": "Arcane Lancer",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Phantom Lancer"
+  },
+  {
+    "FromJobKey": "Arcane Lancer",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Inferno Lancer"
+  },
+  {
+    "FromJobKey": "Dragoon",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Dragon Lancer"
+  },
+  {
+    "FromJobKey": "Dragon Lancer",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Dragon Lord"
+  },
+  {
+    "FromJobKey": "Lancer",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Royal Knight"
+  },
+  {
+    "FromJobKey": "Royal Knight",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Valkyrie"
+  },
+  {
+    "FromJobKey": "Valkyrie",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Grand Valkyrie"
+  },
+  {
+    "FromJobKey": "Valkyrie",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Springs Harbinger"
+  },
+  {
+    "FromJobKey": "Royal Knight",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Atlantian"
+  },
+  {
+    "FromJobKey": "Atlantian",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Ancient Atlantian"
+  },
+  {
+    "FromJobKey": "Warrior",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Hero"
+  },
+  {
+    "FromJobKey": "Hero",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Super Hero"
+  },
+  {
+    "FromJobKey": "Super Hero",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "The Chosen One"
+  },
+  {
+    "FromJobKey": "Warrior",
+    "MaterialKey": "Axe",
+    "ToJobKey": "Barbarian"
+  },
+  {
+    "FromJobKey": "Barbarian",
+    "MaterialKey": "Compass",
+    "ToJobKey": "Viking"
+  },
+  {
+    "FromJobKey": "Viking",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Viking Hero"
+  },
+  {
+    "FromJobKey": "Viking Hero",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Viking Legend"
+  },
+  {
+    "FromJobKey": "Viking",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Dragon Tamer"
+  },
+  {
+    "FromJobKey": "Dragon Tamer",
+    "MaterialKey": "Beast Taming Skills",
+    "ToJobKey": "Dragon Rider"
+  },
+  {
+    "FromJobKey": "Barbarian",
+    "MaterialKey": "Shield",
+    "ToJobKey": "Gladiator"
+  },
+  {
+    "FromJobKey": "Gladiator",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Thracian"
+  },
+  {
+    "FromJobKey": "Thracian",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "Arena Champion"
+  },
+  {
+    "FromJobKey": "Gladiator",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Berserker"
+  },
+  {
+    "FromJobKey": "Berserker",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "War Berserker"
+  },
+  {
+    "FromJobKey": "Berserker",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "Megalomaniac"
+  },
+  {
+    "FromJobKey": "Berserker",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Branded Swordsman"
+  },
+  {
+    "FromJobKey": "Berserker",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Chainsaw Man"
+  },
+  {
+    "FromJobKey": "Berserker",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Titan Shifter"
+  },
+  {
+    "FromJobKey": "Warrior",
+    "MaterialKey": "Gun",
+    "ToJobKey": "Soldier"
+  },
+  {
+    "FromJobKey": "Soldier",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Lieutenant"
+  },
+  {
+    "FromJobKey": "Lieutenant",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Colonel"
+  },
+  {
+    "FromJobKey": "Colonel",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Air Force General"
+  },
+  {
+    "FromJobKey": "Colonel",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Army General"
+  },
+  {
+    "FromJobKey": "Colonel",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Marine General"
+  },
+  {
+    "FromJobKey": "Colonel",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Nutcracker Soldier"
+  },
+  {
+    "FromJobKey": "Colonel",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "NERV Commander"
+  },
+  {
+    "FromJobKey": "Soldier",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Mercenary"
+  },
+  {
+    "FromJobKey": "Mercenary",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Mercenary Leader"
+  },
+  {
+    "FromJobKey": "Mercenary Leader",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "One Man Army"
+  },
+  {
+    "FromJobKey": "Mercenary Leader",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Devil Hunter"
+  },
+  {
+    "FromJobKey": "Mercenary",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Ex Soldier 1st Class"
+  },
+  {
+    "FromJobKey": "Soldier",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Space Soldier"
+  },
+  {
+    "FromJobKey": "Space Soldier",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "Guardian Of The Galaxy"
+  },
+  {
+    "FromJobKey": "Space Soldier",
+    "MaterialKey": "Gun",
+    "ToJobKey": "Space Marine"
+  },
+  {
+    "FromJobKey": "Space Soldier",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "High Templar"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Fighting Gloves",
+    "ToJobKey": "Brawler"
+  },
+  {
+    "FromJobKey": "Brawler",
+    "MaterialKey": "Martial Arts Training",
+    "ToJobKey": "Martial Artist"
+  },
+  {
+    "FromJobKey": "Martial Artist",
+    "MaterialKey": "Fighting Gloves",
+    "ToJobKey": "Boxer"
+  },
+  {
+    "FromJobKey": "Boxer",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Pro Boxer"
+  },
+  {
+    "FromJobKey": "Pro Boxer",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "Boxing Champion"
+  },
+  {
+    "FromJobKey": "Pro Boxer",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Coconut Brawler"
+  },
+  {
+    "FromJobKey": "Martial Artist",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Monk"
+  },
+  {
+    "FromJobKey": "Monk",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Warrior Monk"
+  },
+  {
+    "FromJobKey": "Warrior Monk",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Dragon Descendant"
+  },
+  {
+    "FromJobKey": "Warrior Monk",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Shaolin Master"
+  },
+  {
+    "FromJobKey": "Warrior Monk",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Tai Chi Master"
+  },
+  {
+    "FromJobKey": "Warrior Monk",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Great Sage"
+  },
+  {
+    "FromJobKey": "Warrior Monk",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Chestnut Monk"
+  },
+  {
+    "FromJobKey": "Monk",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Path Seeker"
+  },
+  {
+    "FromJobKey": "Path Seeker",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Sage Of Six Paths"
+  },
+  {
+    "FromJobKey": "Brawler",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Street Fighter"
+  },
+  {
+    "FromJobKey": "Street Fighter",
+    "MaterialKey": "Martial Arts Training",
+    "ToJobKey": "MMA Fighter"
+  },
+  {
+    "FromJobKey": "MMA Fighter",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Underground Fighter"
+  },
+  {
+    "FromJobKey": "Underground Fighter",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "The King Of Fighters"
+  },
+  {
+    "FromJobKey": "Underground Fighter",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Badguy Bounty Hunter"
+  },
+  {
+    "FromJobKey": "Underground Fighter",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Air Force Pilot"
+  },
+  {
+    "FromJobKey": "MMA Fighter",
+    "MaterialKey": "Elemental Runestones",
+    "ToJobKey": "Mystic Fighter"
+  },
+  {
+    "FromJobKey": "Mystic Fighter",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Volcanofist"
+  },
+  {
+    "FromJobKey": "Mystic Fighter",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Aquafist"
+  },
+  {
+    "FromJobKey": "Mystic Fighter",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Thunderfist"
+  },
+  {
+    "FromJobKey": "Mystic Fighter",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Quakefist"
+  },
+  {
+    "FromJobKey": "Mystic Fighter",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Tornadofist"
+  },
+  {
+    "FromJobKey": "Mystic Fighter",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Sharkfist"
+  },
+  {
+    "FromJobKey": "Brawler",
+    "MaterialKey": "Sport Jersey",
+    "ToJobKey": "Street Baller"
+  },
+  {
+    "FromJobKey": "Street Baller",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Club Baller"
+  },
+  {
+    "FromJobKey": "Club Baller",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "NBA Shooting Guard"
+  },
+  {
+    "FromJobKey": "NBA Shooting Guard",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "Air Jordan"
+  },
+  {
+    "FromJobKey": "Club Baller",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "NBA Small Forward"
+  },
+  {
+    "FromJobKey": "NBA Small Forward",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "King James"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Rod",
+    "ToJobKey": "Mage"
+  },
+  {
+    "FromJobKey": "Mage",
+    "MaterialKey": "Magic Ring",
+    "ToJobKey": "Wizard"
+  },
+  {
+    "FromJobKey": "Wizard",
+    "MaterialKey": "Magic Ring",
+    "ToJobKey": "Sorcerer"
+  },
+  {
+    "FromJobKey": "Sorcerer",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "Grand Sorcerer"
+  },
+  {
+    "FromJobKey": "Grand Sorcerer",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Sorcerer Master"
+  },
+  {
+    "FromJobKey": "Grand Sorcerer",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "Barrier Master"
+  },
+  {
+    "FromJobKey": "Grand Sorcerer",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Chronomancer"
+  },
+  {
+    "FromJobKey": "Grand Sorcerer",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Special Grade Sorcerer"
+  },
+  {
+    "FromJobKey": "Grand Sorcerer",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Explosive Enchanter"
+  },
+  {
+    "FromJobKey": "Wizard",
+    "MaterialKey": "Elemental Runestones",
+    "ToJobKey": "Elementalist"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Pyromancer"
+  },
+  {
+    "FromJobKey": "Pyromancer",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Flaremancer"
+  },
+  {
+    "FromJobKey": "Pyromancer",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Volcanomancer"
+  },
+  {
+    "FromJobKey": "Pyromancer",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Flame Colonel"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Electromancer"
+  },
+  {
+    "FromJobKey": "Electromancer",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Fulgurmancer"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Geomancer"
+  },
+  {
+    "FromJobKey": "Geomancer",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Terramancer"
+  },
+  {
+    "FromJobKey": "Geomancer",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Gingerbread Enchanter"
+  },
+  {
+    "FromJobKey": "Geomancer",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Seismic Lord"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Hydromancer"
+  },
+  {
+    "FromJobKey": "Hydromancer",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Cryomancer"
+  },
+  {
+    "FromJobKey": "Hydromancer",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Snowmancer"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Aeromancer"
+  },
+  {
+    "FromJobKey": "Aeromancer",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Stormancer"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Light Spirit",
+    "ToJobKey": "Luxmancer"
+  },
+  {
+    "FromJobKey": "Luxmancer",
+    "MaterialKey": "Light Spirit",
+    "ToJobKey": "Solimancer"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Umbramancer"
+  },
+  {
+    "FromJobKey": "Umbramancer",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Lunamancer"
+  },
+  {
+    "FromJobKey": "Elementalist",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Elemancer"
+  },
+  {
+    "FromJobKey": "Elemancer",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Omnimancer"
+  },
+  {
+    "FromJobKey": "Mage",
+    "MaterialKey": "Sword",
+    "ToJobKey": "Magic Swordsman"
+  },
+  {
+    "FromJobKey": "Magic Swordsman",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Magic Knight"
+  },
+  {
+    "FromJobKey": "Magic Knight",
+    "MaterialKey": "Elemental Runestones",
+    "ToJobKey": "Runes Knight"
+  },
+  {
+    "FromJobKey": "Runes Knight",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Runes Emperor"
+  },
+  {
+    "FromJobKey": "Runes Knight",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Sacred Order Captain"
+  },
+  {
+    "FromJobKey": "Mage",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "Magus"
+  },
+  {
+    "FromJobKey": "Magus",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Star Magus"
+  },
+  {
+    "FromJobKey": "Star Magus",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Celestial Magus"
+  },
+  {
+    "FromJobKey": "Star Magus",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Magus From The East"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Staff",
+    "ToJobKey": "Healer"
+  },
+  {
+    "FromJobKey": "Healer",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Priest"
+  },
+  {
+    "FromJobKey": "Priest",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "High Priest"
+  },
+  {
+    "FromJobKey": "High Priest",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "Bishop"
+  },
+  {
+    "FromJobKey": "Bishop",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Pope"
+  },
+  {
+    "FromJobKey": "High Priest",
+    "MaterialKey": "Light Spirit",
+    "ToJobKey": "Prophet"
+  },
+  {
+    "FromJobKey": "Prophet",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Seer"
+  },
+  {
+    "FromJobKey": "Prophet",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Oracle"
+  },
+  {
+    "FromJobKey": "Prophet",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "The Forerunner"
+  },
+  {
+    "FromJobKey": "Prophet",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Doomsayer"
+  },
+  {
+    "FromJobKey": "Priest",
+    "MaterialKey": "Axe",
+    "ToJobKey": "Cleric"
+  },
+  {
+    "FromJobKey": "Cleric",
+    "MaterialKey": "Shield",
+    "ToJobKey": "Cleric Knight"
+  },
+  {
+    "FromJobKey": "Cleric Knight",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Cleric Saint"
+  },
+  {
+    "FromJobKey": "Cleric Knight",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Hollowed Protector"
+  },
+  {
+    "FromJobKey": "Cleric",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Exorcist"
+  },
+  {
+    "FromJobKey": "Exorcist",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Crazed Exorcist"
+  },
+  {
+    "FromJobKey": "Exorcist",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Witch Hunter"
+  },
+  {
+    "FromJobKey": "Exorcist",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Ghostbuster"
+  },
+  {
+    "FromJobKey": "Healer",
+    "MaterialKey": "Compass",
+    "ToJobKey": "Scholar"
+  },
+  {
+    "FromJobKey": "Scholar",
+    "MaterialKey": "Beast Taming Skills",
+    "ToJobKey": "Summoner"
+  },
+  {
+    "FromJobKey": "Summoner",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Grand Summoner"
+  },
+  {
+    "FromJobKey": "Grand Summoner",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Legendary Summoner"
+  },
+  {
+    "FromJobKey": "Summoner",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Warlock"
+  },
+  {
+    "FromJobKey": "Warlock",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Necromancer"
+  },
+  {
+    "FromJobKey": "Warlock",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Dream Eater"
+  },
+  {
+    "FromJobKey": "Summoner",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "Zomancer"
+  },
+  {
+    "FromJobKey": "Zomancer",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Dracomancer"
+  },
+  {
+    "FromJobKey": "Scholar",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Historian"
+  },
+  {
+    "FromJobKey": "Historian",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Storyteller"
+  },
+  {
+    "FromJobKey": "Storyteller",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Interdimensional Narrator"
+  },
+  {
+    "FromJobKey": "Storyteller",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Pied Piper"
+  },
+  {
+    "FromJobKey": "Scholar",
+    "MaterialKey": "Spanner",
+    "ToJobKey": "Engineering Intern"
+  },
+  {
+    "FromJobKey": "Engineering Intern",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Licensed Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Petroleum Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Marine Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Electrical Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Civil Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Aerospace Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Nuclear Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Gnome Engineer"
+  },
+  {
+    "FromJobKey": "Licensed Engineer",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Beach Sand Sculptor"
+  },
+  {
+    "FromJobKey": "Healer",
+    "MaterialKey": "Medicine",
+    "ToJobKey": "Medic"
+  },
+  {
+    "FromJobKey": "Medic",
+    "MaterialKey": "Medicine",
+    "ToJobKey": "Nurse"
+  },
+  {
+    "FromJobKey": "Nurse",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "Doctor"
+  },
+  {
+    "FromJobKey": "Doctor",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Surgeon"
+  },
+  {
+    "FromJobKey": "Doctor",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Plague Doctor"
+  },
+  {
+    "FromJobKey": "Nurse",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Chief Nurse"
+  },
+  {
+    "FromJobKey": "Chief Nurse",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Pacifist"
+  },
+  {
+    "FromJobKey": "Chief Nurse",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Plague Mistress"
+  },
+  {
+    "FromJobKey": "Medic",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Herbalist"
+  },
+  {
+    "FromJobKey": "Herbalist",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Herb Sage"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Throwing Weapons",
+    "ToJobKey": "Ranger"
+  },
+  {
+    "FromJobKey": "Ranger",
+    "MaterialKey": "Bow",
+    "ToJobKey": "Bowman"
+  },
+  {
+    "FromJobKey": "Bowman",
+    "MaterialKey": "Stealth Sense",
+    "ToJobKey": "Archer"
+  },
+  {
+    "FromJobKey": "Archer",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Archer Elite"
+  },
+  {
+    "FromJobKey": "Archer Elite",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Archerlord"
+  },
+  {
+    "FromJobKey": "Archer Elite",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Sagittarius"
+  },
+  {
+    "FromJobKey": "Archer",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Flame Archer"
+  },
+  {
+    "FromJobKey": "Flame Archer",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Exploding Ranger"
+  },
+  {
+    "FromJobKey": "Archer",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Ice Archer"
+  },
+  {
+    "FromJobKey": "Ice Archer",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Hail Ranger"
+  },
+  {
+    "FromJobKey": "Archer",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Forest Archer"
+  },
+  {
+    "FromJobKey": "Forest Archer",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Mountain Ranger"
+  },
+  {
+    "FromJobKey": "Archer",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Lightning Archer"
+  },
+  {
+    "FromJobKey": "Lightning Archer",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Volt Ranger"
+  },
+  {
+    "FromJobKey": "Bowman",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Bulleyes"
+  },
+  {
+    "FromJobKey": "Bulleyes",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Hawkeyes"
+  },
+  {
+    "FromJobKey": "Bulleyes",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Cupid"
+  },
+  {
+    "FromJobKey": "Ranger",
+    "MaterialKey": "Gun",
+    "ToJobKey": "Gunner"
+  },
+  {
+    "FromJobKey": "Gunner",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Marksman"
+  },
+  {
+    "FromJobKey": "Marksman",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Musketeer"
+  },
+  {
+    "FromJobKey": "Musketeer",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "King's Musketeer"
+  },
+  {
+    "FromJobKey": "Musketeer",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "Grand Duelist"
+  },
+  {
+    "FromJobKey": "Marksman",
+    "MaterialKey": "Stealth Sense",
+    "ToJobKey": "Job Sniper"
+  },
+  {
+    "FromJobKey": "Job Sniper",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Deadshot"
+  },
+  {
+    "FromJobKey": "Marksman",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Cannoneer"
+  },
+  {
+    "FromJobKey": "Cannoneer",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Mega Cannoneer"
+  },
+  {
+    "FromJobKey": "Cannoneer",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Planet Destroyer"
+  },
+  {
+    "FromJobKey": "Ranger",
+    "MaterialKey": "Dagger",
+    "ToJobKey": "Hunter"
+  },
+  {
+    "FromJobKey": "Hunter",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Wild Hunter"
+  },
+  {
+    "FromJobKey": "Wild Hunter",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Myth Hunter"
+  },
+  {
+    "FromJobKey": "Myth Hunter",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Monster Hunter"
+  },
+  {
+    "FromJobKey": "Myth Hunter",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Dragon Hunter"
+  },
+  {
+    "FromJobKey": "Myth Hunter",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Demon Slayer"
+  },
+  {
+    "FromJobKey": "Myth Hunter",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Witcher"
+  },
+  {
+    "FromJobKey": "Wild Hunter",
+    "MaterialKey": "Beast Taming Skills",
+    "ToJobKey": "Beast Tamer"
+  },
+  {
+    "FromJobKey": "Beast Tamer",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Beast Lord"
+  },
+  {
+    "FromJobKey": "Beast Tamer",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Druid"
+  },
+  {
+    "FromJobKey": "Wild Hunter",
+    "MaterialKey": "Spear",
+    "ToJobKey": "Amazon Hunter"
+  },
+  {
+    "FromJobKey": "Amazon Hunter",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "Amazon Prime"
+  },
+  {
+    "FromJobKey": "Amazon Hunter",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Amazon Wonder"
+  },
+  {
+    "FromJobKey": "Wild Hunter",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Great Sea Angler"
+  },
+  {
+    "FromJobKey": "Great Sea Angler",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Legendary Fisherman"
+  },
+  {
+    "FromJobKey": "Great Sea Angler",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Abyssal Hunter"
+  },
+  {
+    "FromJobKey": "Ranger",
+    "MaterialKey": "Sport Jersey",
+    "ToJobKey": "Racket Player"
+  },
+  {
+    "FromJobKey": "Racket Player",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Tennis Player"
+  },
+  {
+    "FromJobKey": "Tennis Player",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "All Court Player"
+  },
+  {
+    "FromJobKey": "All Court Player",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Swiss Maestro"
+  },
+  {
+    "FromJobKey": "All Court Player",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "The Serbinator"
+  },
+  {
+    "FromJobKey": "Racket Player",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Badminton Player"
+  },
+  {
+    "FromJobKey": "Badminton Player",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Power Smasher"
+  },
+  {
+    "FromJobKey": "Power Smasher",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "Super Dan"
+  },
+  {
+    "FromJobKey": "Badminton Player",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Speed Striker"
+  },
+  {
+    "FromJobKey": "Speed Striker",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Datuk LCW"
+  },
+  {
+    "FromJobKey": "Racket Player",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Ping Pong Player"
+  },
+  {
+    "FromJobKey": "Ping Pong Player",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Spin Master"
+  },
+  {
+    "FromJobKey": "Spin Master",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "Mozart Of Table Tennis"
+  },
+  {
+    "FromJobKey": "Ping Pong Player",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Hexagon Warrior"
+  },
+  {
+    "FromJobKey": "Hexagon Warrior",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "The Dragon Of China"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Dagger",
+    "ToJobKey": "Rogue"
+  },
+  {
+    "FromJobKey": "Rogue",
+    "MaterialKey": "Coins",
+    "ToJobKey": "Thief"
+  },
+  {
+    "FromJobKey": "Thief",
+    "MaterialKey": "Compass",
+    "ToJobKey": "Pirate"
+  },
+  {
+    "FromJobKey": "Pirate",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Pirate Quartermaster"
+  },
+  {
+    "FromJobKey": "Pirate Quartermaster",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Pirate Captain"
+  },
+  {
+    "FromJobKey": "Thief",
+    "MaterialKey": "Dagger",
+    "ToJobKey": "Marauder"
+  },
+  {
+    "FromJobKey": "Marauder",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Ground Ravager"
+  },
+  {
+    "FromJobKey": "Ground Ravager",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Bandit Prime"
+  },
+  {
+    "FromJobKey": "Ground Ravager",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Eggblade Scavenger"
+  },
+  {
+    "FromJobKey": "Thief",
+    "MaterialKey": "Spear",
+    "ToJobKey": "Sky Bandit"
+  },
+  {
+    "FromJobKey": "Sky Bandit",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Storm Raider"
+  },
+  {
+    "FromJobKey": "Storm Raider",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Sky Ruler"
+  },
+  {
+    "FromJobKey": "Storm Raider",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Storm Herald"
+  },
+  {
+    "FromJobKey": "Thief",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Villain"
+  },
+  {
+    "FromJobKey": "Villain",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Vigilante"
+  },
+  {
+    "FromJobKey": "Vigilante",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "Dark Hero"
+  },
+  {
+    "FromJobKey": "Vigilante",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Phantom Thief"
+  },
+  {
+    "FromJobKey": "Vigilante",
+    "MaterialKey": "Shield",
+    "ToJobKey": "Cursed Shield Hero"
+  },
+  {
+    "FromJobKey": "Vigilante",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "The Last Spiral"
+  },
+  {
+    "FromJobKey": "Vigilante",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Social Justice Warrior"
+  },
+  {
+    "FromJobKey": "Villain",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Super Villain"
+  },
+  {
+    "FromJobKey": "Super Villain",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "The Big Boss"
+  },
+  {
+    "FromJobKey": "Super Villain",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Flamingo Villain"
+  },
+  {
+    "FromJobKey": "Rogue",
+    "MaterialKey": "Medicine",
+    "ToJobKey": "Maniac"
+  },
+  {
+    "FromJobKey": "Maniac",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Psychopath"
+  },
+  {
+    "FromJobKey": "Psychopath",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Serial Killer"
+  },
+  {
+    "FromJobKey": "Serial Killer",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Reaper"
+  },
+  {
+    "FromJobKey": "Serial Killer",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Gore Lover"
+  },
+  {
+    "FromJobKey": "Serial Killer",
+    "MaterialKey": "Stealth Sense",
+    "ToJobKey": "Mafia Player"
+  },
+  {
+    "FromJobKey": "Psychopath",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Bomberman"
+  },
+  {
+    "FromJobKey": "Bomberman",
+    "MaterialKey": "Champion Belt",
+    "ToJobKey": "Super Bomberman"
+  },
+  {
+    "FromJobKey": "Bomberman",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Carnival Demolisher"
+  },
+  {
+    "FromJobKey": "Maniac",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Blasphemer"
+  },
+  {
+    "FromJobKey": "Blasphemer",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Cultist"
+  },
+  {
+    "FromJobKey": "Cultist",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Demon Possessor"
+  },
+  {
+    "FromJobKey": "Cultist",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Eldritch Child"
+  },
+  {
+    "FromJobKey": "Cultist",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Voodoo Lord"
+  },
+  {
+    "FromJobKey": "Blasphemer",
+    "MaterialKey": "Magic Ring",
+    "ToJobKey": "Witch"
+  },
+  {
+    "FromJobKey": "Witch",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Grand High Witch"
+  },
+  {
+    "FromJobKey": "Witch",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Sultry Temptress"
+  },
+  {
+    "FromJobKey": "Witch",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Karen"
+  },
+  {
+    "FromJobKey": "Witch",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Sea Witch"
+  },
+  {
+    "FromJobKey": "Witch",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "The Snow Queen"
+  },
+  {
+    "FromJobKey": "Rogue",
+    "MaterialKey": "Throwing Weapons",
+    "ToJobKey": "Ninja Genin"
+  },
+  {
+    "FromJobKey": "Ninja Genin",
+    "MaterialKey": "Stealth Sense",
+    "ToJobKey": "Ninja"
+  },
+  {
+    "FromJobKey": "Ninja",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Ninja Jonin"
+  },
+  {
+    "FromJobKey": "Ninja Jonin",
+    "MaterialKey": "Fire Spirit",
+    "ToJobKey": "Hokage"
+  },
+  {
+    "FromJobKey": "Ninja Jonin",
+    "MaterialKey": "Water Spirit",
+    "ToJobKey": "Mizukage"
+  },
+  {
+    "FromJobKey": "Ninja Jonin",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Raikage"
+  },
+  {
+    "FromJobKey": "Ninja Jonin",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Tsuchikage"
+  },
+  {
+    "FromJobKey": "Ninja Jonin",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Kazekage"
+  },
+  {
+    "FromJobKey": "Ninja Jonin",
+    "MaterialKey": "Beast Taming Skills",
+    "ToJobKey": "Puppeteer"
+  },
+  {
+    "FromJobKey": "Ninja Jonin",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Easter Shinobi"
+  },
+  {
+    "FromJobKey": "Ninja",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Anbu"
+  },
+  {
+    "FromJobKey": "Anbu",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Anbu Leader"
+  },
+  {
+    "FromJobKey": "Anbu",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "The Copy Ninja"
+  },
+  {
+    "FromJobKey": "Rogue",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Criminal"
+  },
+  {
+    "FromJobKey": "Criminal",
+    "MaterialKey": "Gun",
+    "ToJobKey": "Mafia"
+  },
+  {
+    "FromJobKey": "Mafia",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Mafia Elite"
+  },
+  {
+    "FromJobKey": "Mafia Elite",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Mafia Boss"
+  },
+  {
+    "FromJobKey": "Mafia",
+    "MaterialKey": "Stealth Sense",
+    "ToJobKey": "Hitman"
+  },
+  {
+    "FromJobKey": "Hitman",
+    "MaterialKey": "Legendary Crest",
+    "ToJobKey": "One Shot"
+  },
+  {
+    "FromJobKey": "Criminal",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Terrorist"
+  },
+  {
+    "FromJobKey": "Terrorist",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Suicide Bomber"
+  },
+  {
+    "FromJobKey": "Suicide Bomber",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "World Ender"
+  },
+  {
+    "FromJobKey": "Suicide Bomber",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "The Survivor"
+  },
+  {
+    "FromJobKey": "Terrorist",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Terrorist Leader"
+  },
+  {
+    "FromJobKey": "Terrorist",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Tyrant"
+  },
+  {
+    "FromJobKey": "Rogue",
+    "MaterialKey": "Compass",
+    "ToJobKey": "Watcher"
+  },
+  {
+    "FromJobKey": "Watcher",
+    "MaterialKey": "Stealth Sense",
+    "ToJobKey": "Spy"
+  },
+  {
+    "FromJobKey": "Spy",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Assassin"
+  },
+  {
+    "FromJobKey": "Assassin",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Phantom"
+  },
+  {
+    "FromJobKey": "Assassin",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Starkiller"
+  },
+  {
+    "FromJobKey": "Assassin",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Shadow Weapon Meister"
+  },
+  {
+    "FromJobKey": "Spy",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Secret Agent"
+  },
+  {
+    "FromJobKey": "Secret Agent",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Double Agent"
+  },
+  {
+    "FromJobKey": "Secret Agent",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Trap Master"
+  },
+  {
+    "FromJobKey": "Spy",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Psionic Agent"
+  },
+  {
+    "FromJobKey": "Psionic Agent",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Queen Of Blades"
+  },
+  {
+    "FromJobKey": "Psionic Agent",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Professor X"
+  },
+  {
+    "FromJobKey": "Watcher",
+    "MaterialKey": "Coins",
+    "ToJobKey": "Detective"
+  },
+  {
+    "FromJobKey": "Detective",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Famous Detective"
+  },
+  {
+    "FromJobKey": "Famous Detective",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Lightning Detective"
+  },
+  {
+    "FromJobKey": "Famous Detective",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Space Detective"
+  },
+  {
+    "FromJobKey": "Detective",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Creepypasta Detective"
+  },
+  {
+    "FromJobKey": "Rogue",
+    "MaterialKey": "Sword",
+    "ToJobKey": "Dual Wielder"
+  },
+  {
+    "FromJobKey": "Dual Wielder",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Dual Blades"
+  },
+  {
+    "FromJobKey": "Dual Blades",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Trinity Blades"
+  },
+  {
+    "FromJobKey": "Trinity Blades",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Infinity Blades"
+  },
+  {
+    "FromJobKey": "Dual Blades",
+    "MaterialKey": "Elemental Runestones",
+    "ToJobKey": "Spell Fencer"
+  },
+  {
+    "FromJobKey": "Spell Fencer",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Omni Fencer"
+  },
+  {
+    "FromJobKey": "Dual Wielder",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Sky Walker"
+  },
+  {
+    "FromJobKey": "Sky Walker",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Dark Vader"
+  },
+  {
+    "FromJobKey": "Dual Wielder",
+    "MaterialKey": "Gun",
+    "ToJobKey": "Dual Gunner"
+  },
+  {
+    "FromJobKey": "Dual Gunner",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Guns Akimbo"
+  },
+  {
+    "FromJobKey": "Guns Akimbo",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Gun Type Meister"
+  },
+  {
+    "FromJobKey": "Guns Akimbo",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Galactic Arms Dealer"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Otaku"
+  },
+  {
+    "FromJobKey": "Otaku",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Madao"
+  },
+  {
+    "FromJobKey": "Madao",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Pure Madao"
+  },
+  {
+    "FromJobKey": "Pure Madao",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Reincarnated Hero"
+  },
+  {
+    "FromJobKey": "Pure Madao",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Cosmic Hobo"
+  },
+  {
+    "FromJobKey": "Pure Madao",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Zero Returner"
+  },
+  {
+    "FromJobKey": "Madao",
+    "MaterialKey": "Fallen",
+    "ToJobKey": "Creepy Madao"
+  },
+  {
+    "FromJobKey": "Creepy Madao",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Reincarnated Demon King"
+  },
+  {
+    "FromJobKey": "Creepy Madao",
+    "MaterialKey": "Phantom Crystal",
+    "ToJobKey": "Stand User"
+  },
+  {
+    "FromJobKey": "Creepy Madao",
+    "MaterialKey": "Dark Spirit",
+    "ToJobKey": "Dark Matter Parasite"
+  },
+  {
+    "FromJobKey": "Otaku",
+    "MaterialKey": "Compass",
+    "ToJobKey": "Gamer"
+  },
+  {
+    "FromJobKey": "Gamer",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Pro Gamer"
+  },
+  {
+    "FromJobKey": "Pro Gamer",
+    "MaterialKey": "Spanner",
+    "ToJobKey": "Beater"
+  },
+  {
+    "FromJobKey": "Pro Gamer",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Solo King"
+  },
+  {
+    "FromJobKey": "Pro Gamer",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Completionist"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Coins",
+    "ToJobKey": "Piker"
+  },
+  {
+    "FromJobKey": "Piker",
+    "MaterialKey": "Coins",
+    "ToJobKey": "Gamester"
+  },
+  {
+    "FromJobKey": "Gamester",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "Professional Gambler"
+  },
+  {
+    "FromJobKey": "Professional Gambler",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Lord Of Gamblers"
+  },
+  {
+    "FromJobKey": "Professional Gambler",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Card Shark"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Spanner",
+    "ToJobKey": "Craftsman"
+  },
+  {
+    "FromJobKey": "Craftsman",
+    "MaterialKey": "Compass",
+    "ToJobKey": "Inventor"
+  },
+  {
+    "FromJobKey": "Inventor",
+    "MaterialKey": "Thunder Spirit",
+    "ToJobKey": "Cyborg"
+  },
+  {
+    "FromJobKey": "Cyborg",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "Big Daddy"
+  },
+  {
+    "FromJobKey": "Cyborg",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Ultimate Gear Justice"
+  },
+  {
+    "FromJobKey": "Cyborg",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Toy Robot Z"
+  },
+  {
+    "FromJobKey": "Inventor",
+    "MaterialKey": "Explosive Tools",
+    "ToJobKey": "Mad Scientist"
+  },
+  {
+    "FromJobKey": "Mad Scientist",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "The Rickest Scientist"
+  },
+  {
+    "FromJobKey": "Mad Scientist",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Santa"
+  },
+  {
+    "FromJobKey": "Mad Scientist",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "Egg Alchemist"
+  },
+  {
+    "FromJobKey": "Craftsman",
+    "MaterialKey": "Sword",
+    "ToJobKey": "Blacksmith"
+  },
+  {
+    "FromJobKey": "Blacksmith",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Warsmith"
+  },
+  {
+    "FromJobKey": "Warsmith",
+    "MaterialKey": "Dragon Heart",
+    "ToJobKey": "Doomsmith"
+  },
+  {
+    "FromJobKey": "Craftsman",
+    "MaterialKey": "Dagger",
+    "ToJobKey": "Whitesmith"
+  },
+  {
+    "FromJobKey": "Whitesmith",
+    "MaterialKey": "Light Spirit",
+    "ToJobKey": "Silversmith"
+  },
+  {
+    "FromJobKey": "Silversmith",
+    "MaterialKey": "Guardian Necklace",
+    "ToJobKey": "Soulsmith"
+  },
+  {
+    "FromJobKey": "Craftsman",
+    "MaterialKey": "Shield",
+    "ToJobKey": "Brownsmith"
+  },
+  {
+    "FromJobKey": "Brownsmith",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Goldsmith"
+  },
+  {
+    "FromJobKey": "Goldsmith",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "Kingsmith"
+  },
+  {
+    "FromJobKey": "Jobless",
+    "MaterialKey": "Paint Brush",
+    "ToJobKey": "Artist"
+  },
+  {
+    "FromJobKey": "Artist",
+    "MaterialKey": "Paint Brush",
+    "ToJobKey": "Painter"
+  },
+  {
+    "FromJobKey": "Painter",
+    "MaterialKey": "Vast Experience",
+    "ToJobKey": "Skilled Painter"
+  },
+  {
+    "FromJobKey": "Skilled Painter",
+    "MaterialKey": "Compass",
+    "ToJobKey": "Established Artist"
+  },
+  {
+    "FromJobKey": "Established Artist",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "The Polymath Artist"
+  },
+  {
+    "FromJobKey": "Artist",
+    "MaterialKey": "Coins",
+    "ToJobKey": "Performer"
+  },
+  {
+    "FromJobKey": "Performer",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Musician"
+  },
+  {
+    "FromJobKey": "Musician",
+    "MaterialKey": "Paint Brush",
+    "ToJobKey": "Music Composer"
+  },
+  {
+    "FromJobKey": "Music Composer",
+    "MaterialKey": "Space Stone",
+    "ToJobKey": "Musical Prodigy"
+  },
+  {
+    "FromJobKey": "Music Composer",
+    "MaterialKey": "Tropical Sunglasses",
+    "ToJobKey": "Tidal Rockstar"
+  },
+  {
+    "FromJobKey": "Musician",
+    "MaterialKey": "Chief Necklace",
+    "ToJobKey": "Music Conductor"
+  },
+  {
+    "FromJobKey": "Music Conductor",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "The Grand Maestro"
+  },
+  {
+    "FromJobKey": "Music Conductor",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Carol Virtuoso"
+  },
+  {
+    "FromJobKey": "Musician",
+    "MaterialKey": "Hero Medallion",
+    "ToJobKey": "Bard"
+  },
+  {
+    "FromJobKey": "Bard",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Maven Of The Strings"
+  },
+  {
+    "FromJobKey": "Bard",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Haunting Melodist"
+  },
+  {
+    "FromJobKey": "Performer",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Joker"
+  },
+  {
+    "FromJobKey": "Joker",
+    "MaterialKey": "Stealth Sense",
+    "ToJobKey": "Trickster"
+  },
+  {
+    "FromJobKey": "Trickster",
+    "MaterialKey": "The Ring Of Lord",
+    "ToJobKey": "The Mad Jester"
+  },
+  {
+    "FromJobKey": "Trickster",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Vampire Queen"
+  },
+  {
+    "FromJobKey": "Trickster",
+    "MaterialKey": "Xmas Hat",
+    "ToJobKey": "Father Frost"
+  },
+  {
+    "FromJobKey": "Joker",
+    "MaterialKey": "Coins",
+    "ToJobKey": "Party Clown"
+  },
+  {
+    "FromJobKey": "Party Clown",
+    "MaterialKey": "The Book Of Wisdom",
+    "ToJobKey": "Happy Meals Clown"
+  },
+  {
+    "FromJobKey": "Party Clown",
+    "MaterialKey": "Jack O Lantern",
+    "ToJobKey": "Spring Heeled Jester"
+  },
+  {
+    "FromJobKey": "Dragon Lancer",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Rogue Lancer"
+  },
+  {
+    "FromJobKey": "Atlantian",
+    "MaterialKey": "Fighting Gloves",
+    "ToJobKey": "Atlantian Monk"
+  },
+  {
+    "FromJobKey": "Lancer",
+    "MaterialKey": "Sport Jersey",
+    "ToJobKey": "Volleyball Player"
+  },
+  {
+    "FromJobKey": "Warrior",
+    "MaterialKey": "Sport Jersey",
+    "ToJobKey": "Linebacker"
+  },
+  {
+    "FromJobKey": "Healer",
+    "MaterialKey": "Light Spirit",
+    "ToJobKey": "Nun"
+  },
+  {
+    "FromJobKey": "Nun",
+    "MaterialKey": "The Holy Grail",
+    "ToJobKey": "Abbess"
+  },
+  {
+    "FromJobKey": "Abbess",
+    "MaterialKey": "Philosopher's Stone",
+    "ToJobKey": "Saintess"
+  },
+  {
+    "FromJobKey": "Archer",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Wind Archer"
+  },
+  {
+    "FromJobKey": "Wind Archer",
+    "MaterialKey": "Wind Spirit",
+    "ToJobKey": "Sonic Ranger"
+  },
+  {
+    "FromJobKey": "Racket Player",
+    "MaterialKey": "Earth Spirit",
+    "ToJobKey": "Pickleball Player"
+  },
+  {
+    "FromJobKey": "Assassin",
+    "MaterialKey": "Easter Basket",
+    "ToJobKey": "The Second Shadow"
+  },
+  {
+    "FromJobKey": "Rogue",
+    "MaterialKey": "Sport Jersey",
+    "ToJobKey": "Footballer"
+  },
+  {
+    "FromJobKey": "Craftsman",
+    "MaterialKey": "Aged Scrolls",
+    "ToJobKey": "Mason"
+  },
+  {
+    "FromJobKey": "Mason",
+    "MaterialKey": "Noble Mission",
+    "ToJobKey": "Freemason"
+  },
+  {
+    "FromJobKey": "Freemason",
+    "MaterialKey": "Demon Contract",
+    "ToJobKey": "Illuminati"
+  },
+  {
+    "FromJobKey": "Painter",
+    "MaterialKey": "Dagger",
+    "ToJobKey": "Street Artist"
+  },
+  {
+    "FromJobKey": "Performer",
+    "MaterialKey": "Staff",
+    "ToJobKey": "Stage Magician"
+  },
+  {
+    "FromJobKey": "Stage Magician",
+    "MaterialKey": "Secret Training",
+    "ToJobKey": "Illusionist"
+  },
+  {
+    "FromJobKey": "Illusionist",
+    "MaterialKey": "Master Proof",
+    "ToJobKey": "The Grand Illusionist"
+  }
+]
