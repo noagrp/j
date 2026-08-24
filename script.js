@@ -19,7 +19,7 @@ function renderLinkedList(values, cat) { if (!Array.isArray(values) || values.le
 function renderTieredAbilities(value) { if (!value || typeof value !== 'object' || Array.isArray(value)) return ''; return Object.entries(value).filter(([, abilities]) => Array.isArray(abilities) && abilities.length > 0).map(([label, abilities]) => infoRow(label, renderLinkedList(abilities, 'abilities'), 'skill-row')).join(''); }
 function renderSpecialCaseAbilities(value) { if (!Array.isArray(value) || value.length === 0) return ''; return value.filter(item => item && Array.isArray(item.abilities) && item.abilities.length > 0).map(item => infoRow(item.condition || 'Condition', renderLinkedList(item.abilities, 'abilities'), 'skill-row')).join(''); }
 function renderAbilityIcon(iconKey, altText, sizeClass) { if (!iconKey) return ''; return `<div class="card-media ${sizeClass}"><img src="iconimage/${encodeURIComponent(iconKey)}.png" alt="${escapeHtml(altText)}"></div>`; }
-function renderMaterialImage(materialKey, sizeClass) { if (!materialKey) return ''; return `<div class="card-media ${sizeClass}"><img src="materialimage/${encodeURIComponent(materialKey)}.png" alt="${escapeHtml(materialKey)}" onerror="this.style.display='none'"></div>`; }
+function renderMaterialImage(materialKey, sizeClass) { if (!materialKey) return ''; return `<div class="card-media ${sizeClass}"><img src="materialsprite/${encodeURIComponent(materialKey)}.png" alt="${escapeHtml(materialKey)}" onerror="this.style.display='none'"></div>`; }
 
 function normalizeMaterialCombineList(material) {
     if (!material) return material;
@@ -35,7 +35,7 @@ function normalizeMaterialCombineList(material) {
 function normalizeMaterialData() { if (Array.isArray(db.materials)) db.materials = db.materials.map(normalizeMaterialCombineList); }
 function renderMaterialCombineList(value) {
     if (!Array.isArray(value) || value.length === 0) return '';
-    return value.map(item => `<div class="info-row material-combine-row"><div class="info-label">${detailLink('jobs', item.Job)}</div><div class="info-value"><span class="skill-separator">→</span> ${detailLink('jobs', item.Result)}</div></div>`).join('');
+    return value.map(item => `<div class="material-combine-row">${detailLink('jobs', item.Job)}<span class="material-combine-arrow">→</span>${detailLink('jobs', item.Result)}</div>`).join('');
 }
 
 function renderMonsterSkillPools(data) {
@@ -159,7 +159,7 @@ async function loadDetail(cat, key, fromHistory = false) {
         if (idx < 6) basicHtml += line; else { extraHtml += line; hasExtra = true; }
     });
     basicHtml += `</div></div>`; extraHtml += `</div></div>`; html += basicHtml; if (hasExtra) html += extraHtml;
-    if (cat === 'materials' && hasStructuredValue(data['Combine List'])) { const combineRows = renderMaterialCombineList(data['Combine List']); if (combineRows) html += `<div class="card detail-section"><h2>Combine List</h2><div class="info-list">${combineRows}</div></div>`; }
+    if (cat === 'materials' && hasStructuredValue(data['Combine List'])) { const combineRows = renderMaterialCombineList(data['Combine List']); if (combineRows) html += `<div class="card detail-section"><h2>Combine List</h2><div class="material-combine-list">${combineRows}</div></div>`; }
     if (cat === 'monsters') { const skillPools = renderMonsterSkillPools(data); if (skillPools) html += `<div class="card detail-section skill-pools"><h2>Enemy Skill Pools</h2>${skillPools}</div>`; }
     if (cat !== 'relic' && cat !== 'materials') {
         const usedBy = [];
