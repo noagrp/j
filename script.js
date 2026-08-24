@@ -19,6 +19,24 @@ function renderLinkedList(values, cat) { if (!Array.isArray(values) || values.le
 function renderTieredAbilities(value) { if (!value || typeof value !== 'object' || Array.isArray(value)) return ''; return Object.entries(value).filter(([, abilities]) => Array.isArray(abilities) && abilities.length > 0).map(([label, abilities]) => infoRow(label, renderLinkedList(abilities, 'abilities'), 'skill-row')).join(''); }
 function renderSpecialCaseAbilities(value) { if (!Array.isArray(value) || value.length === 0) return ''; return value.filter(item => item && Array.isArray(item.abilities) && item.abilities.length > 0).map(item => infoRow(item.condition || 'Condition', renderLinkedList(item.abilities, 'abilities'), 'skill-row')).join(''); }
 function renderAbilityIcon(iconKey, altText, sizeClass) { if (!iconKey) return ''; return `<div class="card-media ${sizeClass}"><img src="iconimage/${encodeURIComponent(iconKey)}.png" alt="${escapeHtml(altText)}"></div>`; }
+function renderMaterialImage(materialKey, sizeClass) { if (!materialKey) return ''; return `<div class="card-media ${sizeClass}"><img src="materialimage/${encodeURIComponent(materialKey)}.png" alt="${escapeHtml(materialKey)}" onerror="this.style.display='none'"></div>`; }
+
+function normalizeMaterialCombineList(material) {
+    if (!material) return material;
+    const raw = material['Combine List'];
+    if (Array.isArray(raw)) return material;
+    material['Combine List'] = raw ? String(raw).split('|').filter(Boolean).map(entry => {
+        const separator = entry.indexOf('-');
+        if (separator < 0) return null;
+        return { Job: entry.slice(0, separator).trim(), Result: entry.slice(separator + 1).trim() };
+    }).filter(item => item && item.Job && item.Result) : [];
+    return material;
+}
+function normalizeMaterialData() { if (Array.isArray(db.materials)) db.materials = db.materials.map(normalizeMaterialCombineList); }
+function renderMaterialCombineList(value) {
+    if (!Array.isArray(value) || value.length === 0) return '';
+    return value.map(item => `<div class="info-row material-combine-row"><div class="info-label">${detailLink('jobs', item.Job)}</div><div class="info-value"><span class="skill-separator">→</span> ${detailLink('jobs', item.Result)}</div></div>`).join('');
+}
 
 function renderMonsterSkillPools(data) {
     const groups = [];
@@ -94,7 +112,7 @@ async function init() {
         for (const f of files) { const res = await fetch(`data/${f}.json`); if (res.ok) db[f] = await res.json(); }
         const dictRes = await fetch('data/dictionary.json'); if (dictRes.ok) dictionary = await dictRes.json();
         const relicRes = await fetch('data/relic_localisation.json'); if (relicRes.ok) relicLocal = await relicRes.json();
-        normalizeMonsterData(); loadView('Home');
+        normalizeMonsterData(); normalizeMaterialData(); loadView('Home');
     } catch (e) { console.error(e); main.innerHTML = `<h1>⚠️ Error</h1><p>Please refresh the page.</p>`; }
 }
 
@@ -113,8 +131,9 @@ function loadView(view) {
         let cardHtml = `<div class="card list-card" data-key="${escapeHtml(itemKey)}" onclick="loadDetail('${cat}', this.dataset.key)">`;
         if (cat === 'monsters') cardHtml += `<div class="card-media card-media-compact"><img src="charactersprite/${encodeURIComponent(itemKey)}.png" alt="${escapeHtml(itemKey)}"></div>`;
         if (cat === 'abilities') cardHtml += renderAbilityIcon(item.IconImage, itemKey, 'card-media-compact');
+        if (cat === 'materials') cardHtml += renderMaterialImage(itemKey, 'card-media-compact');
         cardHtml += `<div class="info-list">`;
-        for (const [k, v] of Object.entries(item)) { if (!v || v === '') continue; if (cat === 'monsters' && monsterStructuredFields.has(k)) continue; if (cat === 'abilities' && k === 'IconImage') continue; cardHtml += infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, false)); }
+        for (const [k, v] of Object.entries(item)) { if (!v || v === '') continue; if (cat === 'monsters' && monsterStructuredFields.has(k)) continue; if (cat === 'abilities' && k === 'IconImage') continue; if (cat === 'materials' && k === 'Combine List') continue; cardHtml += infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, false)); }
         cardHtml += `</div></div>`;
         const div = document.createElement('div'); div.innerHTML = cardHtml; fragment.appendChild(div.firstElementChild);
     });
@@ -130,17 +149,19 @@ async function loadDetail(cat, key, fromHistory = false) {
     let detailMedia = '';
     if (cat === 'monsters') detailMedia = `<div class="card-media card-media-detail"><img src="charactersprite/${encodeURIComponent(key)}.png" alt="${escapeHtml(title)}"></div>`;
     if (cat === 'abilities') detailMedia = renderAbilityIcon(data.IconImage, title, 'card-media-detail');
+    if (cat === 'materials') detailMedia = renderMaterialImage(key, 'card-media-detail');
     let html = `<button onclick="goBackToPreviousDetail()" class="back-btn">← Back</button><div class="detail-stack"><div class="card detail-title-card">${detailMedia}<h3>${escapeHtml(title)}</h3></div>`;
     let basicHtml = `<div class="card detail-section"><h2>Basic Info</h2><div class="info-list">`;
     let extraHtml = `<div class="card detail-section"><h2>More Info</h2><div class="info-list">`; let hasExtra = false;
     Object.entries(data).forEach(([k, v], idx) => {
-        if (cat === 'monsters' && monsterStructuredFields.has(k)) return; if (cat === 'abilities' && k === 'IconImage') return; if (!v || v === '') return;
+        if (cat === 'monsters' && monsterStructuredFields.has(k)) return; if (cat === 'abilities' && k === 'IconImage') return; if (cat === 'materials' && (k === 'MaterialKey' || k === 'Combine List')) return; if (!v || v === '') return;
         const line = infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, true));
         if (idx < 6) basicHtml += line; else { extraHtml += line; hasExtra = true; }
     });
     basicHtml += `</div></div>`; extraHtml += `</div></div>`; html += basicHtml; if (hasExtra) html += extraHtml;
+    if (cat === 'materials' && hasStructuredValue(data['Combine List'])) { const combineRows = renderMaterialCombineList(data['Combine List']); if (combineRows) html += `<div class="card detail-section"><h2>Combine List</h2><div class="info-list">${combineRows}</div></div>`; }
     if (cat === 'monsters') { const skillPools = renderMonsterSkillPools(data); if (skillPools) html += `<div class="card detail-section skill-pools"><h2>Enemy Skill Pools</h2>${skillPools}</div>`; }
-    if (cat !== 'relic') {
+    if (cat !== 'relic' && cat !== 'materials') {
         const usedBy = [];
         ['monsters', 'jobs'].forEach(sourceCat => { (db[sourceCat] || []).forEach(item => { const itemName = Object.values(item)[0]; if (Object.values(item).includes(key) && itemName !== key) usedBy.push({ cat: sourceCat, name: itemName }); }); });
         if (usedBy.length > 0) { html += `<div class="card detail-section"><h2>Used By</h2><div class="used-by-list">`; usedBy.forEach(u => { html += `<div class="used-by-item link" data-cat="${escapeHtml(u.cat)}" data-key="${escapeHtml(u.name)}" onclick="loadDetail(this.dataset.cat, this.dataset.key)">${u.cat === 'monsters' ? '👹' : '⚔️'} ${escapeHtml(u.name)}</div>`; }); html += `</div></div>`; }
