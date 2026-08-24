@@ -11,13 +11,14 @@ const monsterStructuredFields = new Set(['Random Passives', 'Random Abilities', 
 function getDict(key) { const entry = dictionary.find(i => i.DictionaryKey === key); return entry ? (entry[currentLang] || entry['English'] || key) : key; }
 function getRelicName(key) { const entry = relicLocal.find(i => i.RelicKey === key); return entry ? (entry[currentLang] || entry['English'] || key) : key; }
 function changeLanguage(lang) { currentLang = lang; loadView(window.lastView || 'Home'); }
-function escapeHtml(value) { return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
+function escapeHtml(value) { return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#039;'); }
 function detailLink(cat, name) { if (!name) return ''; return `<span class="link" data-cat="${escapeHtml(cat)}" data-key="${escapeHtml(name)}" onclick="event.stopPropagation(); loadDetail(this.dataset.cat, this.dataset.key)">${escapeHtml(name)}</span>`; }
 function infoRow(label, valueHtml, extraClass = '') { if (!valueHtml && valueHtml !== 0) return ''; return `<div class="info-row ${extraClass}"><div class="info-label">${escapeHtml(label)}:</div><div class="info-value">${valueHtml}</div></div>`; }
 function hasStructuredValue(value) { if (Array.isArray(value)) return value.length > 0; if (value && typeof value === 'object') return Object.values(value).some(v => hasStructuredValue(v)); return value !== null && value !== undefined && value !== ''; }
 function renderLinkedList(values, cat) { if (!Array.isArray(values) || values.length === 0) return ''; return values.map(value => detailLink(cat, value)).join('<span class="skill-separator"> · </span>'); }
 function renderTieredAbilities(value) { if (!value || typeof value !== 'object' || Array.isArray(value)) return ''; return Object.entries(value).filter(([, abilities]) => Array.isArray(abilities) && abilities.length > 0).map(([label, abilities]) => infoRow(label, renderLinkedList(abilities, 'abilities'), 'skill-row')).join(''); }
 function renderSpecialCaseAbilities(value) { if (!Array.isArray(value) || value.length === 0) return ''; return value.filter(item => item && Array.isArray(item.abilities) && item.abilities.length > 0).map(item => infoRow(item.condition || 'Condition', renderLinkedList(item.abilities, 'abilities'), 'skill-row')).join(''); }
+function renderAbilityIcon(iconKey, altText, sizeClass) { if (!iconKey) return ''; return `<div class="card-media ${sizeClass}"><img src="iconimage/${encodeURIComponent(iconKey)}.png" alt="${escapeHtml(altText)}"></div>`; }
 
 function renderMonsterSkillPools(data) {
     const groups = [];
@@ -111,8 +112,9 @@ function loadView(view) {
         const itemKey = Object.values(item)[0];
         let cardHtml = `<div class="card list-card" data-key="${escapeHtml(itemKey)}" onclick="loadDetail('${cat}', this.dataset.key)">`;
         if (cat === 'monsters') cardHtml += `<div class="card-media card-media-compact"><img src="charactersprite/${encodeURIComponent(itemKey)}.png" alt="${escapeHtml(itemKey)}"></div>`;
+        if (cat === 'abilities') cardHtml += renderAbilityIcon(item.IconImage, itemKey, 'card-media-compact');
         cardHtml += `<div class="info-list">`;
-        for (const [k, v] of Object.entries(item)) { if (!v || v === '') continue; if (cat === 'monsters' && monsterStructuredFields.has(k)) continue; cardHtml += infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, false)); }
+        for (const [k, v] of Object.entries(item)) { if (!v || v === '') continue; if (cat === 'monsters' && monsterStructuredFields.has(k)) continue; if (cat === 'abilities' && k === 'IconImage') continue; cardHtml += infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, false)); }
         cardHtml += `</div></div>`;
         const div = document.createElement('div'); div.innerHTML = cardHtml; fragment.appendChild(div.firstElementChild);
     });
@@ -125,12 +127,14 @@ async function loadDetail(cat, key, fromHistory = false) {
     const data = db[cat]?.find(i => Object.values(i)[0] === key); if (!data) return;
     if (!fromHistory && currentDetail) detailHistory.push(currentDetail); currentDetail = { cat, key };
     const title = cat === 'relic' ? getRelicName(key) : key;
-    const detailMedia = cat === 'monsters' ? `<div class="card-media card-media-detail"><img src="charactersprite/${encodeURIComponent(key)}.png" alt="${escapeHtml(title)}"></div>` : '';
+    let detailMedia = '';
+    if (cat === 'monsters') detailMedia = `<div class="card-media card-media-detail"><img src="charactersprite/${encodeURIComponent(key)}.png" alt="${escapeHtml(title)}"></div>`;
+    if (cat === 'abilities') detailMedia = renderAbilityIcon(data.IconImage, title, 'card-media-detail');
     let html = `<button onclick="goBackToPreviousDetail()" class="back-btn">← Back</button><div class="detail-stack"><div class="card detail-title-card">${detailMedia}<h3>${escapeHtml(title)}</h3></div>`;
     let basicHtml = `<div class="card detail-section"><h2>Basic Info</h2><div class="info-list">`;
     let extraHtml = `<div class="card detail-section"><h2>More Info</h2><div class="info-list">`; let hasExtra = false;
     Object.entries(data).forEach(([k, v], idx) => {
-        if (cat === 'monsters' && monsterStructuredFields.has(k)) return; if (!v || v === '') return;
+        if (cat === 'monsters' && monsterStructuredFields.has(k)) return; if (cat === 'abilities' && k === 'IconImage') return; if (!v || v === '') return;
         const line = infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, true));
         if (idx < 6) basicHtml += line; else { extraHtml += line; hasExtra = true; }
     });
