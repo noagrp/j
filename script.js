@@ -195,7 +195,7 @@ async function loadDetail(cat, key, fromHistory = false) {
         if (idx < 6) basicHtml += line; else { extraHtml += line; hasExtra = true; }
     });
     basicHtml += `</div></div>`; extraHtml += `</div></div>`; html += basicHtml; if (hasExtra) html += extraHtml;
-    if (cat === 'materials' && hasStructuredValue(data['Combine List'])) { const combineRows = renderMaterialCombineList(data['Combine List']); if (combineRows) html += `<div class="card detail-section"><h2>Combine List</h2><div class="material-combine-list">${combineRows}</div></div>`; }
+    if (cat === 'materials' && hasStructuredValue(data['Combine List'])) { const combineRows = renderMaterialCombineList(data['Combine List']); if (combineRows) html += `<div class="card detail-section"><h2>Combine List</h2><div class="material-combine-guide"><strong>${escapeHtml(key)} + Job → Crafted Job</strong></div><div class="material-combine-list">${combineRows}</div></div>`; }
     if (cat === 'monsters') { const skillPools = renderMonsterSkillPools(data); if (skillPools) html += `<div class="card detail-section skill-pools"><h2>Enemy Skill Pools</h2>${skillPools}</div>`; }
     if (cat !== 'relic' && cat !== 'materials') {
         const usedBy = [];
