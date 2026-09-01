@@ -1,6 +1,5 @@
 const db = {};
 let currentLang = 'English';
-let dictionary = [];
 let relicLocal = [];
 const files = ['abilities', 'jobs', 'monsters', 'passives', 'materials', 'relic', 'jobcraft'];
 let detailHistory = [];
@@ -8,7 +7,6 @@ let currentDetail = null;
 
 const monsterStructuredFields = new Set(['Random Passives', 'Random Abilities', 'Threshold Abilities', 'Special Case Abilities']);
 
-function getDict(key) { const entry = dictionary.find(i => i.DictionaryKey === key); return entry ? (entry[currentLang] || entry['English'] || key) : key; }
 function getRelicName(key) { const entry = relicLocal.find(i => i.RelicKey === key); return entry ? (entry[currentLang] || entry['English'] || key) : key; }
 function changeLanguage(lang) { currentLang = lang; loadView(window.lastView || 'Home'); }
 function escapeHtml(value) { return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#039;'); }
@@ -146,7 +144,6 @@ async function init() {
     const main = document.getElementById('content'); main.innerHTML = `<h1>🔥 Jobmania Wiki</h1><p>🔄 Loading data...</p>`;
     try {
         for (const f of files) { const res = await fetch(`data/${f}.json`); if (res.ok) db[f] = await res.json(); }
-        const dictRes = await fetch('data/dictionary.json'); if (dictRes.ok) dictionary = await dictRes.json();
         const relicRes = await fetch('data/relic_localisation.json'); if (relicRes.ok) relicLocal = await relicRes.json();
         normalizeMonsterData(); normalizeMaterialData(); loadView('Home');
     } catch (e) { console.error(e); main.innerHTML = `<h1>⚠️ Error</h1><p>Please refresh the page.</p>`; }
