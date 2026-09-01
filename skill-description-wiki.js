@@ -1,43 +1,65 @@
 // Jobmania Wiki - Ability / Passive Description Renderer
-// Loads pre-generated description localisation JSONs and appends
+// Lazy-loads pre-generated description localisation JSONs and appends
 // one final Description card to expanded Ability and Passive entries.
 (function () {
     'use strict';
 
-    let abilityDescriptionMap = new Map();
-    let passiveDescriptionMap = new Map();
-    let descriptionsReady = false;
+    let abilityDescriptionMap = null;
+    let passiveDescriptionMap = null;
+    let abilityDescriptionPromise = null;
+    let passiveDescriptionPromise = null;
 
-    async function loadDescriptionData() {
-        try {
-            const [abilityRes, passiveRes] = await Promise.all([
-                fetch('data/abilities_description_localisation.json'),
-                fetch('data/passives_description_localisation.json')
-            ]);
+    async function ensureAbilityDescriptions() {
+        if (abilityDescriptionMap) return abilityDescriptionMap;
+        if (abilityDescriptionPromise) return abilityDescriptionPromise;
 
-            if (abilityRes.ok) {
-                const rows = await abilityRes.json();
+        abilityDescriptionPromise = (async function () {
+            try {
+                const res = await fetch('data/abilities_description_localisation.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                const rows = await res.json();
                 abilityDescriptionMap = new Map(
                     (Array.isArray(rows) ? rows : []).map(item => [item.AbilityKey, item])
                 );
+                return abilityDescriptionMap;
+            } catch (error) {
+                console.error('Failed to load Ability descriptions:', error);
+                abilityDescriptionMap = new Map();
+                return abilityDescriptionMap;
             }
+        })();
 
-            if (passiveRes.ok) {
-                const rows = await passiveRes.json();
+        return abilityDescriptionPromise;
+    }
+
+    async function ensurePassiveDescriptions() {
+        if (passiveDescriptionMap) return passiveDescriptionMap;
+        if (passiveDescriptionPromise) return passiveDescriptionPromise;
+
+        passiveDescriptionPromise = (async function () {
+            try {
+                const res = await fetch('data/passives_description_localisation.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                const rows = await res.json();
                 passiveDescriptionMap = new Map(
                     (Array.isArray(rows) ? rows : []).map(item => [item.PassiveKey, item])
                 );
+                return passiveDescriptionMap;
+            } catch (error) {
+                console.error('Failed to load Passive descriptions:', error);
+                passiveDescriptionMap = new Map();
+                return passiveDescriptionMap;
             }
-        } catch (error) {
-            console.error('Failed to load skill descriptions:', error);
-        } finally {
-            descriptionsReady = true;
-        }
+        })();
+
+        return passiveDescriptionPromise;
     }
 
     function getDescriptionEntry(cat, key) {
-        if (cat === 'abilities') return abilityDescriptionMap.get(key);
-        if (cat === 'passives') return passiveDescriptionMap.get(key);
+        if (cat === 'abilities') return abilityDescriptionMap?.get(key) || null;
+        if (cat === 'passives') return passiveDescriptionMap?.get(key) || null;
         return null;
     }
 
@@ -84,14 +106,21 @@
         stack.appendChild(section);
     }
 
-    const descriptionsPromise = loadDescriptionData();
     const originalLoadDetail = window.loadDetail;
 
     if (typeof originalLoadDetail === 'function') {
         window.loadDetail = async function (cat, key) {
             const result = await originalLoadDetail.apply(this, arguments);
-            if (!descriptionsReady) await descriptionsPromise;
-            appendDescription(String(cat).toLowerCase(), key);
+            const normalizedCat = String(cat).toLowerCase();
+
+            if (normalizedCat === 'abilities') {
+                await ensureAbilityDescriptions();
+                appendDescription(normalizedCat, key);
+            } else if (normalizedCat === 'passives') {
+                await ensurePassiveDescriptions();
+                appendDescription(normalizedCat, key);
+            }
+
             return result;
         };
     }
