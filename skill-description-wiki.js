@@ -53,13 +53,33 @@
         return null;
     }
 
+    function cleanDescriptionLine(line) {
+        return String(line)
+            .replace(/<sprite\s+name=["']?[^>"']+["']?\s*>/gi, '')
+            .replace(/\\<sprite\s+name=["']?[^>"']+["']?\s*>/gi, '')
+            .replace(/\s+/g, ' ')
+            .replace(/\s+([。！？,.!?])/g, '$1')
+            .trim();
+    }
+
     function getDescriptionLines(entry) {
         if (!entry) return [];
         const language = typeof currentLang !== 'undefined' ? currentLang : 'English';
         const selected = entry[language];
         const english = entry.English;
         const lines = Array.isArray(selected) && selected.length ? selected : english;
-        return Array.isArray(lines) ? lines.filter(line => typeof line === 'string' && line.trim()) : [];
+        if (!Array.isArray(lines)) return [];
+
+        const seen = new Set();
+        const cleaned = [];
+        for (const line of lines) {
+            if (typeof line !== 'string' || !line.trim()) continue;
+            const text = cleanDescriptionLine(line);
+            if (!text || seen.has(text)) continue;
+            seen.add(text);
+            cleaned.push(text);
+        }
+        return cleaned;
     }
 
     function appendDescription(cat, key) {
