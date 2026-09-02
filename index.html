@@ -8,13 +8,14 @@
 </head>
 <body>
     <div id="app">
-<div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
         <nav id="main-nav">
-            <img src="https://raw.githubusercontent.com/noagrp/j/refs/heads/main/jobmania_official_icon.png" alt="Jobmania Logo" class="nav-logo">
+            <img src="jobmania_official_icon.png" alt="Jobmania Logo" class="nav-logo">
 
             <select id="langSelect" onchange="window.location.href=this.value">
                 <option value="index.html" selected>🇬🇧 English</option>
-                <option value="chinese.html">🇨🇳 中文 (简体)</option>
+                <option value="zh-cn.html">🇨🇳 中文（简体）</option>
+                <option value="zh-tw.html">🇹🇼 中文（繁體）</option>
             </select>
 
             <div class="game-info">
@@ -34,10 +35,9 @@
             <a href="https://play.google.com/store/apps/details?id=com.aubjective.jobmania&hl=en" target="_blank" class="menu-link">▶️ Google Play</a>
             <a href="https://discord.gg/6U5FNFVrwb" target="_blank" class="menu-link">💬 Join Discord</a>
         </nav>
-        <main id="content">
-            <h1>Loading Wiki Data...</h1>
-        </main>
+        <main id="content"><h1>Loading Wiki Data...</h1></main>
     </div>
+    <script>window.JOBMANIA_LOCALE = 'en';</script>
     <script src="script.js"></script>
     <script src="job-media.js"></script>
     <script src="skill-description-wiki.js"></script>
