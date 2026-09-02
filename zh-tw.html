@@ -11,13 +11,11 @@
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <nav id="main-nav">
             <img src="jobmania_official_icon.png" alt="Jobmania Logo" class="nav-logo">
-
             <select id="langSelect" onchange="window.location.href=this.value">
                 <option value="index.html">🇬🇧 English</option>
                 <option value="zh-cn.html">🇨🇳 中文（简体）</option>
                 <option value="zh-tw.html" selected>🇹🇼 中文（繁體）</option>
             </select>
-
             <div class="game-info">
                 <strong>Jobmania - Eternal Dungeon</strong><br>
                 AUBJECTIVE TECHNOLOGY LTD.<br>
@@ -46,14 +44,56 @@
             basicInfo: '基本資訊', moreInfo: '更多資訊', usedBy: '使用者', description: '說明', condition: '條件',
             combineList: '合成列表', job: '職業', craftedJob: '合成職業', craftingPath: '合成路線', craftsInto: '可合成為',
             enemySkillPools: '敵人技能池', randomPassives: '隨機被動技能', randomAbilities: '隨機技能', thresholdAbilities: '閾值技能', specialCaseAbilities: '特殊條件技能',
-            enemyActFirst: '敵人先行動', below50: '低於 50%', below30: '低於 30%', switchSkill: '切換技能', deckAbility: '牌組技能', passive: '被動技能', ability: '技能', character: '角色'
+            enemyActFirst: '敵人先行動', below50: '低於 50%', below30: '低於 30%', switchSkill: '切換技能', deckAbility: '牌組技能',
+            passive: '被動技能', ability: '技能', character: '角色', relic: '遺物'
         };
+
+        window.JOBMANIA_STAT_LABELS = {
+            HP: '體力', Str: '力量', Agi: '敏捷', Int: '智力'
+        };
+
         window.JOBMANIA_FIELD_LABELS = {
-            Rarity: '稀有度', Difficulty: '難度', 'Ability Tier': '技能等級', 'Skill Rank': '技能等級'
+            JobKey: '職業', AbilityKey: '技能', PassiveKey: '被動技能', RelicKey: '遺物',
+            Rarity: '稀有度', Difficulty: '難度', Race: '種族', Gender: '性別',
+            'Acquire Type': '取得方式', 'Acquire Method': '取得方式',
+            'Ability Tier': '技能等級', 'Skill Rank': '技能等級'
         };
+
+        window.JOBMANIA_VALUE_LABELS = {
+            Rarity: {
+                Common: '普通', Rare: '稀有', Epic: '史詩', Legendary: '傳說'
+            },
+            Difficulty: {
+                Beginner: '入門', Easy: '簡單', Medium: '中等', Hard: '困難', Boss: '首領'
+            },
+            'Ability Tier': {
+                Low: '低階', Medium: '中階', High: '高階', Master: '大師', Curse: '詛咒'
+            },
+            'Skill Rank': {
+                Low: '低階', Medium: '中階', High: '高階', Master: '大師'
+            },
+            Race: {
+                Creature: '生物'
+            },
+            Gender: {
+                Other: '其他', Male: '男性', Female: '女性'
+            },
+            'Acquire Type': {
+                Gacha: '召喚', Normal: '普通', Special: '特殊'
+            },
+            'Acquire Method': {
+                Normal: '普通', Special: '特殊'
+            }
+        };
+
+        window.JOBMANIA_HIDDEN_FIELDS = {
+            relic: ['SpecialType', 'Craft Material x1', 'Craft Ability x5']
+        };
+
         window.JOBMANIA_HOME_HTML = `<h1>🔥 Jobmania - Eternal Dungeon</h1><div class="home-card"><h2>關於遊戲</h2><p><strong>選擇英雄與職業，踏上不斷深入永恆地牢的旅程。</strong></p><p>在旅途中獲得隨機技能與職業，打造屬於自己的獨特玩法。<br><strong>你能走多遠？</strong></p><p><strong>加入我們的 Discord：</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p></div>`;
     </script>
     <script src="script.js"></script>
+    <script src="wiki-localisation.js"></script>
     <script src="job-media.js"></script>
     <script src="skill-description-wiki.js"></script>
 </body>
