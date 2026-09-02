@@ -4,7 +4,7 @@ const localisationIndex = {};
 
 const pageLocale = window.JOBMANIA_LOCALE || 'en';
 const localeLanguageMap = {
-    'en': 'English',
+    en: 'English',
     'zh-CN': 'Chinese',
     'zh-TW': 'Chinese (Traditional)'
 };
@@ -30,25 +30,22 @@ const entityKeyFields = {
 
 let detailHistory = [];
 let currentDetail = null;
-
 const monsterStructuredFields = new Set(['Random Passives', 'Random Abilities', 'Threshold Abilities', 'Special Case Abilities']);
 
-function ui(key, fallback = '') {
-    return window.JOBMANIA_UI?.[key] ?? fallback;
-}
+function ui(key, fallback = '') { return window.JOBMANIA_UI?.[key] ?? fallback; }
+function escapeHtml(value) { return String(value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#039;'); }
+function hasStructuredValue(value) { if (Array.isArray(value)) return value.length > 0; if (value && typeof value === 'object') return Object.values(value).some(hasStructuredValue); return value !== null && value !== undefined && value !== ''; }
 
 function entityKey(cat, item) {
     if (!item) return '';
-    const keyField = entityKeyFields[cat];
-    return keyField ? item[keyField] : Object.values(item)[0];
+    const field = entityKeyFields[cat];
+    return field ? item[field] : Object.values(item)[0];
 }
 
 function buildLocalisationIndex(cat) {
-    const keyField = entityKeyFields[cat];
+    const field = entityKeyFields[cat];
     const map = new Map();
-    for (const row of localisation[cat] || []) {
-        if (row && row[keyField]) map.set(row[keyField], row);
-    }
+    for (const row of localisation[cat] || []) if (row?.[field]) map.set(row[field], row);
     localisationIndex[cat] = map;
 }
 
@@ -58,23 +55,9 @@ function getLocalizedName(cat, key) {
     return row ? (row[currentLang] || row.English || key) : key;
 }
 
-function changeLanguage(lang) {
-    currentLang = localeLanguageMap[lang] || lang || 'English';
-    loadView(window.lastView || 'Home');
-}
-
-function escapeHtml(value) {
-    return String(value ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/\"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-}
-
-function detailLink(cat, name) {
-    if (!name) return '';
-    return `<span class="link" data-cat="${escapeHtml(cat)}" data-key="${escapeHtml(name)}" onclick="event.stopPropagation(); loadDetail(this.dataset.cat, this.dataset.key)">${escapeHtml(getLocalizedName(cat, name))}</span>`;
+function detailLink(cat, key) {
+    if (!key) return '';
+    return `<span class="link" data-cat="${escapeHtml(cat)}" data-key="${escapeHtml(key)}" onclick="event.stopPropagation(); loadDetail(this.dataset.cat, this.dataset.key)">${escapeHtml(getLocalizedName(cat, key))}</span>`;
 }
 
 function infoRow(label, valueHtml, extraClass = '') {
@@ -82,31 +65,19 @@ function infoRow(label, valueHtml, extraClass = '') {
     return `<div class="info-row ${extraClass}"><div class="info-label">${escapeHtml(label)}:</div><div class="info-value">${valueHtml}</div></div>`;
 }
 
-function hasStructuredValue(value) {
-    if (Array.isArray(value)) return value.length > 0;
-    if (value && typeof value === 'object') return Object.values(value).some(v => hasStructuredValue(v));
-    return value !== null && value !== undefined && value !== '';
-}
-
 function renderLinkedList(values, cat) {
-    if (!Array.isArray(values) || value === 0) return '';
+    if (!Array.isArray(values) || values.length === 0) return '';
     return values.map(value => detailLink(cat, value)).join('<span class="skill-separator"> · </span>');
 }
 
 function renderTieredAbilities(value) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) return '';
-    return Object.entries(value)
-        .filter(([, abilities]) => Array.isArray(abilities) && abilities.length > 0)
-        .map(([label, abilities]) => infoRow(label, renderLinkedList(abilities, 'abilities'), 'skill-row'))
-        .join('');
+    return Object.entries(value).filter(([, list]) => Array.isArray(list) && list.length).map(([label, list]) => infoRow(label, renderLinkedList(list, 'abilities'), 'skill-row')).join('');
 }
 
 function renderSpecialCaseAbilities(value) {
     if (!Array.isArray(value) || value.length === 0) return '';
-    return value
-        .filter(item => item && Array.isArray(item.abilities) && item.abilities.length > 0)
-        .map(item => infoRow(item.condition || ui('condition', 'Condition'), renderLinkedList(item.abilities, 'abilities'), 'skill-row'))
-        .join('');
+    return value.filter(item => item && Array.isArray(item.abilities) && item.abilities.length).map(item => infoRow(item.condition || ui('condition', 'Condition'), renderLinkedList(item.abilities, 'abilities'), 'skill-row')).join('');
 }
 
 function renderAbilityIcon(iconKey, altText, sizeClass) {
@@ -124,75 +95,36 @@ function normalizeMaterialCombineList(material) {
     const raw = material['Combine List'];
     if (Array.isArray(raw)) return material;
     material['Combine List'] = raw ? String(raw).split('|').filter(Boolean).map(entry => {
-        const separator = entry.indexOf('-');
-        if (separator < 0) return null;
-        return { Job: entry.slice(0, separator).trim(), Result: entry.slice(separator + 1).trim() };
-    }).filter(item => item && item.Job && item.Result) : [];
+        const i = entry.indexOf('-');
+        if (i < 0) return null;
+        return { Job: entry.slice(0, i).trim(), Result: entry.slice(i + 1).trim() };
+    }).filter(item => item?.Job && item?.Result) : [];
     return material;
 }
 
-function normalizeMaterialData() {
-    if (Array.isArray(db.materials)) db.materials = db.materials.map(normalizeMaterialCombineList);
-}
+function normalizeMaterialData() { if (Array.isArray(db.materials)) db.materials = db.materials.map(normalizeMaterialCombineList); }
+function renderMaterialCombineList(value) { return Array.isArray(value) ? value.map(item => `<div class="material-combine-row">${detailLink('jobs', item.Job)}<span class="material-combine-arrow">→</span>${detailLink('jobs', item.Result)}</div>`).join('') : ''; }
 
-function renderMaterialCombineList(value) {
-    if (!Array.isArray(value) || value.length === 0) return '';
-    return value.map(item => `<div class="material-combine-row">${detailLink('jobs', item.Job)}<span class="material-combine-arrow">→</span>${detailLink('jobs', item.Result)}</div>`).join('');
-}
-
-function craftEntityLink(cat, name) {
-    if (!name) return '';
-    const exists = (db[cat] || []).some(item => entityKey(cat, item) === name);
-    return exists ? detailLink(cat, name) : `<span>${escapeHtml(getLocalizedName(cat, name))}</span>`;
+function craftEntityLink(cat, key) {
+    if (!key) return '';
+    const exists = (db[cat] || []).some(item => entityKey(cat, item) === key);
+    return exists ? detailLink(cat, key) : `<span>${escapeHtml(getLocalizedName(cat, key))}</span>`;
 }
 
 function findCraftingPath(jobKey, visited = new Set()) {
     if (jobKey === 'Jobless') return [];
     if (visited.has(jobKey)) return null;
-    const nextVisited = new Set(visited);
-    nextVisited.add(jobKey);
-    const incoming = (db.jobcraft || []).filter(recipe => recipe.ToJobKey === jobKey);
-    for (const recipe of incoming) {
-        const parentPath = findCraftingPath(recipe.FromJobKey, nextVisited);
-        if (parentPath !== null) return [...parentPath, recipe];
+    const next = new Set(visited); next.add(jobKey);
+    for (const recipe of (db.jobcraft || []).filter(r => r.ToJobKey === jobKey)) {
+        const parent = findCraftingPath(recipe.FromJobKey, next);
+        if (parent !== null) return [...parent, recipe];
     }
     return null;
 }
 
-function renderCraftRecipe(recipe) {
-    return `<div class="craft-row">${craftEntityLink('jobs', recipe.FromJobKey)}<span class="craft-plus">+</span>${craftEntityLink('materials', recipe.MaterialKey)}<span class="craft-arrow">→</span>${craftEntityLink('jobs', recipe.ToJobKey)}</div>`;
-}
-
-function renderCraftingPath(jobKey) {
-    if (jobKey === 'Jobless') return '';
-    const path = findCraftingPath(jobKey);
-    if (!Array.isArray(path) || path.length === 0) return '';
-    return `<div class="craft-list">${path.map(renderCraftRecipe).join('')}</div>`;
-}
-
-function renderCraftsInto(jobKey) {
-    const recipes = (db.jobcraft || []).filter(recipe => recipe.FromJobKey === jobKey);
-    if (recipes.length === 0) return '';
-    return `<div class="craft-list">${recipes.map(renderCraftRecipe).join('')}</div>`;
-}
-
-function renderMonsterSkillPools(data) {
-    const groups = [];
-    if (hasStructuredValue(data['Random Passives'])) groups.push(`<div class="skill-group">${infoRow(ui('randomPassives', 'Random Passives'), renderLinkedList(data['Random Passives'], 'passives'), 'skill-row')}</div>`);
-    if (hasStructuredValue(data['Random Abilities'])) {
-        const rows = renderTieredAbilities(data['Random Abilities']);
-        if (rows) groups.push(`<div class="skill-group"><h3>${escapeHtml(ui('randomAbilities', 'Random Abilities'))}</h3>${rows}</div>`);
-    }
-    if (hasStructuredValue(data['Threshold Abilities'])) {
-        const rows = renderTieredAbilities(data['Threshold Abilities']);
-        if (rows) groups.push(`<div class="skill-group"><h3>${escapeHtml(ui('thresholdAbilities', 'Threshold Abilities'))}</h3>${rows}</div>`);
-    }
-    if (hasStructuredValue(data['Special Case Abilities'])) {
-        const rows = renderSpecialCaseAbilities(data['Special Case Abilities']);
-        if (rows) groups.push(`<div class="skill-group"><h3>${escapeHtml(ui('specialCaseAbilities', 'Special Case Abilities'))}</h3>${rows}</div>`);
-    }
-    return groups.join('');
-}
+function renderCraftRecipe(recipe) { return `<div class="craft-row">${craftEntityLink('jobs', recipe.FromJobKey)}<span class="craft-plus">+</span>${craftEntityLink('materials', recipe.MaterialKey)}<span class="craft-arrow">→</span>${craftEntityLink('jobs', recipe.ToJobKey)}</div>`; }
+function renderCraftingPath(jobKey) { const path = findCraftingPath(jobKey); return Array.isArray(path) && path.length ? `<div class="craft-list">${path.map(renderCraftRecipe).join('')}</div>` : ''; }
+function renderCraftsInto(jobKey) { const rows = (db.jobcraft || []).filter(r => r.FromJobKey === jobKey); return rows.length ? `<div class="craft-list">${rows.map(renderCraftRecipe).join('')}</div>` : ''; }
 
 function splitKnownNames(raw, cat) {
     if (!raw) return [];
@@ -204,15 +136,12 @@ function splitKnownNames(raw, cat) {
         if (index === source.length) return [];
         if (memo.has(index)) return memo.get(index);
         for (const name of names) {
-            const slice = source.slice(index, index + name.length);
-            if (slice.toLowerCase() !== String(name).toLowerCase()) continue;
+            if (source.slice(index, index + name.length).toLowerCase() !== String(name).toLowerCase()) continue;
             const next = index + name.length;
-            if (next === source.length) {
-                const result = [name]; memo.set(index, result); return result;
-            }
+            if (next === source.length) return [name];
             if (source[next] === '-') {
                 const tail = parseAt(next + 1);
-                if (tail) { const result = [name, ...tail]; memo.set(index, result); return result; }
+                if (tail) return [name, ...tail];
             }
         }
         memo.set(index, null); return null;
@@ -221,45 +150,39 @@ function splitKnownNames(raw, cat) {
 }
 
 function normalizeMonsterSkillPools(monster) {
-    if ('Passives' in monster && !('Random Passives' in monster)) {
-        monster['Random Passives'] = splitKnownNames(monster.Passives, 'passives'); delete monster.Passives;
-    }
+    if ('Passives' in monster && !('Random Passives' in monster)) { monster['Random Passives'] = splitKnownNames(monster.Passives, 'passives'); delete monster.Passives; }
     if (typeof monster['Random Abilities'] === 'string') {
-        const parts = monster['Random Abilities'].split('|');
-        const labels = ['100%', '99% to 50%', '49% to 30%', '29% to 1%'];
-        monster['Random Abilities'] = Object.fromEntries(labels.map((label, index) => [label, splitKnownNames(parts[index] || '', 'abilities')]));
+        const p = monster['Random Abilities'].split('|');
+        monster['Random Abilities'] = Object.fromEntries(['100%', '99% to 50%', '49% to 30%', '29% to 1%'].map((label, i) => [label, splitKnownNames(p[i] || '', 'abilities')]));
     }
     if (typeof monster['Threshold Abilities'] === 'string') {
-        const parts = monster['Threshold Abilities'].split('|');
-        const labels = [ui('enemyActFirst', 'Enemy act first'), ui('below50', 'Below 50%'), ui('below30', 'Below 30%')];
-        monster['Threshold Abilities'] = Object.fromEntries(labels.map((label, index) => [label, splitKnownNames(parts[index] || '', 'abilities')]));
+        const p = monster['Threshold Abilities'].split('|');
+        monster['Threshold Abilities'] = Object.fromEntries([ui('enemyActFirst', 'Enemy act first'), ui('below50', 'Below 50%'), ui('below30', 'Below 30%')].map((label, i) => [label, splitKnownNames(p[i] || '', 'abilities')]));
     }
     if (typeof monster['Special Case Abilities'] === 'string') {
         monster['Special Case Abilities'] = monster['Special Case Abilities'] ? monster['Special Case Abilities'].split('|').filter(Boolean).map(entry => {
-            const separator = entry.indexOf(':');
-            const condition = separator >= 0 ? entry.slice(0, separator).trim() : '';
-            const skills = separator >= 0 ? entry.slice(separator + 1) : entry;
-            return { condition, abilities: splitKnownNames(skills, 'abilities') };
+            const i = entry.indexOf(':');
+            return { condition: i >= 0 ? entry.slice(0, i).trim() : '', abilities: splitKnownNames(i >= 0 ? entry.slice(i + 1) : entry, 'abilities') };
         }) : [];
     }
     return monster;
 }
+function normalizeMonsterData() { if (Array.isArray(db.monsters)) db.monsters = db.monsters.map(normalizeMonsterSkillPools); }
 
-function normalizeMonsterData() {
-    if (Array.isArray(db.monsters)) db.monsters = db.monsters.map(normalizeMonsterSkillPools);
+function renderMonsterSkillPools(data) {
+    const groups = [];
+    if (hasStructuredValue(data['Random Passives'])) groups.push(`<div class="skill-group">${infoRow(ui('randomPassives', 'Random Passives'), renderLinkedList(data['Random Passives'], 'passives'), 'skill-row')}</div>`);
+    if (hasStructuredValue(data['Random Abilities'])) { const rows = renderTieredAbilities(data['Random Abilities']); if (rows) groups.push(`<div class="skill-group"><h3>${escapeHtml(ui('randomAbilities', 'Random Abilities'))}</h3>${rows}</div>`); }
+    if (hasStructuredValue(data['Threshold Abilities'])) { const rows = renderTieredAbilities(data['Threshold Abilities']); if (rows) groups.push(`<div class="skill-group"><h3>${escapeHtml(ui('thresholdAbilities', 'Threshold Abilities'))}</h3>${rows}</div>`); }
+    if (hasStructuredValue(data['Special Case Abilities'])) { const rows = renderSpecialCaseAbilities(data['Special Case Abilities']); if (rows) groups.push(`<div class="skill-group"><h3>${escapeHtml(ui('specialCaseAbilities', 'Special Case Abilities'))}</h3>${rows}</div>`); }
+    return groups.join('');
 }
 
 function getRankEmoji(cat, key, value) {
     if (!value) return '';
     const val = String(value).toLowerCase().trim();
-    if (cat === 'jobs' && key === 'Rarity') return ({'1':' ⭐','2':' ⭐⭐','3':' ⭐⭐⭐','4':' ⭐⭐⭐⭐','5':' ⭐⭐⭐⭐⭐'})[val] || '';
-    if (cat === 'monsters' && key === 'Difficulty') {
-        if (val.includes('beginner')) return ' ⭐';
-        if (val.includes('easy')) return ' ⭐⭐';
-        if (val.includes('medium')) return ' ⭐⭐⭐';
-        if (val.includes('hard')) return ' ⭐⭐⭐⭐';
-        if (val.includes('boss')) return ' ⭐⭐⭐⭐⭐';
-    }
+    if (cat === 'jobs' && key === 'Rarity') return ({1:' ⭐',2:' ⭐⭐',3:' ⭐⭐⭐',4:' ⭐⭐⭐⭐',5:' ⭐⭐⭐⭐⭐'})[val] || '';
+    if (cat === 'monsters' && key === 'Difficulty') { if (val.includes('beginner')) return ' ⭐'; if (val.includes('easy')) return ' ⭐⭐'; if (val.includes('medium')) return ' ⭐⭐⭐'; if (val.includes('hard')) return ' ⭐⭐⭐⭐'; if (val.includes('boss')) return ' ⭐⭐⭐⭐⭐'; }
     if (cat === 'abilities' && key === 'Ability Tier') return ({low:' ⭐',medium:' ⭐⭐',high:' ⭐⭐⭐',master:' ⭐⭐⭐⭐',curse:' ⭐'})[val] || '';
     if (cat === 'passives' && key === 'Skill Rank') return ({low:' ⭐',medium:' ⭐⭐',high:' ⭐⭐⭐',master:' ⭐⭐⭐⭐'})[val] || '';
     return '';
@@ -267,25 +190,18 @@ function getRankEmoji(cat, key, value) {
 
 function getDisplayKey(cat, originalKey) {
     if (!originalKey) return '';
-    let key = originalKey.trim();
+    if (window.JOBMANIA_FIELD_LABELS?.[originalKey]) return window.JOBMANIA_FIELD_LABELS[originalKey];
     if (cat === 'jobs') {
         if (originalKey === 'AbilityKey') return ui('switchSkill', 'Switch Skill');
         if (originalKey.includes('AbilityKey')) return `${ui('deckAbility', 'Deck Ability')} ${originalKey.replace('AbilityKey', '').trim()}`.trim();
     }
     if (cat === 'monsters') {
-        if (originalKey.includes('PassiveKey')) {
-            const match = originalKey.match(/\d+/); return `${ui('passive', 'Passive')}${match ? parseInt(match[0]) : 1}`;
-        }
-        if (originalKey.includes('AbilityKey')) {
-            const match = originalKey.match(/\d+/); return `${ui('ability', 'Ability')}${match ? parseInt(match[0]) : 1}`;
-        }
+        if (originalKey.includes('PassiveKey')) { const m = originalKey.match(/\d+/); return `${ui('passive', 'Passive')}${m ? parseInt(m[0]) : 1}`; }
+        if (originalKey.includes('AbilityKey')) { const m = originalKey.match(/\d+/); return `${ui('ability', 'Ability')}${m ? parseInt(m[0]) : 1}`; }
         if (originalKey === 'MonsterKey') return ui('character', 'Character');
     }
-    const exact = window.JOBMANIA_FIELD_LABELS?.[originalKey];
-    if (exact) return exact;
-    key = key.replace(/Key(_\d+)?$/, '').trim();
-    if (key) key = key.charAt(0).toUpperCase() + key.slice(1);
-    return key;
+    let key = originalKey.replace(/Key(_\d+)?$/, '').trim();
+    return key ? key.charAt(0).toUpperCase() + key.slice(1) : key;
 }
 
 function referencedCategory(cat, key) {
@@ -303,12 +219,7 @@ function renderFieldValue(cat, key, value, clickable = false) {
     const emoji = getRankEmoji(cat, key, value);
     if (emoji) return escapeHtml(emoji.trim());
     const refCat = referencedCategory(cat, key);
-    if (refCat && typeof value === 'string') {
-        if (clickable && (refCat === 'abilities' || refCat === 'passives' || refCat === 'jobs' || refCat === 'monsters' || refCat === 'materials' || refCat === 'relic')) {
-            return detailLink(refCat, value);
-        }
-        return escapeHtml(getLocalizedName(refCat, value));
-    }
+    if (refCat && typeof value === 'string') return clickable ? detailLink(refCat, value) : escapeHtml(getLocalizedName(refCat, value));
     return escapeHtml(value);
 }
 
@@ -316,203 +227,73 @@ async function init() {
     const main = document.getElementById('content');
     main.innerHTML = `<h1>🔥 Jobmania Wiki</h1><p>🔄 ${escapeHtml(ui('loading', 'Loading data...'))}</p>`;
     try {
-        for (const f of files) {
-            const res = await fetch(`data/${f}.json`);
-            if (res.ok) db[f] = await res.json();
-        }
-        for (const [cat, file] of Object.entries(localisationFiles)) {
-            const res = await fetch(`data/${file}.json`);
-            if (res.ok) localisation[cat] = await res.json();
-            buildLocalisationIndex(cat);
-        }
-        normalizeMonsterData();
-        normalizeMaterialData();
-        loadView('Home');
-    } catch (e) {
-        console.error(e);
-        main.innerHTML = `<h1>⚠️ ${escapeHtml(ui('error', 'Error'))}</h1><p>${escapeHtml(ui('refresh', 'Please refresh the page.'))}</p>`;
-    }
+        for (const f of files) { const res = await fetch(`data/${f}.json`); if (res.ok) db[f] = await res.json(); }
+        for (const [cat, file] of Object.entries(localisationFiles)) { const res = await fetch(`data/${file}.json`); if (res.ok) localisation[cat] = await res.json(); buildLocalisationIndex(cat); }
+        normalizeMonsterData(); normalizeMaterialData(); loadView('Home');
+    } catch (e) { console.error(e); main.innerHTML = `<h1>⚠️ ${escapeHtml(ui('error', 'Error'))}</h1><p>${escapeHtml(ui('refresh', 'Please refresh the page.'))}</p>`; }
 }
 
 function viewLabel(view) {
-    const labels = {
-        Home: ui('home', 'Home'),
-        Monsters: ui('characters', 'Characters'),
-        Jobs: ui('jobs', 'Jobs'),
-        Abilities: ui('abilities', 'Abilities'),
-        Passives: ui('passives', 'Passives'),
-        Materials: ui('materials', 'Materials'),
-        Relic: ui('relicSystem', 'Relic System')
-    };
-    return labels[view] || view;
+    return ({ Home: ui('home','Home'), Monsters: ui('characters','Characters'), Jobs: ui('jobs','Jobs'), Abilities: ui('abilities','Abilities'), Passives: ui('passives','Passives'), Materials: ui('materials','Materials'), Relic: ui('relicSystem','Relic System') })[view] || view;
 }
 
 function loadView(view) {
-    detailHistory = [];
-    currentDetail = null;
-    window.lastView = view;
+    detailHistory = []; currentDetail = null; window.lastView = view;
     const main = document.getElementById('content');
-    const searchHtml = view !== 'Home' ? `<input type="text" id="searchInput" placeholder="${escapeHtml(ui('search', 'Search...'))}">` : '';
-    if (view === 'Home') {
-        main.innerHTML = window.JOBMANIA_HOME_HTML || `<h1>🔥 Jobmania - Eternal Dungeon</h1><div class="home-card"><h2>About this game</h2><p><strong>Pick a Hero and a job then embark on an eternal journey of dungeon descending.</strong></p><p>Acquire random abilities and jobs through the journey and build your own unique play style.<br><strong>How far can you go?</strong></p><h3>FEATURES</h3><ul><li>Rogue lite, procedural enemies and events generation.</li><li>Dungeon crawler, descend into the dungeon as much as you can.</li><li>Strategic deck building, build your own unique deck by adding abilities into your deck via chests and defeating enemies.</li><li>RPG Turn-based combat system, complex but easy to play. Defeat tons of different enemies, challenging but addictive.</li><li>Equip 3 jobs at once, swap, and use their abilities strategically for powerful synergy.</li><li>Combine jobs and materials to craft new unique jobs.</li><li>Get new heroes from Gacha, enemies defeated from the last run will appear in a special Gacha pool!</li><li>Collect special relics to enhance your build further.</li><li>A lot of Memes, Anime and Movies references in the game!</li><li>Free with ads and in-app purchases, remove all ads with one purchase.</li><li>Portrait screen only, you can play this game with one hand.</li></ul><p><strong>Join our Discord:</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p></div>`;
-        return;
-    }
-    const cat = view.toLowerCase();
-    const items = db[cat] || [];
-    main.innerHTML = `<div class="header-card"><h1>${escapeHtml(viewLabel(view))}</h1><p><strong>${items.length} ${escapeHtml(ui('entries', 'entries'))}</strong></p>${searchHtml}</div><div class="grid" id="grid-container"></div>`;
-    const container = document.getElementById('grid-container');
-    const fragment = document.createDocumentFragment();
+    const searchHtml = view !== 'Home' ? `<input type="text" id="searchInput" placeholder="${escapeHtml(ui('search','Search...'))}">` : '';
+    if (view === 'Home') { main.innerHTML = window.JOBMANIA_HOME_HTML || `<h1>🔥 Jobmania - Eternal Dungeon</h1><div class="home-card"><h2>About this game</h2><p><strong>Pick a Hero and a job then embark on an eternal journey of dungeon descending.</strong></p><p>Acquire random abilities and jobs through the journey and build your own unique play style.<br><strong>How far can you go?</strong></p><h3>FEATURES</h3><ul><li>Rogue lite, procedural enemies and events generation.</li><li>Dungeon crawler, descend into the dungeon as much as you can.</li><li>Strategic deck building, build your own unique deck by adding abilities into your deck via chests and defeating enemies.</li><li>RPG Turn-based combat system, complex but easy to play. Defeat tons of different enemies, challenging but addictive.</li><li>Equip 3 jobs at once, swap, and use their abilities strategically for powerful synergy.</li><li>Combine jobs and materials to craft new unique jobs.</li><li>Get new heroes from Gacha, enemies defeated from the last run will appear in a special Gacha pool!</li><li>Collect special relics to enhance your build further.</li><li>A lot of Memes, Anime and Movies references in the game!</li><li>Free with ads and in-app purchases, remove all ads with one purchase.</li><li>Portrait screen only, you can play this game with one hand.</li></ul><p><strong>Join our Discord:</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p></div>`; return; }
+    const cat = view.toLowerCase(), items = db[cat] || [];
+    main.innerHTML = `<div class="header-card"><h1>${escapeHtml(viewLabel(view))}</h1><p><strong>${items.length} ${escapeHtml(ui('entries','entries'))}</strong></p>${searchHtml}</div><div class="grid" id="grid-container"></div>`;
+    const container = document.getElementById('grid-container'), fragment = document.createDocumentFragment();
     items.forEach(item => {
-        const itemKey = entityKey(cat, item);
-        const displayName = getLocalizedName(cat, itemKey);
-        let cardHtml = `<div class="card list-card" data-key="${escapeHtml(itemKey)}" onclick="loadDetail('${cat}', this.dataset.key)">`;
-        if (cat === 'monsters') cardHtml += `<div class="card-media card-media-compact"><img src="charactersprite/${encodeURIComponent(itemKey)}.png" alt="${escapeHtml(displayName)}"></div>`;
-        if (cat === 'abilities') cardHtml += renderAbilityIcon(item.IconImage, displayName, 'card-media-compact');
-        if (cat === 'materials') cardHtml += renderMaterialImage(itemKey, 'card-media-compact');
-        cardHtml += `<div class="info-list">`;
-        for (const [k, v] of Object.entries(item)) {
-            if (!v || v === '') continue;
-            if (cat === 'monsters' && monsterStructuredFields.has(k)) continue;
-            if (cat === 'abilities' && k === 'IconImage') continue;
-            if (cat === 'materials' && k === 'Combine List') continue;
-            cardHtml += infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, false));
-        }
-        cardHtml += `</div></div>`;
-        const div = document.createElement('div');
-        div.innerHTML = cardHtml;
-        fragment.appendChild(div.firstElementChild);
+        const key = entityKey(cat, item), display = getLocalizedName(cat, key);
+        let html = `<div class="card list-card" data-key="${escapeHtml(key)}" onclick="loadDetail('${cat}', this.dataset.key)">`;
+        if (cat === 'monsters') html += `<div class="card-media card-media-compact"><img src="charactersprite/${encodeURIComponent(key)}.png" alt="${escapeHtml(display)}"></div>`;
+        if (cat === 'abilities') html += renderAbilityIcon(item.IconImage, display, 'card-media-compact');
+        if (cat === 'materials') html += renderMaterialImage(key, 'card-media-compact');
+        html += '<div class="info-list">';
+        for (const [k,v] of Object.entries(item)) { if (!v || v === '') continue; if (cat === 'monsters' && monsterStructuredFields.has(k)) continue; if (cat === 'abilities' && k === 'IconImage') continue; if (cat === 'materials' && k === 'Combine List') continue; html += infoRow(getDisplayKey(cat,k), renderFieldValue(cat,k,v,false)); }
+        html += '</div></div>';
+        const wrap = document.createElement('div'); wrap.innerHTML = html; fragment.appendChild(wrap.firstElementChild);
     });
-    container.appendChild(fragment);
-    attachSearch();
+    container.appendChild(fragment); attachSearch();
 }
 
 function attachSearch() {
-    const input = document.getElementById('searchInput');
-    if (!input) return;
-    input.addEventListener('input', () => {
-        const term = input.value.toLowerCase().trim();
-        document.querySelectorAll('.list-card').forEach(card => {
-            const key = (card.dataset.key || '').toLowerCase();
-            card.style.display = (card.textContent.toLowerCase().includes(term) || key.includes(term)) ? '' : 'none';
-        });
-    });
+    const input = document.getElementById('searchInput'); if (!input) return;
+    input.addEventListener('input', () => { const term = input.value.toLowerCase().trim(); document.querySelectorAll('.list-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(term) || (card.dataset.key || '').toLowerCase().includes(term) ? '' : 'none'; }); });
 }
 
 async function loadDetail(cat, key, fromHistory = false) {
-    const data = db[cat]?.find(i => entityKey(cat, i) === key);
-    if (!data) return;
-    if (!fromHistory && currentDetail) detailHistory.push(currentDetail);
-    currentDetail = { cat, key };
-    const title = getLocalizedName(cat, key);
-    let detailMedia = '';
-    if (cat === 'monsters') detailMedia = `<div class="card-media card-media-detail"><img src="charactersprite/${encodeURIComponent(key)}.png" alt="${escapeHtml(title)}"></div>`;
-    if (cat === 'abilities') detailMedia = renderAbilityIcon(data.IconImage, title, 'card-media-detail');
-    if (cat === 'materials') detailMedia = renderMaterialImage(key, 'card-media-detail');
-    let html = `<button onclick="goBackToPreviousDetail()" class="back-btn">← ${escapeHtml(ui('back', 'Back'))}</button><div class="detail-stack"><div class="card detail-title-card">${detailMedia}<h3>${escapeHtml(title)}</h3></div>`;
-    let basicHtml = `<div class="card detail-section"><h2>${escapeHtml(ui('basicInfo', 'Basic Info'))}</h2><div class="info-list">`;
-    let extraHtml = `<div class="card detail-section"><h2>${escapeHtml(ui('moreInfo', 'More Info'))}</h2><div class="info-list">`;
-    let hasExtra = false;
-    Object.entries(data).forEach(([k, v], idx) => {
-        if (cat === 'monsters' && monsterStructuredFields.has(k)) return;
-        if (cat === 'abilities' && k === 'IconImage') return;
-        if (cat === 'materials' && (k === 'MaterialKey' || k === 'Combine List')) return;
-        if (!v || v === '') return;
-        const line = infoRow(getDisplayKey(cat, k), renderFieldValue(cat, k, v, true));
-        if (idx < 6) basicHtml += line;
-        else { extraHtml += line; hasExtra = true; }
-    });
-    basicHtml += `</div></div>`;
-    extraHtml += `</div></div>`;
-    html += basicHtml;
-    if (hasExtra) html += extraHtml;
-
-    if (cat === 'materials' && hasStructuredValue(data['Combine List'])) {
-        const combineRows = renderMaterialCombineList(data['Combine List']);
-        if (combineRows) html += `<div class="card detail-section"><h2>${escapeHtml(ui('combineList', 'Combine List'))}</h2><div class="material-combine-guide"><strong>${escapeHtml(title)} + ${escapeHtml(ui('job', 'Job'))} → ${escapeHtml(ui('craftedJob', 'Crafted Job'))}</strong></div><div class="material-combine-list">${combineRows}</div></div>`;
-    }
-    if (cat === 'monsters') {
-        const skillPools = renderMonsterSkillPools(data);
-        if (skillPools) html += `<div class="card detail-section skill-pools"><h2>${escapeHtml(ui('enemySkillPools', 'Enemy Skill Pools'))}</h2>${skillPools}</div>`;
-    }
+    const data = db[cat]?.find(item => entityKey(cat,item) === key); if (!data) return;
+    if (!fromHistory && currentDetail) detailHistory.push(currentDetail); currentDetail = {cat,key};
+    const title = getLocalizedName(cat,key);
+    let media = '';
+    if (cat === 'monsters') media = `<div class="card-media card-media-detail"><img src="charactersprite/${encodeURIComponent(key)}.png" alt="${escapeHtml(title)}"></div>`;
+    if (cat === 'abilities') media = renderAbilityIcon(data.IconImage,title,'card-media-detail');
+    if (cat === 'materials') media = renderMaterialImage(key,'card-media-detail');
+    let html = `<button onclick="goBackToPreviousDetail()" class="back-btn">← ${escapeHtml(ui('back','Back'))}</button><div class="detail-stack"><div class="card detail-title-card">${media}<h3>${escapeHtml(title)}</h3></div>`;
+    let basic = `<div class="card detail-section"><h2>${escapeHtml(ui('basicInfo','Basic Info'))}</h2><div class="info-list">`, extra = `<div class="card detail-section"><h2>${escapeHtml(ui('moreInfo','More Info'))}</h2><div class="info-list">`, hasExtra = false;
+    Object.entries(data).forEach(([k,v],idx) => { if (cat === 'monsters' && monsterStructuredFields.has(k)) return; if (cat === 'abilities' && k === 'IconImage') return; if (cat === 'materials' && (k === 'MaterialKey' || k === 'Combine List')) return; if (!v || v === '') return; const row = infoRow(getDisplayKey(cat,k),renderFieldValue(cat,k,v,true)); if (idx < 6) basic += row; else { extra += row; hasExtra = true; } });
+    basic += '</div></div>'; extra += '</div></div>'; html += basic; if (hasExtra) html += extra;
+    if (cat === 'materials' && hasStructuredValue(data['Combine List'])) { const rows = renderMaterialCombineList(data['Combine List']); if (rows) html += `<div class="card detail-section"><h2>${escapeHtml(ui('combineList','Combine List'))}</h2><div class="material-combine-guide"><strong>${escapeHtml(title)} + ${escapeHtml(ui('job','Job'))} → ${escapeHtml(ui('craftedJob','Crafted Job'))}</strong></div><div class="material-combine-list">${rows}</div></div>`; }
+    if (cat === 'monsters') { const pools = renderMonsterSkillPools(data); if (pools) html += `<div class="card detail-section skill-pools"><h2>${escapeHtml(ui('enemySkillPools','Enemy Skill Pools'))}</h2>${pools}</div>`; }
     if (cat !== 'relic' && cat !== 'materials') {
         const usedBy = [];
-        ['monsters', 'jobs'].forEach(sourceCat => {
-            (db[sourceCat] || []).forEach(item => {
-                const itemName = entityKey(sourceCat, item);
-                if (Object.values(item).includes(key) && itemName !== key) usedBy.push({ cat: sourceCat, name: itemName });
-            });
-        });
-        if (usedBy.length > 0) {
-            html += `<div class="card detail-section"><h2>${escapeHtml(ui('usedBy', 'Used By'))}</h2><div class="used-by-list">`;
-            usedBy.forEach(u => {
-                html += `<div class="used-by-item link" data-cat="${escapeHtml(u.cat)}" data-key="${escapeHtml(u.name)}" onclick="loadDetail(this.dataset.cat, this.dataset.key)">${u.cat === 'monsters' ? '👹' : '⚔️'} ${escapeHtml(getLocalizedName(u.cat, u.name))}</div>`;
-            });
-            html += `</div></div>`;
-        }
+        ['monsters','jobs'].forEach(sourceCat => (db[sourceCat] || []).forEach(item => { const name = entityKey(sourceCat,item); if (Object.values(item).includes(key) && name !== key) usedBy.push({cat:sourceCat,name}); }));
+        if (usedBy.length) { html += `<div class="card detail-section"><h2>${escapeHtml(ui('usedBy','Used By'))}</h2><div class="used-by-list">`; usedBy.forEach(u => { html += `<div class="used-by-item link" data-cat="${escapeHtml(u.cat)}" data-key="${escapeHtml(u.name)}" onclick="loadDetail(this.dataset.cat, this.dataset.key)">${u.cat === 'monsters' ? '👹' : '⚔️'} ${escapeHtml(getLocalizedName(u.cat,u.name))}</div>`; }); html += '</div></div>'; }
     }
-    if (cat === 'jobs') {
-        const craftingPath = renderCraftingPath(key);
-        if (craftingPath) html += `<div class="card detail-section"><h2>${escapeHtml(ui('craftingPath', 'Crafting Path'))}</h2>${craftingPath}</div>`;
-        const craftsInto = renderCraftsInto(key);
-        if (craftsInto) html += `<div class="card detail-section"><h2>${escapeHtml(ui('craftsInto', 'Crafts Into'))}</h2>${craftsInto}</div>`;
-    }
-    html += `</div>`;
-    document.getElementById('content').innerHTML = html;
-    window.scrollTo(0, 0);
+    if (cat === 'jobs') { const path = renderCraftingPath(key); if (path) html += `<div class="card detail-section"><h2>${escapeHtml(ui('craftingPath','Crafting Path'))}</h2>${path}</div>`; const into = renderCraftsInto(key); if (into) html += `<div class="card detail-section"><h2>${escapeHtml(ui('craftsInto','Crafts Into'))}</h2>${into}</div>`; }
+    html += '</div>'; document.getElementById('content').innerHTML = html; window.scrollTo(0,0);
 }
 
-function goBackToPreviousDetail() {
-    const previousDetail = detailHistory.pop();
-    if (previousDetail) { loadDetail(previousDetail.cat, previousDetail.key, true); return; }
-    if (currentDetail) {
-        const categoryView = currentDetail.cat.charAt(0).toUpperCase() + currentDetail.cat.slice(1);
-        loadView(categoryView);
-    }
-}
-
-function toggleMenu() {
-    document.querySelector('nav').classList.toggle('open');
-}
-
-document.addEventListener('click', e => {
-    if (e.target.classList.contains('menu-item') && window.innerWidth <= 768) document.querySelector('nav').classList.remove('open');
-});
-
-function createFireParticle(x, y) {
-    const trail = document.getElementById('fire-trail') || createTrailContainer();
-    const particle = document.createElement('div');
-    particle.className = 'fire-particle';
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-    particle.style.background = `hsl(${Math.random()*30 + 15}, 100%, 60%)`;
-    trail.appendChild(particle);
-    setTimeout(() => particle.remove(), 1000);
-}
-
-function createTrailContainer() {
-    const container = document.createElement('div');
-    container.id = 'fire-trail';
-    document.body.appendChild(container);
-    return container;
-}
-
-function createFireBurst(x, y) {
-    const burst = document.createElement('div');
-    burst.className = 'fire-burst';
-    burst.style.left = `${x}px`;
-    burst.style.top = `${y}px`;
-    document.body.appendChild(burst);
-    setTimeout(() => burst.remove(), 600);
-}
-
-document.addEventListener('mousemove', e => {
-    if (Math.random() > 0.35) createFireParticle(e.clientX, e.clientY);
-});
-
-document.addEventListener('click', e => {
-    createFireBurst(e.clientX, e.clientY);
-    setTimeout(() => createFireBurst(e.clientX + 12, e.clientY + 8), 60);
-    setTimeout(() => createFireBurst(e.clientX - 10, e.clientY - 10), 120);
-});
+function goBackToPreviousDetail() { const prev = detailHistory.pop(); if (prev) { loadDetail(prev.cat,prev.key,true); return; } if (currentDetail) loadView(currentDetail.cat.charAt(0).toUpperCase() + currentDetail.cat.slice(1)); }
+function toggleMenu() { document.querySelector('nav').classList.toggle('open'); }
+document.addEventListener('click', e => { if (e.target.classList.contains('menu-item') && window.innerWidth <= 768) document.querySelector('nav').classList.remove('open'); });
+function createFireParticle(x,y) { const trail = document.getElementById('fire-trail') || createTrailContainer(); const p = document.createElement('div'); p.className='fire-particle'; p.style.left=`${x}px`; p.style.top=`${y}px`; p.style.background=`hsl(${Math.random()*30+15}, 100%, 60%)`; trail.appendChild(p); setTimeout(()=>p.remove(),1000); }
+function createTrailContainer() { const c=document.createElement('div'); c.id='fire-trail'; document.body.appendChild(c); return c; }
+function createFireBurst(x,y) { const b=document.createElement('div'); b.className='fire-burst'; b.style.left=`${x}px`; b.style.top=`${y}px`; document.body.appendChild(b); setTimeout(()=>b.remove(),600); }
+document.addEventListener('mousemove',e=>{ if (Math.random()>0.35) createFireParticle(e.clientX,e.clientY); });
+document.addEventListener('click',e=>{ createFireBurst(e.clientX,e.clientY); setTimeout(()=>createFireBurst(e.clientX+12,e.clientY+8),60); setTimeout(()=>createFireBurst(e.clientX-10,e.clientY-10),120); });
 
 init();
