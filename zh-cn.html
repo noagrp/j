@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobmania Wiki - 简体中文</title>
+    <title>Jobmania Wiki</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,86 +11,34 @@
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <nav id="main-nav">
             <img src="jobmania_official_icon.png" alt="Jobmania Logo" class="nav-logo">
+
             <select id="langSelect" onchange="window.location.href=this.value">
                 <option value="index.html">🇬🇧 English</option>
                 <option value="zh-cn.html" selected>🇨🇳 中文（简体）</option>
                 <option value="zh-tw.html">🇹🇼 中文（繁體）</option>
             </select>
+
             <div class="game-info">
                 <strong>Jobmania - Eternal Dungeon</strong><br>
                 AUBJECTIVE TECHNOLOGY LTD.<br>
-                包含广告 • 应用内购买
+                <span data-wiki-key="Contains ads • In-app purchases">Contains ads • In-app purchases</span>
             </div>
             <hr>
-            <div class="menu-item" onclick="loadView('Home')">🏠 首页</div>
-            <div class="menu-item" onclick="loadView('Monsters')">👹 角色</div>
-            <div class="menu-item" onclick="loadView('Jobs')">⚔️ 职业</div>
-            <div class="menu-item" onclick="loadView('Abilities')">✨ 技能</div>
-            <div class="menu-item" onclick="loadView('Passives')">🛡️ 被动技能</div>
-            <div class="menu-item" onclick="loadView('Materials')">🧱 材料</div>
-            <div class="menu-item" onclick="loadView('Relic')">💍 遗物系统</div>
+            <div class="menu-item" onclick="loadView('Home')" data-wiki-key="Home" data-wiki-prefix="🏠 ">🏠 Home</div>
+            <div class="menu-item" onclick="loadView('Monsters')" data-wiki-key="Characters" data-wiki-prefix="👹 ">👹 Characters</div>
+            <div class="menu-item" onclick="loadView('Jobs')" data-wiki-key="Jobs" data-wiki-prefix="⚔️ ">⚔️ Jobs</div>
+            <div class="menu-item" onclick="loadView('Abilities')" data-wiki-key="Abilities" data-wiki-prefix="✨ ">✨ Abilities</div>
+            <div class="menu-item" onclick="loadView('Passives')" data-wiki-key="Passives" data-wiki-prefix="🛡️ ">🛡️ Passives</div>
+            <div class="menu-item" onclick="loadView('Materials')" data-wiki-key="Materials" data-wiki-prefix="🧱 ">🧱 Materials</div>
+            <div class="menu-item" onclick="loadView('Relic')" data-wiki-key="Relic System" data-wiki-prefix="💍 ">💍 Relic System</div>
             <hr>
             <a href="https://play.google.com/store/apps/details?id=com.aubjective.jobmania&hl=zh-CN" target="_blank" class="menu-link">▶️ Google Play</a>
-            <a href="https://discord.gg/6U5FNFVrwb" target="_blank" class="menu-link">💬 加入 Discord</a>
+            <a href="https://discord.gg/6U5FNFVrwb" target="_blank" class="menu-link" data-wiki-key="Join Discord" data-wiki-prefix="💬 ">💬 Join Discord</a>
         </nav>
-        <main id="content"><h1>正在加载 Wiki 数据...</h1></main>
+        <main id="content"><h1 data-wiki-key="Loading Wiki Data...">Loading Wiki Data...</h1></main>
     </div>
 
-    <script>
-        window.JOBMANIA_LOCALE = 'zh-CN';
-        window.JOBMANIA_UI = {
-            home: '首页', characters: '角色', jobs: '职业', abilities: '技能', passives: '被动技能', materials: '材料', relicSystem: '遗物系统',
-            search: '搜索...', entries: '条目', loading: '正在加载数据...', error: '错误', refresh: '请刷新页面。', back: '返回',
-            basicInfo: '基本信息', moreInfo: '更多信息', usedBy: '使用者', description: '说明', condition: '条件',
-            combineList: '合成列表', job: '职业', craftedJob: '合成职业', craftingPath: '合成路线', craftsInto: '可合成为',
-            enemySkillPools: '敌人技能池', randomPassives: '随机被动技能', randomAbilities: '随机技能', thresholdAbilities: '阈值技能', specialCaseAbilities: '特殊条件技能',
-            enemyActFirst: '敌人先行动', below50: '低于 50%', below30: '低于 30%', switchSkill: '切换技能', deckAbility: '牌组技能',
-            passive: '被动技能', ability: '技能', character: '角色', relic: '遗物'
-        };
-
-        window.JOBMANIA_STAT_LABELS = {
-            HP: '体力', Str: '力量', Agi: '敏捷', Int: '智力'
-        };
-
-        window.JOBMANIA_FIELD_LABELS = {
-            JobKey: '职业', AbilityKey: '技能', PassiveKey: '被动技能', RelicKey: '遗物',
-            Rarity: '稀有度', Difficulty: '难度', Race: '种族', Gender: '性别',
-            'Acquire Type': '获取方式', 'Acquire Method': '获取方式',
-            'Ability Tier': '技能等级', 'Skill Rank': '技能等级'
-        };
-
-        window.JOBMANIA_VALUE_LABELS = {
-            Rarity: {
-                Common: '普通', Rare: '稀有', Epic: '史诗', Legendary: '传说'
-            },
-            Difficulty: {
-                Beginner: '入门', Easy: '简单', Medium: '中等', Hard: '困难', Boss: '首领'
-            },
-            'Ability Tier': {
-                Low: '低阶', Medium: '中阶', High: '高阶', Master: '大师', Curse: '诅咒'
-            },
-            'Skill Rank': {
-                Low: '低阶', Medium: '中阶', High: '高阶', Master: '大师'
-            },
-            Race: {
-                Creature: '生物'
-            },
-            Gender: {
-                Other: '其他', Male: '男性', Female: '女性'
-            },
-            'Acquire Type': {
-                Gacha: '召唤', Normal: '普通', Special: '特殊'
-            },
-            'Acquire Method': {
-                Normal: '普通', Special: '特殊'
-            }
-        };
-
-        window.JOBMANIA_HOME_HTML = `<h1>🔥 Jobmania - Eternal Dungeon</h1><div class="home-card"><h2>关于本游戏</h2><p><strong>选择一名英雄和一个职业，踏上不断深入永恒地牢的冒险旅程。</strong></p><p>在旅途中获得随机技能与职业，打造属于自己的独特玩法。<br><strong>你能走多远？</strong></p><h3>特色</h3><ul><li>Roguelite 玩法，敌人与事件均为程序随机生成。</li><li>地牢探索，不断深入地牢，挑战自己的极限。</li><li>策略卡组构筑，通过开启宝箱和击败敌人将技能加入卡组，打造属于自己的独特牌组。</li><li>RPG 回合制战斗系统，机制丰富但易于上手。击败大量不同敌人，挑战十足又让人上瘾。</li><li>可同时装备 3 个职业，在战斗中切换并策略性使用各职业技能，组合出强力联动。</li><li>组合职业与材料，合成新的独特职业。</li><li>通过召唤获得新英雄；上一局被击败的敌人会出现在特殊召唤池中！</li><li>收集特殊遗物，进一步强化你的构筑。</li><li>游戏中包含大量梗、动漫与电影彩蛋！</li><li>免费下载，含广告与应用内购买；一次购买即可移除所有广告。</li><li>仅支持竖屏，你可以单手游玩。</li></ul><p><strong>加入我们的 Discord：</strong> <a href="https://discord.gg/6U5FNFVrwb" target="_blank">https://discord.gg/6U5FNFVrwb</a></p></div>`;
-    </script>
-    <script src="script.js"></script>
-    <script src="wiki-localisation.js"></script>
-    <script src="job-media.js"></script>
-    <script src="skill-description-wiki.js"></script>
+    <script>window.JOBMANIA_LOCALE = 'zh-CN';</script>
+    <script src="wiki-data.js"></script>
 </body>
 </html>
