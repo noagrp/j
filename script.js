@@ -296,4 +296,4 @@ function createFireBurst(x,y) { const b=document.createElement('div'); b.classNa
 document.addEventListener('mousemove',e=>{ if (Math.random()>0.35) createFireParticle(e.clientX,e.clientY); });
 document.addEventListener('click',e=>{ createFireBurst(e.clientX,e.clientY); setTimeout(()=>createFireBurst(e.clientX+12,e.clientY+8),60); setTimeout(()=>createFireBurst(e.clientX-10,e.clientY-10),120); });
 
-init();
+if (!window.JOBMANIA_DEFER_INIT) init();
