@@ -142,5 +142,65 @@
     "English": "Null",
     "Chinese": "无",
     "Chinese (Traditional)": "無"
+  },
+  {
+    "Key": "Home",
+    "English": "Home",
+    "Chinese": "首页",
+    "Chinese (Traditional)": "首頁"
+  },
+  {
+    "Key": "Characters",
+    "English": "Characters",
+    "Chinese": "角色",
+    "Chinese (Traditional)": "角色"
+  },
+  {
+    "Key": "Jobs",
+    "English": "Jobs",
+    "Chinese": "职业",
+    "Chinese (Traditional)": "職業"
+  },
+  {
+    "Key": "Abilities",
+    "English": "Abilities",
+    "Chinese": "主动技能",
+    "Chinese (Traditional)": "主動技能"
+  },
+  {
+    "Key": "Passives",
+    "English": "Passives",
+    "Chinese": "被动技能",
+    "Chinese (Traditional)": "被動技能"
+  },
+  {
+    "Key": "Materials",
+    "English": "Materials",
+    "Chinese": "素材",
+    "Chinese (Traditional)": "素材"
+  },
+  {
+    "Key": "Relic System",
+    "English": "Relic System",
+    "Chinese": "遗物系统",
+    "Chinese (Traditional)": "遺物系統"
+  },
+  {
+    "Key": "Join Discord",
+    "English": "Join Discord",
+    "Chinese": "加入 Discord",
+    "Chinese (Traditional)": "加入 Discord"
+  },
+  {
+    "Key": "Back",
+    "English": "Back",
+    "Chinese": "返回",
+    "Chinese (Traditional)": "返回"
+  },
+  {
+    "Key": "Loading Wiki Data...",
+    "English": "Loading Wiki Data...",
+    "Chinese": "正在加载 Wiki 数据...",
+    "Chinese (Traditional)": "正在載入 Wiki 資料..."
   }
 ]
