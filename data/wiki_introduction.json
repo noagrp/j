@@ -1,0 +1,97 @@
+{
+  "title": {
+    "English": "Jobmania - Eternal Dungeon",
+    "Chinese": "Jobmania - Eternal Dungeon",
+    "Chinese (Traditional)": "Jobmania - Eternal Dungeon"
+  },
+  "aboutTitle": {
+    "English": "About this game",
+    "Chinese": "关于本游戏",
+    "Chinese (Traditional)": "關於本遊戲"
+  },
+  "intro": [
+    {
+      "English": "Pick a Hero and a job then embark on an eternal journey of dungeon descending.",
+      "Chinese": "选择一名英雄和一个职业，踏上不断深入永恒地牢的冒险旅程。",
+      "Chinese (Traditional)": "選擇一名英雄與一個職業，踏上不斷深入永恆地牢的冒險旅程。"
+    },
+    {
+      "English": "Acquire random abilities and jobs through the journey and build your own unique play style.",
+      "Chinese": "在旅途中获得随机技能与职业，打造属于自己的独特玩法。",
+      "Chinese (Traditional)": "在旅途中獲得隨機技能與職業，打造屬於自己的獨特玩法。"
+    },
+    {
+      "English": "How far can you go?",
+      "Chinese": "你能走多远？",
+      "Chinese (Traditional)": "你能走多遠？"
+    }
+  ],
+  "featuresTitle": {
+    "English": "FEATURES",
+    "Chinese": "特色",
+    "Chinese (Traditional)": "特色"
+  },
+  "features": [
+    {
+      "English": "Rogue lite, procedural enemies and events generation.",
+      "Chinese": "Roguelite 玩法，敌人与事件均为程序随机生成。",
+      "Chinese (Traditional)": "Roguelite 玩法，敵人與事件皆為程序隨機生成。"
+    },
+    {
+      "English": "Dungeon crawler, descend into the dungeon as much as you can.",
+      "Chinese": "地牢探索，不断深入地牢，挑战自己的极限。",
+      "Chinese (Traditional)": "地牢探索，不斷深入地牢，挑戰自己的極限。"
+    },
+    {
+      "English": "Strategic deck building, build your own unique deck by adding abilities into your deck via chests and defeating enemies.",
+      "Chinese": "策略卡组构筑，通过开启宝箱和击败敌人将技能加入卡组，打造属于自己的独特牌组。",
+      "Chinese (Traditional)": "策略牌組構築，透過開啟寶箱與擊敗敵人將技能加入牌組，打造屬於自己的獨特牌組。"
+    },
+    {
+      "English": "RPG Turn-based combat system, complex but easy to play. Defeat tons of different enemies, challenging but addictive.",
+      "Chinese": "RPG 回合制战斗系统，机制丰富但易于上手。击败大量不同敌人，挑战十足又让人上瘾。",
+      "Chinese (Traditional)": "RPG 回合制戰鬥系統，機制豐富但容易上手。擊敗大量不同敵人，充滿挑戰又令人上癮。"
+    },
+    {
+      "English": "Equip 3 jobs at once, swap, and use their abilities strategically for powerful synergy.",
+      "Chinese": "可同时装备 3 个职业，在战斗中切换并策略性使用各职业技能，组合出强力联动。",
+      "Chinese (Traditional)": "可同時裝備 3 個職業，在戰鬥中切換並策略性使用各職業技能，組合出強力連動。"
+    },
+    {
+      "English": "Combine jobs and materials to craft new unique jobs.",
+      "Chinese": "组合职业与材料，合成新的独特职业。",
+      "Chinese (Traditional)": "組合職業與材料，合成新的獨特職業。"
+    },
+    {
+      "English": "Get new heroes from Gacha, enemies defeated from the last run will appear in a special Gacha pool!",
+      "Chinese": "通过召唤获得新英雄；上一局被击败的敌人会出现在特殊召唤池中！",
+      "Chinese (Traditional)": "透過召喚獲得新英雄；上一局被擊敗的敵人會出現在特殊召喚池中！"
+    },
+    {
+      "English": "Collect special relics to enhance your build further.",
+      "Chinese": "收集特殊遗物，进一步强化你的构筑。",
+      "Chinese (Traditional)": "收集特殊遺物，進一步強化你的構築。"
+    },
+    {
+      "English": "A lot of Memes, Anime and Movies references in the game!",
+      "Chinese": "游戏中包含大量梗、动漫与电影彩蛋！",
+      "Chinese (Traditional)": "遊戲中包含大量迷因、動漫與電影彩蛋！"
+    },
+    {
+      "English": "Free with ads and in-app purchases, remove all ads with one purchase.",
+      "Chinese": "免费下载，含广告与应用内购买；一次购买即可移除所有广告。",
+      "Chinese (Traditional)": "免費下載，含廣告與應用程式內購買；一次購買即可移除所有廣告。"
+    },
+    {
+      "English": "Portrait screen only, you can play this game with one hand.",
+      "Chinese": "仅支持竖屏，你可以单手游玩。",
+      "Chinese (Traditional)": "僅支援直向畫面，你可以單手游玩。"
+    }
+  ],
+  "discordLabel": {
+    "English": "Join our Discord:",
+    "Chinese": "加入我们的 Discord：",
+    "Chinese (Traditional)": "加入我們的 Discord："
+  },
+  "discordUrl": "https://discord.gg/6U5FNFVrwb"
+}
