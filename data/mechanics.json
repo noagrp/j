@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "source": "Jobmania Database Guides sheet",
+  "powerLv": {
+    "stat": {
+      "1": 10,
+      "2": 25,
+      "3": 40,
+      "4": 70,
+      "5": 100,
+      "6": 150,
+      "7": 200,
+      "8": 300
+    },
+    "maxHP": {
+      "1": { "enemy": 5, "player": 10 },
+      "2": { "enemy": 10, "player": 15 },
+      "3": { "enemy": 15, "player": 25 },
+      "4": { "enemy": 20, "player": 35 },
+      "5": { "enemy": 25, "player": 40 },
+      "6": { "enemy": 30, "player": 50 },
+      "7": { "enemy": 40, "player": 70 },
+      "8": { "enemy": 50, "player": 100 }
+    }
+  },
+  "routes": {
+    "ability": {
+      "Damage": {
+        "Strength": "powerLv.stat",
+        "Agility": "powerLv.stat",
+        "Intelligence": "powerLv.stat",
+        "Protect": "powerLv.stat",
+        "MaxHP": "powerLv.maxHP"
+      },
+      "Heal": {
+        "MaxHP": "powerLv.maxHP"
+      }
+    }
+  }
+}
