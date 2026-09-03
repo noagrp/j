@@ -1,0 +1,146 @@
+[
+  {
+    "Key": "HP",
+    "English": "HP",
+    "Chinese": "体力",
+    "Chinese (Traditional)": "體力"
+  },
+  {
+    "Key": "MaxHP",
+    "English": "MaxHP",
+    "Chinese": "体力上限",
+    "Chinese (Traditional)": "體力上限"
+  },
+  {
+    "Key": "Str",
+    "English": "Str",
+    "Chinese": "力量",
+    "Chinese (Traditional)": "力量"
+  },
+  {
+    "Key": "Strength",
+    "English": "Strength",
+    "Chinese": "力量",
+    "Chinese (Traditional)": "力量"
+  },
+  {
+    "Key": "Agi",
+    "English": "Agi",
+    "Chinese": "敏捷",
+    "Chinese (Traditional)": "敏捷"
+  },
+  {
+    "Key": "Agility",
+    "English": "Agility",
+    "Chinese": "敏捷",
+    "Chinese (Traditional)": "敏捷"
+  },
+  {
+    "Key": "Int",
+    "English": "Int",
+    "Chinese": "智力",
+    "Chinese (Traditional)": "智力"
+  },
+  {
+    "Key": "Intelligence",
+    "English": "Intelligence",
+    "Chinese": "智力",
+    "Chinese (Traditional)": "智力"
+  },
+  {
+    "Key": "Humanoid",
+    "English": "Humanoid",
+    "Chinese": "人族",
+    "Chinese (Traditional)": "人族"
+  },
+  {
+    "Key": "Creature",
+    "English": "Creature",
+    "Chinese": "兽族",
+    "Chinese (Traditional)": "獸族"
+  },
+  {
+    "Key": "Spirit",
+    "English": "Spirit",
+    "Chinese": "魂族",
+    "Chinese (Traditional)": "魂族"
+  },
+  {
+    "Key": "Matter",
+    "English": "Matter",
+    "Chinese": "物族",
+    "Chinese (Traditional)": "物族"
+  },
+  {
+    "Key": "Fire",
+    "English": "Fire",
+    "Chinese": "火",
+    "Chinese (Traditional)": "火"
+  },
+  {
+    "Key": "Water",
+    "English": "Water",
+    "Chinese": "水",
+    "Chinese (Traditional)": "水"
+  },
+  {
+    "Key": "Thunder",
+    "English": "Thunder",
+    "Chinese": "雷",
+    "Chinese (Traditional)": "雷"
+  },
+  {
+    "Key": "Earth",
+    "English": "Earth",
+    "Chinese": "土",
+    "Chinese (Traditional)": "土"
+  },
+  {
+    "Key": "Wind",
+    "English": "Wind",
+    "Chinese": "风",
+    "Chinese (Traditional)": "風"
+  },
+  {
+    "Key": "Light",
+    "English": "Light",
+    "Chinese": "光",
+    "Chinese (Traditional)": "光"
+  },
+  {
+    "Key": "Dark",
+    "English": "Dark",
+    "Chinese": "暗",
+    "Chinese (Traditional)": "暗"
+  },
+  {
+    "Key": "Gacha",
+    "English": "Gacha",
+    "Chinese": "常驻",
+    "Chinese (Traditional)": "常駐"
+  },
+  {
+    "Key": "EventGacha",
+    "English": "EventGacha",
+    "Chinese": "活动",
+    "Chinese (Traditional)": "活動"
+  },
+  {
+    "Key": "SpecialGacha",
+    "English": "SpecialGacha",
+    "Chinese": "特别",
+    "Chinese (Traditional)": "特別"
+  },
+  {
+    "Key": "Unobtainable",
+    "English": "Unobtainable",
+    "Chinese": "无法获得",
+    "Chinese (Traditional)": "無法獲得"
+  },
+  {
+    "Key": "Null",
+    "English": "Null",
+    "Chinese": "无",
+    "Chinese (Traditional)": "無"
+  }
+]
