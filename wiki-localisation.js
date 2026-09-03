@@ -7,6 +7,11 @@
     const originalRenderFieldValue = window.renderFieldValue;
     const originalLoadDetail = window.loadDetail;
 
+    const relicReferenceFields = {
+        'Craft Material x1': 'materials',
+        'Craft Ability x5': 'abilities'
+    };
+
     function fieldLabel(cat, key) {
         if (cat === 'abilities' && key === 'AbilityKey') return window.JOBMANIA_UI?.ability || 'Ability';
         if (cat === 'passives' && key === 'PassiveKey') return window.JOBMANIA_UI?.passive || 'Passive';
@@ -27,6 +32,24 @@
         return fieldMap[raw] ?? fieldMap[raw.toLowerCase()] ?? value;
     }
 
+    function renderRelicReference(cat, key, value, clickable) {
+        if (cat !== 'relic' || typeof value !== 'string' || !value) return null;
+        const refCat = relicReferenceFields[key];
+        if (!refCat) return null;
+
+        if (clickable && typeof window.detailLink === 'function') {
+            return window.detailLink(refCat, value);
+        }
+
+        const localized = typeof window.getLocalizedName === 'function'
+            ? window.getLocalizedName(refCat, value)
+            : value;
+
+        return typeof window.escapeHtml === 'function'
+            ? window.escapeHtml(localized)
+            : String(localized);
+    }
+
     if (typeof originalGetDisplayKey === 'function') {
         window.getDisplayKey = function (cat, key) {
             return fieldLabel(cat, key) || originalGetDisplayKey.apply(this, arguments);
@@ -35,6 +58,9 @@
 
     if (typeof originalRenderFieldValue === 'function') {
         window.renderFieldValue = function (cat, key, value, clickable) {
+            const relicReference = renderRelicReference(cat, key, value, clickable);
+            if (relicReference !== null) return relicReference;
+
             const rendered = originalRenderFieldValue.apply(this, arguments);
             const emoji = typeof window.getRankEmoji === 'function' ? window.getRankEmoji(cat, key, value) : '';
             if (emoji) return rendered;
