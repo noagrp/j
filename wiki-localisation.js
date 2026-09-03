@@ -58,6 +58,10 @@
 
     if (typeof originalRenderFieldValue === 'function') {
         window.renderFieldValue = function (cat, key, value, clickable) {
+            if (cat === 'abilities' && key === 'Ability Tier' && String(value).toLowerCase().trim() === 'curse') {
+                return '☆';
+            }
+
             const relicReference = renderRelicReference(cat, key, value, clickable);
             if (relicReference !== null) return relicReference;
 
