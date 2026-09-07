@@ -8,9 +8,10 @@
  * - Ability Heal + MaxHP -> MaxHP Power Lv table (enemy/player values)
  * - Ability Protect + Strength/Agility/Intelligence -> stat Power Lv table
  * - Ability Protect + MaxHP -> MaxHP Power Lv table (enemy/player values)
+ * - Strength/Agility/Intelligence/MaxHP Buff and Debuff stack behavior
  * - Apply1-Apply4 tags resolve through mechanics.json to player-facing effect names
  *
- * Balance values and Apply-tag labels live in data/mechanics.json, not in this file.
+ * Balance values, reusable effect definitions, and Apply-tag labels live in data/mechanics.json.
  */
 (function (root) {
   'use strict';
@@ -95,6 +96,26 @@
     return null;
   }
 
+  function getEffectDefinition(name) {
+    const key = String(name || '').trim();
+    if (!key) return null;
+    return mechanicsData?.effectDefinitions?.[key] || null;
+  }
+
+  function getStatEffectDefinition(skillUnit, effect) {
+    const normalizedSkillUnit = String(skillUnit || '').trim();
+    const normalizedEffect = String(effect || '').trim();
+    if (!normalizedSkillUnit || !normalizedEffect) return null;
+
+    const entries = mechanicsData?.effectDefinitions || {};
+    for (const [name, definition] of Object.entries(entries)) {
+      if (definition?.skillUnit === normalizedSkillUnit && definition?.effect === normalizedEffect) {
+        return { name, ...definition };
+      }
+    }
+    return null;
+  }
+
   function getApplyTagLabel(rawTag) {
     const key = String(rawTag || '').trim();
     if (!key) return null;
@@ -173,6 +194,8 @@
     load,
     resolve,
     installRules,
+    getEffectDefinition,
+    getStatEffectDefinition,
     getApplyTagLabel,
     formatApplyTags,
     get data() {
