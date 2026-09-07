@@ -14,6 +14,10 @@
     let passiveSkillUnitMap = null;
     let abilitySkillUnitPromise = null;
     let passiveSkillUnitPromise = null;
+
+    let abilityApplyTagMap = null;
+    let passiveApplyTagMap = null;
+    let applyTagsPromise = null;
     let runtimePromise = null;
 
     function loadScriptOnce(src, globalName) {
@@ -54,6 +58,45 @@
             return null;
         });
         return runtimePromise;
+    }
+
+    async function ensureApplyTags() {
+        if (abilityApplyTagMap && passiveApplyTagMap) {
+            return { abilities: abilityApplyTagMap, passives: passiveApplyTagMap };
+        }
+        if (applyTagsPromise) return applyTagsPromise;
+
+        applyTagsPromise = (async function () {
+            const indexRes = await fetch('data/apply_tags.json');
+            if (!indexRes.ok) throw new Error(`HTTP ${indexRes.status}`);
+            const index = await indexRes.json();
+
+            const abilityChunks = Array.isArray(index.abilityChunks) ? index.abilityChunks : [];
+            const abilityObjects = await Promise.all(abilityChunks.map(async src => {
+                const res = await fetch(src);
+                if (!res.ok) throw new Error(`HTTP ${res.status} loading ${src}`);
+                return res.json();
+            }));
+
+            let passiveObject = {};
+            if (index.passiveFile) {
+                const res = await fetch(index.passiveFile);
+                if (!res.ok) throw new Error(`HTTP ${res.status} loading ${index.passiveFile}`);
+                passiveObject = await res.json();
+            }
+
+            const mergedAbilities = Object.assign({}, ...abilityObjects);
+            abilityApplyTagMap = new Map(Object.entries(mergedAbilities));
+            passiveApplyTagMap = new Map(Object.entries(passiveObject || {}));
+            return { abilities: abilityApplyTagMap, passives: passiveApplyTagMap };
+        })().catch(error => {
+            console.error('Failed to load Apply tags:', error);
+            abilityApplyTagMap = new Map();
+            passiveApplyTagMap = new Map();
+            return { abilities: abilityApplyTagMap, passives: passiveApplyTagMap };
+        });
+
+        return applyTagsPromise;
     }
 
     async function ensureSkillUnitSource(cat) {
@@ -173,16 +216,35 @@
         return cleanLines(lines);
     }
 
+    async function getApplyTagLine(cat, key) {
+        await ensureApplyTags();
+        const rawTags = cat === 'passives'
+            ? (passiveApplyTagMap?.get(key) || [])
+            : (abilityApplyTagMap?.get(key) || []);
+        if (!rawTags.length) return '';
+
+        const formatted = window.JobmaniaMechanics?.formatApplyTags
+            ? window.JobmaniaMechanics.formatApplyTags(rawTags)
+            : rawTags.map(tag => `(${tag})`);
+        return formatted.join(' ');
+    }
+
     async function getLiveEnglishLines(cat, key) {
         const engine = await ensureRuntime();
         if (!engine?.resolveEntry) return [];
 
         const sourceMap = await ensureSkillUnitSource(cat);
         const entry = sourceMap.get(key);
-        if (!entry) return [];
+        const lines = [];
 
-        const result = engine.resolveEntry(entry, { kind: cat === 'passives' ? 'passive' : 'ability' });
-        return cleanLines(result?.descriptions || []);
+        if (entry) {
+            const result = engine.resolveEntry(entry, { kind: cat === 'passives' ? 'passive' : 'ability' });
+            lines.push(...cleanLines(result?.descriptions || []));
+        }
+
+        const tagLine = await getApplyTagLine(cat, key);
+        if (tagLine) lines.push(tagLine);
+        return lines;
     }
 
     async function getDescriptionLines(cat, key) {
