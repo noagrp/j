@@ -4,7 +4,10 @@
  * Expandable data-driven mechanics layer. Current confirmed mechanics:
  * - Ability Damage + Strength/Agility/Intelligence/Protect -> stat Power Lv table
  * - Ability Damage + MaxHP -> MaxHP Power Lv table (enemy/player values)
+ * - Ability Heal + Agility -> stat Power Lv table
  * - Ability Heal + MaxHP -> MaxHP Power Lv table (enemy/player values)
+ * - Ability Protect + Strength/Agility/Intelligence -> stat Power Lv table
+ * - Ability Protect + MaxHP -> MaxHP Power Lv table (enemy/player values)
  *
  * Balance values live in data/mechanics.json, not in this file.
  */
@@ -63,12 +66,40 @@
     if (!resolved) return null;
     const value = resolved.value;
 
-    if (effect === 'MaxHP' && resolved.route === 'powerLv.maxHP') {
+    if (resolved.route === 'powerLv.maxHP') {
       if (!value || typeof value !== 'object') return null;
       return `Recover ${value.enemy}%/${value.player}% MaxHP.`;
     }
 
+    if (resolved.route === 'powerLv.stat') {
+      return `Recover ${value}% ${effect}.`;
+    }
+
     return null;
+  }
+
+  function formatAbilityProtect(effect, resolved) {
+    if (!resolved) return null;
+    const value = resolved.value;
+
+    if (resolved.route === 'powerLv.maxHP') {
+      if (!value || typeof value !== 'object') return null;
+      return `Gain ${value.enemy}%/${value.player}% MaxHP Protect.`;
+    }
+
+    if (resolved.route === 'powerLv.stat') {
+      return `Gain ${value}% ${effect} Protect.`;
+    }
+
+    return null;
+  }
+
+  function unresolved(kind, skillUnit, effect, multiplier) {
+    return {
+      text: null,
+      unresolved: true,
+      reason: `No confirmed mechanic value for ${kind} ${skillUnit} + ${effect} at multiplier ${multiplier}`
+    };
   }
 
   function installRules() {
@@ -77,24 +108,23 @@
 
     ['Strength', 'Agility', 'Intelligence', 'Protect', 'MaxHP'].forEach((effect) => {
       engine.registerRule('ability', 'Damage', effect, ({ Multiplier }) => {
-        const resolved = resolve('ability', 'Damage', effect, Multiplier);
-        const text = formatAbilityDamage(effect, resolved);
-        return text || {
-          text: null,
-          unresolved: true,
-          reason: `No confirmed mechanic value for ability Damage + ${effect} at multiplier ${Multiplier}`
-        };
+        const text = formatAbilityDamage(effect, resolve('ability', 'Damage', effect, Multiplier));
+        return text || unresolved('ability', 'Damage', effect, Multiplier);
       });
     });
 
-    engine.registerRule('ability', 'Heal', 'MaxHP', ({ Multiplier }) => {
-      const resolved = resolve('ability', 'Heal', 'MaxHP', Multiplier);
-      const text = formatAbilityHeal('MaxHP', resolved);
-      return text || {
-        text: null,
-        unresolved: true,
-        reason: `No confirmed mechanic value for ability Heal + MaxHP at multiplier ${Multiplier}`
-      };
+    ['Agility', 'MaxHP'].forEach((effect) => {
+      engine.registerRule('ability', 'Heal', effect, ({ Multiplier }) => {
+        const text = formatAbilityHeal(effect, resolve('ability', 'Heal', effect, Multiplier));
+        return text || unresolved('ability', 'Heal', effect, Multiplier);
+      });
+    });
+
+    ['Strength', 'Agility', 'Intelligence', 'MaxHP'].forEach((effect) => {
+      engine.registerRule('ability', 'Protect', effect, ({ Multiplier }) => {
+        const text = formatAbilityProtect(effect, resolve('ability', 'Protect', effect, Multiplier));
+        return text || unresolved('ability', 'Protect', effect, Multiplier);
+      });
     });
 
     return true;
