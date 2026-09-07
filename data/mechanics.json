@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "source": "Jobmania Database Guides sheet",
+  "version": 2,
+  "source": "Jobmania Database Guides and Skill Unit sheets",
   "powerLv": {
     "stat": {
       "1": 10,
@@ -33,7 +33,9 @@
         "MaxHP": "powerLv.maxHP"
       },
       "Heal": {
+        "Strength": "powerLv.stat",
         "Agility": "powerLv.stat",
+        "Intelligence": "powerLv.stat",
         "MaxHP": "powerLv.maxHP"
       },
       "Protect": {
@@ -43,5 +45,53 @@
         "MaxHP": "powerLv.maxHP"
       }
     }
+  },
+  "applyTags": {
+    "Humanoid": "Humanoid",
+    "Creature": "Beast",
+    "Spirit": "Spirit",
+    "Matter": "Inorganic",
+    "LifeSteal": "Lifesteal",
+    "Strength": "Strength Synergy",
+    "Agility": "Agility Synergy",
+    "Intelligence": "Intelligence Synergy",
+    "MaxHP": "Max HP Synergy",
+    "Fire": "Fire",
+    "Water": "Water",
+    "Thunder": "Thunder",
+    "Earth": "Earth",
+    "Wind": "Wind",
+    "Light": "Light",
+    "Dark": "Dark",
+    "Charge": "Chronocharge",
+    "Action": "Practice Perfect",
+    "Buff": "Focus Energy",
+    "Debuff": "Desperate Power",
+    "Multiply": "Overloaded",
+    "Draw": "Last Resort",
+    "Exhaust": "Exhaust",
+    "Curse": "Curse",
+    "Combo": "Combo Blend",
+    "Delay": "Scheduled",
+    "Direct": "Automatic",
+    "Dice": "Gamble",
+    "Sacrifice": "Grudge",
+    "Full": "Favor",
+    "Element": "Elemental Burst",
+    "Certain": "Fatal",
+    "Steal": "Steal",
+    "Unstable": "Panic",
+    "Summon": "Summon",
+    "Misfortune": "Calamity Cache",
+    "Do": "Do",
+    "Re": "Re",
+    "Mi": "Mi",
+    "Slack": "Slumber Snap",
+    "Silver": "Silver",
+    "Gold": "Gold",
+    "Crystal": "Crystal",
+    "Food": "Food",
+    "Tool": "Tool",
+    "Prepare": "Preparation"
   }
 }
