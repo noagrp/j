@@ -4,12 +4,13 @@
  * Expandable data-driven mechanics layer. Current confirmed mechanics:
  * - Ability Damage + Strength/Agility/Intelligence/Protect -> stat Power Lv table
  * - Ability Damage + MaxHP -> MaxHP Power Lv table (enemy/player values)
- * - Ability Heal + Agility -> stat Power Lv table
+ * - Ability Heal + Strength/Agility/Intelligence -> stat Power Lv table
  * - Ability Heal + MaxHP -> MaxHP Power Lv table (enemy/player values)
  * - Ability Protect + Strength/Agility/Intelligence -> stat Power Lv table
  * - Ability Protect + MaxHP -> MaxHP Power Lv table (enemy/player values)
+ * - Apply1-Apply4 tags resolve through mechanics.json to player-facing effect names
  *
- * Balance values live in data/mechanics.json, not in this file.
+ * Balance values and Apply-tag labels live in data/mechanics.json, not in this file.
  */
 (function (root) {
   'use strict';
@@ -72,7 +73,7 @@
     }
 
     if (resolved.route === 'powerLv.stat') {
-      return `Recover ${value}% ${effect}.`;
+      return `Recover ${value}% ${effect} HP.`;
     }
 
     return null;
@@ -94,6 +95,20 @@
     return null;
   }
 
+  function getApplyTagLabel(rawTag) {
+    const key = String(rawTag || '').trim();
+    if (!key) return null;
+    return mechanicsData?.applyTags?.[key] || key;
+  }
+
+  function formatApplyTags(rawTags) {
+    if (!Array.isArray(rawTags)) return [];
+    return rawTags
+      .map(getApplyTagLabel)
+      .filter(Boolean)
+      .map(label => `(${label})`);
+  }
+
   function unresolved(kind, skillUnit, effect, multiplier) {
     return {
       text: null,
@@ -113,7 +128,7 @@
       });
     });
 
-    ['Agility', 'MaxHP'].forEach((effect) => {
+    ['Strength', 'Agility', 'Intelligence', 'MaxHP'].forEach((effect) => {
       engine.registerRule('ability', 'Heal', effect, ({ Multiplier }) => {
         const text = formatAbilityHeal(effect, resolve('ability', 'Heal', effect, Multiplier));
         return text || unresolved('ability', 'Heal', effect, Multiplier);
@@ -158,6 +173,8 @@
     load,
     resolve,
     installRules,
+    getApplyTagLabel,
+    formatApplyTags,
     get data() {
       return mechanicsData;
     }
