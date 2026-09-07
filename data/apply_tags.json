@@ -1,1 +1,12 @@
-__FULL_CONTENT__
+{
+  "version": 1,
+  "source": "Copy of Jobmania Database 0 — Abilities/PassiveSkills Apply columns",
+  "abilityChunks": [
+    "data/apply_tags_abilities_0.json",
+    "data/apply_tags_abilities_1.json",
+    "data/apply_tags_abilities_2.json",
+    "data/apply_tags_abilities_3.json",
+    "data/apply_tags_abilities_4.json"
+  ],
+  "passiveFile": "data/apply_tags_passives.json"
+}
