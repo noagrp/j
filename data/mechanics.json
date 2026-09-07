@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "source": "Jobmania Database Guides and Skill Unit sheets",
   "powerLv": {
     "stat": {
@@ -44,6 +44,88 @@
         "Intelligence": "powerLv.stat",
         "MaxHP": "powerLv.maxHP"
       }
+    }
+  },
+  "effectDefinitions": {
+    "Strength Buff": {
+      "skillUnit": "Buff",
+      "effect": "Strength",
+      "changePercentPerStack": 10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnStart",
+      "decreaseStacks": 1,
+      "description": "Temporarily increase Strength by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+    },
+    "Agility Buff": {
+      "skillUnit": "Buff",
+      "effect": "Agility",
+      "changePercentPerStack": 10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnStart",
+      "decreaseStacks": 1,
+      "description": "Temporarily increase Agility by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+    },
+    "Intelligence Buff": {
+      "skillUnit": "Buff",
+      "effect": "Intelligence",
+      "changePercentPerStack": 10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnStart",
+      "decreaseStacks": 1,
+      "description": "Temporarily increase Intelligence by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+    },
+    "MaxHP Buff": {
+      "skillUnit": "Buff",
+      "effect": "MaxHP",
+      "changePercentPerStack": 10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnStart",
+      "decreaseStacks": 1,
+      "description": "Temporarily increase MaxHP by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+    },
+    "Strength Debuff": {
+      "skillUnit": "Debuff",
+      "effect": "Strength",
+      "changePercentPerStack": -10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnEnd",
+      "decreaseStacks": 1,
+      "description": "Temporarily reduce Strength by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
+    },
+    "Agility Debuff": {
+      "skillUnit": "Debuff",
+      "effect": "Agility",
+      "changePercentPerStack": -10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnEnd",
+      "decreaseStacks": 1,
+      "description": "Temporarily reduce Agility by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
+    },
+    "Intelligence Debuff": {
+      "skillUnit": "Debuff",
+      "effect": "Intelligence",
+      "changePercentPerStack": -10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnEnd",
+      "decreaseStacks": 1,
+      "description": "Temporarily reduce Intelligence by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
+    },
+    "MaxHP Debuff": {
+      "skillUnit": "Debuff",
+      "effect": "MaxHP",
+      "changePercentPerStack": -10,
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "decreaseAt": "TurnEnd",
+      "decreaseStacks": 1,
+      "description": "Temporarily reduce MaxHP by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
     }
   },
   "applyTags": {
