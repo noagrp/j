@@ -191,6 +191,9 @@
         return String(line)
             .replace(/<sprite\s+name=["']?[^>"']+["']?\s*>/gi, '')
             .replace(/\\<sprite\s+name=["']?[^>"']+["']?\s*>/gi, '')
+            .replace(/\bStr\b/g, 'Strength')
+            .replace(/\bAgi\b/g, 'Agility')
+            .replace(/\bInt\b/g, 'Intelligence')
             .replace(/\s+/g, ' ')
             .replace(/\s+([。！？,.!?])/g, '$1')
             .trim();
