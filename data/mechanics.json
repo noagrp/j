@@ -33,6 +33,13 @@
         "MaxHP": "powerLv.maxHP"
       },
       "Heal": {
+        "Agility": "powerLv.stat",
+        "MaxHP": "powerLv.maxHP"
+      },
+      "Protect": {
+        "Strength": "powerLv.stat",
+        "Agility": "powerLv.stat",
+        "Intelligence": "powerLv.stat",
         "MaxHP": "powerLv.maxHP"
       }
     }
