@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "source": "Jobmania Database Guides and Skill Unit sheets plus confirmed in-game descriptions",
   "powerLv": {
     "stat": {
@@ -47,28 +47,28 @@
       }
     }
   },
-  "elementSystems": {
-    "Fire": {
-      "status": "Burn",
-      "finale": "Fire Finale",
-      "abilityMechanic": "Fire Ability",
-      "elementMechanic": "Fire Element",
-      "counteredBy": "Water",
-      "advantageCondition": ["Wind", "Burn"],
+  "elementMechanics": {
+    "shared": {
       "abilityBonusPerStack": 3,
       "abilityConditionalDamageBonus": 20,
       "abilityConditionalDamageBonusUpgraded": 30,
       "elementNonElementalDamageBonusPerStack": 3,
       "elementDamageReductionPerStack": 3,
-      "elementDamageReductionTypes": ["Fire", "Wind"],
       "maxStacks": 5,
       "upgradeMaxStacks": 10,
-      "loseStackWhenHitBy": "Water",
-      "loseStacksWhenHit": 1,
+      "loseStacksWhenCountered": 1,
       "finaleThreshold": 5,
       "finaleDamagePercent": 100,
       "finaleMaxThreshold": 10,
       "finaleMaxDamagePercent": 150
+    },
+    "elements": {
+      "Fire": {
+        "counteredBy": "Water"
+      },
+      "Water": {
+        "counteredBy": "Thunder"
+      }
     }
   },
   "effectDefinitions": {
@@ -155,21 +155,6 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "removedAt": "TurnEnd"
-    },
-    "Fire Ability": {
-      "type": "ApplyTagMechanic",
-      "effect": "Fire",
-      "elementSystem": "Fire"
-    },
-    "Fire Element": {
-      "skillUnit": "Buff",
-      "effect": "Fire",
-      "elementSystem": "Fire"
-    },
-    "Fire Finale": {
-      "type": "ElementFinale",
-      "effect": "Fire",
-      "elementSystem": "Fire"
     }
   },
   "applyTags": {
