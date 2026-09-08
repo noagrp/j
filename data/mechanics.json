@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "source": "Jobmania Database Guides and Skill Unit sheets",
+  "version": 4,
+  "source": "Jobmania Database Guides and Skill Unit sheets plus confirmed in-game descriptions",
   "powerLv": {
     "stat": {
       "1": 10,
@@ -30,7 +30,8 @@
         "Agility": "powerLv.stat",
         "Intelligence": "powerLv.stat",
         "Protect": "powerLv.stat",
-        "MaxHP": "powerLv.maxHP"
+        "MaxHP": "powerLv.maxHP",
+        "Fire": "powerLv.stat"
       },
       "Heal": {
         "Strength": "powerLv.stat",
@@ -46,6 +47,30 @@
       }
     }
   },
+  "elementSystems": {
+    "Fire": {
+      "status": "Burn",
+      "finale": "Fire Finale",
+      "abilityMechanic": "Fire Ability",
+      "elementMechanic": "Fire Element",
+      "counteredBy": "Water",
+      "advantageCondition": ["Wind", "Burn"],
+      "abilityBonusPerStack": 3,
+      "abilityConditionalDamageBonus": 20,
+      "abilityConditionalDamageBonusUpgraded": 30,
+      "elementNonElementalDamageBonusPerStack": 3,
+      "elementDamageReductionPerStack": 3,
+      "elementDamageReductionTypes": ["Fire", "Wind"],
+      "maxStacks": 5,
+      "upgradeMaxStacks": 10,
+      "loseStackWhenHitBy": "Water",
+      "loseStacksWhenHit": 1,
+      "finaleThreshold": 5,
+      "finaleDamagePercent": 100,
+      "finaleMaxThreshold": 10,
+      "finaleMaxDamagePercent": 150
+    }
+  },
   "effectDefinitions": {
     "Strength Buff": {
       "skillUnit": "Buff",
@@ -54,8 +79,7 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnStart",
-      "decreaseStacks": 1,
-      "description": "Temporarily increase Strength by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+      "decreaseStacks": 1
     },
     "Agility Buff": {
       "skillUnit": "Buff",
@@ -64,8 +88,7 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnStart",
-      "decreaseStacks": 1,
-      "description": "Temporarily increase Agility by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+      "decreaseStacks": 1
     },
     "Intelligence Buff": {
       "skillUnit": "Buff",
@@ -74,8 +97,7 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnStart",
-      "decreaseStacks": 1,
-      "description": "Temporarily increase Intelligence by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+      "decreaseStacks": 1
     },
     "MaxHP Buff": {
       "skillUnit": "Buff",
@@ -84,8 +106,7 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnStart",
-      "decreaseStacks": 1,
-      "description": "Temporarily increase MaxHP by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the start of the user's turn."
+      "decreaseStacks": 1
     },
     "Strength Debuff": {
       "skillUnit": "Debuff",
@@ -94,8 +115,7 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1,
-      "description": "Temporarily reduce Strength by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
+      "decreaseStacks": 1
     },
     "Agility Debuff": {
       "skillUnit": "Debuff",
@@ -104,8 +124,7 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1,
-      "description": "Temporarily reduce Agility by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
+      "decreaseStacks": 1
     },
     "Intelligence Debuff": {
       "skillUnit": "Debuff",
@@ -114,8 +133,7 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1,
-      "description": "Temporarily reduce Intelligence by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
+      "decreaseStacks": 1
     },
     "MaxHP Debuff": {
       "skillUnit": "Debuff",
@@ -124,8 +142,34 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1,
-      "description": "Temporarily reduce MaxHP by 10% per stack. Max 3 stacks, or 5 when upgraded. Lose 1 stack at the end of the user's turn."
+      "decreaseStacks": 1
+    },
+    "Burn": {
+      "skillUnit": "Debuff",
+      "effect": "Fire",
+      "damagePercentPerStack": 5,
+      "damageBasedOn": "MaxHP",
+      "damageAt": "TurnStart",
+      "instantDamageIfInflictedDuringUserTurn": true,
+      "receivesMoreDamageFrom": "Fire",
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "removedAt": "TurnEnd"
+    },
+    "Fire Ability": {
+      "type": "ApplyTagMechanic",
+      "effect": "Fire",
+      "elementSystem": "Fire"
+    },
+    "Fire Element": {
+      "skillUnit": "Buff",
+      "effect": "Fire",
+      "elementSystem": "Fire"
+    },
+    "Fire Finale": {
+      "type": "ElementFinale",
+      "effect": "Fire",
+      "elementSystem": "Fire"
     }
   },
   "applyTags": {
