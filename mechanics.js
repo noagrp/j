@@ -60,7 +60,11 @@
 
   function getElementSystem(element) {
     const key = String(element || '').trim();
-    return key ? (mechanicsData?.elementSystems?.[key] || null) : null;
+    if (!key) return null;
+    const shared = mechanicsData?.elementMechanics?.shared || null;
+    const specific = mechanicsData?.elementMechanics?.elements?.[key] || null;
+    if (!shared && !specific) return null;
+    return { ...(shared || {}), ...(specific || {}), element: key };
   }
 
   function getLocaleBlock(locale) {
@@ -71,6 +75,27 @@
   function getMechanicName(name, locale) {
     const block = getLocaleBlock(locale);
     return block?.mechanicNames?.[name] || name;
+  }
+
+  function getElementMechanicName(element, type, locale) {
+    const block = getLocaleBlock(locale);
+    const templates = block?.nameTemplates || {};
+    const template = templates?.[type];
+    if (!template) return `${element} ${type}`;
+    return fillTemplate(template, { element });
+  }
+
+  function getElementMechanic(element, type) {
+    const system = getElementSystem(element);
+    if (!system) return null;
+    const normalizedType = String(type || '').trim().toLowerCase();
+    if (!['element', 'ability', 'finale'].includes(normalizedType)) return null;
+    return {
+      type: normalizedType,
+      name: getElementMechanicName(element, normalizedType, 'en'),
+      element: system.element,
+      ...system
+    };
   }
 
   function describeReusableMechanic(name, locale) {
@@ -107,14 +132,16 @@
       });
     }
 
-    const element = definition.elementSystem;
+    return null;
+  }
+
+  function describeElementMechanic(element, type, locale) {
     const system = getElementSystem(element);
     if (!system) return null;
+    const block = getLocaleBlock(locale);
+    const templates = block?.templates || {};
     const common = {
-      element,
-      status: system.status,
-      finale: system.finale,
-      advantageElement: Array.isArray(system.advantageCondition) ? system.advantageCondition.find(v => v !== system.status) : '',
+      element: system.element,
       stackBonus: system.abilityBonusPerStack,
       conditionalBonus: system.abilityConditionalDamageBonus,
       upgradedConditionalBonus: system.abilityConditionalDamageBonusUpgraded,
@@ -123,15 +150,17 @@
       max: system.maxStacks,
       upgradeMax: system.upgradeMaxStacks,
       counteredBy: system.counteredBy,
-      loseStacks: system.loseStacksWhenHit,
+      loseStacks: system.loseStacksWhenCountered,
       threshold: system.finaleThreshold,
       damage: system.finaleDamagePercent,
       maxThreshold: system.finaleMaxThreshold,
       maxDamage: system.finaleMaxDamagePercent
     };
-    if (definition.type === 'ApplyTagMechanic') return fillTemplate(templates.elementAbility, common);
-    if (definition.type === 'ElementFinale') return fillTemplate(templates.elementFinale, common);
-    if (definition.skillUnit === 'Buff') return fillTemplate(templates.elementElement, common);
+
+    const normalizedType = String(type || '').trim().toLowerCase();
+    if (normalizedType === 'element') return fillTemplate(templates.elementCore, common);
+    if (normalizedType === 'ability') return fillTemplate(templates.elementAbilityCore, common);
+    if (normalizedType === 'finale') return fillTemplate(templates.elementFinale, common);
     return null;
   }
 
@@ -177,7 +206,7 @@
     return fillTemplate(template, {
       element: effect,
       percent: resolved.value,
-      finale: system.finale
+      finale: getElementMechanicName(effect, 'finale', 'en')
     });
   }
 
@@ -206,7 +235,7 @@
       });
     });
 
-    Object.keys(mechanicsData?.elementSystems || {}).forEach((effect) => {
+    Object.keys(mechanicsData?.elementMechanics?.elements || {}).forEach((effect) => {
       if (!routeFor('ability', 'Damage', effect)) return;
       engine.registerRule('ability', 'Damage', effect, ({ Multiplier }) => {
         const text = formatElementalDamage(effect, resolve('ability', 'Damage', effect, Multiplier));
@@ -263,8 +292,11 @@
     getEffectDefinition,
     getStatEffectDefinition,
     getElementSystem,
-    getMechanicName,
+    getElementMechanic,
+    getElementMechanicName,
     describeReusableMechanic,
+    describeElementMechanic,
+    getMechanicName,
     getApplyTagLabel,
     formatApplyTags,
     get data() { return mechanicsData; },
