@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "locales": {
+    "en": {
+      "mechanicNames": {
+        "Strength Buff": "Strength Buff",
+        "Agility Buff": "Agility Buff",
+        "Intelligence Buff": "Intelligence Buff",
+        "MaxHP Buff": "MaxHP Buff",
+        "Strength Debuff": "Strength Debuff",
+        "Agility Debuff": "Agility Debuff",
+        "Intelligence Debuff": "Intelligence Debuff",
+        "MaxHP Debuff": "MaxHP Debuff",
+        "Burn": "Burn",
+        "Fire Ability": "Fire Ability",
+        "Fire Element": "Fire Element",
+        "Fire Finale": "Fire Finale"
+      },
+      "templates": {
+        "statBuff": "Temporarily increase {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the start of the user's turn.",
+        "statDebuff": "Temporarily reduce {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the end of the user's turn.",
+        "elementalDamage": "Consume all {element} elements. For each stack consumed, deal {percent}% {element} damage based on your strongest attribute. If the specific condition is met, trigger {finale}.",
+        "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from Fire attacks. Newly received stacks deal their damage immediately if inflicted during the user's turn. Max {max} stacks, or {upgradeMax} when upgraded. Removed at the end of each turn.",
+        "elementAbility": "Increase damage dealt and healing by {stackBonus}% for each {element} element on self. If the opponent has {advantageElement} element or {status}, increase damage dealt by {conditionalBonus}%, or {upgradedConditionalBonus}% when upgraded.",
+        "elementElement": "For each {element} element stack on self, increase non-elemental damage dealt to opponents with {status} or {advantageElement} element by {damageBonus}% and reduce {element} and {advantageElement} elemental damage received by {reduction}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. {element} can replace and stack with other elements. Lose {loseStacks} stack when hit by a {counteredBy} attack.",
+        "elementFinale": "If an elemental attack consumes {threshold} or more {element} element stacks, deal an extra {damage}% {element} damage based on your strongest attribute. If {maxThreshold} stacks are consumed, deal {maxDamage}% instead."
+      }
+    },
+    "zh-CN": {
+      "mechanicNames": {},
+      "templates": {}
+    },
+    "zh-TW": {
+      "mechanicNames": {},
+      "templates": {}
+    }
+  }
+}
