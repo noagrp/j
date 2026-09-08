@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "locales": {
     "en": {
       "mechanicNames": {
@@ -11,21 +11,31 @@
         "Agility Debuff": "Agility Debuff",
         "Intelligence Debuff": "Intelligence Debuff",
         "MaxHP Debuff": "MaxHP Debuff",
-        "Burn": "Burn"
+        "Burn": "Burn",
+        "Chill": "Chill",
+        "Paralysis": "Paralysis",
+        "Seed": "Seed",
+        "Dizzy": "Dizzy",
+        "Blind": "Blind",
+        "Depress": "Depress"
       },
       "nameTemplates": {
         "element": "{element} Element",
         "ability": "{element} Ability",
-        "finale": "{element} Finale"
+        "finale": "{element} Finale",
+        "vulnerable": "{element} Vulnerable"
       },
       "templates": {
         "statBuff": "Temporarily increase {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the start of the user's turn.",
         "statDebuff": "Temporarily reduce {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the end of the user's turn.",
         "elementalDamage": "Consume all {element} elements. For each stack consumed, deal {percent}% {element} damage based on your strongest attribute. If the specific condition is met, trigger {finale}.",
         "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from Fire attacks. Newly received stacks deal their damage immediately if inflicted during the user's turn. Max {max} stacks, or {upgradeMax} when upgraded. Removed at the end of each turn.",
-        "elementCore": "Each {element} element stack uses the shared element rules: {damageBonus}% non-elemental damage bonus per stack under its matching condition, {reduction}% elemental damage reduction per stack, max {max} stacks or {upgradeMax} when upgraded, and loses {loseStacks} stack when countered by {counteredBy}.",
-        "elementAbilityCore": "Increase damage dealt and healing by {stackBonus}% for each {element} element on self. The matching conditional damage bonus is {conditionalBonus}%, or {upgradedConditionalBonus}% when upgraded.",
-        "elementFinale": "If an elemental attack consumes {threshold} or more {element} element stacks, deal an extra {damage}% {element} damage based on your strongest attribute. If {maxThreshold} stacks are consumed, deal {maxDamage}% instead."
+        "elementCore": "For each {element} element stack on self, increase non-elemental damage dealt to opponents with {status} or {counters} element by {damageBonus}% and reduce {element} and {counters} elemental damage received by {reduction}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {loseStacks} stack when hit by a {counteredBy} attack.",
+        "elementAbilityCore": "Increase damage dealt and healing by {stackBonus}% for each {element} element on self. If the opponent has {counters} element or {status}, increase damage dealt by {conditionalBonus}%, or {upgradedConditionalBonus}% when upgraded.",
+        "elementFinale": "If an elemental attack consumes {threshold} or more {element} element stacks, deal an extra {damage}% {element} damage based on your strongest attribute. If {maxThreshold} stacks are consumed, deal {maxDamage}% instead.",
+        "elementVulnerable": "Receive {percent}% more damage from {element} attacks for each stack. {secondary} Max {max} stacks. Removed at the end of turn.",
+        "vulnerableStatusBoost": "Increase {status} effect by {percent}%.",
+        "vulnerableSealPassive": "If {status} is active, seal {timing} passives."
       }
     },
     "zh-CN": {
