@@ -67,6 +67,11 @@
     return { ...(shared || {}), ...(specific || {}), element: key };
   }
 
+  function getElementStatus(element) {
+    const key = String(element || '').trim();
+    return key ? (mechanicsData?.elementStatuses?.[key] || null) : null;
+  }
+
   function getLocaleBlock(locale) {
     const key = String(locale || 'en');
     return localisationData?.locales?.[key] || localisationData?.locales?.en || null;
@@ -89,7 +94,7 @@
     const system = getElementSystem(element);
     if (!system) return null;
     const normalizedType = String(type || '').trim().toLowerCase();
-    if (!['element', 'ability', 'finale'].includes(normalizedType)) return null;
+    if (!['element', 'ability', 'finale', 'vulnerable'].includes(normalizedType)) return null;
     return {
       type: normalizedType,
       name: getElementMechanicName(element, normalizedType, 'en'),
@@ -135,6 +140,24 @@
     return null;
   }
 
+  function formatVulnerableSecondary(system, templates) {
+    const secondary = system?.vulnerableSecondary;
+    if (!secondary) return '';
+    if (secondary.type === 'statusEffectBoost') {
+      return fillTemplate(templates.vulnerableStatusBoost, {
+        status: secondary.status,
+        percent: secondary.percent
+      });
+    }
+    if (secondary.type === 'sealPassiveIfStatus') {
+      return fillTemplate(templates.vulnerableSealPassive, {
+        status: secondary.status,
+        timing: secondary.passiveTiming
+      });
+    }
+    return '';
+  }
+
   function describeElementMechanic(element, type, locale) {
     const system = getElementSystem(element);
     if (!system) return null;
@@ -142,6 +165,8 @@
     const templates = block?.templates || {};
     const common = {
       element: system.element,
+      status: system.status,
+      counters: system.counters,
       stackBonus: system.abilityBonusPerStack,
       conditionalBonus: system.abilityConditionalDamageBonus,
       upgradedConditionalBonus: system.abilityConditionalDamageBonusUpgraded,
@@ -154,13 +179,23 @@
       threshold: system.finaleThreshold,
       damage: system.finaleDamagePercent,
       maxThreshold: system.finaleMaxThreshold,
-      maxDamage: system.finaleMaxDamagePercent
+      maxDamage: system.finaleMaxDamagePercent,
+      vulnerablePercent: system.vulnerableDamageTakenPercentPerStack,
+      vulnerableMax: system.vulnerableMaxStacks
     };
 
     const normalizedType = String(type || '').trim().toLowerCase();
     if (normalizedType === 'element') return fillTemplate(templates.elementCore, common);
     if (normalizedType === 'ability') return fillTemplate(templates.elementAbilityCore, common);
     if (normalizedType === 'finale') return fillTemplate(templates.elementFinale, common);
+    if (normalizedType === 'vulnerable') {
+      return fillTemplate(templates.elementVulnerable, {
+        element: system.element,
+        percent: system.vulnerableDamageTakenPercentPerStack,
+        secondary: formatVulnerableSecondary(system, templates),
+        max: system.vulnerableMaxStacks
+      });
+    }
     return null;
   }
 
@@ -292,6 +327,7 @@
     getEffectDefinition,
     getStatEffectDefinition,
     getElementSystem,
+    getElementStatus,
     getElementMechanic,
     getElementMechanicName,
     describeReusableMechanic,
