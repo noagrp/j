@@ -27,6 +27,13 @@
     });
   }
 
+  function normalizeLocale(locale) {
+    const raw = String(locale || 'en').trim().toLowerCase();
+    if (raw === 'zh-cn' || raw === 'zh_hans' || raw === 'zh-hans' || raw === 'simplified chinese') return 'zh-CN';
+    if (raw === 'zh-tw' || raw === 'zh_hant' || raw === 'zh-hant' || raw === 'traditional chinese') return 'zh-TW';
+    return raw.startsWith('en') || raw === 'english' ? 'en' : locale || 'en';
+  }
+
   function routeFor(kind, skillUnit, effect) {
     return mechanicsData?.routes?.[kind]?.[skillUnit]?.[effect] || null;
   }
@@ -94,7 +101,7 @@
   }
 
   function getLocaleBlock(locale) {
-    const key = String(locale || 'en');
+    const key = normalizeLocale(locale);
     return localisationData?.locales?.[key] || localisationData?.locales?.en || null;
   }
 
@@ -141,6 +148,16 @@
       elementId: system.elementId,
       ...system
     };
+  }
+
+  function getElementLinkLabel(element, type, locale) {
+    const system = getElementSystem(element);
+    if (!system) return '';
+    const block = getLocaleBlock(locale);
+    const elementLabel = getElementLabel(system.elementId, locale);
+    const template = block?.linkTemplates?.[type];
+    if (!template) return elementLabel;
+    return fillTemplate(template, { element: elementLabel });
   }
 
   function describeReusableMechanic(name, locale) {
@@ -366,12 +383,14 @@
     loadLocalisation,
     resolve,
     installRules,
+    normalizeLocale,
     getEffectDefinition,
     getStatEffectDefinition,
     getElementSystem,
     getElementStatus,
     getElementMechanic,
     getElementMechanicName,
+    getElementLinkLabel,
     getElementLabel,
     getStatusLabel,
     localizeTerm,
