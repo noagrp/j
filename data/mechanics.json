@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "source": "Jobmania Database Guides and Skill Unit sheets, Localization Skills Description sheet, plus confirmed in-game descriptions",
   "powerLv": {
     "stat": {
@@ -13,14 +13,38 @@
       "8": 300
     },
     "maxHP": {
-      "1": { "enemy": 5, "player": 10 },
-      "2": { "enemy": 10, "player": 15 },
-      "3": { "enemy": 15, "player": 25 },
-      "4": { "enemy": 20, "player": 35 },
-      "5": { "enemy": 25, "player": 40 },
-      "6": { "enemy": 30, "player": 50 },
-      "7": { "enemy": 40, "player": 70 },
-      "8": { "enemy": 50, "player": 100 }
+      "1": {
+        "enemy": 5,
+        "player": 10
+      },
+      "2": {
+        "enemy": 10,
+        "player": 15
+      },
+      "3": {
+        "enemy": 15,
+        "player": 25
+      },
+      "4": {
+        "enemy": 20,
+        "player": 35
+      },
+      "5": {
+        "enemy": 25,
+        "player": 40
+      },
+      "6": {
+        "enemy": 30,
+        "player": 50
+      },
+      "7": {
+        "enemy": 40,
+        "player": 70
+      },
+      "8": {
+        "enemy": 50,
+        "player": 100
+      }
     }
   },
   "routes": {
@@ -72,7 +96,11 @@
         "counters": "wind",
         "counteredBy": "water",
         "status": "burn",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "burn", "percent": 5 }
+        "vulnerableSecondary": {
+          "type": "statusEffectBoost",
+          "status": "burn",
+          "percent": 5
+        }
       },
       "water": {
         "sourceEffect": "Water",
@@ -80,7 +108,11 @@
         "counters": "fire",
         "counteredBy": "thunder",
         "status": "chill",
-        "vulnerableSecondary": { "type": "sealPassiveIfStatus", "status": "chill", "passiveTimingKey": "timing.endOfTurn" }
+        "vulnerableSecondary": {
+          "type": "sealPassiveIfStatus",
+          "status": "chill",
+          "passiveTimingKey": "timing.endOfTurn"
+        }
       },
       "thunder": {
         "sourceEffect": "Thunder",
@@ -88,7 +120,11 @@
         "counters": "water",
         "counteredBy": "earth",
         "status": "paralysis",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "paralysis", "percent": 10 }
+        "vulnerableSecondary": {
+          "type": "statusEffectBoost",
+          "status": "paralysis",
+          "percent": 10
+        }
       },
       "earth": {
         "sourceEffect": "Earth",
@@ -96,7 +132,11 @@
         "counters": "thunder",
         "counteredBy": "wind",
         "status": "seed",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "seed", "percent": 20 }
+        "vulnerableSecondary": {
+          "type": "statusEffectBoost",
+          "status": "seed",
+          "percent": 20
+        }
       },
       "wind": {
         "sourceEffect": "Wind",
@@ -104,7 +144,11 @@
         "counters": "earth",
         "counteredBy": "fire",
         "status": "dizzy",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "dizzy", "percent": 10 }
+        "vulnerableSecondary": {
+          "type": "statusEffectBoost",
+          "status": "dizzy",
+          "percent": 10
+        }
       },
       "light": {
         "sourceEffect": "Light",
@@ -112,7 +156,11 @@
         "counters": "dark",
         "counteredBy": "dark",
         "status": "blind",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "blind", "percent": 15 }
+        "vulnerableSecondary": {
+          "type": "statusEffectBoost",
+          "status": "blind",
+          "percent": 15
+        }
       },
       "dark": {
         "sourceEffect": "Dark",
@@ -120,7 +168,11 @@
         "counters": "light",
         "counteredBy": "light",
         "status": "depress",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "depress", "percent": 15 }
+        "vulnerableSecondary": {
+          "type": "statusEffectBoost",
+          "status": "depress",
+          "percent": 15
+        }
       }
     }
   },
@@ -196,7 +248,12 @@
       "mechanicConfirmed": true,
       "confirmationSource": "sheet+localisation",
       "wrongTargetChancePercentPerStack": 10,
-      "excludedSkillTermKeys": ["skill.elementInfusion", "skill.secondChance", "skill.charge", "skill.guard"],
+      "excludedSkillTermKeys": [
+        "skill.elementInfusion",
+        "skill.secondChance",
+        "skill.charge",
+        "skill.guard"
+      ],
       "triggerAt": "BuffEffect",
       "receivesMoreDamageFromElement": "wind",
       "maxStacks": 3,
@@ -341,7 +398,7 @@
       "termKey": "mechanic.stackGuard",
       "localisationKey": "StackGuardXDescr",
       "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
+      "confirmationSource": "live+sheet+localisation",
       "clickable": true,
       "templateKey": "stackGuard",
       "templateArgs": {
@@ -376,6 +433,149 @@
       "decreaseStacks": 1,
       "preventsLethalDamage": true,
       "recoverMaxHPPercentOnTrigger": 10
+    },
+    "Guard": {
+      "skillUnit": "InstantBoost",
+      "effect": "Guard",
+      "termKey": "mechanic.guard",
+      "localisationKey": "GuardXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "live+sheet+localisation",
+      "clickable": true,
+      "templateKey": "guard",
+      "templateArgs": {
+        "basePercent": "directDamageReductionPercent",
+        "upgradePercent": "upgradeDirectDamageReductionPercent"
+      },
+      "maxStacks": 1,
+      "upgradeMaxStacks": 1,
+      "triggerAt": "GotAttacked",
+      "removedAt": "ActionCycleEnd",
+      "consumedOnActivation": true,
+      "endOfTurnPassivesConsume": true,
+      "directDamageReductionPercent": 30,
+      "upgradeDirectDamageReductionPercent": 40
+    },
+    "Instinct": {
+      "skillUnit": "Sacrifice",
+      "effect": "Guard",
+      "termKey": "mechanic.instinct",
+      "localisationKey": "InstinctXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "live+sheet+localisation",
+      "clickable": true,
+      "templateKey": "instinct",
+      "templateArgs": {
+        "perStackPercent": "directDamageReductionPercentPerStack",
+        "baseCapPercent": "baseDamageReductionCapPercent",
+        "enhancedCapPercent": "enhancedDamageReductionCapPercent",
+        "threshold": "enhancedCapThresholdStacks",
+        "name": "displayName"
+      },
+      "triggerAt": "GotAttacked",
+      "stackIncreaseAt": "GotAttacked",
+      "removedAt": "TurnStart",
+      "directDamageReductionPercentPerStack": 1,
+      "baseDamageReductionCapPercent": 15,
+      "enhancedDamageReductionCapPercent": 30,
+      "enhancedCapThresholdStacks": 10,
+      "displayName": "Instinct"
+    },
+    "Rage": {
+      "skillUnit": "Sacrifice",
+      "effect": "Charge",
+      "termKey": "mechanic.rage",
+      "localisationKey": "RageXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "live+sheet+localisation",
+      "clickable": true,
+      "templateKey": "rage",
+      "templateArgs": {
+        "perStackPercent": "damageBoostPercentPerStack",
+        "baseCapPercent": "baseDamageBoostCapPercent",
+        "enhancedCapPercent": "enhancedDamageBoostCapPercent",
+        "threshold": "enhancedCapThresholdStacks",
+        "name": "displayName"
+      },
+      "triggerAt": "AttackEffect",
+      "removedAt": "TurnEnd",
+      "damageBoostPercentPerStack": 0.5,
+      "baseDamageBoostCapPercent": 15,
+      "enhancedDamageBoostCapPercent": 30,
+      "enhancedCapThresholdStacks": 10,
+      "displayName": "Rage"
+    },
+    "Strength Boost": {
+      "skillUnit": "Buff",
+      "effect": "Strength",
+      "termKey": "mechanic.strengthBoost",
+      "localisationKey": "XStatBoostDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "clickable": true,
+      "templateKey": "statBoost",
+      "templateArgs": {
+        "stat": "displayStat",
+        "percent": "changePercentPerStack",
+        "max": "maxStacks"
+      },
+      "displayStat": "Strength",
+      "changePercentPerStack": 10,
+      "maxStacks": 5
+    },
+    "Agility Boost": {
+      "skillUnit": "Buff",
+      "effect": "Agility",
+      "termKey": "mechanic.agilityBoost",
+      "localisationKey": "XStatBoostDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "clickable": true,
+      "templateKey": "statBoost",
+      "templateArgs": {
+        "stat": "displayStat",
+        "percent": "changePercentPerStack",
+        "max": "maxStacks"
+      },
+      "displayStat": "Agility",
+      "changePercentPerStack": 10,
+      "maxStacks": 5
+    },
+    "Intelligence Boost": {
+      "skillUnit": "Buff",
+      "effect": "Intelligence",
+      "termKey": "mechanic.intelligenceBoost",
+      "localisationKey": "XStatBoostDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "clickable": true,
+      "templateKey": "statBoost",
+      "templateArgs": {
+        "stat": "displayStat",
+        "percent": "changePercentPerStack",
+        "max": "maxStacks"
+      },
+      "displayStat": "Intelligence",
+      "changePercentPerStack": 10,
+      "maxStacks": 5
+    },
+    "Max HP Boost": {
+      "skillUnit": "Buff",
+      "effect": "MaxHP",
+      "termKey": "mechanic.maxHPBoost",
+      "localisationKey": "XStatBoostDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "live+sheet+localisation",
+      "clickable": true,
+      "templateKey": "statBoost",
+      "templateArgs": {
+        "stat": "displayStat",
+        "percent": "changePercentPerStack",
+        "max": "maxStacks"
+      },
+      "displayStat": "Max HP",
+      "changePercentPerStack": 10,
+      "maxStacks": 5
     }
   },
   "applyTags": {
