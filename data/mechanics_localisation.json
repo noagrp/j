@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "locales": {
     "en": {
       "terms": {
@@ -25,6 +25,13 @@
         "skill.guard": "Guard",
         "mechanic.protect": "Protect",
         "mechanic.stackGuard": "Stack Guard",
+        "mechanic.guard": "Guard",
+        "mechanic.instinct": "Instinct",
+        "mechanic.rage": "Rage",
+        "mechanic.strengthBoost": "Strength Boost",
+        "mechanic.agilityBoost": "Agility Boost",
+        "mechanic.intelligenceBoost": "Intelligence Boost",
+        "mechanic.maxHPBoost": "Max HP Boost",
         "ui.mechanicDetailsPending": "Mechanic details pending confirmation."
       },
       "mechanicNames": {
@@ -38,7 +45,14 @@
         "MaxHP Debuff": "MaxHP Debuff",
         "Protect": "Protect",
         "Stack Guard": "Stack Guard",
-        "Second Chance": "Second Chance"
+        "Second Chance": "Second Chance",
+        "Guard": "Guard",
+        "Instinct": "Instinct",
+        "Rage": "Rage",
+        "Strength Boost": "Strength Boost",
+        "Agility Boost": "Agility Boost",
+        "Intelligence Boost": "Intelligence Boost",
+        "Max HP Boost": "Max HP Boost"
       },
       "nameTemplates": {
         "element": "{element} Element",
@@ -57,6 +71,10 @@
         "protect": "Block damage from direct attack. (Max {maxPercent}% of MaxHP, {upgradeMaxPercent}% if upgraded)",
         "stackGuard": "Reduce direct damage received by {basePercent}% ({upgradePercent}% if upgraded) for one hit. Becomes {decayPercent}% less effective after each hit.",
         "secondChance": "Prevent lethal damage once per stack and recover {recoverPercent}% of MaxHP when triggered. Max {max} stacks.",
+        "guard": "Reduce one action's direct damage received by {basePercent}% ({upgradePercent}% if upgraded). Consumed on activation. [End-of-Turn] passives will also consume this buff.",
+        "instinct": "For every direct instance of damage you take, gain a stacking buff. For each stack, reduce direct damage received by {perStackPercent}%. Removed at the start of turn. Damage reduction caps at {baseCapPercent}% / {enhancedCapPercent}% if you have {threshold} or more {name} stacks.",
+        "rage": "For every instance of damage dealt to the enemy, gain a stacking buff. For each stack, boost damage dealt by {perStackPercent}%. Removed at the end of turn. Damage boost caps at {baseCapPercent}% / {enhancedCapPercent}% if you have {threshold} or more {name} stacks.",
+        "statBoost": "Boost {stat} by {percent}% for each stack (Max {max} stacks).",
         "elementalDamage": "Consume all {element} elements. For each stack consumed, deal {percent}% {element} damage based on your strongest attribute. If the specific condition is met, trigger {finale}.",
         "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from {element} attacks. Suffer the received stacks' damage instantly if gained during the user's turn. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of each turn).",
         "statusChill": "With {threshold} or more stacks, decrease Action Point by {apReduction} at the start of turn (Enemy AP will not go below {enemyMinimumAP}) and receive more damage from {element} attacks. Reduce AP instantly if gained during user's turn. With {sealAt} stacks, seal [{sealedTiming}] passives. (Max {max} / upgrade {upgradeMax} stacks. Remove at the end of each turn).",
@@ -77,36 +95,72 @@
       "terms": {
         "skill.secondChance": "二次机会",
         "mechanic.protect": "护甲",
-        "mechanic.stackGuard": "多重防守"
+        "mechanic.stackGuard": "多重防守",
+        "mechanic.guard": "防守",
+        "mechanic.instinct": "直觉",
+        "mechanic.rage": "愤怒",
+        "mechanic.strengthBoost": "力量强化",
+        "mechanic.agilityBoost": "敏捷强化",
+        "mechanic.intelligenceBoost": "智力强化",
+        "mechanic.maxHPBoost": "Max HP强化"
       },
       "mechanicNames": {
         "Protect": "护甲",
         "Stack Guard": "多重防守",
-        "Second Chance": "二次机会"
+        "Second Chance": "二次机会",
+        "Guard": "防守",
+        "Instinct": "直觉",
+        "Rage": "愤怒",
+        "Strength Boost": "力量强化",
+        "Agility Boost": "敏捷强化",
+        "Intelligence Boost": "智力强化",
+        "Max HP Boost": "Max HP强化"
       },
       "nameTemplates": {},
       "linkTemplates": {},
       "templates": {
         "protect": "抵挡一定数值的直接攻击伤害。 (上限为MaxHP的{maxPercent}%, 升级后提升至{upgradeMaxPercent}% )",
-        "stackGuard": "下一击承受的直接伤害减轻{basePercent}%(升级后{upgradePercent}% )。每次发动后伤害减轻效果将会降低{decayPercent}%。"
+        "stackGuard": "下一击承受的直接伤害减轻{basePercent}%(升级后{upgradePercent}% )。每次发动后伤害减轻效果将会降低{decayPercent}%。",
+        "guard": "降低{basePercent}%敌方（或自己）一个行动对自身所造成的直接伤害。 (升级了提升至{upgradePercent}%。发动后才消耗。【回合结束】的被动技能也会消耗此效果)",
+        "instinct": "每当你受到直接伤害时, 获得并叠加此增益效果：每叠加减低自身{perStackPercent}%所受到的伤害。(回合开始时去除。伤害减低可达到{baseCapPercent}% / {enhancedCapPercent}%如果{name}的叠加数等于或超过{threshold} )",
+        "rage": "每当你攻击时, 获得并叠加此增益效果：每叠加提升自身{perStackPercent}%对敌方造成的伤害。(回合结束时去除。伤害提升可达到{baseCapPercent}% / {enhancedCapPercent}%如果{name}的叠加数等于或超过{threshold} )",
+        "statBoost": "增加{stat}{percent}%。(叠加上限{max} )"
       }
     },
     "zh-TW": {
       "terms": {
         "skill.secondChance": "二次機會",
         "mechanic.protect": "護甲",
-        "mechanic.stackGuard": "多重防守"
+        "mechanic.stackGuard": "多重防守",
+        "mechanic.guard": "防守",
+        "mechanic.instinct": "直覺",
+        "mechanic.rage": "憤怒",
+        "mechanic.strengthBoost": "力量強化",
+        "mechanic.agilityBoost": "敏捷強化",
+        "mechanic.intelligenceBoost": "智力強化",
+        "mechanic.maxHPBoost": "Max HP強化"
       },
       "mechanicNames": {
         "Protect": "護甲",
         "Stack Guard": "多重防守",
-        "Second Chance": "二次機會"
+        "Second Chance": "二次機會",
+        "Guard": "防守",
+        "Instinct": "直覺",
+        "Rage": "憤怒",
+        "Strength Boost": "力量強化",
+        "Agility Boost": "敏捷強化",
+        "Intelligence Boost": "智力強化",
+        "Max HP Boost": "Max HP強化"
       },
       "nameTemplates": {},
       "linkTemplates": {},
       "templates": {
         "protect": "抵擋一定數值的直接攻擊傷害。 (上限為MaxHP的{maxPercent}%, 升級後提升至{upgradeMaxPercent}% )",
-        "stackGuard": "下一擊承受的直接傷害減輕{basePercent}%(升級後{upgradePercent}% )。每次發動後傷害減輕效果將會降低{decayPercent}%。"
+        "stackGuard": "下一擊承受的直接傷害減輕{basePercent}%(升級後{upgradePercent}% )。每次發動後伤害减轻效果將會降低{decayPercent}%。",
+        "guard": "降低{basePercent}%敵方（或自己）一個行動對自身所造成的直接傷害。 (升級了提升至{upgradePercent}%。發動後才消耗。【回合结束】的被動技能也會消耗此效果)",
+        "instinct": "每當你受到直接傷害時, 獲得並疊加此增益效果：每疊加減低自身{perStackPercent}%所受到的傷害。(回合開始時去除。傷害減低可達到{baseCapPercent}% / {enhancedCapPercent}%如果{name}的疊加數等於或超過{threshold} )",
+        "rage": "每當你攻擊時, 獲得並疊加此增益效果：每疊加提升自身{perStackPercent}%對敵方造成的傷害。(回合结束時去除。傷害提升可達到{baseCapPercent}% / {enhancedCapPercent}%如果{name}的疊加數等於或超過{threshold} )",
+        "statBoost": "增加{stat}{percent}%。 (疊加上限{max} )"
       }
     }
   }
