@@ -367,6 +367,14 @@
             }
         }
 
+        for (const [name, definition] of Object.entries(mechanics.data.effectDefinitions || {})) {
+            if (!definition?.clickable) continue;
+            const text = definition.termKey
+                ? mechanics.localizeTerm?.(definition.termKey, locale, mechanics.getMechanicName?.(name, locale) || name)
+                : (mechanics.getMechanicName?.(name, locale) || name);
+            if (text) candidates.push({ text, key: `mechanic.${name.toLowerCase().replace(/[^a-z0-9]+/g, '.')}`, kind: 'reusable', mechanicName: name, priority: 45 });
+        }
+
         const seen = new Set();
         return candidates
             .filter(item => item.text && item.key)
@@ -418,6 +426,19 @@
             const description = status?.mechanicConfirmed
                 ? mechanics.describeReusableMechanic?.(status.sourceName || reference.statusId, locale)
                 : null;
+            return {
+                key: reference.key,
+                title,
+                description: description || mechanics.localizeTerm?.('ui.mechanicDetailsPending', locale, 'Mechanic details pending confirmation.')
+            };
+        }
+
+        if (reference.kind === 'reusable') {
+            const definition = mechanics.getEffectDefinition?.(reference.mechanicName);
+            const title = definition?.termKey
+                ? mechanics.localizeTerm?.(definition.termKey, locale, mechanics.getMechanicName?.(reference.mechanicName, locale) || reference.mechanicName)
+                : (mechanics.getMechanicName?.(reference.mechanicName, locale) || reference.mechanicName);
+            const description = mechanics.describeReusableMechanic?.(reference.mechanicName, locale);
             return {
                 key: reference.key,
                 title,
