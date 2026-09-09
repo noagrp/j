@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "source": "Jobmania Database Guides and Skill Unit sheets, Localization Skills Description sheet, plus confirmed in-game descriptions",
   "powerLv": {
     "stat": {
@@ -316,6 +316,21 @@
       "maxStacks": 3,
       "upgradeMaxStacks": 5,
       "removedAt": "TurnEnd"
+    },
+    "Second Chance": {
+      "skillUnit": "Protect",
+      "effect": "Guard",
+      "termKey": "skill.secondChance",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "clickable": true,
+      "maxStacks": 2,
+      "upgradeMaxStacks": 2,
+      "triggerAt": "HealthReduced",
+      "decreaseAt": "HealthReduced",
+      "decreaseStacks": 1,
+      "preventsLethalDamage": true,
+      "recoverMaxHPPercentOnTrigger": 10
     }
   },
   "applyTags": {
