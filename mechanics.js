@@ -242,6 +242,15 @@
     const block = getLocaleBlock(locale);
     const templates = block?.templates || {};
 
+    if (definition.termKey === 'skill.secondChance') {
+      const template = templates.secondChance || localisationData?.locales?.en?.templates?.secondChance;
+      return fillTemplate(template, {
+        recoverPercent: definition.recoverMaxHPPercentOnTrigger,
+        max: definition.maxStacks,
+        upgradeMax: definition.upgradeMaxStacks
+      });
+    }
+
     if (definition.skillUnit === 'Buff' && ['Strength', 'Agility', 'Intelligence', 'MaxHP'].includes(definition.effect)) {
       return fillTemplate(templates.statBuff, {
         stat: definition.effect,
