@@ -172,6 +172,7 @@
         else basicInfoList.appendChild(row);
     }
 
+    // Primary path: decorate the shared detail loader.
     if (typeof originalLoadDetail === 'function') {
         window.loadDetail = async function (cat, key) {
             const result = await originalLoadDetail.apply(this, arguments);
@@ -181,4 +182,23 @@
             return result;
         };
     }
+
+    // Fallback path for browsers/inline handlers that resolve the original global
+    // loadDetail binding instead of window.loadDetail after it has been decorated.
+    // This keeps AP rendering reliable without changing the core wiki renderer.
+    document.addEventListener('click', event => {
+        const target = event.target instanceof Element ? event.target.closest('[data-key]') : null;
+        if (!target) return;
+
+        const explicitCat = String(target.dataset.cat || '').toLowerCase();
+        const listAbility = target.classList.contains('list-card') && String(window.lastView || '').toLowerCase() === 'abilities';
+        if (explicitCat !== 'abilities' && !listAbility) return;
+
+        const abilityKey = target.dataset.key;
+        if (!abilityKey) return;
+
+        setTimeout(() => {
+            insertAbilityCost(abilityKey).catch(error => console.error('Failed to insert Ability AP cost:', error));
+        }, 0);
+    }, true);
 })();
