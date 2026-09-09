@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "locales": {
     "en": {
       "terms": {
@@ -23,6 +23,8 @@
         "skill.secondChance": "Second Chance",
         "skill.charge": "Charge",
         "skill.guard": "Guard",
+        "mechanic.protect": "Protect",
+        "mechanic.stackGuard": "Stack Guard",
         "ui.mechanicDetailsPending": "Mechanic details pending confirmation."
       },
       "mechanicNames": {
@@ -34,6 +36,8 @@
         "Agility Debuff": "Agility Debuff",
         "Intelligence Debuff": "Intelligence Debuff",
         "MaxHP Debuff": "MaxHP Debuff",
+        "Protect": "Protect",
+        "Stack Guard": "Stack Guard",
         "Second Chance": "Second Chance"
       },
       "nameTemplates": {
@@ -50,6 +54,8 @@
       "templates": {
         "statBuff": "Temporarily increase {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the start of the user's turn.",
         "statDebuff": "Temporarily reduce {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the end of the user's turn.",
+        "protect": "Block damage from direct attack. (Max {maxPercent}% of MaxHP, {upgradeMaxPercent}% if upgraded)",
+        "stackGuard": "Reduce direct damage received by {basePercent}% ({upgradePercent}% if upgraded) for one hit. Becomes {decayPercent}% less effective after each hit.",
         "secondChance": "Prevent lethal damage once per stack and recover {recoverPercent}% of MaxHP when triggered. Max {max} stacks.",
         "elementalDamage": "Consume all {element} elements. For each stack consumed, deal {percent}% {element} damage based on your strongest attribute. If the specific condition is met, trigger {finale}.",
         "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from {element} attacks. Suffer the received stacks' damage instantly if gained during the user's turn. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of each turn).",
@@ -69,25 +75,39 @@
     },
     "zh-CN": {
       "terms": {
-        "skill.secondChance": "二次机会"
+        "skill.secondChance": "二次机会",
+        "mechanic.protect": "护甲",
+        "mechanic.stackGuard": "多重防守"
       },
       "mechanicNames": {
+        "Protect": "护甲",
+        "Stack Guard": "多重防守",
         "Second Chance": "二次机会"
       },
       "nameTemplates": {},
       "linkTemplates": {},
-      "templates": {}
+      "templates": {
+        "protect": "抵挡一定数值的直接攻击伤害。 (上限为MaxHP的{maxPercent}%, 升级后提升至{upgradeMaxPercent}% )",
+        "stackGuard": "下一击承受的直接伤害减轻{basePercent}%(升级后{upgradePercent}% )。每次发动后伤害减轻效果将会降低{decayPercent}%。"
+      }
     },
     "zh-TW": {
       "terms": {
-        "skill.secondChance": "二次機會"
+        "skill.secondChance": "二次機會",
+        "mechanic.protect": "護甲",
+        "mechanic.stackGuard": "多重防守"
       },
       "mechanicNames": {
+        "Protect": "護甲",
+        "Stack Guard": "多重防守",
         "Second Chance": "二次機會"
       },
       "nameTemplates": {},
       "linkTemplates": {},
-      "templates": {}
+      "templates": {
+        "protect": "抵擋一定數值的直接攻擊傷害。 (上限為MaxHP的{maxPercent}%, 升級後提升至{upgradeMaxPercent}% )",
+        "stackGuard": "下一擊承受的直接傷害減輕{basePercent}%(升級後{upgradePercent}% )。每次發動後傷害減輕效果將會降低{decayPercent}%。"
+      }
     }
   }
 }
