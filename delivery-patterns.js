@@ -22,6 +22,11 @@
     return data?.locales?.[key] || data?.locales?.en || null;
   }
 
+  function localizeTerm(key, locale, fallback) {
+    const block = localeBlock(locale);
+    return block?.terms?.[key] || data?.locales?.en?.terms?.[key] || fallback || key;
+  }
+
   function template(key, locale) {
     const block = localeBlock(locale);
     return block?.templates?.[key] || data?.locales?.en?.templates?.[key] || '';
@@ -36,17 +41,28 @@
     return family?.effects?.[effect] || null;
   }
 
+  function getStatusLabel(statusId, locale) {
+    if (root.JobmaniaMechanics?.getStatusLabel) {
+      const label = root.JobmaniaMechanics.getStatusLabel(statusId, locale);
+      if (label && label !== statusId) return label;
+    }
+    return localizeTerm(`status.${statusId}`, locale, statusId);
+  }
+
   function describe(kind, skillUnit, effect, multiplier, locale) {
     const families = data?.families || {};
-    for (const [familyId, family] of Object.entries(families)) {
-      const status = family?.effects?.[effect];
-      if (!status) continue;
+    for (const family of Object.values(families)) {
+      const statusId = family?.effects?.[effect];
+      if (!statusId) continue;
       const rule = (family.rules || []).find(item => item?.kind === kind && item?.skillUnit === skillUnit);
       if (!rule?.template) continue;
       return fill(template(rule.template, locale), {
         multiplier,
-        status,
-        effect
+        status: getStatusLabel(statusId, locale),
+        effect,
+        combatStart: localizeTerm('timing.combatStart', locale, 'Combat Start'),
+        startOfTurn: localizeTerm('timing.startOfTurn', locale, 'Start-of-Turn'),
+        endOfTurn: localizeTerm('timing.endOfTurn', locale, 'End-of-Turn')
       });
     }
     return null;
@@ -97,24 +113,13 @@
     return loadPromise;
   }
 
-  // skillunit.js is loaded lazily by the wiki description renderer. If this
-  // engine is already present, install as soon as JobmaniaSkillUnit appears.
-  let attempts = 0;
-  const timer = setInterval(() => {
-    attempts += 1;
-    if (root.JobmaniaSkillUnit && data) {
-      install(root.JobmaniaSkillUnit);
-      clearInterval(timer);
-    } else if (attempts >= 200) {
-      clearInterval(timer);
-    }
-  }, 50);
-
   root.JobmaniaDeliveryPatterns = {
     load,
     install,
     describe,
     resolveStatus,
+    getStatusLabel,
+    localizeTerm,
     normalizeLocale,
     get data() { return data; }
   };
