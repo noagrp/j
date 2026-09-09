@@ -1,6 +1,6 @@
 {
-  "version": 7,
-  "source": "Jobmania Database Guides and Skill Unit sheets plus confirmed in-game descriptions",
+  "version": 8,
+  "source": "Jobmania Database Guides and Skill Unit sheets, Localization Skills Description sheet, plus confirmed in-game descriptions",
   "powerLv": {
     "stat": {
       "1": 10,
@@ -125,13 +125,112 @@
     }
   },
   "elementStatuses": {
-    "burn": { "element": "fire", "termKey": "status.burn", "sourceName": "Burn", "mechanicConfirmed": true },
-    "chill": { "element": "water", "termKey": "status.chill", "sourceName": "Chill", "mechanicConfirmed": false },
-    "paralysis": { "element": "thunder", "termKey": "status.paralysis", "sourceName": "Paralysis", "mechanicConfirmed": false },
-    "seed": { "element": "earth", "termKey": "status.seed", "sourceName": "Seed", "mechanicConfirmed": false },
-    "dizzy": { "element": "wind", "termKey": "status.dizzy", "sourceName": "Dizzy", "mechanicConfirmed": false },
-    "blind": { "element": "light", "termKey": "status.blind", "sourceName": "Blind", "mechanicConfirmed": false },
-    "depress": { "element": "dark", "termKey": "status.depress", "sourceName": "Depress", "mechanicConfirmed": false }
+    "burn": {
+      "element": "fire",
+      "termKey": "status.burn",
+      "sourceName": "Burn",
+      "localisationKey": "BurnXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "live+sheet+localisation",
+      "damagePercentPerStack": 5,
+      "damageBasedOn": "MaxHP",
+      "triggerAt": "TurnStart",
+      "instantTriggerIfGainedDuringUserTurn": true,
+      "receivesMoreDamageFromElement": "fire",
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "removedAt": "TurnEnd"
+    },
+    "chill": {
+      "element": "water",
+      "termKey": "status.chill",
+      "sourceName": "Chill",
+      "localisationKey": "ChillXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "live+sheet+localisation",
+      "apReductionThreshold": 1,
+      "apReduction": 1,
+      "triggerAt": "TurnStart",
+      "enemyMinimumAP": 1,
+      "instantTriggerIfGainedDuringUserTurn": true,
+      "receivesMoreDamageFromElement": "water",
+      "sealPassiveAtStacks": 2,
+      "sealedPassiveTimingKey": "timing.afterEachAction",
+      "maxStacks": 1,
+      "upgradeMaxStacks": 2,
+      "removedAt": "TurnEnd"
+    },
+    "paralysis": {
+      "element": "thunder",
+      "termKey": "status.paralysis",
+      "sourceName": "Paralysis",
+      "localisationKey": "ParalysisXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "actionFailChancePercentPerStack": 10,
+      "triggerAt": "BeforeAction",
+      "receivesMoreDamageFromElement": "thunder",
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "removedAt": "TurnEnd"
+    },
+    "seed": {
+      "element": "earth",
+      "termKey": "status.seed",
+      "sourceName": "Seed",
+      "localisationKey": "SeedXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "opponentHealPercentOfDamageDealtPerStack": 20,
+      "triggerAt": "GotAttacked",
+      "receivesMoreDamageFromElement": "earth",
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "removedAt": "TurnEnd"
+    },
+    "dizzy": {
+      "element": "wind",
+      "termKey": "status.dizzy",
+      "sourceName": "Dizzy",
+      "localisationKey": "DizzyXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "wrongTargetChancePercentPerStack": 10,
+      "excludedSkillTermKeys": ["skill.elementInfusion", "skill.secondChance", "skill.charge", "skill.guard"],
+      "triggerAt": "BuffEffect",
+      "receivesMoreDamageFromElement": "wind",
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "removedAt": "TurnEnd"
+    },
+    "blind": {
+      "element": "light",
+      "termKey": "status.blind",
+      "sourceName": "Blind",
+      "localisationKey": "BlindXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "attackMissChancePercentPerStack": 15,
+      "triggerAt": "AttackEffect",
+      "receivesMoreDamageFromElement": "light",
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "removedAt": "TurnEnd"
+    },
+    "depress": {
+      "element": "dark",
+      "termKey": "status.depress",
+      "sourceName": "Depress",
+      "localisationKey": "DepressXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "healingAndProtectReductionPercentPerStack": 15,
+      "triggerAt": "HealEffect",
+      "receivesMoreDamageFromElement": "dark",
+      "maxStacks": 3,
+      "upgradeMaxStacks": 5,
+      "removedAt": "TurnEnd"
+    }
   },
   "effectDefinitions": {
     "Strength Buff": {
