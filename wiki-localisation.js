@@ -20,6 +20,7 @@
     };
 
     let abilityCostPromise = null;
+    let currentAbilityCostKey = null;
 
     function loadScriptOnce(src, globalName) {
         if (globalName && window[globalName]) return Promise.resolve(window[globalName]);
@@ -158,34 +159,23 @@
     }
 
     async function insertAbilityCost(abilityKey) {
+        if (!abilityKey) return;
         const engine = await ensureAbilityCost();
         const info = engine?.getInfo?.(abilityKey);
         if (!info) return;
 
-        const basicInfoList = document.querySelector('#content .detail-stack .detail-section .info-list');
-        if (!basicInfoList || basicInfoList.querySelector('.ability-ap-cost-row')) return;
+        const descriptionList = document.querySelector('#content .skill-description-section .skill-description-list');
+        if (!descriptionList || descriptionList.querySelector('.ability-ap-cost-row')) return;
 
-        const row = document.createElement('div');
-        row.className = 'info-row ability-ap-cost-row';
-
-        const value = document.createElement('div');
-        value.className = 'info-value';
-        value.style.gridColumn = '1 / -1';
-        value.textContent = formatAbilityCost(info.baseCost);
-        row.appendChild(value);
-
-        const tierLabel = typeof window.getDisplayKey === 'function'
-            ? window.getDisplayKey('abilities', 'Ability Tier')
-            : (window.JOBMANIA_FIELD_LABELS?.['Ability Tier'] || 'Ability Tier');
-
-        const tierRow = Array.from(basicInfoList.querySelectorAll('.info-row')).find(item => {
-            const text = item.querySelector('.info-label')?.textContent?.replace(/:\s*$/, '').trim();
-            return text === tierLabel;
-        });
-
-        if (tierRow) tierRow.insertAdjacentElement('afterend', row);
-        else basicInfoList.appendChild(row);
+        const line = document.createElement('p');
+        line.className = 'skill-description-line ability-ap-cost-row';
+        line.textContent = formatAbilityCost(info.baseCost);
+        descriptionList.appendChild(line);
     }
+
+    // Expose one shared hook so other wiki renderers can request AP insertion
+    // without owning AP data or localisation.
+    window.JobmaniaInsertAbilityCost = insertAbilityCost;
 
     // Primary path: decorate the shared detail loader.
     if (typeof originalLoadDetail === 'function') {
@@ -193,14 +183,18 @@
             const result = await originalLoadDetail.apply(this, arguments);
             const normalizedCat = String(cat).toLowerCase();
             removeHiddenRows(normalizedCat);
-            if (normalizedCat === 'abilities') await insertAbilityCost(key);
+            if (normalizedCat === 'abilities') {
+                currentAbilityCostKey = key;
+                await insertAbilityCost(key);
+            } else {
+                currentAbilityCostKey = null;
+            }
             return result;
         };
     }
 
-    // Fallback path for browsers/inline handlers that resolve the original global
-    // loadDetail binding instead of window.loadDetail after it has been decorated.
-    // This keeps AP rendering reliable without changing the core wiki renderer.
+    // Capture inline/core Ability navigation so AP rendering does not depend on
+    // whether the page calls the lexical loadDetail binding or window.loadDetail.
     document.addEventListener('click', event => {
         const target = event.target instanceof Element ? event.target.closest('[data-key]') : null;
         if (!target) return;
@@ -211,9 +205,19 @@
 
         const abilityKey = target.dataset.key;
         if (!abilityKey) return;
-
-        setTimeout(() => {
-            insertAbilityCost(abilityKey).catch(error => console.error('Failed to insert Ability AP cost:', error));
-        }, 0);
+        currentAbilityCostKey = abilityKey;
     }, true);
+
+    // Description is appended asynchronously by skill-description-wiki.js.
+    // Observe the content container and insert AP as soon as that section exists.
+    const content = document.getElementById('content');
+    if (content && typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver(() => {
+            if (!currentAbilityCostKey) return;
+            if (!content.querySelector('.skill-description-section .skill-description-list')) return;
+            insertAbilityCost(currentAbilityCostKey)
+                .catch(error => console.error('Failed to insert Ability AP cost:', error));
+        });
+        observer.observe(content, { childList: true, subtree: true });
+    }
 })();
