@@ -1,16 +1,16 @@
 {
-  "version": 1,
+  "version": 2,
   "source": "Jobmania Database Skill Unit sheet delivery wording",
   "families": {
     "elementStatus": {
       "effects": {
-        "Fire": "Burn",
-        "Water": "Chill",
-        "Thunder": "Paralysis",
-        "Earth": "Seed",
-        "Wind": "Dizzy",
-        "Light": "Blind",
-        "Dark": "Depress"
+        "Fire": "burn",
+        "Water": "chill",
+        "Thunder": "paralysis",
+        "Earth": "seed",
+        "Wind": "dizzy",
+        "Light": "blind",
+        "Dark": "depress"
       },
       "rules": [
         { "kind": "ability", "skillUnit": "Debuff", "template": "inflictOpponent" },
@@ -27,6 +27,13 @@
   "locales": {
     "en": {
       "terms": {
+        "status.burn": "Burn",
+        "status.chill": "Chill",
+        "status.paralysis": "Paralysis",
+        "status.seed": "Seed",
+        "status.dizzy": "Dizzy",
+        "status.blind": "Blind",
+        "status.depress": "Depress",
         "timing.combatStart": "Combat Start",
         "timing.startOfTurn": "Start-of-Turn",
         "timing.endOfTurn": "End-of-Turn"
@@ -35,9 +42,9 @@
         "inflictOpponent": "Inflict {multiplier} {status} on the opponent.",
         "removeSelf": "Remove {status} from self.",
         "gainSelf": "Gain {multiplier} {status} on self.",
-        "gainStartOfTurn": "Gain {multiplier} {status} at Start-of-Turn.",
+        "gainStartOfTurn": "Gain {multiplier} {status} at {startOfTurn}.",
         "gainCombatStart": "Start combat with {multiplier} {status}.",
-        "inflictEndOfTurn": "Inflict {multiplier} {status} on the opponent at End-of-Turn.",
+        "inflictEndOfTurn": "Inflict {multiplier} {status} on the opponent at {endOfTurn}.",
         "reflectStatus": "When the opponent inflicts {status} on you, inflict the same number of {status} stacks on the opponent.",
         "immuneStatus": "Immune to {status}."
       }
