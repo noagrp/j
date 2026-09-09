@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "locales": {
     "en": {
       "terms": {
@@ -18,6 +18,11 @@
         "status.blind": "Blind",
         "status.depress": "Depress",
         "timing.endOfTurn": "End-of-Turn",
+        "timing.afterEachAction": "After-Each-Action",
+        "skill.elementInfusion": "element infusion",
+        "skill.secondChance": "Second Chance",
+        "skill.charge": "Charge",
+        "skill.guard": "Guard",
         "ui.mechanicDetailsPending": "Mechanic details pending confirmation."
       },
       "mechanicNames": {
@@ -45,7 +50,13 @@
         "statBuff": "Temporarily increase {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the start of the user's turn.",
         "statDebuff": "Temporarily reduce {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the end of the user's turn.",
         "elementalDamage": "Consume all {element} elements. For each stack consumed, deal {percent}% {element} damage based on your strongest attribute. If the specific condition is met, trigger {finale}.",
-        "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from {element} attacks. Newly received stacks deal their damage immediately if inflicted during the user's turn. Max {max} stacks, or {upgradeMax} when upgraded. Removed at the end of each turn.",
+        "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from {element} attacks. Suffer the received stacks' damage instantly if gained during the user's turn. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of each turn).",
+        "statusChill": "With {threshold} or more stacks, decrease Action Point by {apReduction} at the start of turn (Enemy AP will not go below {enemyMinimumAP}) and receive more damage from {element} attacks. Reduce AP instantly if gained during user's turn. With {sealAt} stacks, seal [{sealedTiming}] passives. (Max {max} / upgrade {upgradeMax} stacks. Remove at the end of each turn).",
+        "statusParalysis": "{percent}% chance that executing an action will fail for each stack and receive more damage from {element} attacks. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of turn).",
+        "statusSeed": "Receive more damage from {element} attacks and the opponent heals for {percent}% of the damage they deal for each stack. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of turn).",
+        "statusDizzy": "For each stack, {percent}% chance that using a buff or debuff skill (excluding {excluded}) will be used on the wrong target, and receive more damage from {element} attacks. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of turn).",
+        "statusBlind": "Attacks have {percent}% chance to miss for each stack and receive more damage from {element} attacks. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of turn).",
+        "statusDepress": "Healing and Protect gain are decreased by {percent}% for each stack, and receive more damage from {element} attacks. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of turn).",
         "elementCore": "For each {element} element stack on self, increase non-elemental damage dealt to opponents with {status} or {counters} element by {damageBonus}% and reduce {element} and {counters} elemental damage received by {reduction}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {loseStacks} stack when hit by a {counteredBy} attack.",
         "elementAbilityCore": "Increase damage dealt and healing by {stackBonus}% for each {element} element on self. If the opponent has {counters} element or {status}, increase damage dealt by {conditionalBonus}%, or {upgradedConditionalBonus}% when upgraded.",
         "elementFinale": "If an elemental attack consumes {threshold} or more {element} element stacks, deal an extra {damage}% {element} damage based on your strongest attribute. If {maxThreshold} stacks are consumed, deal {maxDamage}% instead.",
