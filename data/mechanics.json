@@ -1,629 +1,79 @@
 {
-  "version": 11,
+  "version": 12,
   "source": "Jobmania Database Guides and Skill Unit sheets, Localization Skills Description sheet, plus confirmed in-game descriptions",
   "powerLv": {
-    "stat": {
-      "1": 10,
-      "2": 25,
-      "3": 40,
-      "4": 70,
-      "5": 100,
-      "6": 150,
-      "7": 200,
-      "8": 300
-    },
+    "stat": {"1":10,"2":25,"3":40,"4":70,"5":100,"6":150,"7":200,"8":300},
     "maxHP": {
-      "1": {
-        "enemy": 5,
-        "player": 10
-      },
-      "2": {
-        "enemy": 10,
-        "player": 15
-      },
-      "3": {
-        "enemy": 15,
-        "player": 25
-      },
-      "4": {
-        "enemy": 20,
-        "player": 35
-      },
-      "5": {
-        "enemy": 25,
-        "player": 40
-      },
-      "6": {
-        "enemy": 30,
-        "player": 50
-      },
-      "7": {
-        "enemy": 40,
-        "player": 70
-      },
-      "8": {
-        "enemy": 50,
-        "player": 100
-      }
+      "1":{"enemy":5,"player":10},"2":{"enemy":10,"player":15},"3":{"enemy":15,"player":25},"4":{"enemy":20,"player":35},
+      "5":{"enemy":25,"player":40},"6":{"enemy":30,"player":50},"7":{"enemy":40,"player":70},"8":{"enemy":50,"player":100}
     }
   },
   "routes": {
     "ability": {
-      "Damage": {
-        "Strength": "powerLv.stat",
-        "Agility": "powerLv.stat",
-        "Intelligence": "powerLv.stat",
-        "Protect": "powerLv.stat",
-        "MaxHP": "powerLv.maxHP",
-        "Fire": "powerLv.stat"
-      },
-      "Heal": {
-        "Strength": "powerLv.stat",
-        "Agility": "powerLv.stat",
-        "Intelligence": "powerLv.stat",
-        "MaxHP": "powerLv.maxHP"
-      },
-      "Protect": {
-        "Strength": "powerLv.stat",
-        "Agility": "powerLv.stat",
-        "Intelligence": "powerLv.stat",
-        "MaxHP": "powerLv.maxHP"
-      }
+      "Damage": {"Strength":"powerLv.stat","Agility":"powerLv.stat","Intelligence":"powerLv.stat","Protect":"powerLv.stat","MaxHP":"powerLv.maxHP","Fire":"powerLv.stat"},
+      "Heal": {"Strength":"powerLv.stat","Agility":"powerLv.stat","Intelligence":"powerLv.stat","MaxHP":"powerLv.maxHP"},
+      "Protect": {"Strength":"powerLv.stat","Agility":"powerLv.stat","Intelligence":"powerLv.stat","MaxHP":"powerLv.maxHP"}
     }
   },
   "elementMechanics": {
     "shared": {
-      "abilityBonusPerStack": 3,
-      "abilityConditionalDamageBonus": 20,
-      "abilityConditionalDamageBonusUpgraded": 30,
-      "elementNonElementalDamageBonusPerStack": 3,
-      "elementDamageReductionPerStack": 3,
-      "maxStacks": 5,
-      "upgradeMaxStacks": 10,
-      "loseStacksWhenCountered": 1,
-      "finaleThreshold": 5,
-      "finaleDamagePercent": 100,
-      "finaleMaxThreshold": 10,
-      "finaleMaxDamagePercent": 150,
-      "vulnerableDamageTakenPercentPerStack": 5,
-      "vulnerableMaxStacks": 10,
-      "vulnerableRemovedAt": "TurnEnd"
+      "abilityBonusPerStack":3,"abilityConditionalDamageBonus":20,"abilityConditionalDamageBonusUpgraded":30,
+      "elementNonElementalDamageBonusPerStack":3,"elementDamageReductionPerStack":3,"maxStacks":5,"upgradeMaxStacks":10,
+      "loseStacksWhenCountered":1,"finaleThreshold":5,"finaleDamagePercent":100,"finaleMaxThreshold":10,"finaleMaxDamagePercent":150,
+      "vulnerableDamageTakenPercentPerStack":5,"vulnerableMaxStacks":10,"vulnerableRemovedAt":"TurnEnd"
     },
     "elements": {
-      "fire": {
-        "sourceEffect": "Fire",
-        "termKey": "element.fire",
-        "counters": "wind",
-        "counteredBy": "water",
-        "status": "burn",
-        "vulnerableSecondary": {
-          "type": "statusEffectBoost",
-          "status": "burn",
-          "percent": 5
-        }
-      },
-      "water": {
-        "sourceEffect": "Water",
-        "termKey": "element.water",
-        "counters": "fire",
-        "counteredBy": "thunder",
-        "status": "chill",
-        "vulnerableSecondary": {
-          "type": "sealPassiveIfStatus",
-          "status": "chill",
-          "passiveTimingKey": "timing.endOfTurn"
-        }
-      },
-      "thunder": {
-        "sourceEffect": "Thunder",
-        "termKey": "element.thunder",
-        "counters": "water",
-        "counteredBy": "earth",
-        "status": "paralysis",
-        "vulnerableSecondary": {
-          "type": "statusEffectBoost",
-          "status": "paralysis",
-          "percent": 10
-        }
-      },
-      "earth": {
-        "sourceEffect": "Earth",
-        "termKey": "element.earth",
-        "counters": "thunder",
-        "counteredBy": "wind",
-        "status": "seed",
-        "vulnerableSecondary": {
-          "type": "statusEffectBoost",
-          "status": "seed",
-          "percent": 20
-        }
-      },
-      "wind": {
-        "sourceEffect": "Wind",
-        "termKey": "element.wind",
-        "counters": "earth",
-        "counteredBy": "fire",
-        "status": "dizzy",
-        "vulnerableSecondary": {
-          "type": "statusEffectBoost",
-          "status": "dizzy",
-          "percent": 10
-        }
-      },
-      "light": {
-        "sourceEffect": "Light",
-        "termKey": "element.light",
-        "counters": "dark",
-        "counteredBy": "dark",
-        "status": "blind",
-        "vulnerableSecondary": {
-          "type": "statusEffectBoost",
-          "status": "blind",
-          "percent": 15
-        }
-      },
-      "dark": {
-        "sourceEffect": "Dark",
-        "termKey": "element.dark",
-        "counters": "light",
-        "counteredBy": "light",
-        "status": "depress",
-        "vulnerableSecondary": {
-          "type": "statusEffectBoost",
-          "status": "depress",
-          "percent": 15
-        }
-      }
+      "fire":{"sourceEffect":"Fire","termKey":"element.fire","counters":"wind","counteredBy":"water","status":"burn","vulnerableSecondary":{"type":"statusEffectBoost","status":"burn","percent":5}},
+      "water":{"sourceEffect":"Water","termKey":"element.water","counters":"fire","counteredBy":"thunder","status":"chill","vulnerableSecondary":{"type":"sealPassiveIfStatus","status":"chill","passiveTimingKey":"timing.endOfTurn"}},
+      "thunder":{"sourceEffect":"Thunder","termKey":"element.thunder","counters":"water","counteredBy":"earth","status":"paralysis","vulnerableSecondary":{"type":"statusEffectBoost","status":"paralysis","percent":10}},
+      "earth":{"sourceEffect":"Earth","termKey":"element.earth","counters":"thunder","counteredBy":"wind","status":"seed","vulnerableSecondary":{"type":"statusEffectBoost","status":"seed","percent":20}},
+      "wind":{"sourceEffect":"Wind","termKey":"element.wind","counters":"earth","counteredBy":"fire","status":"dizzy","vulnerableSecondary":{"type":"statusEffectBoost","status":"dizzy","percent":10}},
+      "light":{"sourceEffect":"Light","termKey":"element.light","counters":"dark","counteredBy":"dark","status":"blind","vulnerableSecondary":{"type":"statusEffectBoost","status":"blind","percent":15}},
+      "dark":{"sourceEffect":"Dark","termKey":"element.dark","counters":"light","counteredBy":"light","status":"depress","vulnerableSecondary":{"type":"statusEffectBoost","status":"depress","percent":15}}
     }
   },
   "elementStatuses": {
-    "burn": {
-      "element": "fire",
-      "termKey": "status.burn",
-      "sourceName": "Burn",
-      "localisationKey": "BurnXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "live+sheet+localisation",
-      "damagePercentPerStack": 5,
-      "damageBasedOn": "MaxHP",
-      "triggerAt": "TurnStart",
-      "instantTriggerIfGainedDuringUserTurn": true,
-      "receivesMoreDamageFromElement": "fire",
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "removedAt": "TurnEnd"
-    },
-    "chill": {
-      "element": "water",
-      "termKey": "status.chill",
-      "sourceName": "Chill",
-      "localisationKey": "ChillXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "live+sheet+localisation",
-      "apReductionThreshold": 1,
-      "apReduction": 1,
-      "triggerAt": "TurnStart",
-      "enemyMinimumAP": 1,
-      "instantTriggerIfGainedDuringUserTurn": true,
-      "receivesMoreDamageFromElement": "water",
-      "sealPassiveAtStacks": 2,
-      "sealedPassiveTimingKey": "timing.afterEachAction",
-      "maxStacks": 1,
-      "upgradeMaxStacks": 2,
-      "removedAt": "TurnEnd"
-    },
-    "paralysis": {
-      "element": "thunder",
-      "termKey": "status.paralysis",
-      "sourceName": "Paralysis",
-      "localisationKey": "ParalysisXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "actionFailChancePercentPerStack": 10,
-      "triggerAt": "BeforeAction",
-      "receivesMoreDamageFromElement": "thunder",
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "removedAt": "TurnEnd"
-    },
-    "seed": {
-      "element": "earth",
-      "termKey": "status.seed",
-      "sourceName": "Seed",
-      "localisationKey": "SeedXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "opponentHealPercentOfDamageDealtPerStack": 20,
-      "triggerAt": "GotAttacked",
-      "receivesMoreDamageFromElement": "earth",
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "removedAt": "TurnEnd"
-    },
-    "dizzy": {
-      "element": "wind",
-      "termKey": "status.dizzy",
-      "sourceName": "Dizzy",
-      "localisationKey": "DizzyXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "wrongTargetChancePercentPerStack": 10,
-      "excludedSkillTermKeys": [
-        "skill.elementInfusion",
-        "skill.secondChance",
-        "skill.charge",
-        "skill.guard"
-      ],
-      "triggerAt": "BuffEffect",
-      "receivesMoreDamageFromElement": "wind",
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "removedAt": "TurnEnd"
-    },
-    "blind": {
-      "element": "light",
-      "termKey": "status.blind",
-      "sourceName": "Blind",
-      "localisationKey": "BlindXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "attackMissChancePercentPerStack": 15,
-      "triggerAt": "AttackEffect",
-      "receivesMoreDamageFromElement": "light",
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "removedAt": "TurnEnd"
-    },
-    "depress": {
-      "element": "dark",
-      "termKey": "status.depress",
-      "sourceName": "Depress",
-      "localisationKey": "DepressXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "healingAndProtectReductionPercentPerStack": 15,
-      "triggerAt": "HealEffect",
-      "receivesMoreDamageFromElement": "dark",
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "removedAt": "TurnEnd"
-    }
+    "burn":{"element":"fire","termKey":"status.burn","sourceName":"Burn","localisationKey":"BurnXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","damagePercentPerStack":5,"damageBasedOn":"MaxHP","triggerAt":"TurnStart","instantTriggerIfGainedDuringUserTurn":true,"receivesMoreDamageFromElement":"fire","maxStacks":3,"upgradeMaxStacks":5,"removedAt":"TurnEnd"},
+    "chill":{"element":"water","termKey":"status.chill","sourceName":"Chill","localisationKey":"ChillXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","apReductionThreshold":1,"apReduction":1,"triggerAt":"TurnStart","enemyMinimumAP":1,"instantTriggerIfGainedDuringUserTurn":true,"receivesMoreDamageFromElement":"water","sealPassiveAtStacks":2,"sealedPassiveTimingKey":"timing.afterEachAction","maxStacks":1,"upgradeMaxStacks":2,"removedAt":"TurnEnd"},
+    "paralysis":{"element":"thunder","termKey":"status.paralysis","sourceName":"Paralysis","localisationKey":"ParalysisXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","actionFailChancePercentPerStack":10,"triggerAt":"BeforeAction","receivesMoreDamageFromElement":"thunder","maxStacks":3,"upgradeMaxStacks":5,"removedAt":"TurnEnd"},
+    "seed":{"element":"earth","termKey":"status.seed","sourceName":"Seed","localisationKey":"SeedXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","opponentHealPercentOfDamageDealtPerStack":20,"triggerAt":"GotAttacked","receivesMoreDamageFromElement":"earth","maxStacks":3,"upgradeMaxStacks":5,"removedAt":"TurnEnd"},
+    "dizzy":{"element":"wind","termKey":"status.dizzy","sourceName":"Dizzy","localisationKey":"DizzyXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","wrongTargetChancePercentPerStack":10,"excludedSkillTermKeys":["skill.elementInfusion","skill.secondChance","skill.charge","skill.guard"],"triggerAt":"BuffEffect","receivesMoreDamageFromElement":"wind","maxStacks":3,"upgradeMaxStacks":5,"removedAt":"TurnEnd"},
+    "blind":{"element":"light","termKey":"status.blind","sourceName":"Blind","localisationKey":"BlindXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","attackMissChancePercentPerStack":15,"triggerAt":"AttackEffect","receivesMoreDamageFromElement":"light","maxStacks":3,"upgradeMaxStacks":5,"removedAt":"TurnEnd"},
+    "depress":{"element":"dark","termKey":"status.depress","sourceName":"Depress","localisationKey":"DepressXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","healingAndProtectReductionPercentPerStack":15,"triggerAt":"HealEffect","receivesMoreDamageFromElement":"dark","maxStacks":3,"upgradeMaxStacks":5,"removedAt":"TurnEnd"}
   },
   "effectDefinitions": {
-    "Strength Buff": {
-      "skillUnit": "Buff",
-      "effect": "Strength",
-      "changePercentPerStack": 10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnStart",
-      "decreaseStacks": 1
-    },
-    "Agility Buff": {
-      "skillUnit": "Buff",
-      "effect": "Agility",
-      "changePercentPerStack": 10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnStart",
-      "decreaseStacks": 1
-    },
-    "Intelligence Buff": {
-      "skillUnit": "Buff",
-      "effect": "Intelligence",
-      "changePercentPerStack": 10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnStart",
-      "decreaseStacks": 1
-    },
-    "MaxHP Buff": {
-      "skillUnit": "Buff",
-      "effect": "MaxHP",
-      "changePercentPerStack": 10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnStart",
-      "decreaseStacks": 1
-    },
-    "Strength Debuff": {
-      "skillUnit": "Debuff",
-      "effect": "Strength",
-      "changePercentPerStack": -10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1
-    },
-    "Agility Debuff": {
-      "skillUnit": "Debuff",
-      "effect": "Agility",
-      "changePercentPerStack": -10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1
-    },
-    "Intelligence Debuff": {
-      "skillUnit": "Debuff",
-      "effect": "Intelligence",
-      "changePercentPerStack": -10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1
-    },
-    "MaxHP Debuff": {
-      "skillUnit": "Debuff",
-      "effect": "MaxHP",
-      "changePercentPerStack": -10,
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "decreaseAt": "TurnEnd",
-      "decreaseStacks": 1
-    },
-    "Burn": {
-      "skillUnit": "Debuff",
-      "effect": "Fire",
-      "damagePercentPerStack": 5,
-      "damageBasedOn": "MaxHP",
-      "damageAt": "TurnStart",
-      "instantDamageIfInflictedDuringUserTurn": true,
-      "receivesMoreDamageFrom": "Fire",
-      "maxStacks": 3,
-      "upgradeMaxStacks": 5,
-      "removedAt": "TurnEnd"
-    },
-    "Protect": {
-      "skillUnit": "Protect",
-      "effect": "Protect",
-      "termKey": "mechanic.protect",
-      "localisationKey": "ProtectXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "clickable": true,
-      "templateKey": "protect",
-      "templateArgs": {
-        "maxPercent": "maxAmountMaxHPPercent",
-        "upgradeMaxPercent": "upgradeMaxAmountMaxHPPercent"
-      },
-      "blocksDirectAttackDamage": true,
-      "maxAmountMaxHPPercent": 50,
-      "upgradeMaxAmountMaxHPPercent": 80,
-      "triggerAt": "GotAttacked"
-    },
-    "Stack Guard": {
-      "skillUnit": "Buff",
-      "effect": "Guard",
-      "termKey": "mechanic.stackGuard",
-      "localisationKey": "StackGuardXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "live+sheet+localisation",
-      "clickable": true,
-      "templateKey": "stackGuard",
-      "templateArgs": {
-        "basePercent": "directDamageReductionPercent",
-        "upgradePercent": "upgradeDirectDamageReductionPercent",
-        "decayPercent": "effectivenessDecayPercentPerHit"
-      },
-      "maxStacks": 1,
-      "upgradeMaxStacks": 1,
-      "triggerAt": "GotAttacked",
-      "directDamageReductionPercent": 30,
-      "upgradeDirectDamageReductionPercent": 40,
-      "effectivenessDecayPercentPerHit": 10
-    },
-    "Second Chance": {
-      "skillUnit": "Protect",
-      "effect": "Guard",
-      "termKey": "skill.secondChance",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "clickable": true,
-      "templateKey": "secondChance",
-      "templateArgs": {
-        "recoverPercent": "recoverMaxHPPercentOnTrigger",
-        "max": "maxStacks",
-        "upgradeMax": "upgradeMaxStacks"
-      },
-      "maxStacks": 2,
-      "upgradeMaxStacks": 2,
-      "triggerAt": "HealthReduced",
-      "decreaseAt": "HealthReduced",
-      "decreaseStacks": 1,
-      "preventsLethalDamage": true,
-      "recoverMaxHPPercentOnTrigger": 10
-    },
-    "Guard": {
-      "skillUnit": "InstantBoost",
-      "effect": "Guard",
-      "termKey": "mechanic.guard",
-      "localisationKey": "GuardXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "live+sheet+localisation",
-      "clickable": true,
-      "templateKey": "guard",
-      "templateArgs": {
-        "basePercent": "directDamageReductionPercent",
-        "upgradePercent": "upgradeDirectDamageReductionPercent"
-      },
-      "maxStacks": 1,
-      "upgradeMaxStacks": 1,
-      "triggerAt": "GotAttacked",
-      "removedAt": "ActionCycleEnd",
-      "consumedOnActivation": true,
-      "endOfTurnPassivesConsume": true,
-      "directDamageReductionPercent": 30,
-      "upgradeDirectDamageReductionPercent": 40
-    },
-    "Instinct": {
-      "skillUnit": "Sacrifice",
-      "effect": "Guard",
-      "termKey": "mechanic.instinct",
-      "localisationKey": "InstinctXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "live+sheet+localisation",
-      "clickable": true,
-      "templateKey": "instinct",
-      "templateArgs": {
-        "perStackPercent": "directDamageReductionPercentPerStack",
-        "baseCapPercent": "baseDamageReductionCapPercent",
-        "enhancedCapPercent": "enhancedDamageReductionCapPercent",
-        "threshold": "enhancedCapThresholdStacks",
-        "name": "displayName"
-      },
-      "triggerAt": "GotAttacked",
-      "stackIncreaseAt": "GotAttacked",
-      "removedAt": "TurnStart",
-      "directDamageReductionPercentPerStack": 1,
-      "baseDamageReductionCapPercent": 15,
-      "enhancedDamageReductionCapPercent": 30,
-      "enhancedCapThresholdStacks": 10,
-      "displayName": "Instinct"
-    },
-    "Rage": {
-      "skillUnit": "Sacrifice",
-      "effect": "Charge",
-      "termKey": "mechanic.rage",
-      "localisationKey": "RageXDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "live+sheet+localisation",
-      "clickable": true,
-      "templateKey": "rage",
-      "templateArgs": {
-        "perStackPercent": "damageBoostPercentPerStack",
-        "baseCapPercent": "baseDamageBoostCapPercent",
-        "enhancedCapPercent": "enhancedDamageBoostCapPercent",
-        "threshold": "enhancedCapThresholdStacks",
-        "name": "displayName"
-      },
-      "triggerAt": "AttackEffect",
-      "removedAt": "TurnEnd",
-      "damageBoostPercentPerStack": 0.5,
-      "baseDamageBoostCapPercent": 15,
-      "enhancedDamageBoostCapPercent": 30,
-      "enhancedCapThresholdStacks": 10,
-      "displayName": "Rage"
-    },
-    "Strength Boost": {
-      "skillUnit": "Buff",
-      "effect": "Strength",
-      "termKey": "mechanic.strengthBoost",
-      "localisationKey": "XStatBoostDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "clickable": true,
-      "templateKey": "statBoost",
-      "templateArgs": {
-        "stat": "displayStat",
-        "percent": "changePercentPerStack",
-        "max": "maxStacks"
-      },
-      "displayStat": "Strength",
-      "changePercentPerStack": 10,
-      "maxStacks": 5
-    },
-    "Agility Boost": {
-      "skillUnit": "Buff",
-      "effect": "Agility",
-      "termKey": "mechanic.agilityBoost",
-      "localisationKey": "XStatBoostDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "clickable": true,
-      "templateKey": "statBoost",
-      "templateArgs": {
-        "stat": "displayStat",
-        "percent": "changePercentPerStack",
-        "max": "maxStacks"
-      },
-      "displayStat": "Agility",
-      "changePercentPerStack": 10,
-      "maxStacks": 5
-    },
-    "Intelligence Boost": {
-      "skillUnit": "Buff",
-      "effect": "Intelligence",
-      "termKey": "mechanic.intelligenceBoost",
-      "localisationKey": "XStatBoostDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "sheet+localisation",
-      "clickable": true,
-      "templateKey": "statBoost",
-      "templateArgs": {
-        "stat": "displayStat",
-        "percent": "changePercentPerStack",
-        "max": "maxStacks"
-      },
-      "displayStat": "Intelligence",
-      "changePercentPerStack": 10,
-      "maxStacks": 5
-    },
-    "Max HP Boost": {
-      "skillUnit": "Buff",
-      "effect": "MaxHP",
-      "termKey": "mechanic.maxHPBoost",
-      "localisationKey": "XStatBoostDescr",
-      "mechanicConfirmed": true,
-      "confirmationSource": "live+sheet+localisation",
-      "clickable": true,
-      "templateKey": "statBoost",
-      "templateArgs": {
-        "stat": "displayStat",
-        "percent": "changePercentPerStack",
-        "max": "maxStacks"
-      },
-      "displayStat": "Max HP",
-      "changePercentPerStack": 10,
-      "maxStacks": 5
-    }
+    "Strength Buff":{"skillUnit":"Buff","effect":"Strength","changePercentPerStack":10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnStart","decreaseStacks":1},
+    "Agility Buff":{"skillUnit":"Buff","effect":"Agility","changePercentPerStack":10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnStart","decreaseStacks":1},
+    "Intelligence Buff":{"skillUnit":"Buff","effect":"Intelligence","changePercentPerStack":10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnStart","decreaseStacks":1},
+    "MaxHP Buff":{"skillUnit":"Buff","effect":"MaxHP","changePercentPerStack":10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnStart","decreaseStacks":1},
+    "Strength Debuff":{"skillUnit":"Debuff","effect":"Strength","changePercentPerStack":-10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnEnd","decreaseStacks":1},
+    "Agility Debuff":{"skillUnit":"Debuff","effect":"Agility","changePercentPerStack":-10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnEnd","decreaseStacks":1},
+    "Intelligence Debuff":{"skillUnit":"Debuff","effect":"Intelligence","changePercentPerStack":-10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnEnd","decreaseStacks":1},
+    "MaxHP Debuff":{"skillUnit":"Debuff","effect":"MaxHP","changePercentPerStack":-10,"maxStacks":3,"upgradeMaxStacks":5,"decreaseAt":"TurnEnd","decreaseStacks":1},
+    "Burn":{"skillUnit":"Debuff","effect":"Fire","damagePercentPerStack":5,"damageBasedOn":"MaxHP","damageAt":"TurnStart","instantDamageIfInflictedDuringUserTurn":true,"receivesMoreDamageFrom":"Fire","maxStacks":3,"upgradeMaxStacks":5,"removedAt":"TurnEnd"},
+    "Protect":{"skillUnit":"Protect","effect":"Protect","termKey":"mechanic.protect","localisationKey":"ProtectXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","clickable":true,"templateKey":"protect","templateArgs":{"maxPercent":"maxAmountMaxHPPercent","upgradeMaxPercent":"upgradeMaxAmountMaxHPPercent"},"blocksDirectAttackDamage":true,"maxAmountMaxHPPercent":50,"upgradeMaxAmountMaxHPPercent":80,"triggerAt":"GotAttacked"},
+    "Stack Guard":{"skillUnit":"Buff","effect":"Guard","termKey":"mechanic.stackGuard","localisationKey":"StackGuardXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","clickable":true,"templateKey":"stackGuard","templateArgs":{"basePercent":"directDamageReductionPercent","upgradePercent":"upgradeDirectDamageReductionPercent","decayPercent":"effectivenessDecayPercentPerHit"},"maxStacks":1,"upgradeMaxStacks":1,"triggerAt":"GotAttacked","directDamageReductionPercent":30,"upgradeDirectDamageReductionPercent":40,"effectivenessDecayPercentPerHit":10},
+    "Second Chance":{"skillUnit":"Protect","effect":"Guard","termKey":"skill.secondChance","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","clickable":true,"templateKey":"secondChance","templateArgs":{"recoverPercent":"recoverMaxHPPercentOnTrigger","max":"maxStacks","upgradeMax":"upgradeMaxStacks"},"maxStacks":2,"upgradeMaxStacks":2,"triggerAt":"HealthReduced","decreaseAt":"HealthReduced","decreaseStacks":1,"preventsLethalDamage":true,"recoverMaxHPPercentOnTrigger":10},
+    "Guard":{"skillUnit":"InstantBoost","effect":"Guard","termKey":"mechanic.guard","localisationKey":"GuardXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","clickable":true,"templateKey":"guard","templateArgs":{"basePercent":"directDamageReductionPercent","upgradePercent":"upgradeDirectDamageReductionPercent"},"maxStacks":1,"upgradeMaxStacks":1,"triggerAt":"GotAttacked","removedAt":"ActionCycleEnd","consumedOnActivation":true,"endOfTurnPassivesConsume":true,"directDamageReductionPercent":30,"upgradeDirectDamageReductionPercent":40},
+    "Instinct":{"skillUnit":"Sacrifice","effect":"Guard","termKey":"mechanic.instinct","localisationKey":"InstinctXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","clickable":true,"templateKey":"instinct","templateArgs":{"perStackPercent":"directDamageReductionPercentPerStack","baseCapPercent":"baseDamageReductionCapPercent","enhancedCapPercent":"enhancedDamageReductionCapPercent","threshold":"enhancedCapThresholdStacks","name":"displayName"},"triggerAt":"GotAttacked","stackIncreaseAt":"GotAttacked","removedAt":"TurnStart","directDamageReductionPercentPerStack":1,"baseDamageReductionCapPercent":15,"enhancedDamageReductionCapPercent":30,"enhancedCapThresholdStacks":10,"displayName":"Instinct"},
+    "Rage":{"skillUnit":"Sacrifice","effect":"Charge","termKey":"mechanic.rage","localisationKey":"RageXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","clickable":true,"templateKey":"rage","templateArgs":{"perStackPercent":"damageBoostPercentPerStack","baseCapPercent":"baseDamageBoostCapPercent","enhancedCapPercent":"enhancedDamageBoostCapPercent","threshold":"enhancedCapThresholdStacks","name":"displayName"},"triggerAt":"AttackEffect","removedAt":"TurnEnd","damageBoostPercentPerStack":0.5,"baseDamageBoostCapPercent":15,"enhancedDamageBoostCapPercent":30,"enhancedCapThresholdStacks":10,"displayName":"Rage"},
+    "Strength Boost":{"skillUnit":"Buff","effect":"Strength","termKey":"mechanic.strengthBoost","localisationKey":"XStatBoostDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","clickable":true,"templateKey":"statBoost","templateArgs":{"stat":"displayStat","percent":"changePercentPerStack","max":"maxStacks"},"displayStat":"Strength","changePercentPerStack":10,"maxStacks":5},
+    "Agility Boost":{"skillUnit":"Buff","effect":"Agility","termKey":"mechanic.agilityBoost","localisationKey":"XStatBoostDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","clickable":true,"templateKey":"statBoost","templateArgs":{"stat":"displayStat","percent":"changePercentPerStack","max":"maxStacks"},"displayStat":"Agility","changePercentPerStack":10,"maxStacks":5},
+    "Intelligence Boost":{"skillUnit":"Buff","effect":"Intelligence","termKey":"mechanic.intelligenceBoost","localisationKey":"XStatBoostDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","clickable":true,"templateKey":"statBoost","templateArgs":{"stat":"displayStat","percent":"changePercentPerStack","max":"maxStacks"},"displayStat":"Intelligence","changePercentPerStack":10,"maxStacks":5},
+    "Max HP Boost":{"skillUnit":"Buff","effect":"MaxHP","termKey":"mechanic.maxHPBoost","localisationKey":"XStatBoostDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","clickable":true,"templateKey":"statBoost","templateArgs":{"stat":"displayStat","percent":"changePercentPerStack","max":"maxStacks"},"displayStat":"Max HP","changePercentPerStack":10,"maxStacks":5},
+    "Venom":{"family":"VRI","familyAttribute":"Strength","skillUnit":"Debuff","effect":"Venom","termKey":"mechanic.venom","localisationKey":"VRIXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","clickable":true,"templateKey":"vriStrength","templateArgs":{"percent":"damagePercentPerStack","max":"maxStacks","upgradeMax":"upgradeMaxStacks"},"damagePercentPerStack":8,"damageBasedOnTargetAttribute":"Strength","triggerAt":["TurnStart","TurnEnd"],"instantTriggerIfGainedDuringUserTurn":true,"maxStacks":35,"upgradeMaxStacks":50,"stackReductionAt":"TurnEnd","stackReduction":"half"},
+    "Restrain":{"family":"VRI","familyAttribute":"Agility","skillUnit":"Debuff","effect":"Restrain","termKey":"mechanic.restrain","localisationKey":"VRIXDescr","mechanicConfirmed":true,"confirmationSource":"sheet+localisation","clickable":true,"templateKey":"vriAgility","templateArgs":{"percent":"damagePercentPerStack","max":"maxStacks","upgradeMax":"upgradeMaxStacks"},"damagePercentPerStack":8,"damageBasedOnTargetAttribute":"Agility","triggerAt":["TurnStart","TurnEnd"],"instantTriggerIfGainedDuringUserTurn":true,"maxStacks":35,"upgradeMaxStacks":50,"stackReductionAt":"TurnEnd","stackReduction":"half"},
+    "Insane":{"family":"VRI","familyAttribute":"Intelligence","skillUnit":"Debuff","effect":"Insane","termKey":"mechanic.insane","localisationKey":"VRIXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","clickable":true,"templateKey":"vriIntelligence","templateArgs":{"percent":"damagePercentPerStack","max":"maxStacks","upgradeMax":"upgradeMaxStacks"},"damagePercentPerStack":8,"damageBasedOnTargetAttribute":"Intelligence","triggerAt":["TurnStart","TurnEnd"],"instantTriggerIfGainedDuringUserTurn":true,"maxStacks":35,"upgradeMaxStacks":50,"stackReductionAt":"TurnEnd","stackReduction":"half"},
+    "Confuse":{"skillUnit":"Debuff","effect":"Confuse","termKey":"mechanic.confuse","localisationKey":"ConfuseXDescr","mechanicConfirmed":true,"confirmationSource":"live+sheet+localisation","clickable":true,"templateKey":"confuse","templateArgs":{"max":"maxStacks"},"triggerAt":"OnAction","decreaseAt":"ActionCycleEnd","decreaseStacks":1,"maxStacks":3,"randomAttributeMultiplier":true,"excludedRandomAttribute":"MaxHP","affectsSkillTypes":["Damage","Heal","Protect"],"affectsStatCombo":false}
   },
   "applyTags": {
-    "Humanoid": "Humanoid",
-    "Creature": "Beast",
-    "Spirit": "Spirit",
-    "Matter": "Inorganic",
-    "LifeSteal": "Lifesteal",
-    "Strength": "Strength Synergy",
-    "Agility": "Agility Synergy",
-    "Intelligence": "Intelligence Synergy",
-    "MaxHP": "Max HP Synergy",
-    "Fire": "Fire",
-    "Water": "Water",
-    "Thunder": "Thunder",
-    "Earth": "Earth",
-    "Wind": "Wind",
-    "Light": "Light",
-    "Dark": "Dark",
-    "Charge": "Chronocharge",
-    "Action": "Practice Perfect",
-    "Buff": "Focus Energy",
-    "Debuff": "Desperate Power",
-    "Multiply": "Overloaded",
-    "Draw": "Last Resort",
-    "Exhaust": "Exhaust",
-    "Curse": "Curse",
-    "Combo": "Combo Blend",
-    "Delay": "Scheduled",
-    "Direct": "Automatic",
-    "Dice": "Gamble",
-    "Sacrifice": "Grudge",
-    "Full": "Favor",
-    "Element": "Elemental Burst",
-    "Certain": "Fatal",
-    "Steal": "Steal",
-    "Unstable": "Panic",
-    "Summon": "Summon",
-    "Misfortune": "Calamity Cache",
-    "Do": "Do",
-    "Re": "Re",
-    "Mi": "Mi",
-    "Slack": "Slumber Snap",
-    "Silver": "Silver",
-    "Gold": "Gold",
-    "Crystal": "Crystal",
-    "Food": "Food",
-    "Tool": "Tool",
-    "Prepare": "Preparation"
+    "Humanoid":"Humanoid","Creature":"Beast","Spirit":"Spirit","Matter":"Inorganic","LifeSteal":"Lifesteal",
+    "Strength":"Strength Synergy","Agility":"Agility Synergy","Intelligence":"Intelligence Synergy","MaxHP":"Max HP Synergy",
+    "Fire":"Fire","Water":"Water","Thunder":"Thunder","Earth":"Earth","Wind":"Wind","Light":"Light","Dark":"Dark",
+    "Charge":"Chronocharge","Action":"Practice Perfect","Buff":"Focus Energy","Debuff":"Desperate Power","Multiply":"Overloaded",
+    "Draw":"Last Resort","Exhaust":"Exhaust","Curse":"Curse","Combo":"Combo Blend","Delay":"Scheduled","Direct":"Automatic",
+    "Dice":"Gamble","Sacrifice":"Grudge","Full":"Favor","Element":"Elemental Burst","Certain":"Fatal","Steal":"Steal","Unstable":"Panic",
+    "Summon":"Summon","Misfortune":"Calamity Cache","Do":"Do","Re":"Re","Mi":"Mi","Slack":"Slumber Snap","Silver":"Silver","Gold":"Gold",
+    "Crystal":"Crystal","Food":"Food","Tool":"Tool","Prepare":"Preparation"
   }
 }
