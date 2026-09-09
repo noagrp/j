@@ -50,10 +50,16 @@
     }
 
     // Delivery wording is a reusable SkillUnit description layer. It stays plain
-    // text in the wiki; only underlying combat mechanics are clickable.
-    loadScriptOnce('delivery-patterns.js', 'JobmaniaDeliveryPatterns')
-        .then(engine => engine?.load ? engine.load('data/delivery_patterns.json') : null)
-        .catch(error => console.error('Failed to load delivery patterns:', error));
+    // text in the wiki; only underlying combat mechanics are clickable. Preload
+    // skillunit.js here so delivery rules are installed deterministically before
+    // the description renderer asks the SkillUnit engine for output.
+    Promise.all([
+        loadScriptOnce('delivery-patterns.js', 'JobmaniaDeliveryPatterns'),
+        loadScriptOnce('skillunit.js', 'JobmaniaSkillUnit')
+    ]).then(async ([delivery, skillunit]) => {
+        if (delivery?.load) await delivery.load('data/delivery_patterns.json');
+        delivery?.install?.(skillunit);
+    }).catch(error => console.error('Failed to load delivery patterns:', error));
 
     function fieldLabel(cat, key) {
         if (cat === 'abilities' && key === 'AbilityKey') return window.JOBMANIA_UI?.ability || 'Ability';
