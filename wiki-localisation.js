@@ -12,6 +12,13 @@
         'Craft Ability x5': 'abilities'
     };
 
+    // Official Localization / Words key: CostXAP
+    const costXAPTemplates = {
+        en: 'Cost {0} AP',
+        'zh-CN': '消耗{0}AP',
+        'zh-TW': '消耗{0}AP'
+    };
+
     let abilityCostPromise = null;
 
     function loadScriptOnce(src, globalName) {
@@ -137,9 +144,22 @@
         });
     }
 
+    function normalizeCostLocale(locale) {
+        const raw = String(locale || 'en').trim().toLowerCase();
+        if (raw === 'zh-cn' || raw === 'zh_hans' || raw === 'zh-hans' || raw === 'simplified chinese') return 'zh-CN';
+        if (raw === 'zh-tw' || raw === 'zh_hant' || raw === 'zh-hant' || raw === 'traditional chinese') return 'zh-TW';
+        return 'en';
+    }
+
+    function formatAbilityCost(cost) {
+        const locale = normalizeCostLocale(window.JOBMANIA_LOCALE || 'en');
+        const template = costXAPTemplates[locale] || costXAPTemplates.en;
+        return template.replace('{0}', String(cost));
+    }
+
     async function insertAbilityCost(abilityKey) {
         const engine = await ensureAbilityCost();
-        const info = engine?.getInfo?.(abilityKey, window.JOBMANIA_LOCALE || 'en');
+        const info = engine?.getInfo?.(abilityKey);
         if (!info) return;
 
         const basicInfoList = document.querySelector('#content .detail-stack .detail-section .info-list');
@@ -148,15 +168,10 @@
         const row = document.createElement('div');
         row.className = 'info-row ability-ap-cost-row';
 
-        const label = document.createElement('div');
-        label.className = 'info-label';
-        label.textContent = `${info.label}:`;
-
         const value = document.createElement('div');
         value.className = 'info-value';
-        value.textContent = String(info.baseCost);
-
-        row.appendChild(label);
+        value.style.gridColumn = '1 / -1';
+        value.textContent = formatAbilityCost(info.baseCost);
         row.appendChild(value);
 
         const tierLabel = typeof window.getDisplayKey === 'function'
