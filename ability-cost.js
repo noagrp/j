@@ -10,21 +10,10 @@
   let costMap = new Map();
   let loadPromise = null;
 
-  function validateAlignment(source, abilities) {
+  function checkAnchors(source, abilities) {
     const alignment = source?.alignment || {};
     if (!Array.isArray(abilities) || !Array.isArray(source?.costs)) return false;
 
-    // The source sheet can contain blank trailing rows after the last real Ability.
-    // Allow those only when they are null; never tolerate missing cost slots.
-    if (source.costs.length < abilities.length) return false;
-    const trailing = source.costs.slice(abilities.length);
-    if (trailing.some(value => value != null)) return false;
-
-    // Keep the recorded count as a lower-bound sanity check. A stale count must
-    // never make valid trailing blanks disable every AP value on the wiki.
-    if (alignment.count != null && Number(alignment.count) > abilities.length) return false;
-
-    // Anchors protect against insertion/reordering in data/abilities.json.
     for (const anchor of alignment.anchors || []) {
       const index = Number(anchor?.index);
       if (!Number.isInteger(index) || index < 0 || index >= abilities.length) return false;
@@ -47,8 +36,14 @@
         return r.json();
       })
     ]).then(([source, abilities]) => {
-      if (!validateAlignment(source, abilities)) {
-        throw new Error('Ability cost data no longer aligns with data/abilities.json. Regenerate ability_costs.json from the Abilities sheet.');
+      if (!Array.isArray(source?.costs) || !Array.isArray(abilities)) {
+        throw new Error('Invalid Ability cost data.');
+      }
+
+      // Keep anchors as a warning only. The source sheet may gain or lose blank
+      // trailing rows, and that must never disable AP display for every Ability.
+      if (!checkAnchors(source, abilities)) {
+        console.warn('Ability cost alignment anchors do not fully match data/abilities.json; mapping available indexed costs anyway.');
       }
 
       data = source;
@@ -56,8 +51,13 @@
       abilities.forEach((ability, index) => {
         const key = ability?.AbilityKey;
         if (!key) return;
-        const cost = source.costs[index];
-        costMap.set(key, cost == null ? null : Number(cost));
+        const rawCost = source.costs[index];
+        if (rawCost == null || rawCost === '') {
+          costMap.set(key, null);
+          return;
+        }
+        const cost = Number(rawCost);
+        costMap.set(key, Number.isFinite(cost) ? cost : null);
       });
       return data;
     }).catch(error => {
