@@ -233,6 +233,14 @@
     return null;
   }
 
+  function getReusableTemplateValues(definition) {
+    const values = {};
+    for (const [placeholder, sourceKey] of Object.entries(definition?.templateArgs || {})) {
+      values[placeholder] = getPath(definition, sourceKey);
+    }
+    return values;
+  }
+
   function describeReusableMechanic(name, locale) {
     const status = getElementStatus(name);
     if (status?.mechanicConfirmed) return describeElementStatus(status.id, locale);
@@ -242,13 +250,10 @@
     const block = getLocaleBlock(locale);
     const templates = block?.templates || {};
 
-    if (definition.termKey === 'skill.secondChance') {
-      const template = templates.secondChance || localisationData?.locales?.en?.templates?.secondChance;
-      return fillTemplate(template, {
-        recoverPercent: definition.recoverMaxHPPercentOnTrigger,
-        max: definition.maxStacks,
-        upgradeMax: definition.upgradeMaxStacks
-      });
+    if (definition.templateKey) {
+      const template = templates[definition.templateKey]
+        || localisationData?.locales?.en?.templates?.[definition.templateKey];
+      if (template) return fillTemplate(template, getReusableTemplateValues(definition));
     }
 
     if (definition.skillUnit === 'Buff' && ['Strength', 'Agility', 'Intelligence', 'MaxHP'].includes(definition.effect)) {
