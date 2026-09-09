@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "source": "Jobmania Database Skill Unit sheet delivery wording",
+  "version": 3,
+  "source": "Jobmania Database Skill Unit sheet delivery wording, Localization Skills Description sheet, plus confirmed in-game descriptions",
   "families": {
     "elementStatus": {
       "effects": {
@@ -22,6 +22,20 @@
         { "kind": "passive", "skillUnit": "Reflect", "template": "reflectStatus" },
         { "kind": "passive", "skillUnit": "Protect", "template": "immuneStatus" }
       ]
+    },
+    "elementActionBuff": {
+      "effects": {
+        "Fire": "fireActionBuff",
+        "Water": "waterActionBuff",
+        "Thunder": "thunderActionBuff",
+        "Earth": "earthActionBuff",
+        "Wind": "windActionBuff",
+        "Light": "lightActionBuff",
+        "Dark": "darkActionBuff"
+      },
+      "rules": [
+        { "kind": "ability", "skillUnit": "InstantBoost", "template": "applyActionBuffSelf" }
+      ]
     }
   },
   "locales": {
@@ -34,6 +48,13 @@
         "status.dizzy": "Dizzy",
         "status.blind": "Blind",
         "status.depress": "Depress",
+        "status.fireActionBuff": "Fire Action Buff",
+        "status.waterActionBuff": "Water Action Buff",
+        "status.thunderActionBuff": "Thunder Action Buff",
+        "status.earthActionBuff": "Earth Action Buff",
+        "status.windActionBuff": "Wind Action Buff",
+        "status.lightActionBuff": "Light Action Buff",
+        "status.darkActionBuff": "Dark Action Buff",
         "timing.combatStart": "Combat Start",
         "timing.startOfTurn": "Start-of-Turn",
         "timing.endOfTurn": "End-of-Turn"
@@ -46,15 +67,32 @@
         "gainCombatStart": "Start combat with {multiplier} {status}.",
         "inflictEndOfTurn": "Inflict {multiplier} {status} on the opponent at {endOfTurn}.",
         "reflectStatus": "When the opponent inflicts {status} on you, inflict the same number of {status} stacks on the opponent.",
-        "immuneStatus": "Immune to {status}."
+        "immuneStatus": "Immune to {status}.",
+        "applyActionBuffSelf": "Apply {multiplier} {status} to self."
       }
     },
     "zh-CN": {
-      "terms": {},
+      "terms": {
+        "status.fireActionBuff": "火微增益",
+        "status.waterActionBuff": "水微增益",
+        "status.thunderActionBuff": "雷微增益",
+        "status.earthActionBuff": "土微增益",
+        "status.windActionBuff": "风微增益",
+        "status.lightActionBuff": "光微增益",
+        "status.darkActionBuff": "暗微增益"
+      },
       "templates": {}
     },
     "zh-TW": {
-      "terms": {},
+      "terms": {
+        "status.fireActionBuff": "火微增益",
+        "status.waterActionBuff": "水微增益",
+        "status.thunderActionBuff": "雷微增益",
+        "status.earthActionBuff": "土微增益",
+        "status.windActionBuff": "風微增益",
+        "status.lightActionBuff": "光微增益",
+        "status.darkActionBuff": "暗微增益"
+      },
       "templates": {}
     }
   }
