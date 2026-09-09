@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "locales": {
     "en": {
       "terms": {
@@ -17,7 +17,8 @@
         "status.dizzy": "Dizzy",
         "status.blind": "Blind",
         "status.depress": "Depress",
-        "timing.endOfTurn": "End-of-Turn"
+        "timing.endOfTurn": "End-of-Turn",
+        "ui.mechanicDetailsPending": "Mechanic details pending confirmation."
       },
       "mechanicNames": {
         "Strength Buff": "Strength Buff",
@@ -34,6 +35,11 @@
         "ability": "{element} Ability",
         "finale": "{element} Finale",
         "vulnerable": "{element} Vulnerable"
+      },
+      "linkTemplates": {
+        "elementSingular": "{element} element",
+        "elementPlural": "{element} elements",
+        "abilityTag": "({element})"
       },
       "templates": {
         "statBuff": "Temporarily increase {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the start of the user's turn.",
@@ -52,12 +58,14 @@
       "terms": {},
       "mechanicNames": {},
       "nameTemplates": {},
+      "linkTemplates": {},
       "templates": {}
     },
     "zh-TW": {
       "terms": {},
       "mechanicNames": {},
       "nameTemplates": {},
+      "linkTemplates": {},
       "templates": {}
     }
   }
