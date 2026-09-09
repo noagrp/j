@@ -1,7 +1,24 @@
 {
-  "version": 3,
+  "version": 4,
   "locales": {
     "en": {
+      "terms": {
+        "element.fire": "Fire",
+        "element.water": "Water",
+        "element.thunder": "Thunder",
+        "element.earth": "Earth",
+        "element.wind": "Wind",
+        "element.light": "Light",
+        "element.dark": "Dark",
+        "status.burn": "Burn",
+        "status.chill": "Chill",
+        "status.paralysis": "Paralysis",
+        "status.seed": "Seed",
+        "status.dizzy": "Dizzy",
+        "status.blind": "Blind",
+        "status.depress": "Depress",
+        "timing.endOfTurn": "End-of-Turn"
+      },
       "mechanicNames": {
         "Strength Buff": "Strength Buff",
         "Agility Buff": "Agility Buff",
@@ -10,14 +27,7 @@
         "Strength Debuff": "Strength Debuff",
         "Agility Debuff": "Agility Debuff",
         "Intelligence Debuff": "Intelligence Debuff",
-        "MaxHP Debuff": "MaxHP Debuff",
-        "Burn": "Burn",
-        "Chill": "Chill",
-        "Paralysis": "Paralysis",
-        "Seed": "Seed",
-        "Dizzy": "Dizzy",
-        "Blind": "Blind",
-        "Depress": "Depress"
+        "MaxHP Debuff": "MaxHP Debuff"
       },
       "nameTemplates": {
         "element": "{element} Element",
@@ -29,7 +39,7 @@
         "statBuff": "Temporarily increase {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the start of the user's turn.",
         "statDebuff": "Temporarily reduce {stat} by {percent}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {decrease} stack at the end of the user's turn.",
         "elementalDamage": "Consume all {element} elements. For each stack consumed, deal {percent}% {element} damage based on your strongest attribute. If the specific condition is met, trigger {finale}.",
-        "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from Fire attacks. Newly received stacks deal their damage immediately if inflicted during the user's turn. Max {max} stacks, or {upgradeMax} when upgraded. Removed at the end of each turn.",
+        "statusBurn": "For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from {element} attacks. Newly received stacks deal their damage immediately if inflicted during the user's turn. Max {max} stacks, or {upgradeMax} when upgraded. Removed at the end of each turn.",
         "elementCore": "For each {element} element stack on self, increase non-elemental damage dealt to opponents with {status} or {counters} element by {damageBonus}% and reduce {element} and {counters} elemental damage received by {reduction}% per stack. Max {max} stacks, or {upgradeMax} when upgraded. Lose {loseStacks} stack when hit by a {counteredBy} attack.",
         "elementAbilityCore": "Increase damage dealt and healing by {stackBonus}% for each {element} element on self. If the opponent has {counters} element or {status}, increase damage dealt by {conditionalBonus}%, or {upgradedConditionalBonus}% when upgraded.",
         "elementFinale": "If an elemental attack consumes {threshold} or more {element} element stacks, deal an extra {damage}% {element} damage based on your strongest attribute. If {maxThreshold} stacks are consumed, deal {maxDamage}% instead.",
@@ -39,11 +49,13 @@
       }
     },
     "zh-CN": {
+      "terms": {},
       "mechanicNames": {},
       "nameTemplates": {},
       "templates": {}
     },
     "zh-TW": {
+      "terms": {},
       "mechanicNames": {},
       "nameTemplates": {},
       "templates": {}
