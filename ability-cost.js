@@ -1,7 +1,7 @@
 /**
  * Jobmania Ability Cost Engine
  * Loads supplemental base AP costs without modifying data/abilities.json.
- * Locale-specific display labels live beside the cost data for easy extension.
+ * Display wording/localisation is handled by wiki-localisation.js.
  */
 (function (root) {
   'use strict';
@@ -9,13 +9,6 @@
   let data = null;
   let costMap = new Map();
   let loadPromise = null;
-
-  function normalizeLocale(locale) {
-    const raw = String(locale || 'en').trim().toLowerCase();
-    if (raw === 'zh-cn' || raw === 'zh_hans' || raw === 'zh-hans' || raw === 'simplified chinese') return 'zh-CN';
-    if (raw === 'zh-tw' || raw === 'zh_hant' || raw === 'zh-hant' || raw === 'traditional chinese') return 'zh-TW';
-    return raw.startsWith('en') || raw === 'english' ? 'en' : String(locale || 'en');
-  }
 
   function validateAlignment(source, abilities) {
     const alignment = source?.alignment || {};
@@ -74,25 +67,16 @@
     return Number.isFinite(value) ? value : null;
   }
 
-  function getLabel(locale) {
-    const key = normalizeLocale(locale || root.JOBMANIA_LOCALE || 'en');
-    const requested = data?.locales?.[key]?.label;
-    const english = data?.locales?.en?.label;
-    return requested || english || 'AP Cost';
-  }
-
-  function getInfo(abilityKey, locale) {
+  function getInfo(abilityKey) {
     const cost = getCost(abilityKey);
     if (cost == null) return null;
-    return { abilityKey, baseCost: cost, label: getLabel(locale) };
+    return { abilityKey, baseCost: cost };
   }
 
   root.JobmaniaAbilityCost = {
     load,
     getCost,
-    getLabel,
     getInfo,
-    normalizeLocale,
     get data() { return data; }
   };
 })(typeof globalThis !== 'undefined' ? globalThis : window);
