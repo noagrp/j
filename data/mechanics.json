@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "source": "Jobmania Database Guides and Skill Unit sheets, Localization Skills Description sheet, plus confirmed in-game descriptions",
   "powerLv": {
     "stat": {
@@ -317,6 +317,45 @@
       "upgradeMaxStacks": 5,
       "removedAt": "TurnEnd"
     },
+    "Protect": {
+      "skillUnit": "Protect",
+      "effect": "Protect",
+      "termKey": "mechanic.protect",
+      "localisationKey": "ProtectXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "clickable": true,
+      "templateKey": "protect",
+      "templateArgs": {
+        "maxPercent": "maxAmountMaxHPPercent",
+        "upgradeMaxPercent": "upgradeMaxAmountMaxHPPercent"
+      },
+      "blocksDirectAttackDamage": true,
+      "maxAmountMaxHPPercent": 50,
+      "upgradeMaxAmountMaxHPPercent": 80,
+      "triggerAt": "GotAttacked"
+    },
+    "Stack Guard": {
+      "skillUnit": "Buff",
+      "effect": "Guard",
+      "termKey": "mechanic.stackGuard",
+      "localisationKey": "StackGuardXDescr",
+      "mechanicConfirmed": true,
+      "confirmationSource": "sheet+localisation",
+      "clickable": true,
+      "templateKey": "stackGuard",
+      "templateArgs": {
+        "basePercent": "directDamageReductionPercent",
+        "upgradePercent": "upgradeDirectDamageReductionPercent",
+        "decayPercent": "effectivenessDecayPercentPerHit"
+      },
+      "maxStacks": 1,
+      "upgradeMaxStacks": 1,
+      "triggerAt": "GotAttacked",
+      "directDamageReductionPercent": 30,
+      "upgradeDirectDamageReductionPercent": 40,
+      "effectivenessDecayPercentPerHit": 10
+    },
     "Second Chance": {
       "skillUnit": "Protect",
       "effect": "Guard",
@@ -324,6 +363,12 @@
       "mechanicConfirmed": true,
       "confirmationSource": "sheet+localisation",
       "clickable": true,
+      "templateKey": "secondChance",
+      "templateArgs": {
+        "recoverPercent": "recoverMaxHPPercentOnTrigger",
+        "max": "maxStacks",
+        "upgradeMax": "upgradeMaxStacks"
+      },
       "maxStacks": 2,
       "upgradeMaxStacks": 2,
       "triggerAt": "HealthReduced",
