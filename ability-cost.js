@@ -13,9 +13,18 @@
   function validateAlignment(source, abilities) {
     const alignment = source?.alignment || {};
     if (!Array.isArray(abilities) || !Array.isArray(source?.costs)) return false;
-    if (alignment.count != null && abilities.length !== alignment.count) return false;
-    if (source.costs.length !== abilities.length) return false;
 
+    // The source sheet can contain blank trailing rows after the last real Ability.
+    // Allow those only when they are null; never tolerate missing cost slots.
+    if (source.costs.length < abilities.length) return false;
+    const trailing = source.costs.slice(abilities.length);
+    if (trailing.some(value => value != null)) return false;
+
+    // Keep the recorded count as a lower-bound sanity check. A stale count must
+    // never make valid trailing blanks disable every AP value on the wiki.
+    if (alignment.count != null && Number(alignment.count) > abilities.length) return false;
+
+    // Anchors protect against insertion/reordering in data/abilities.json.
     for (const anchor of alignment.anchors || []) {
       const index = Number(anchor?.index);
       if (!Number.isInteger(index) || index < 0 || index >= abilities.length) return false;
