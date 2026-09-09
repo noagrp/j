@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "source": "Jobmania Database Skill Unit sheet delivery wording",
+  "families": {
+    "elementStatus": {
+      "effects": {
+        "Fire": "Burn",
+        "Water": "Chill",
+        "Thunder": "Paralysis",
+        "Earth": "Seed",
+        "Wind": "Dizzy",
+        "Light": "Blind",
+        "Dark": "Depress"
+      },
+      "rules": [
+        { "kind": "ability", "skillUnit": "Debuff", "template": "inflictOpponent" },
+        { "kind": "ability", "skillUnit": "Protect", "template": "removeSelf" },
+        { "kind": "ability", "skillUnit": "Sacrifice", "template": "gainSelf" },
+        { "kind": "ability", "skillUnit": "Curse", "template": "gainStartOfTurn" },
+        { "kind": "passive", "skillUnit": "InstantNerf", "template": "gainCombatStart" },
+        { "kind": "passive", "skillUnit": "TurnDebuff", "template": "inflictEndOfTurn" },
+        { "kind": "passive", "skillUnit": "Reflect", "template": "reflectStatus" },
+        { "kind": "passive", "skillUnit": "Protect", "template": "immuneStatus" }
+      ]
+    }
+  },
+  "locales": {
+    "en": {
+      "terms": {
+        "timing.combatStart": "Combat Start",
+        "timing.startOfTurn": "Start-of-Turn",
+        "timing.endOfTurn": "End-of-Turn"
+      },
+      "templates": {
+        "inflictOpponent": "Inflict {multiplier} {status} on the opponent.",
+        "removeSelf": "Remove {status} from self.",
+        "gainSelf": "Gain {multiplier} {status} on self.",
+        "gainStartOfTurn": "Gain {multiplier} {status} at Start-of-Turn.",
+        "gainCombatStart": "Start combat with {multiplier} {status}.",
+        "inflictEndOfTurn": "Inflict {multiplier} {status} on the opponent at End-of-Turn.",
+        "reflectStatus": "When the opponent inflicts {status} on you, inflict the same number of {status} stacks on the opponent.",
+        "immuneStatus": "Immune to {status}."
+      }
+    },
+    "zh-CN": {
+      "terms": {},
+      "templates": {}
+    },
+    "zh-TW": {
+      "terms": {},
+      "templates": {}
+    }
+  }
+}
