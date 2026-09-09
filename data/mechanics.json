@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "source": "Jobmania Database Guides and Skill Unit sheets plus confirmed in-game descriptions",
   "powerLv": {
     "stat": {
@@ -66,58 +66,72 @@
       "vulnerableRemovedAt": "TurnEnd"
     },
     "elements": {
-      "Fire": {
-        "counters": "Wind",
-        "counteredBy": "Water",
-        "status": "Burn",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "Burn", "percent": 5 }
+      "fire": {
+        "sourceEffect": "Fire",
+        "termKey": "element.fire",
+        "counters": "wind",
+        "counteredBy": "water",
+        "status": "burn",
+        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "burn", "percent": 5 }
       },
-      "Water": {
-        "counters": "Fire",
-        "counteredBy": "Thunder",
-        "status": "Chill",
-        "vulnerableSecondary": { "type": "sealPassiveIfStatus", "status": "Chill", "passiveTiming": "End-of-Turn" }
+      "water": {
+        "sourceEffect": "Water",
+        "termKey": "element.water",
+        "counters": "fire",
+        "counteredBy": "thunder",
+        "status": "chill",
+        "vulnerableSecondary": { "type": "sealPassiveIfStatus", "status": "chill", "passiveTimingKey": "timing.endOfTurn" }
       },
-      "Thunder": {
-        "counters": "Water",
-        "counteredBy": "Earth",
-        "status": "Paralysis",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "Paralysis", "percent": 10 }
+      "thunder": {
+        "sourceEffect": "Thunder",
+        "termKey": "element.thunder",
+        "counters": "water",
+        "counteredBy": "earth",
+        "status": "paralysis",
+        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "paralysis", "percent": 10 }
       },
-      "Earth": {
-        "counters": "Thunder",
-        "counteredBy": "Wind",
-        "status": "Seed",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "Seed", "percent": 20 }
+      "earth": {
+        "sourceEffect": "Earth",
+        "termKey": "element.earth",
+        "counters": "thunder",
+        "counteredBy": "wind",
+        "status": "seed",
+        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "seed", "percent": 20 }
       },
-      "Wind": {
-        "counters": "Earth",
-        "counteredBy": "Fire",
-        "status": "Dizzy",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "Dizzy", "percent": 10 }
+      "wind": {
+        "sourceEffect": "Wind",
+        "termKey": "element.wind",
+        "counters": "earth",
+        "counteredBy": "fire",
+        "status": "dizzy",
+        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "dizzy", "percent": 10 }
       },
-      "Light": {
-        "counters": "Dark",
-        "counteredBy": "Dark",
-        "status": "Blind",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "Blind", "percent": 15 }
+      "light": {
+        "sourceEffect": "Light",
+        "termKey": "element.light",
+        "counters": "dark",
+        "counteredBy": "dark",
+        "status": "blind",
+        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "blind", "percent": 15 }
       },
-      "Dark": {
-        "counters": "Light",
-        "counteredBy": "Light",
-        "status": "Depress",
-        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "Depress", "percent": 15 }
+      "dark": {
+        "sourceEffect": "Dark",
+        "termKey": "element.dark",
+        "counters": "light",
+        "counteredBy": "light",
+        "status": "depress",
+        "vulnerableSecondary": { "type": "statusEffectBoost", "status": "depress", "percent": 15 }
       }
     }
   },
   "elementStatuses": {
-    "Fire": { "name": "Burn", "mechanicConfirmed": true },
-    "Water": { "name": "Chill", "mechanicConfirmed": false },
-    "Thunder": { "name": "Paralysis", "mechanicConfirmed": false },
-    "Earth": { "name": "Seed", "mechanicConfirmed": false },
-    "Wind": { "name": "Dizzy", "mechanicConfirmed": false },
-    "Light": { "name": "Blind", "mechanicConfirmed": false },
-    "Dark": { "name": "Depress", "mechanicConfirmed": false }
+    "burn": { "element": "fire", "termKey": "status.burn", "sourceName": "Burn", "mechanicConfirmed": true },
+    "chill": { "element": "water", "termKey": "status.chill", "sourceName": "Chill", "mechanicConfirmed": false },
+    "paralysis": { "element": "thunder", "termKey": "status.paralysis", "sourceName": "Paralysis", "mechanicConfirmed": false },
+    "seed": { "element": "earth", "termKey": "status.seed", "sourceName": "Seed", "mechanicConfirmed": false },
+    "dizzy": { "element": "wind", "termKey": "status.dizzy", "sourceName": "Dizzy", "mechanicConfirmed": false },
+    "blind": { "element": "light", "termKey": "status.blind", "sourceName": "Blind", "mechanicConfirmed": false },
+    "depress": { "element": "dark", "termKey": "status.depress", "sourceName": "Depress", "mechanicConfirmed": false }
   },
   "effectDefinitions": {
     "Strength Buff": {
