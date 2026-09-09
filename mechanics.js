@@ -160,7 +160,83 @@
     return fillTemplate(template, { element: elementLabel });
   }
 
+  function describeElementStatus(statusOrElement, locale) {
+    const status = getElementStatus(statusOrElement);
+    if (!status?.mechanicConfirmed) return null;
+
+    const block = getLocaleBlock(locale);
+    const templates = block?.templates || {};
+    const element = getElementLabel(status.element, locale);
+    const common = {
+      element,
+      max: status.maxStacks,
+      upgradeMax: status.upgradeMaxStacks
+    };
+
+    if (status.id === 'burn') {
+      return fillTemplate(templates.statusBurn, {
+        ...common,
+        percent: status.damagePercentPerStack
+      });
+    }
+
+    if (status.id === 'chill') {
+      return fillTemplate(templates.statusChill, {
+        ...common,
+        threshold: status.apReductionThreshold,
+        apReduction: status.apReduction,
+        enemyMinimumAP: status.enemyMinimumAP,
+        sealAt: status.sealPassiveAtStacks,
+        sealedTiming: localizeTerm(status.sealedPassiveTimingKey, locale, status.sealedPassiveTimingKey)
+      });
+    }
+
+    if (status.id === 'paralysis') {
+      return fillTemplate(templates.statusParalysis, {
+        ...common,
+        percent: status.actionFailChancePercentPerStack
+      });
+    }
+
+    if (status.id === 'seed') {
+      return fillTemplate(templates.statusSeed, {
+        ...common,
+        percent: status.opponentHealPercentOfDamageDealtPerStack
+      });
+    }
+
+    if (status.id === 'dizzy') {
+      const excluded = (status.excludedSkillTermKeys || [])
+        .map(key => localizeTerm(key, locale, key))
+        .join(', ');
+      return fillTemplate(templates.statusDizzy, {
+        ...common,
+        percent: status.wrongTargetChancePercentPerStack,
+        excluded
+      });
+    }
+
+    if (status.id === 'blind') {
+      return fillTemplate(templates.statusBlind, {
+        ...common,
+        percent: status.attackMissChancePercentPerStack
+      });
+    }
+
+    if (status.id === 'depress') {
+      return fillTemplate(templates.statusDepress, {
+        ...common,
+        percent: status.healingAndProtectReductionPercentPerStack
+      });
+    }
+
+    return null;
+  }
+
   function describeReusableMechanic(name, locale) {
+    const status = getElementStatus(name);
+    if (status?.mechanicConfirmed) return describeElementStatus(status.id, locale);
+
     const definition = getEffectDefinition(name);
     if (!definition) return null;
     const block = getLocaleBlock(locale);
@@ -183,15 +259,6 @@
         max: definition.maxStacks,
         upgradeMax: definition.upgradeMaxStacks,
         decrease: definition.decreaseStacks
-      });
-    }
-
-    if (String(name).toLowerCase() === 'burn') {
-      return fillTemplate(templates.statusBurn, {
-        element: getElementLabel('fire', locale),
-        percent: definition.damagePercentPerStack,
-        max: definition.maxStacks,
-        upgradeMax: definition.upgradeMaxStacks
       });
     }
 
@@ -394,6 +461,7 @@
     getElementLabel,
     getStatusLabel,
     localizeTerm,
+    describeElementStatus,
     describeReusableMechanic,
     describeElementMechanic,
     getMechanicName,
