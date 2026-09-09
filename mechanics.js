@@ -58,23 +58,61 @@
     return null;
   }
 
+  function normalizeElementId(value) {
+    const raw = String(value || '').trim();
+    if (!raw) return '';
+    const lower = raw.toLowerCase();
+    if (mechanicsData?.elementMechanics?.elements?.[lower]) return lower;
+    const entries = mechanicsData?.elementMechanics?.elements || {};
+    for (const [id, definition] of Object.entries(entries)) {
+      if (String(definition?.sourceEffect || '').toLowerCase() === lower) return id;
+    }
+    return lower;
+  }
+
   function getElementSystem(element) {
-    const key = String(element || '').trim();
+    const key = normalizeElementId(element);
     if (!key) return null;
     const shared = mechanicsData?.elementMechanics?.shared || null;
     const specific = mechanicsData?.elementMechanics?.elements?.[key] || null;
-    if (!shared && !specific) return null;
-    return { ...(shared || {}), ...(specific || {}), element: key };
+    if (!specific) return null;
+    return { ...(shared || {}), ...specific, elementId: key };
   }
 
-  function getElementStatus(element) {
-    const key = String(element || '').trim();
-    return key ? (mechanicsData?.elementStatuses?.[key] || null) : null;
+  function getElementStatus(statusOrElement) {
+    const raw = String(statusOrElement || '').trim().toLowerCase();
+    if (!raw) return null;
+    const statuses = mechanicsData?.elementStatuses || {};
+    if (statuses[raw]) return { id: raw, ...statuses[raw] };
+    const elementId = normalizeElementId(raw);
+    const system = getElementSystem(elementId);
+    if (system?.status && statuses[system.status]) return { id: system.status, ...statuses[system.status] };
+    for (const [id, definition] of Object.entries(statuses)) {
+      if (String(definition?.sourceName || '').toLowerCase() === raw) return { id, ...definition };
+    }
+    return null;
   }
 
   function getLocaleBlock(locale) {
     const key = String(locale || 'en');
     return localisationData?.locales?.[key] || localisationData?.locales?.en || null;
+  }
+
+  function localizeTerm(termKey, locale, fallback) {
+    const block = getLocaleBlock(locale);
+    return block?.terms?.[termKey] || fallback || termKey;
+  }
+
+  function getElementLabel(element, locale) {
+    const system = getElementSystem(element);
+    if (!system) return String(element || '');
+    return localizeTerm(system.termKey, locale, system.sourceEffect || system.elementId);
+  }
+
+  function getStatusLabel(status, locale) {
+    const definition = getElementStatus(status);
+    if (!definition) return String(status || '');
+    return localizeTerm(definition.termKey, locale, definition.sourceName || definition.id);
   }
 
   function getMechanicName(name, locale) {
@@ -86,19 +124,21 @@
     const block = getLocaleBlock(locale);
     const templates = block?.nameTemplates || {};
     const template = templates?.[type];
-    if (!template) return `${element} ${type}`;
-    return fillTemplate(template, { element });
+    const elementLabel = getElementLabel(element, locale);
+    if (!template) return `${elementLabel} ${type}`;
+    return fillTemplate(template, { element: elementLabel });
   }
 
-  function getElementMechanic(element, type) {
+  function getElementMechanic(element, type, locale) {
     const system = getElementSystem(element);
     if (!system) return null;
     const normalizedType = String(type || '').trim().toLowerCase();
     if (!['element', 'ability', 'finale', 'vulnerable'].includes(normalizedType)) return null;
     return {
+      key: `element.${system.elementId}.${normalizedType}`,
       type: normalizedType,
-      name: getElementMechanicName(element, normalizedType, 'en'),
-      element: system.element,
+      name: getElementMechanicName(system.elementId, normalizedType, locale || 'en'),
+      elementId: system.elementId,
       ...system
     };
   }
@@ -129,8 +169,9 @@
       });
     }
 
-    if (name === 'Burn') {
+    if (String(name).toLowerCase() === 'burn') {
       return fillTemplate(templates.statusBurn, {
+        element: getElementLabel('fire', locale),
         percent: definition.damagePercentPerStack,
         max: definition.maxStacks,
         upgradeMax: definition.upgradeMaxStacks
@@ -140,19 +181,19 @@
     return null;
   }
 
-  function formatVulnerableSecondary(system, templates) {
+  function formatVulnerableSecondary(system, templates, locale) {
     const secondary = system?.vulnerableSecondary;
     if (!secondary) return '';
     if (secondary.type === 'statusEffectBoost') {
       return fillTemplate(templates.vulnerableStatusBoost, {
-        status: secondary.status,
+        status: getStatusLabel(secondary.status, locale),
         percent: secondary.percent
       });
     }
     if (secondary.type === 'sealPassiveIfStatus') {
       return fillTemplate(templates.vulnerableSealPassive, {
-        status: secondary.status,
-        timing: secondary.passiveTiming
+        status: getStatusLabel(secondary.status, locale),
+        timing: localizeTerm(secondary.passiveTimingKey, locale, secondary.passiveTimingKey)
       });
     }
     return '';
@@ -163,10 +204,14 @@
     if (!system) return null;
     const block = getLocaleBlock(locale);
     const templates = block?.templates || {};
+    const elementLabel = getElementLabel(system.elementId, locale);
+    const countersLabel = getElementLabel(system.counters, locale);
+    const counteredByLabel = getElementLabel(system.counteredBy, locale);
+    const statusLabel = getStatusLabel(system.status, locale);
     const common = {
-      element: system.element,
-      status: system.status,
-      counters: system.counters,
+      element: elementLabel,
+      status: statusLabel,
+      counters: countersLabel,
       stackBonus: system.abilityBonusPerStack,
       conditionalBonus: system.abilityConditionalDamageBonus,
       upgradedConditionalBonus: system.abilityConditionalDamageBonusUpgraded,
@@ -174,14 +219,12 @@
       reduction: system.elementDamageReductionPerStack,
       max: system.maxStacks,
       upgradeMax: system.upgradeMaxStacks,
-      counteredBy: system.counteredBy,
+      counteredBy: counteredByLabel,
       loseStacks: system.loseStacksWhenCountered,
       threshold: system.finaleThreshold,
       damage: system.finaleDamagePercent,
       maxThreshold: system.finaleMaxThreshold,
-      maxDamage: system.finaleMaxDamagePercent,
-      vulnerablePercent: system.vulnerableDamageTakenPercentPerStack,
-      vulnerableMax: system.vulnerableMaxStacks
+      maxDamage: system.finaleMaxDamagePercent
     };
 
     const normalizedType = String(type || '').trim().toLowerCase();
@@ -190,9 +233,9 @@
     if (normalizedType === 'finale') return fillTemplate(templates.elementFinale, common);
     if (normalizedType === 'vulnerable') {
       return fillTemplate(templates.elementVulnerable, {
-        element: system.element,
+        element: elementLabel,
         percent: system.vulnerableDamageTakenPercentPerStack,
-        secondary: formatVulnerableSecondary(system, templates),
+        secondary: formatVulnerableSecondary(system, templates, locale),
         max: system.vulnerableMaxStacks
       });
     }
@@ -206,9 +249,7 @@
       if (!value || typeof value !== 'object') return null;
       return `Deal ${value.enemy}%/${value.player}% MaxHP damage.`;
     }
-    if (resolved.route === 'powerLv.stat') {
-      return `Deal ${value}% ${effect} damage.`;
-    }
+    if (resolved.route === 'powerLv.stat') return `Deal ${value}% ${effect} damage.`;
     return null;
   }
 
@@ -234,14 +275,14 @@
     return null;
   }
 
-  function formatElementalDamage(effect, resolved) {
+  function formatElementalDamage(effect, resolved, locale) {
     const system = getElementSystem(effect);
     if (!system || !resolved || resolved.route !== 'powerLv.stat') return null;
-    const template = getLocaleBlock('en')?.templates?.elementalDamage;
-    return fillTemplate(template, {
-      element: effect,
+    const block = getLocaleBlock(locale || 'en');
+    return fillTemplate(block?.templates?.elementalDamage, {
+      element: getElementLabel(system.elementId, locale || 'en'),
       percent: resolved.value,
-      finale: getElementMechanicName(effect, 'finale', 'en')
+      finale: getElementMechanicName(system.elementId, 'finale', locale || 'en')
     });
   }
 
@@ -270,10 +311,11 @@
       });
     });
 
-    Object.keys(mechanicsData?.elementMechanics?.elements || {}).forEach((effect) => {
-      if (!routeFor('ability', 'Damage', effect)) return;
+    Object.values(mechanicsData?.elementMechanics?.elements || {}).forEach((definition) => {
+      const effect = definition?.sourceEffect;
+      if (!effect || !routeFor('ability', 'Damage', effect)) return;
       engine.registerRule('ability', 'Damage', effect, ({ Multiplier }) => {
-        const text = formatElementalDamage(effect, resolve('ability', 'Damage', effect, Multiplier));
+        const text = formatElementalDamage(effect, resolve('ability', 'Damage', effect, Multiplier), 'en');
         return text || unresolved('ability', 'Damage', effect, Multiplier);
       });
     });
@@ -330,6 +372,9 @@
     getElementStatus,
     getElementMechanic,
     getElementMechanicName,
+    getElementLabel,
+    getStatusLabel,
+    localizeTerm,
     describeReusableMechanic,
     describeElementMechanic,
     getMechanicName,
