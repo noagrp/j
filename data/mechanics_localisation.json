@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "locales": {
     "en": {
       "terms": {
@@ -9,6 +9,7 @@
         "mechanic.protect":"Protect","mechanic.stackGuard":"Stack Guard","mechanic.guard":"Guard","mechanic.instinct":"Instinct","mechanic.rage":"Rage",
         "mechanic.strengthBoost":"Strength Boost","mechanic.agilityBoost":"Agility Boost","mechanic.intelligenceBoost":"Intelligence Boost","mechanic.maxHPBoost":"Max HP Boost",
         "mechanic.venom":"Venom","mechanic.restrain":"Restrain","mechanic.insane":"Insane","mechanic.confuse":"Confuse",
+        "mechanic.fireActionBuff":"Fire Action Buff","mechanic.waterActionBuff":"Water Action Buff","mechanic.thunderActionBuff":"Thunder Action Buff","mechanic.earthActionBuff":"Earth Action Buff","mechanic.windActionBuff":"Wind Action Buff","mechanic.lightActionBuff":"Light Action Buff","mechanic.darkActionBuff":"Dark Action Buff",
         "ui.mechanicDetailsPending":"Mechanic details pending confirmation."
       },
       "mechanicNames": {
@@ -16,7 +17,8 @@
         "Strength Debuff":"Strength Debuff","Agility Debuff":"Agility Debuff","Intelligence Debuff":"Intelligence Debuff","MaxHP Debuff":"MaxHP Debuff",
         "Protect":"Protect","Stack Guard":"Stack Guard","Second Chance":"Second Chance","Guard":"Guard","Instinct":"Instinct","Rage":"Rage",
         "Strength Boost":"Strength Boost","Agility Boost":"Agility Boost","Intelligence Boost":"Intelligence Boost","Max HP Boost":"Max HP Boost",
-        "Venom":"Venom","Restrain":"Restrain","Insane":"Insane","Confuse":"Confuse"
+        "Venom":"Venom","Restrain":"Restrain","Insane":"Insane","Confuse":"Confuse",
+        "Fire Action Buff":"Fire Action Buff","Water Action Buff":"Water Action Buff","Thunder Action Buff":"Thunder Action Buff","Earth Action Buff":"Earth Action Buff","Wind Action Buff":"Wind Action Buff","Light Action Buff":"Light Action Buff","Dark Action Buff":"Dark Action Buff"
       },
       "nameTemplates": {"element":"{element} Element","ability":"{element} Ability","finale":"{element} Finale","vulnerable":"{element} Vulnerable"},
       "linkTemplates": {"elementSingular":"{element} element","elementPlural":"{element} elements","abilityTag":"({element})"},
@@ -34,6 +36,7 @@
         "vriAgility":"Suffer {percent}% damage based on target's Agility for each stack at the start and end of each turn. Suffer the received stacks' damage instantly if gained during the user's turn. (Max {max} / upgrade {upgradeMax} stacks. Lose half of the stacks at the end of turn)",
         "vriIntelligence":"Suffer {percent}% damage based on target's Intelligence for each stack at the start and end of each turn. Suffer the received stacks' damage instantly if gained during the user's turn. (Max {max} / upgrade {upgradeMax} stacks. Lose half of the stacks at the end of turn)",
         "confuse":"Next action's attack, heal and Protect skills will use a random attribute (not including Max HP) as multiplier instead of the one they originally have. Actions become unpredictable. (Max {max} stacks. Remove 1 stack on trigger, won't affect stat combo)",
+        "elementActionBuff":"Buff one action's {element} damage and heal by {percent}% for each stack. (Max {max}/upgrade {upgradeMax} stacks. Consumed on activation. [End-of-Turn] passives will also consume this buff)",
         "elementalDamage":"Consume all {element} elements. For each stack consumed, deal {percent}% {element} damage based on your strongest attribute. If the specific condition is met, trigger {finale}.",
         "statusBurn":"For each stack, take {percent}% damage based on MaxHP at the start of turn and receive more damage from {element} attacks. Suffer the received stacks' damage instantly if gained during the user's turn. (Max {max} / upgrade {upgradeMax} stacks. Removed at the end of each turn).",
         "statusChill":"With {threshold} or more stacks, decrease Action Point by {apReduction} at the start of turn (Enemy AP will not go below {enemyMinimumAP}) and receive more damage from {element} attacks. Reduce AP instantly if gained during user's turn. With {sealAt} stacks, seal [{sealedTiming}] passives. (Max {max} / upgrade {upgradeMax} stacks. Remove at the end of each turn).",
@@ -51,14 +54,17 @@
     },
     "zh-CN": {
       "terms": {
+        "element.fire":"火","element.water":"水","element.thunder":"雷","element.earth":"土","element.wind":"风","element.light":"光","element.dark":"暗",
         "skill.secondChance":"二次机会","mechanic.protect":"护甲","mechanic.stackGuard":"多重防守","mechanic.guard":"防守","mechanic.instinct":"直觉","mechanic.rage":"愤怒",
         "mechanic.strengthBoost":"力量强化","mechanic.agilityBoost":"敏捷强化","mechanic.intelligenceBoost":"智力强化","mechanic.maxHPBoost":"Max HP强化",
-        "mechanic.venom":"剧毒","mechanic.restrain":"拘束","mechanic.insane":"疯癫","mechanic.confuse":"混乱"
+        "mechanic.venom":"剧毒","mechanic.restrain":"拘束","mechanic.insane":"疯癫","mechanic.confuse":"混乱",
+        "mechanic.fireActionBuff":"火微增益","mechanic.waterActionBuff":"水微增益","mechanic.thunderActionBuff":"雷微增益","mechanic.earthActionBuff":"土微增益","mechanic.windActionBuff":"风微增益","mechanic.lightActionBuff":"光微增益","mechanic.darkActionBuff":"暗微增益"
       },
       "mechanicNames": {
         "Protect":"护甲","Stack Guard":"多重防守","Second Chance":"二次机会","Guard":"防守","Instinct":"直觉","Rage":"愤怒",
         "Strength Boost":"力量强化","Agility Boost":"敏捷强化","Intelligence Boost":"智力强化","Max HP Boost":"Max HP强化",
-        "Venom":"剧毒","Restrain":"拘束","Insane":"疯癫","Confuse":"混乱"
+        "Venom":"剧毒","Restrain":"拘束","Insane":"疯癫","Confuse":"混乱",
+        "Fire Action Buff":"火微增益","Water Action Buff":"水微增益","Thunder Action Buff":"雷微增益","Earth Action Buff":"土微增益","Wind Action Buff":"风微增益","Light Action Buff":"光微增益","Dark Action Buff":"暗微增益"
       },
       "nameTemplates": {},"linkTemplates": {},
       "templates": {
@@ -71,19 +77,23 @@
         "vriStrength":"每个回合开始和结束时, 根据自身的力量对自己造成{percent}%的伤害。如果在自身回合获得此效果, 自身将直接受到所获得的效果伤害。(叠加上限{max} / 升级后{upgradeMax}。回合结束后失去一半的叠加数)",
         "vriAgility":"每个回合开始和结束时, 根据自身的敏捷对自己造成{percent}%的伤害。如果在自身回合获得此效果, 自身将直接受到所获得的效果伤害。(叠加上限{max} / 升级后{upgradeMax}。回合结束后失去一半的叠加数)",
         "vriIntelligence":"每个回合开始和结束时, 根据自身的智力对自己造成{percent}%的伤害。如果在自身回合获得此效果, 自身将直接受到所获得的效果伤害。(叠加上限{max} / 升级后{upgradeMax}。回合结束后失去一半的叠加数)",
-        "confuse":"下个行动将使用随机的属性值(不包括Max HP)来计算伤害, 恢复与护甲获得量。行动变得无法预料。(叠加上限{max}。触发时失去1叠加数, 不会影响属性值连击)"
+        "confuse":"下个行动将使用随机的属性值(不包括Max HP)来计算伤害, 恢复与护甲获得量。行动变得无法预料。(叠加上限{max}。触发时失去1叠加数, 不会影响属性值连击)",
+        "elementActionBuff":"增强{percent}%一个行动的{element}元素伤害和恢复。(叠加上限{max} / 升级后{upgradeMax}。发动后消耗, 【回合结束】的被动技能也会消耗此效果)"
       }
     },
     "zh-TW": {
       "terms": {
+        "element.fire":"火","element.water":"水","element.thunder":"雷","element.earth":"土","element.wind":"風","element.light":"光","element.dark":"暗",
         "skill.secondChance":"二次機會","mechanic.protect":"護甲","mechanic.stackGuard":"多重防守","mechanic.guard":"防守","mechanic.instinct":"直覺","mechanic.rage":"憤怒",
         "mechanic.strengthBoost":"力量強化","mechanic.agilityBoost":"敏捷強化","mechanic.intelligenceBoost":"智力強化","mechanic.maxHPBoost":"Max HP強化",
-        "mechanic.venom":"劇毒","mechanic.restrain":"拘束","mechanic.insane":"瘋癲","mechanic.confuse":"混亂"
+        "mechanic.venom":"劇毒","mechanic.restrain":"拘束","mechanic.insane":"瘋癲","mechanic.confuse":"混亂",
+        "mechanic.fireActionBuff":"火微增益","mechanic.waterActionBuff":"水微增益","mechanic.thunderActionBuff":"雷微增益","mechanic.earthActionBuff":"土微增益","mechanic.windActionBuff":"風微增益","mechanic.lightActionBuff":"光微增益","mechanic.darkActionBuff":"暗微增益"
       },
       "mechanicNames": {
         "Protect":"護甲","Stack Guard":"多重防守","Second Chance":"二次機會","Guard":"防守","Instinct":"直覺","Rage":"憤怒",
         "Strength Boost":"力量強化","Agility Boost":"敏捷強化","Intelligence Boost":"智力強化","Max HP Boost":"Max HP強化",
-        "Venom":"劇毒","Restrain":"拘束","Insane":"瘋癲","Confuse":"混亂"
+        "Venom":"劇毒","Restrain":"拘束","Insane":"瘋癲","Confuse":"混亂",
+        "Fire Action Buff":"火微增益","Water Action Buff":"水微增益","Thunder Action Buff":"雷微增益","Earth Action Buff":"土微增益","Wind Action Buff":"風微增益","Light Action Buff":"光微增益","Dark Action Buff":"暗微增益"
       },
       "nameTemplates": {},"linkTemplates": {},
       "templates": {
@@ -96,7 +106,8 @@
         "vriStrength":"每個回合開始和结束時, 根據自身的力量對自己造成{percent}%的傷害。如果在自身回合獲得此效果, 自身將直接受到所獲得的效果傷害。 (疊加上限{max} / 升級後{upgradeMax}。回合结束後失去一半的疊加數)",
         "vriAgility":"每個回合開始和结束時, 根據自身的敏捷對自己造成{percent}%的傷害。如果在自身回合獲得此效果, 自身將直接受到所獲得的效果傷害。 (疊加上限{max} / 升級後{upgradeMax}。回合结束後失去一半的疊加數)",
         "vriIntelligence":"每個回合開始和结束時, 根據自身的智力對自己造成{percent}%的傷害。如果在自身回合獲得此效果, 自身將直接受到所獲得的效果傷害。 (疊加上限{max} / 升級後{upgradeMax}。回合结束後失去一半的疊加數)",
-        "confuse":"下個行動將使用隨機的屬性值(不包括Max HP)來計算傷害, 恢復與護甲獲得量。行動變得無法預料。(疊加上限{max}。觸發時失去1疊加數, 不會影響屬性值連擊)"
+        "confuse":"下個行動將使用隨機的屬性值(不包括Max HP)來計算傷害, 恢復與護甲獲得量。行動變得無法預料。(疊加上限{max}。觸發時失去1疊加數, 不會影響屬性值連擊)",
+        "elementActionBuff":"增強{percent}%一個行動的{element}元素傷害和恢復。 (疊加上限{max} / 升級後{upgradeMax}。發動後消耗, 【回合结束】的被動技能也會消耗此效果)"
       }
     }
   }
